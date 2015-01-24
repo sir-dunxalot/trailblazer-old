@@ -4,6 +4,9 @@ import Saving from 'trailblazer/mixins/controllers/saving';
 export default Ember.ObjectController.extend(
   Saving, {
 
+  lowerValue: 5,
+  upperValue: 7,
+
   validations: {
     name: {
       presence: true

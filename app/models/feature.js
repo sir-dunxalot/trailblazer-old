@@ -9,11 +9,15 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
-  end: attr('date'),
+  endDate: attr('date'),
   name: attr('string'),
   notes: attr('string'),
   stages: hasMany('stage'),
-  start: attr('date'),
+  startDate: attr('date', {
+    defaultValue: function() {
+      return new Date();
+    }
+  }),
   tasks: hasMany('task', {
     async: true
   }),

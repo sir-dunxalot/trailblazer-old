@@ -1,12 +1,17 @@
 <form>
   {{input name}}
-  {{input start as='date'}}
-  {{input end as='date'}}
+  {{input startDate as='date'}}
+  {{input endDate as='date'}}
   {{input notes as='text'}}
+
+  {{startDate}}
 
   {{#each stage in stages}}
     {{stage.type.name}}
   {{/each}}
+
+  {{range-slider lower=lowerValue upper=upperValue}}
+  {{lowerValue}}{{upperValue}}
 
   {{form-submission}}
 </form>
