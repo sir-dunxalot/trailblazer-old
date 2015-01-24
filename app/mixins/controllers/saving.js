@@ -16,7 +16,7 @@ export default Ember.Mixin.create(
     return this.toString().indexOf('/new:') > -1;
   }.property().readOnly(),
 
-  showServerError: function(xhr) {
+  showServerError: function(/* xhr */) {
     this.set('formSubmitted', false);
   },
 
@@ -24,7 +24,7 @@ export default Ember.Mixin.create(
     var _this = this;
 
     if (_this.runCustomValidations) {
-      Em.warn('If your custom validations method has a reject method, remember to set the controller\'s isValid property to false when the form content is invalid');
+      Ember.warn('If your custom validations method has a reject method, remember to set the controller\'s isValid property to false when the form content is invalid');
       _this.runCustomValidations();
     }
 
@@ -32,7 +32,7 @@ export default Ember.Mixin.create(
       _this.set('formSubmitted', false);
       return false;
     } else {
-      Em.assert('You need to specify a save method on this controller', this.save);
+      Ember.assert('You need to specify a save method on this controller', this.save);
       this.save();
     }
   },

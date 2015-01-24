@@ -13,8 +13,10 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
-  description: attr('string'),
   name: attr('string'),
-  feature: belongsTo('feature'),
+  notes: attr('string'),
+  feature: belongsTo('feature', {
+    async: true
+  }),
   stage: belongsTo('stage')
 });

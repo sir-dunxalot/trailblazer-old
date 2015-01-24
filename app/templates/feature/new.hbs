@@ -4,5 +4,9 @@
   {{input end as='date'}}
   {{input notes as='text'}}
 
+  {{#each stage in stages}}
+    {{stage.type.name}}
+  {{/each}}
+
   {{form-submission}}
 </form>

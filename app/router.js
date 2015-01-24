@@ -6,10 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('index', { path: 'roadmap' });
 
   this.resource('user', function() {
+    this.route('index', { path: 'team' });
     this.route('new');
     this.route('show', { path: '/:id' });
   });
@@ -20,6 +20,9 @@ Router.map(function() {
     this.route('show', { path: '/:id' });
   });
 
+  this.route("stage-type", function() {
+    this.route("new");
+  });
 });
 
 export default Router;
