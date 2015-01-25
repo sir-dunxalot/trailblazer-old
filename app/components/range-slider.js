@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import insert from 'trailblazer/utils/insert';
+import defaultFor from 'trailblazer/utils/default-for';
+import insert from 'trailblazer/utils/computed/insert';
 
 export default Ember.Component.extend({
   lower: null,
@@ -12,10 +13,18 @@ export default Ember.Component.extend({
   renderSlider: function() {
     var _this = this;
     var element = this.$();
+    var lower = defaultFor(
+      this.get('lower'),
+      this.get('max') * 0.3
+    );
+    var upper = defaultFor(
+      this.get('upper'),
+      this.get('max') * 0.7
+    );
 
-    ['lower', 'upper', 'max', 'min'].forEach(function(key) {
+    ['max', 'min'].forEach(function(key) {
       if (typeof _this.get(key) !== 'number') {
-        Em.assert('You must pass the ' + key +
+        Ember.assert('You must pass the ' + key +
           ' property to the range-slider component');
       }
     });
@@ -23,7 +32,8 @@ export default Ember.Component.extend({
     element.noUiSlider({
       animate: true,
       connect: true,
-      start: [0, 5],
+      margin: 1,
+      start: [lower, upper],
       range: {
         min: this.get('min'),
         max: this.get('max'),

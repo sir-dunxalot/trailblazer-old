@@ -4,8 +4,15 @@ import Saving from 'trailblazer/mixins/controllers/saving';
 export default Ember.ObjectController.extend(
   Saving, {
 
-  lowerValue: 5,
-  upperValue: 7,
+  lowerDuration: null,
+  upperDuration: null,
+
+  totalDuration: function() {
+    var endDate = moment(this.get('endDate'));
+    var startDate = moment(this.get('startDate'));
+
+    return endDate.diff(startDate, 'days');
+  }.property('startDate', 'endDate'),
 
   validations: {
     name: {
@@ -28,5 +35,9 @@ export default Ember.ObjectController.extend(
       _this.transitionToRoute('show', feature);
     });
   },
+
+  setStageDurations: function() {
+
+  }.observes('lowerValue', 'upperValue', 'totalDuration'),
 
 });

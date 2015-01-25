@@ -1,3 +1,5 @@
+/* global moment */
+
 import DS from 'ember-data';
 
 var attr = DS.attr;
@@ -9,7 +11,11 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
-  endDate: attr('date'),
+  endDate: attr('date', {
+    defaultValue: function() {
+      return moment().add(1, 'M').toDate();
+    }
+  }),
   name: attr('string'),
   notes: attr('string'),
   stages: hasMany('stage'),
@@ -21,8 +27,4 @@ export default DS.Model.extend({
   tasks: hasMany('task', {
     async: true
   }),
-
-  // seedStages: function() {
-  //   this.set('stages', [1,2,3])
-  // }.on('didCreate'),
 });

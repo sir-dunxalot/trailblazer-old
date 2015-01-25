@@ -1,17 +1,16 @@
 <form>
+
+  {{input startDate as='date' maxDate=endDate}}
+  {{input endDate as='date' minDate=startDate}}
+
+  {{range-slider
+    lower=lowerDuration
+    upper=upperDuration
+    max=totalDuration
+  }}
+
   {{input name}}
-  {{input startDate as='date'}}
-  {{input endDate as='date'}}
   {{input notes as='text'}}
-
-  {{startDate}}
-
-  {{#each stage in stages}}
-    {{stage.type.name}}
-  {{/each}}
-
-  {{range-slider lower=lowerValue upper=upperValue}}
-  {{lowerValue}}{{upperValue}}
 
   {{form-submission}}
 </form>
