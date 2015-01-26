@@ -139,7 +139,7 @@ export default {
       formatDate: function() {
         var value = this.get('value');
         var format = this.get('format');
-        var formattedValue = moment(value).format(format);
+        var formattedValue = moment(new Date(value)).format(format);
 
         this.set('value', formattedValue);
       }.on('willInsertElement'),
@@ -153,7 +153,7 @@ export default {
 
         this.set('datepicker',
           new Pikaday({
-            defaultDate: this.get('value'),
+            defaultDate: new Date(this.get('value')),
             field: this.$()[0],
             format: this.get('format'),
             margin: this.get('margin'),

@@ -18,7 +18,9 @@ export default DS.Model.extend({
   }),
   name: attr('string'),
   notes: attr('string'),
-  stages: hasMany('stage'),
+  stages: hasMany('stage', {
+    async: true
+  }),
   startDate: attr('date', {
     defaultValue: function() {
       return new Date();

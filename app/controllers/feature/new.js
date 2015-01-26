@@ -22,11 +22,11 @@ export default Ember.ObjectController.extend(
       presence: true
     },
 
-    end: {
+    endDate: {
       presence: true
     },
 
-    start: {
+    startDate: {
       presence: true
     }
   },
@@ -35,9 +35,16 @@ export default Ember.ObjectController.extend(
 
   save: function() {
     var _this = this;
+    var feature = this.get('content');
 
-    this.get('content').save().then(function(feature) {
-      _this.transitionToRoute('show', feature);
+    this.get('stages').forEach(function(stage) {
+      stage.set('feature', feature);
+      stage.save();
+    });
+
+    feature.save().then(function(/* feature */) {
+      // TODO - transition to feature show
+      _this.transitionToRoute('index');
     });
   },
 
