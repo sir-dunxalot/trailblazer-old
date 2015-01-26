@@ -12,5 +12,9 @@
   {{input name}}
   {{input notes as='text'}}
 
+  {{#each stage in stages}}
+    Duration: {{stage.duration}}
+  {{/each}}
+
   {{form-submission}}
 </form>

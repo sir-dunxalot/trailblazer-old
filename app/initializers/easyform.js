@@ -126,11 +126,13 @@ export default {
     /* Datepicker built with pickaday */
 
     Ember.EasyForm.DatePicker = Em.EasyForm.TextField.extend({
+      classNames: ['datepicker'],
+      datepicker: null,
 
       format: function() {
         return defaultFor(
           this.get('parentView.format'),
-          'MMM D, YYYY'
+          'MMM D, YYYY' // e.g. Jan 4, 2015
         );
       }.property('parentView.format'),
 
@@ -146,18 +148,29 @@ export default {
         var parentView = this.get('parentView');
         var minDate = defaultFor(
           parentView.get('minDate'),
-          moment()
+          moment().toDate()
         );
 
-        var datepicker = new Pikaday({
-          defaultDate: this.get('value'),
-          field: this.$()[0],
-          format: this.get('format'),
-          margin: this.get('margin'),
-          maxDate: parentView.get('maxDate'),
-          minDate: minDate
-        })
+        this.set('datepicker',
+          new Pikaday({
+            defaultDate: this.get('value'),
+            field: this.$()[0],
+            format: this.get('format'),
+            margin: this.get('margin'),
+            maxDate: parentView.get('maxDate'),
+            minDate: minDate
+          })
+        );
       }.on('didInsertElement'),
+
+      update: function(view, key) {
+        var datepicker = this.get('datepicker');
+        var method = 'set' + key.split('.')[1].capitalize();
+
+        if (datepicker) {
+          datepicker[method](moment(this.get(key)));
+        }
+      }.observes('parentView.minDate', 'parentView.maxDate')
 
     });
 

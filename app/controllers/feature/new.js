@@ -1,3 +1,4 @@
+import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
 import Saving from 'trailblazer/mixins/controllers/saving';
 
@@ -14,6 +15,8 @@ export default Ember.ObjectController.extend(
     return endDate.diff(startDate, 'days');
   }.property('startDate', 'endDate'),
 
+  /* Validations */
+
   validations: {
     name: {
       presence: true
@@ -28,6 +31,8 @@ export default Ember.ObjectController.extend(
     }
   },
 
+  /* Methods */
+
   save: function() {
     var _this = this;
 
@@ -37,7 +42,23 @@ export default Ember.ObjectController.extend(
   },
 
   setStageDurations: function() {
+    var lower = this.get('lowerDuration');
+    var upper = this.get('upperDuration');
+    var hash = {
+      research: lower,
+      development: upper - lower,
+      testing: this.get('totalDuration') - upper
+    };
 
-  }.observes('lowerValue', 'upperValue', 'totalDuration'),
+    this.get('stages').forEach(function(stage) {
+      stage.set('duration', hash[stage.get('type.name')]);
+    });
+
+  }.observes(
+    'lowerDuration',
+    'upperDuration',
+    'totalDuration',
+    'stages.[]'
+  ),
 
 });

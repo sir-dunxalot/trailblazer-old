@@ -13,14 +13,18 @@ export default Ember.Component.extend({
   renderSlider: function() {
     var _this = this;
     var element = this.$();
-    var lower = defaultFor(
-      this.get('lower'),
-      this.get('max') * 0.3
-    );
-    var upper = defaultFor(
-      this.get('upper'),
-      this.get('max') * 0.7
-    );
+    var lower = this.get('lower');
+    var upper = this.get('upper');
+
+    lower = defaultFor(lower, this.get('max') * 0.3);
+    upper = defaultFor(upper, this.get('max') * 0.7);
+
+    if (!this.get('lower') || !this.get('upper')) {
+      _this.setProperties({
+        lower: lower,
+        upper: upper,
+      });
+    }
 
     ['max', 'min'].forEach(function(key) {
       if (typeof _this.get(key) !== 'number') {
@@ -52,4 +56,9 @@ export default Ember.Component.extend({
       }
     });
   }.on('didInsertElement'),
+
+  rerenderSlider: function() {
+    Em.run.debounce(this, this.rerender, 100);
+  }.observes('min', 'max'),
+
 });
