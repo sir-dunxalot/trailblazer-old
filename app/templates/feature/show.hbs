@@ -3,13 +3,13 @@
 {{#link-to 'feature.edit' content}}Edit{{/link-to}}
 
 <p>
-  {{moment feature.startDate dateFormat}}
+  {{moment startDate dateFormat}}
   -
-  {{moment feature.endDate dateFormat}}
+  {{moment endDate dateFormat}}
 </p>
 
 <ol>
-  {{#each stage in feature.stages}}
+  {{#each stage in stages}}
     <li>{{stage.duration}}</li>
   {{/each}}
 </ol>

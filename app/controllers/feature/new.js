@@ -40,16 +40,14 @@ export default Ember.ObjectController.extend(
     var _this = this;
     var feature = this.get('content');
 
-    console.log(feature.get('endDate'));
+    this.get('stages').forEach(function(stage) {
+      stage.set('feature', feature);
+      stage.save();
+    });
 
-    // this.get('stages').forEach(function(stage) {
-    //   stage.set('feature', feature);
-    //   stage.save();
-    // });
-
-    // feature.save().then(function(feature) {
-    //   _this.transitionToRoute('feature.show', feature);
-    // });
+    feature.save().then(function(feature) {
+      _this.transitionToRoute('feature.show', feature);
+    });
   },
 
   setStageDurations: function() {
