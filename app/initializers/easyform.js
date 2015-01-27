@@ -1,6 +1,7 @@
+import Config from 'trailblazer/config/environment';
 import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
-
+import insert from 'trailblazer/utils/computed/insert';
 
 // ==========================================================================
 // Project:   Ember EasyForm
@@ -26,6 +27,9 @@ export default {
     Ember.EasyForm.Config.registerTemplate('easyForm/input', Ember.Handlebars.compile(
       '{{label-field propertyBinding="view.property" textBinding="view.label"}}' +
       '<div class="input_wrapper">' +
+      '{{#if view.isDatepicker}}' +
+        '{{input id=view.datepickerInputId class="datepicker"}}' +
+      '{{/if}}' +
         '{{partial "easyForm/inputControls"}}' +
       '</div>'
     ));
@@ -82,6 +86,8 @@ export default {
 
     Ember.EasyForm.Input.reopen({
       classNameBindings: ['showValidity:input_with_validity'],
+      datepickerInputId: insert('elementId', 'input-{{value}}'),
+      isDatepicker: Em.computed.equal('as', 'date'),
       showValidity: false,
 
       setInvalidToValid: function() {
@@ -119,33 +125,32 @@ export default {
             }
           });
         });
-      }
+      },
 
     });
 
     /* Datepicker built with pickaday */
 
     Ember.EasyForm.DatePicker = Em.EasyForm.TextField.extend({
-      classNames: ['datepicker'],
+      classNames: ['datepicker', 'removed'],
       datepicker: null,
+      type: 'hidden',
+
+      // TODO - set container so calendar doesn't render into the DOM multiple times
 
       format: function() {
         return defaultFor(
           this.get('parentView.format'),
-          'MMM D, YYYY' // e.g. Jan 4, 2015
+          Config.APP.dateFormat
         );
       }.property('parentView.format'),
 
-      formatDate: function() {
-        var value = this.get('value');
-        var format = this.get('format');
-        var formattedValue = moment(new Date(value)).format(format);
-
-        this.set('value', formattedValue);
-      }.on('willInsertElement'),
-
       renderDatePicker: function() {
+        var _this = this;
+        var defaultDate = new Date(this.get('value'));
+        var format = this.get('format');
         var parentView = this.get('parentView');
+        var inputId = parentView.get('datepickerInputId');
         var minDate = defaultFor(
           parentView.get('minDate'),
           moment().toDate()
@@ -153,13 +158,21 @@ export default {
 
         this.set('datepicker',
           new Pikaday({
-            defaultDate: new Date(this.get('value')),
-            field: this.$()[0],
-            format: this.get('format'),
+            defaultDate: defaultDate,
+            field: document.getElementById(inputId),
+            format: format,
             margin: this.get('margin'),
             maxDate: parentView.get('maxDate'),
-            minDate: minDate
+            minDate: minDate,
+
+            onSelect: function(date) {
+              _this.set('value', new Date(date));
+            }
           })
+        );
+
+        parentView.$().find('#' + inputId).val(
+          moment(defaultDate).format(format)
         );
       }.on('didInsertElement'),
 
@@ -174,7 +187,9 @@ export default {
 
     });
 
-    Em.EasyForm.Config.registerInputType('date', Em.EasyForm.DatePicker);
+    Em.EasyForm.Config.registerInputType('date',
+      Em.EasyForm.DatePicker
+    );
 
   }
 };

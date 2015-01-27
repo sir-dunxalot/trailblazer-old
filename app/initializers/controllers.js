@@ -1,9 +1,11 @@
 import Em from 'ember';
 
-export function initialize(/* container, app */) {
+export function initialize(container, app) {
 
   Em.ControllerMixin.reopen(
     Em.Evented, {
+
+    dateFormat: app.dateFormat
 
   });
 

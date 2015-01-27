@@ -1,7 +1,21 @@
-{{#each feature in content}}
-  {{feature.name}}
+<ul>
+  {{#each feature in content}}
+    <li>
+      {{#link-to 'feature.show' feature}}
+        {{feature.name}}
+      {{/link-to}}
 
-  {{#each stage in feature.stages}}
-    {{stage.duration}}
+      <p>
+        {{moment feature.startDate dateFormat}}
+        -
+        {{moment feature.endDate dateFormat}}
+      </p>
+
+      <ol>
+        {{#each stage in feature.stages}}
+          <li>{{stage.duration}}</li>
+        {{/each}}
+      </ol>
+    </li>
   {{/each}}
-{{/each}}
+</ul>

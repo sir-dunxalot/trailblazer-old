@@ -1,4 +1,3 @@
-import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
 import Saving from 'trailblazer/mixins/controllers/saving';
 
@@ -33,19 +32,24 @@ export default Ember.ObjectController.extend(
 
   /* Methods */
 
+  cancel: function() {
+    this.transitionToRoute('feature.show', this.get('content'));
+  },
+
   save: function() {
     var _this = this;
     var feature = this.get('content');
 
-    this.get('stages').forEach(function(stage) {
-      stage.set('feature', feature);
-      stage.save();
-    });
+    console.log(feature.get('endDate'));
 
-    feature.save().then(function(/* feature */) {
-      // TODO - transition to feature show
-      _this.transitionToRoute('index');
-    });
+    // this.get('stages').forEach(function(stage) {
+    //   stage.set('feature', feature);
+    //   stage.save();
+    // });
+
+    // feature.save().then(function(feature) {
+    //   _this.transitionToRoute('feature.show', feature);
+    // });
   },
 
   setStageDurations: function() {

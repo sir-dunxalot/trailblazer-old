@@ -70,7 +70,7 @@ export default Ember.Mixin.create({
   autofocus: function() {
     var input = this.$().find('input').first();
 
-    if (!$(input).hasClass('datepicker')) {
+    if (!Ember.$(input).hasClass('datepicker')) {
       input.focus();
     }
   }.on('didInsertElement'),

@@ -1,5 +1,5 @@
-import Ember from 'ember';
 import defaultFor from 'trailblazer/utils/default-for';
+import Ember from 'ember';
 import insert from 'trailblazer/utils/computed/insert';
 
 var previousMax;
@@ -22,23 +22,15 @@ export default Ember.Component.extend({
     var lowerRatio = lower ? lower / previousMax : 0.3;
     var upperRatio = upper ? upper / previousMax : 0.7;
 
-    this.set('lower', max * lowerRatio);
-    this.set('upper', max * upperRatio);
+    this.setProperties({
+      lower: Math.round(max * lowerRatio),
+      upper: Math.round(max * upperRatio)
+    });
   }.observes('max').on('init'),
 
   renderSlider: function() {
     var _this = this;
     var element = this.$();
-
-    // var lowerFallback = defaultFor(lower, max * 0.3);
-    // var upperFallback = defaultFor(upper, max * 0.7);
-
-    ['max', 'min'].forEach(function(key) {
-      if (typeof _this.get(key) !== 'number') {
-        Ember.assert('You must pass the ' + key +
-          ' property to the range-slider component');
-      }
-    });
 
     element.noUiSlider({
       animate: true,

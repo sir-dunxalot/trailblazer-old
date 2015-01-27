@@ -1,0 +1,23 @@
+<h1>{{name}}</h1>
+
+{{#link-to 'feature.edit' content}}Edit{{/link-to}}
+
+<p>
+  {{moment feature.startDate dateFormat}}
+  -
+  {{moment feature.endDate dateFormat}}
+</p>
+
+<ol>
+  {{#each stage in feature.stages}}
+    <li>{{stage.duration}}</li>
+  {{/each}}
+</ol>
+
+<ul>
+  {{#each task in tasks}}
+    <li>
+      {{task.name}}
+    </li>
+  {{/each}}
+</ul>
