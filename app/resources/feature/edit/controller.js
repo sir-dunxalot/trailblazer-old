@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FeatureController from 'trailblazer/controllers/feature/new';
+import FeatureController from 'trailblazer/resources/features/new/controller';
 
 export default FeatureController.extend({
 
