@@ -33,7 +33,7 @@ export default Ember.ObjectController.extend(
   /* Methods */
 
   cancel: function() {
-    this.transitionToRoute('feature.show', this.get('content'));
+    this.transitionToRoute('feature', this.get('content'));
   },
 
   save: function() {
@@ -46,7 +46,7 @@ export default Ember.ObjectController.extend(
     });
 
     feature.save().then(function(feature) {
-      _this.transitionToRoute('feature.show', feature);
+      _this.transitionToRoute('feature', feature);
     });
   },
 

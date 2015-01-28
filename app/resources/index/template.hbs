@@ -1,9 +1,11 @@
 <ul>
   {{#each feature in content}}
     <li>
-      {{#link-to 'feature.show' feature}}
+      {{#link-to 'feature' feature}}
         {{feature.name}}
       {{/link-to}}
+
+      <p>{{feature.id}}</p>
 
       <p>
         {{moment feature.startDate dateFormat}}

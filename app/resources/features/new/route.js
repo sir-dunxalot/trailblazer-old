@@ -11,6 +11,7 @@ export default Ember.Route.extend(
 
       types.forEach(function(type) {
         var stage = store.createRecord('stage', {
+          // TODO - set feature here
           type: type
         });
 

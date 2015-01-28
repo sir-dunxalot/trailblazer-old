@@ -1,0 +1,5 @@
+<h2>Users</h2>
+
+{{#each user in content}}
+  {{#link-to 'user' user}}{{user.name}}{{/link-to}}
+{{/each}}

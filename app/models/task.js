@@ -4,7 +4,7 @@ var attr = DS.attr;
 var belongsTo = DS.belongsTo;
 
 export default DS.Model.extend({
-  assignee: belongsTo('user'),
+  assignee: belongsTo('user'), // TODO - default to session user
   completed: attr('boolean', {
     defaultValue: false
   }),

@@ -2,6 +2,7 @@ import Config from 'trailblazer/config/environment';
 import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
 import insert from 'trailblazer/utils/computed/insert';
+import { EmberSelectizeComponent } from 'ember-cli-selectize/index';
 
 // ==========================================================================
 // Project:   Ember EasyForm
@@ -187,8 +188,12 @@ export default {
 
     });
 
-    Em.EasyForm.Config.registerInputType('date',
-      Em.EasyForm.DatePicker
+    Ember.EasyForm.Config.registerInputType('date',
+      Ember.EasyForm.DatePicker
+    );
+
+    Ember.EasyForm.Config.registerInputType('selectize',
+      EmberSelectizeComponent
     );
 
   }

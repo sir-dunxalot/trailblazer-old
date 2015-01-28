@@ -7,19 +7,28 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 
-  this.resource('user', function() {
-    this.route('index', { path: 'team' }); // TODO - better path
+  this.resource('users', function() {
+    this.route('index', { path: '/team' });
     this.route('new');
-    this.route('show', { path: '/:id' });
+
+    this.resource('user', { path: '/:id' }, function() {
+
+    });
   });
 
-  this.resource('feature', function() {
-    this.route('edit', { path: '/:id/edit' });
+  this.resource('features', function() {
     this.route('new');
-    this.route('show', { path: '/:id' });
+
+    this.resource('feature', { path: '/:id' }, function() {
+      this.route('edit');
+
+      this.resource('tasks', function() {
+        this.route('new');
+      });
+    });
   });
 
-  this.route('stage-type', function() {
+  this.resource('stage-types', function() {
     this.route('new');
   });
 
