@@ -18,6 +18,10 @@ export default Ember.ObjectController.extend(
     }
   },
 
+  cancel: function() {
+    this.transitionToRoute('feature', this.get('feature'));
+  },
+
   save: function() {
     var _this = this;
 
