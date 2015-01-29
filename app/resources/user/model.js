@@ -8,6 +8,7 @@ export default DS.Model.extend({
   email: attr('string'),
   firstName: attr('string'),
   lastName: attr('string'),
+  // TODO - Decide whether to add tasks relationship here
   tasks: hasMany('task', {
     async: true
   }),
