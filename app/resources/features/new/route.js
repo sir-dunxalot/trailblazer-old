@@ -24,10 +24,4 @@ export default Ember.Route.extend(
     return this.store.createRecord('feature');
   },
 
-  // setupController: function(controller, model) {
-  //   this._super(controller, model);
-
-  //   this.get('store').
-  // }
-
 });

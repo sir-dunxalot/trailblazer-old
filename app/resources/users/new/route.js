@@ -6,6 +6,13 @@ export default Ember.Route.extend(
 
   model: function() {
     return this.store.createRecord('user');
-  }
+  },
+
+  setupController: function(controller, model) {
+    var teams = this.store.find('team');
+
+    this._super(controller, model);
+    controller.set('teams', teams);
+  },
 
 });

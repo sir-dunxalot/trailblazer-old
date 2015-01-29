@@ -1,10 +1,9 @@
 <form>
-
   {{input startDate as='date' maxDate=endDate}}
   {{input endDate as='date' minDate=startDate}}
 
-  {{content.endDate}}
-  {{content.startDate}}
+  {{lowerDuration}}
+  {{upperDuration}}
 
   {{range-slider
     lower=lowerDuration

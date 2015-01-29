@@ -6,7 +6,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.resource('users', function() {
     // this.route('index', { path: '/team' });
     this.route('new');
@@ -30,6 +29,14 @@ Router.map(function() {
 
   this.resource('stage-types', function() {
     this.route('new');
+  });
+
+  this.resource('teams', function() {
+    this.route('new');
+
+    this.resource('team', { path: '/:id' }, function() {
+
+    });
   });
 
 });

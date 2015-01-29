@@ -22,8 +22,23 @@ export default Ember.ObjectController.extend(
     var _this = this;
 
     this.get('content').save().then(function(task) {
-      _this.transitionToRoute('feature.show', task.get('feature'));
+      var feature = task.get('feature');
+
+      feature.get('tasks').pushObject(task);
+      feature.get('content').save().then(function() {
+        _this.transitionToRoute('feature', feature);
+      });
     });
   },
+
+  setDefaultStage: function() {
+    var _this = this;
+
+    _this.get('feature.stages').then(function(stages) {
+      var stage = stages.objectAt(1);
+
+      _this.set('stage', stage);
+    });
+  }.observes('stages.[]'),
 
 });

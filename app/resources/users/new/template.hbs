@@ -1,7 +1,16 @@
 <form>
-  {{input name}}
+  {{input firstName}}
+  {{input lastName}}
   {{input email}}
   {{input password}}
+
+  {{input team
+    as='selectize'
+    content=teams
+    optionValuePath='content.id'
+    optionLabelPath='content.name'
+    placeholder='Select a team'
+  }}
 
   {{form-submission}}
 </form>

@@ -33,7 +33,7 @@ export default Ember.ObjectController.extend(
   /* Methods */
 
   cancel: function() {
-    this.transitionToRoute('feature', this.get('content'));
+    this.transitionToRoute('index');
   },
 
   save: function() {
@@ -49,6 +49,8 @@ export default Ember.ObjectController.extend(
       _this.transitionToRoute('feature', feature);
     });
   },
+
+  // TODO - redo how the durations are bound
 
   setStageDurations: function() {
     var lower = this.get('lowerDuration');

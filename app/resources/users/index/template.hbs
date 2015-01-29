@@ -1,5 +1,9 @@
 <h2>Users</h2>
 
-{{#each user in content}}
-  {{#link-to 'user' user}}{{user.name}}{{/link-to}}
-{{/each}}
+<ul>
+  {{#each user in content}}
+    <li>{{#link-to 'user' user}}{{user.firstName}}{{/link-to}}</li>
+  {{else}}
+    <li>No teammembers!</li>
+  {{/each}}
+</ul>

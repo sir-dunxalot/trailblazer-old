@@ -15,7 +15,9 @@ export default Ember.Component.extend({
     previousMax = this.get('max');
   }.observesBefore('max'),
 
-  calculateValues: function() {
+  /* Recalculate values is the min-max range changes */
+
+  calculateRangeValues: function() {
     var max = this.get('max');
     var lower = this.get('lower');
     var upper = this.get('upper');
@@ -27,6 +29,8 @@ export default Ember.Component.extend({
       upper: Math.round(max * upperRatio)
     });
   }.observes('max').on('init'),
+
+  // TODO - allow values to be passed in when editing a feature
 
   renderSlider: function() {
     var _this = this;

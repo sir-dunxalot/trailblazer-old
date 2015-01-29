@@ -1,0 +1,9 @@
+<h1>{{name}}</h1>
+
+<ul>
+  {{#each user in members}}
+    <li>{{user.firstName}} {{user.lastName}}</li>
+  {{else}}
+    <li>No teammembers!</li>
+  {{/each}}
+</ul>

@@ -1,0 +1,9 @@
+<h2>Teams</h2>
+
+<ul>
+  {{#each team in content}}
+    <li>{{#link-to 'team' team}}{{team.name}}{{/link-to}}</li>
+  {{else}}
+    <li>No teams!</li>
+  {{/each}}
+</ul>

@@ -192,8 +192,18 @@ export default {
       Ember.EasyForm.DatePicker
     );
 
+    Ember.EasyForm.Selectize = EmberSelectizeComponent.extend({
+      // TODO - allow default option
+      content: Em.computed.alias('parentView.content'),
+
+      watchForSelection: function() {
+        this.set('value', this.get('selection'));
+      }.observes('selection'),
+
+    });
+
     Ember.EasyForm.Config.registerInputType('selectize',
-      EmberSelectizeComponent
+      Ember.EasyForm.Selectize
     );
 
   }

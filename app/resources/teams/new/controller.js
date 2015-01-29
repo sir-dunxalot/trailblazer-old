@@ -5,32 +5,20 @@ export default Ember.ObjectController.extend(
   Saving, {
 
   validations: {
-    email: {
+    name: {
       presence: true
     },
-
-    firstName: {
-      presence: true
-    },
-
-    lastName: {
-      presence: true
-    },
-
-    team: {
-      presence: true
-    }
   },
 
   cancel: function() {
-    this.transitionToRoute('users');
+    this.transitionToRoute('teams');
   },
 
   save: function() {
     var _this = this;
 
-    this.get('content').save().then(function(user) {
-      _this.transitionToRoute('user', user);
+    this.get('content').save().then(function(team) {
+      _this.transitionToRoute('team', team);
     });
   },
 

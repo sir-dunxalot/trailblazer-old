@@ -1,2 +1,23 @@
-{{input name}}
-{{input stage as='selectize' content=feature.stages}}
+<form>
+  {{input name}}
+  {{input notes as='text'}}
+
+  {{!-- TODO - set to last used stage --}}
+  {{input stage
+    as='selectize'
+    content=feature.stages
+    optionValuePath='content.id'
+    optionLabelPath='content.type.capitalizedName'
+    placeholder='Select a stage'
+  }}
+
+  {{input assignee
+    as='selectize'
+    content=users
+    optionValuePath='content.id'
+    optionLabelPath='content.fullName'
+    placeholder='Select an assignee'
+  }}
+
+  {{form-submission}}
+</form>
