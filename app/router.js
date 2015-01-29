@@ -23,6 +23,10 @@ Router.map(function() {
 
       this.resource('tasks', function() {
         this.route('new');
+
+        this.resource('task', { path: '/:id' }, function() {
+          this.route('edit');
+        });
       });
     });
   });
@@ -38,7 +42,6 @@ Router.map(function() {
 
     });
   });
-
 });
 
 export default Router;

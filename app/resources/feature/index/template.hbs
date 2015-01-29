@@ -18,7 +18,9 @@
 <ul>
   {{#each task in tasks}}
     <li {{bind-attr class='task.stage.type.name'}}>
-      {{task.name}}
+      {{#link-to 'task.edit' task}}
+        {{task.name}}
+      {{/link-to}}
     </li>
   {{/each}}
 </ul>
