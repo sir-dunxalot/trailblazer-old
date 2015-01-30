@@ -4,6 +4,24 @@ import Saving from 'trailblazer/mixins/controllers/saving';
 export default Ember.ObjectController.extend(
   Saving, {
 
+  testTask: null,
+  testTaskSelection: null,
+  testTaskOptions: Em.A([
+    {
+      name: 'None',
+      value: null
+    }, {
+      name: 'Unit test',
+      value: 'unit'
+    }, {
+      name: 'Integration test',
+      value: 'integration'
+    }, {
+      name: 'Both',
+      value: 'both'
+    }
+  ]),
+
   validations: {
     stage: {
       presence: true
@@ -14,6 +32,10 @@ export default Ember.ObjectController.extend(
     },
 
     assignee: {
+      presence: true
+    },
+
+    testTaskSelection: {
       presence: true
     }
   },
@@ -34,6 +56,16 @@ export default Ember.ObjectController.extend(
       });
     });
   },
+
+  // saveTestTask: function() {
+  //   var _this = this;
+
+  //   return new Ember.RSVP.Promise(function(resolve, reject) {
+  //     var testTask = _this.get('testTask');
+
+
+  //   });
+  // },
 
   setDefaultStage: function() {
     var _this = this;

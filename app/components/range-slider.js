@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   max: 10,
   min: 0,
   upper: null,
+  rendered: false,
   step: 1,
 
   _cacheMax: function() {
@@ -18,17 +19,31 @@ export default Ember.Component.extend({
   /* Recalculate values is the min-max range changes */
 
   calculateRangeValues: function() {
-    var max = this.get('max');
-    var lower = this.get('lower');
-    var upper = this.get('upper');
-    var lowerRatio = lower ? lower / previousMax : 0.3;
-    var upperRatio = upper ? upper / previousMax : 0.7;
+    var max, lowerRatio, upperRatio;
 
-    this.setProperties({
-      lower: Math.round(max * lowerRatio),
-      upper: Math.round(max * upperRatio)
-    });
-  }.observes('max').on('init'),
+    if (typeof previousMax === 'number' && this.get('rendered')) {
+      max = this.get('max');
+      lowerRatio = this.get('lower') / previousMax;
+      upperRatio = this.get('upper') / previousMax;
+
+      console.log('Change values');
+
+      this.$().val([
+        Math.round(max * lowerRatio),
+        Math.round(max * upperRatio)
+      ]);
+
+      this.set('rendered', false);
+      this.rerender();
+
+      this.setProperties({
+        lower: Math.round(max * lowerRatio),
+        upper: Math.round(max * upperRatio)
+      });
+
+      // this.renderSlider();
+    }
+  }.observes('max'),
 
   // TODO - allow values to be passed in when editing a feature
 
@@ -58,10 +73,24 @@ export default Ember.Component.extend({
         });
       }
     });
-  }.on('didInsertElement'),
+  },
 
-  rerenderSlider: function() {
-    Em.run.debounce(this, this.rerender, 100);
-  }.observes('min', 'max'),
+  // rerenderSlider: function() {
+  //   Em.run.debounce(this, this.rerender, 100);
+  // }.observes('min', 'max'),
+
+  setInitialValues: function(context, key) {
+    var value = this.get(key);
+
+    if (!value) {
+      this.set(key, value);
+    } else if (!this.get('rendered')) {
+      this.set('rendered', true);
+
+      Em.run.scheduleOnce('afterRender', this, function() {
+        this.renderSlider();
+      });
+    }
+  }.observes('lower', 'upper')
 
 });

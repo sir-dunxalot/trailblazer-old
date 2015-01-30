@@ -19,6 +19,16 @@
     placeholder='Select an assignee'
   }}
 
+  {{#if new}}
+    {{input testTaskSelection
+      as='selectize'
+      content=testTaskOptions
+      optionValuePath='content.value'
+      optionLabelPath='content.name'
+      placeholder='Add a test task?'
+    }}
+  {{/if}}
+
   {{!-- TODO - Add test tasks for new only --}}
 
   {{form-submission}}
