@@ -2,50 +2,43 @@ import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
 import insert from 'trailblazer/utils/computed/insert';
 
-var previousMax;
-
 export default Ember.Component.extend({
   lower: null,
   max: 10,
   min: 0,
   upper: null,
+  _previousMax: null,
   rendered: false,
   step: 1,
 
   _cacheMax: function() {
-    previousMax = this.get('max');
+    this.set('_previousMax', this.get('max'));
   }.observesBefore('max'),
 
   /* Recalculate values is the min-max range changes */
 
   calculateRangeValues: function() {
-    var max, lowerRatio, upperRatio;
+    var previousMax = this.get('_previousMax');
+    var max, newLowerValue, lowerRatio, newUpperValue, upperRatio;
 
-    if (typeof previousMax === 'number' && this.get('rendered')) {
+    if (previousMax && this.get('rendered')) {
       max = this.get('max');
       lowerRatio = this.get('lower') / previousMax;
       upperRatio = this.get('upper') / previousMax;
+      newLowerValue = Math.round(max * lowerRatio);
+      newUpperValue = Math.round(max * upperRatio);
 
-      console.log('Change values');
-
-      this.$().val([
-        Math.round(max * lowerRatio),
-        Math.round(max * upperRatio)
-      ]);
+      this.$().val([newLowerValue, newUpperValue]);
 
       this.set('rendered', false);
       this.rerender();
 
       this.setProperties({
-        lower: Math.round(max * lowerRatio),
-        upper: Math.round(max * upperRatio)
+        lower: newLowerValue,
+        upper: newUpperValue
       });
-
-      // this.renderSlider();
     }
   }.observes('max'),
-
-  // TODO - allow values to be passed in when editing a feature
 
   renderSlider: function() {
     var _this = this;
@@ -75,22 +68,16 @@ export default Ember.Component.extend({
     });
   },
 
-  // rerenderSlider: function() {
-  //   Em.run.debounce(this, this.rerender, 100);
-  // }.observes('min', 'max'),
-
   setInitialValues: function(context, key) {
-    var value = this.get(key);
-
-    if (!value) {
-      this.set(key, value);
-    } else if (!this.get('rendered')) {
+    if (key && !this.get(key)) {
+      this.set(key, this.get(key));
+    } else if (!this.get('rendered') && this.get('upper') && this.get('lower')) {
       this.set('rendered', true);
 
       Em.run.scheduleOnce('afterRender', this, function() {
         this.renderSlider();
       });
     }
-  }.observes('lower', 'upper')
+  }.observes('lower', 'upper').on('didInsertElement')
 
 });

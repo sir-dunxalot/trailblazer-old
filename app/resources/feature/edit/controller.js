@@ -11,13 +11,9 @@ export default FeatureController.extend({
       var developmentStage = stages.objectAt(1);
       var lower, upper;
 
-      console.log(researchStage);
-
       if (researchStage) {
         lower = researchStage.get('duration');
         upper = lower + developmentStage.get('duration');
-
-        console.log(upper, lower);
 
         _this.setProperties({
           lowerDuration: lower,

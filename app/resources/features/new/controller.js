@@ -55,21 +55,22 @@ export default Ember.ObjectController.extend(
   setStageDurations: function() {
     var lower = this.get('lowerDuration');
     var upper = this.get('upperDuration');
-    var hash = {
-      research: lower,
-      development: upper - lower,
-      testing: this.get('totalDuration') - upper
-    };
+    var hash;
 
-    this.get('stages').forEach(function(stage) {
-      stage.set('duration', hash[stage.get('type.name')]);
-    });
+    if (lower && upper) {
+      hash = {
+        research: lower,
+        development: upper - lower,
+        testing: this.get('totalDuration') - upper
+      };
 
-  }.observes(
-    'lowerDuration',
-    'upperDuration',
-    'totalDuration',
-    'stages.[]'
-  ),
+      this.get('stages').forEach(function(stage) {
+        stage.get('type').then(function(type) {
+          stage.set('duration', hash[type.get('name')]);
+        });
+      });
+    }
+
+  }.observes('lowerDuration', 'upperDuration'),
 
 });
