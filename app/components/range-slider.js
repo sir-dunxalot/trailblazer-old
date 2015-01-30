@@ -53,7 +53,15 @@ export default Ember.Component.extend({
         min: this.get('min'),
         max: this.get('max'),
       },
-      step: this.get('step')
+      step: this.get('step'),
+      format: {
+        to: function(value) {
+          return parseInt(value).toFixed(0);
+        },
+        from: function(value) {
+          return parseInt(value).toFixed(0);
+        }
+      }
     });
 
     element.on({

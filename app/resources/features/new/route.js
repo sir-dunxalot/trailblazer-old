@@ -4,6 +4,16 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   DeleteRecord, {
 
+  // undoStageCreation: function() {
+  //   var stages = this.get('controller.content.stages');
+
+  //   stages.forEach(function(stage) {
+  //     if (stage.get('isDirty')) {
+  //       stage.deleteRecord();
+  //     }
+  //   })
+  // }.on('willTransition'),
+
   afterModel: function(newFeature) {
     var store = this.store;
     var duration = newFeature.get('totalDuration');
@@ -17,9 +27,9 @@ export default Ember.Route.extend(
 
       types.forEach(function(type, i) {
         var stage = store.createRecord('stage', {
-          // TODO - set feature here
-          type: type,
-          duration: Math.round(durations[i])
+          duration: Math.round(durations[i]),
+          feature: newFeature,
+          type: type
         });
 
         newFeature.get('stages').pushObject(stage);

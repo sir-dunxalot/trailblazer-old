@@ -5,8 +5,6 @@ import DS from 'ember-data';
 var attr = DS.attr;
 var hasMany = DS.hasMany;
 
-// TODO - date not saving
-
 export default DS.Model.extend({
   createdAt: attr('date', {
     defaultValue: function() {
