@@ -7,12 +7,12 @@ export default Ember.ObjectController.extend(
   lowerDuration: null,
   upperDuration: null,
 
-  totalDuration: function() {
-    var endDate = moment(this.get('endDate'));
-    var startDate = moment(this.get('startDate'));
+  // totalDuration: function() {
+  //   var endDate = moment(this.get('endDate'));
+  //   var startDate = moment(this.get('startDate'));
 
-    return endDate.diff(startDate, 'days');
-  }.property('startDate', 'endDate'),
+  //   return endDate.diff(startDate, 'days');
+  // }.property('startDate', 'endDate'),
 
   /* Validations */
 
@@ -72,5 +72,26 @@ export default Ember.ObjectController.extend(
     }
 
   }.observes('lowerDuration', 'upperDuration'),
+
+  setDurations: function() {
+    var _this = this;
+
+    this.get('stages').then(function(stages) {
+      var researchStage = stages.objectAt(0);
+      var developmentStage = stages.objectAt(1);
+      var lower, upper;
+
+      if (researchStage) {
+        lower = researchStage.get('duration');
+        upper = lower + developmentStage.get('duration');
+
+        _this.setProperties({
+          lowerDuration: lower,
+          upperDuration: upper
+        });
+      }
+    });
+
+  }.observes('stages.[]'),
 
 });

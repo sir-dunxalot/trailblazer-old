@@ -3,25 +3,28 @@ import FeatureController from 'trailblazer/resources/features/new/controller';
 
 export default FeatureController.extend({
 
-  setDurations: function() {
-    var _this = this;
+  // lowerDuration: null,
+  // upperDuration: null,
 
-    this.get('stages').then(function(stages) {
-      var researchStage = stages.objectAt(0);
-      var developmentStage = stages.objectAt(1);
-      var lower, upper;
+  // setDurations: function() {
+  //   var _this = this;
 
-      if (researchStage) {
-        lower = researchStage.get('duration');
-        upper = lower + developmentStage.get('duration');
+  //   this.get('stages').then(function(stages) {
+  //     var researchStage = stages.objectAt(0);
+  //     var developmentStage = stages.objectAt(1);
+  //     var lower, upper;
 
-        _this.setProperties({
-          lowerDuration: lower,
-          upperDuration: upper
-        });
-      }
-    });
+  //     if (researchStage) {
+  //       lower = researchStage.get('duration');
+  //       upper = lower + developmentStage.get('duration');
 
-  }.observes('stages.[]'),
+  //       _this.setProperties({
+  //         lowerDuration: lower,
+  //         upperDuration: upper
+  //       });
+  //     }
+  //   });
+
+  // }.observes('stages.[]'),
 
 })

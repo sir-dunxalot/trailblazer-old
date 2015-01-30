@@ -15,7 +15,7 @@ export default DS.Model.extend({
   }),
   endDate: attr('date', {
     defaultValue: function() {
-      return moment().add(1, 'M').toDate();
+      return moment().add(30, 'days').toDate();
     }
   }),
   name: attr('string'),
@@ -31,4 +31,11 @@ export default DS.Model.extend({
   tasks: hasMany('task', {
     async: true
   }),
+
+  totalDuration: function() {
+    var endDate = moment(this.get('endDate'));
+    var startDate = moment(this.get('startDate'));
+
+    return endDate.diff(startDate, 'days');
+  }.property('startDate', 'endDate'),
 });
