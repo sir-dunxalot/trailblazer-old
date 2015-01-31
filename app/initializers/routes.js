@@ -14,14 +14,14 @@ export function initialize(/* container, app */) {
 
     authenticate: true,
 
-    addAuthenticatorMixin: function() {
+    addAuthenticationMixin: function() {
       // So null doesn't add anything
       if (this.get('authenticate')) {
         this.reopen(AuthenticatedRouteMixin);
       } else if (this.get('authenticate') === false) {
         this.reopen(UnauthenticatedRouteMixin);
       }
-    },
+    }.on('init'),
 
     /**
     @ISSUE https://github.com/emberjs/ember.js/issues/5394

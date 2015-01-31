@@ -1,8 +1,38 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
+var fmt = Ember.String.fmt;
+
 export default DS.FirebaseAdapter.extend({
+  // TODO - move URL to config
   firebase: new Firebase('https://trailblazer.firebaseio.com'),
+
+  find: function(store, type, id) {
+    var adapter = this;
+    var ref = this._getRef(type, id);
+    var serializer = store.serializerFor(type);
+
+    return new Promise(function(resolve, reject) {
+      ref.once('value', function(snapshot) {
+        var payload = adapter._assignIdToPayload(snapshot);
+
+        adapter._updateRecordCacheForType(type, payload);
+
+        if (payload === null) {
+          reject();
+        } else {
+          resolve(payload);
+        }
+      },
+      function(err) {
+        reject(err);
+      });
+    },
+      Ember.String.fmt('DS: FirebaseAdapter#find %@ to %@',
+        [type, ref.toString()]
+      )
+    );
+  },
 
   // https://github.com/webhook/webhook-cms/blob/master/app/adapters/application.js
 

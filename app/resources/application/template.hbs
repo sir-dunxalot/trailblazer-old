@@ -11,8 +11,9 @@
     <li>{{#link-to 'teams'}}Teams{{/link-to}}</li>
     <li><button {{action 'invalidateSession'}}>Logout</button></li>
   </ul>
-{{outlet}}
 
 {{else}}
-  <button {{action 'authenticateSession'}}>Login with github</button>
+  {{!-- <button {{action 'authenticateSession'}}>Login with github</button> --}}
 {{/if}}
+
+{{outlet}}

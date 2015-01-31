@@ -4,8 +4,4 @@ export default Ember.Route.extend({
   authenticate: false,
   //  authorizer?
 
-  beforeModel: function() {
-    // No auth
-  },
-
 });
