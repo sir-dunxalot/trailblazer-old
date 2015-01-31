@@ -6,11 +6,12 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+
   this.resource('users', function() {
     this.route('new');
 
     this.resource('user', { path: '/:id' }, function() {
-
+      this.route('edit');
     });
   });
 
@@ -41,7 +42,8 @@ Router.map(function() {
 
     });
   });
-  this.route("sign-in");
+
+  this.route('sign-in');
 });
 
 export default Router;
