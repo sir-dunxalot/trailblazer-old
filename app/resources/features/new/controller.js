@@ -7,13 +7,6 @@ export default Ember.ObjectController.extend(
   lowerDuration: null,
   upperDuration: null,
 
-  // totalDuration: function() {
-  //   var endDate = moment(this.get('endDate'));
-  //   var startDate = moment(this.get('startDate'));
-
-  //   return endDate.diff(startDate, 'days');
-  // }.property('startDate', 'endDate'),
-
   /* Validations */
 
   validations: {

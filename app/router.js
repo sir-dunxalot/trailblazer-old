@@ -41,6 +41,7 @@ Router.map(function() {
 
     });
   });
+  this.route("sign-in");
 });
 
 export default Router;

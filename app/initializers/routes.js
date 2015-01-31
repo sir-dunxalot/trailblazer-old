@@ -1,4 +1,6 @@
-import Em from 'ember';
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
+import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-mixin';
+import Ember from 'ember';
 
 export function initialize(/* container, app */) {
 
@@ -7,8 +9,19 @@ export function initialize(/* container, app */) {
   @submodule routes
   */
 
-  Em.Route.reopen(
-    Em.Evented, {
+  Ember.Route.reopen(
+    Ember.Evented, {
+
+    authenticate: true,
+
+    addAuthenticatorMixin: function() {
+      // So null doesn't add anything
+      if (this.get('authenticate')) {
+        this.reopen(AuthenticatedRouteMixin);
+      } else if (this.get('authenticate') === false) {
+        this.reopen(UnauthenticatedRouteMixin);
+      }
+    },
 
     /**
     @ISSUE https://github.com/emberjs/ember.js/issues/5394

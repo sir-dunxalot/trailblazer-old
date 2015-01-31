@@ -1,13 +1,18 @@
-<ul>
-  <li>{{#link-to 'index'}}Roadmap{{/link-to}}</li>
-  <li>{{#link-to 'users.new'}}New user{{/link-to}}</li>
-  <li>{{#link-to 'users'}}Users{{/link-to}}</li>
-  <li>{{#link-to 'features.new'}}New feature{{/link-to}}</li>
-{{!--   <li>{{#link-to 'features'}}Features{{/link-to}}</li> --}}
-  {{!-- <li>{{#link-to 'stage-type.new'}}New stage type{{/link-to}}</li> --}}
-  <li>{{#link-to 'stage-types'}}Stage types{{/link-to}}</li>
-  <li>{{#link-to 'teams.new'}}New team{{/link-to}}</li>
-  <li>{{#link-to 'teams'}}Teams{{/link-to}}</li>
-</ul>
-
+{{#if session.isAuthenticated}}
+  <ul>
+    <li>{{#link-to 'index'}}Roadmap{{/link-to}}</li>
+    <li>{{#link-to 'users.new'}}New user{{/link-to}}</li>
+    <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+    <li>{{#link-to 'features.new'}}New feature{{/link-to}}</li>
+  {{!--   <li>{{#link-to 'features'}}Features{{/link-to}}</li> --}}
+    {{!-- <li>{{#link-to 'stage-type.new'}}New stage type{{/link-to}}</li> --}}
+    <li>{{#link-to 'stage-types'}}Stage types{{/link-to}}</li>
+    <li>{{#link-to 'teams.new'}}New team{{/link-to}}</li>
+    <li>{{#link-to 'teams'}}Teams{{/link-to}}</li>
+    <li><button {{action 'invalidateSession'}}>Logout</button></li>
+  </ul>
 {{outlet}}
+
+{{else}}
+  <button {{action 'authenticateSession'}}>Login with github</button>
+{{/if}}

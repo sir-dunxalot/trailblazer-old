@@ -1,5 +1,3 @@
-/* globals Firebase */
-
 import DS from 'ember-data';
 import Ember from 'ember';
 

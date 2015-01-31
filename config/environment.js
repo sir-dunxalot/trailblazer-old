@@ -23,6 +23,10 @@ module.exports = function(environment) {
       'frame-src': "'self' https://*.firebaseio.com",
       'script-src': "'self' 'unsafe-eval' https://*.firebaseio.com",
       'style-src': "'self' 'unsafe-inline'",
+    },
+
+    'simple-auth': {
+      authenticationRoute: 'sign-in',
     }
   };
 
