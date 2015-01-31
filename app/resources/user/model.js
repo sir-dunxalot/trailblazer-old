@@ -5,10 +5,11 @@ var belongsTo = DS.belongsTo;
 var hasMany = DS.hasMany;
 
 export default DS.Model.extend({
+  avatarUrl: attr('string'),
   email: attr('string'),
   firstName: attr('string'),
+  githubUserName: attr('string'),
   lastName: attr('string'),
-  // TODO - Decide whether to add tasks relationship here
   tasks: hasMany('task', {
     async: true
   }),

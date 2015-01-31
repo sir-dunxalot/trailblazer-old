@@ -41,21 +41,23 @@ var CustomAuthenticator = AuthenticatorBase.extend({
   createUser: function(authData, store) {
     var _this = this;
 
-    console.log(authData);
-
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var nameParts = authData.github.displayName.split(' ');
+      var githubData = authData.github;
+      var githubProfile = authData.github.cachedUserProfile;
+      var nameParts = githubData.displayName.split(' ');
       var newUser = store.createRecord('user', {
-        email: authData.github.email,
+        avatarUrl: githubProfile.avatar_url,
+        email: githubData.email,
         id: authData.uid,
         firstName: nameParts[0],
+        githubUserName: githubData.username,
         lastName: nameParts[1],
       });
 
       newUser.save().then(function(user) {
         resolve(user);
       }, function() {
-        reject(user);
+        reject();
       });
 
     });
@@ -74,6 +76,7 @@ var CustomAuthenticator = AuthenticatorBase.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var timestamp = Math.floor(Date.now() / 1000);
 
+      // TODO - Does simple auth handle this?
       if (authData && authData.expires > timestamp) {
         resolve(authData);
       } else {
@@ -92,15 +95,3 @@ export default {
   name: 'authentication',
   initialize: initialize
 }
-
-/*
-
-authData: {
-  uid: Unique user ID
-  token: Firebase auth token for the session
-  github.id: Github user ID
-  github.accessToken: Github OAuth 2.0 access token
-  github.displayName: The github user's full name
-}
-
-*/
