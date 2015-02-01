@@ -43,6 +43,7 @@ Router.map(function() {
     });
   });
 
+  this.route('settings');
   this.route('sign-in');
 });
 

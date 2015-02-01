@@ -1,0 +1,62 @@
+.fade {
+  @include transition(opacity 0.5s);
+  @extend %use_hardware_acceleration;
+}
+
+@include mod(fade) {
+  @extend .fade;
+}
+
+.csstransitions {
+  .fade-out {
+    @include transparent;
+  }
+
+  .fade-in {
+    @include opaque;
+  }
+}
+// TODO - single or double :: ?
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+.removed {
+  display: none !important;
+  visibility: hidden;
+}
+
+.hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  @extend %absolute;
+  width: 1px;
+}
+
+.hidden.focusable:active,
+.hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+[aria-hidden="false"] {
+  pointer-events: auto;
+}

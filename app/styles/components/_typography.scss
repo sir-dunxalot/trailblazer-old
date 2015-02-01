@@ -1,0 +1,19 @@
+html {
+  font-size: $baseFontSize * 0.8;
+
+  // @media ($medium) {
+  //   font-size: $baseFontSize;
+  // }
+}
+
+body {
+  @include rem(font-size, $bodyFontSize);
+  // font-family: $lato;
+  // font-weight: $latoReg;
+  // color: $body;
+  // So text looks much better in Crome/Safari
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; // Better fonts display for Firefox on Macs
+}

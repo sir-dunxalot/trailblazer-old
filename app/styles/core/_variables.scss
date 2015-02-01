@@ -1,0 +1,23 @@
+/* So 1rem = 10px when browser has default font-size of
+16px (i.e. 10/16 * 100) */
+
+$baseFontSize: 62.5%;
+$bodyFontSize: 1.6; // In rem
+
+/* Colors */
+
+$black: #000;
+$blue: #8dabcd;
+$gray: #868686;
+$green: #bcdb9d;
+$orange: #e7a169;
+$offwhite: #f0f0f0;
+$purple: #b287d7;
+$white: #fff;
+
+/* Layout */
+
+$small: "min-width: 37.5em"; // 600px
+$medium: "min-width: 50em"; // 800px
+$big: "min-width: 63.75em"; // 1020px
+$xBig: "min-width: 81.25em"; // 1200px

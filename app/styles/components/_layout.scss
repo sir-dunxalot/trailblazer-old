@@ -1,0 +1,20 @@
+.app {
+  @extend %table;
+  @extend %full_height-viewport;
+}
+
+.nav, .main {
+  // @extend %align-top;
+  // @extend %full_width;
+}
+
+.header {
+  background: yellow;
+  display: table-header-group;
+}
+
+.main {
+  @extend %cell;
+  // @extend %full_height;
+  background: red;
+}

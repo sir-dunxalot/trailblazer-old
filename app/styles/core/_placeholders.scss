@@ -1,0 +1,139 @@
+%full_height {
+  height: 100%;
+}
+
+%full_width {
+  width: 100%;
+}
+
+%full_height-viewport {
+  height: 100vh;
+}
+
+%full_width-viewport {
+  width: 100vw;
+}
+
+// .pad {
+//   @include rem(padding, $spacing);
+//   @extend %border_box;
+// }
+
+// .space {
+//   @include rem(margin-top, $spacing);
+//   @include rem(margin-bottom, $spacing);
+// }
+
+%nowrap {
+  white-space: nowrap;
+}
+
+%border_box {
+  @include box-sizing(border-box);
+}
+
+%relative {
+  position: relative;
+}
+
+%absolute {
+  position: absolute;
+}
+
+%fixed {
+  position: fixed;
+}
+
+%table {
+  display: table;
+  border-collapse: collapse;
+  @extend %full_width;
+  max-width: 100%;
+}
+
+%row {
+  display: table-row;
+}
+
+%cell {
+  display: table-cell;
+  @extend %align-middle;
+}
+
+%inline_block {
+  @include inline-block;
+}
+
+%align-middle {
+  vertical-align: middle;
+}
+
+%align-top {
+  vertical-align: top;
+}
+
+%block {
+  display: block;
+}
+
+%no_content {
+  content: '';
+}
+
+%full_size_pseudo {
+  @extend %no_content;
+  @extend %absolute;
+  @extend %full_height;
+  @extend %full_width;
+  @extend %top;
+  @extend %left;
+}
+
+%align-left {
+  text-align: left;
+}
+
+%align-center {
+  text-align: center;
+}
+
+%align-right {
+  text-align: right;
+}
+
+%terrace {
+  font-size: 0;
+
+  & > * {
+    @include rem(font-size, $bodyFontSize);
+  }
+}
+
+%not_allowed {
+  cursor: not-allowed;
+}
+
+%use_hardware_acceleration {
+  @include transform(translateZ(0)); // Hardware acceleration
+  @include backface-visibility;
+}
+
+// .sub {
+//   @include opacity(0.5);
+// }
+
+%top {
+  top: 0;
+}
+
+%right {
+  right: 0;
+}
+
+%bottom {
+  bottom: 0;
+}
+
+%left {
+  left: 0;
+}

@@ -1,9 +1,17 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var bowerDir = 'bower_components/';
 
-var app = new EmberApp();
-var bowerDir = app.bowerDirectory + '/';
+var app = new EmberApp({
+
+  sassOptions: {
+    includePaths: [
+      bowerDir + 'compass-mixins/lib'
+    ]
+  },
+
+});
 
 /* Boilerplate stuff */
 
