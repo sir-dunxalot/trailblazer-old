@@ -21,6 +21,7 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       'connect-src': "'self' wss://*.firebaseio.com",
       'frame-src': "'self' https://*.firebaseio.com",
+      'img-src': "'self' https://*.githubusercontent.com",
       'script-src': "'self' 'unsafe-eval' https://*.firebaseio.com",
       'style-src': "'self' 'unsafe-inline'",
     },

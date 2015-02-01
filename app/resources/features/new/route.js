@@ -4,6 +4,24 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   DeleteRecord, {
 
+  beforeModel: function(transition, queryParams) {
+    var _this = this;
+    var userId = this.get('userId');
+
+    this._super(transition, queryParams);
+
+    /* If user has team, don't let them create a feature */
+
+    this.store.find('user', userId).then(function(user) {
+      if (!user.get('team.content')) {
+        transition.abort();
+        _this.transitionTo('user.edit', user);
+      } else {
+        _this.set('controller.userCanCreateFeature', true);
+      }
+    });
+  },
+
   // undoStageCreation: function() {
   //   var stages = this.get('controller.content.stages');
 

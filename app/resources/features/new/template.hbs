@@ -1,22 +1,26 @@
-<form>
-  {{input startDate as='date' maxDate=endDate}}
-  {{input endDate as='date' minDate=startDate}}
+{{#if userCanCreateFeature}}
+  <form>
+    {{input startDate as='date' maxDate=endDate}}
+    {{input endDate as='date' minDate=startDate}}
 
-  {{lowerDuration}}-
-  {{upperDuration}}
+    {{lowerDuration}}-
+    {{upperDuration}}
 
-  {{range-slider
-    lower=lowerDuration
-    upper=upperDuration
-    max=totalDuration
-  }}
+    {{range-slider
+      lower=lowerDuration
+      upper=upperDuration
+      max=totalDuration
+    }}
 
-  {{input name}}
-  {{input notes as='text'}}
+    {{input name}}
+    {{input notes as='text'}}
 
-  {{#each stage in stages}}
-    Duration: {{stage.duration}}
-  {{/each}}
+    {{#each stage in stages}}
+      Duration: {{stage.duration}}
+    {{/each}}
 
-  {{form-submission}}
-</form>
+    {{form-submission}}
+  </form>
+{{else}}
+Loading
+{{/if}}

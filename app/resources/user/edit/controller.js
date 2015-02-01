@@ -20,6 +20,10 @@ export default Ember.ObjectController.extend(
       presence: true
     },
 
+    teamId: {
+      presence: true
+    }
+
   },
 
   cancel: function() {
