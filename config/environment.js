@@ -21,9 +21,10 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       'connect-src': "'self' wss://*.firebaseio.com",
       'frame-src': "'self' https://*.firebaseio.com",
+      'font-src': "'self' http://fonts.gstatic.com https://s3.amazonaws.com",
       'img-src': "'self' https://*.githubusercontent.com",
       'script-src': "'self' 'unsafe-eval' https://*.firebaseio.com",
-      'style-src': "'self' 'unsafe-inline'",
+      'style-src': "'self' 'unsafe-inline' https://s3.amazonaws.com http://fonts.googleapis.com",
     },
 
     'simple-auth': {

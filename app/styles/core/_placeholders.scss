@@ -118,9 +118,9 @@
   @include backface-visibility;
 }
 
-// .sub {
-//   @include opacity(0.5);
-// }
+%sub {
+  @include opacity(0.5);
+}
 
 %top {
   top: 0;
@@ -136,4 +136,8 @@
 
 %left {
   left: 0;
+}
+
+%uppercase {
+  text-transform: uppercase;
 }

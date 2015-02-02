@@ -1,0 +1,84 @@
+.logo {
+  color: $white;
+  background: $orange;
+  @include rem(font-size, $iconFontSize);
+  @extend %inline_block;
+
+  @include mod(icon) {
+    @extend .fade;
+  }
+
+  .icon-logo {
+    @extend %relative;
+  }
+
+  .icon-home {
+    @extend .fade-out;
+    @extend %absolute;
+    @extend %top;
+    @include rem(left, -0.2);
+    @include rem(font-size, 2);
+
+    &:before {
+      @extend %sub;
+    }
+  }
+
+  &:hover {
+    .icon-logo {
+      @extend .fade-out;
+    }
+
+    .icon-home {
+      @extend .fade-in;
+    }
+  }
+}
+
+.nav {
+  @include mod(icon) {
+    @extend %inline_block;
+    @include rem(padding, 1, 1.2, 1, 1.4);
+  }
+
+  .link-to-settings {
+    @extend %sub;
+    @extend .fade;
+
+    &:hover {
+      @extend .fade-in;
+    }
+  }
+}
+
+.letterhead {
+  color: $orange;
+  @extend %uppercase;
+  font-style: italic;
+  @include transform(scaleX(0.8));
+  @extend %inline_block;
+  @include rem(font-size, 1.4);
+  @include rem(padding, 1.4, 1);
+  @include transition(letter-spacing $slow);
+  @extend %absolute;
+  @extend %full_width-viewport;
+  @extend %align-center;
+  @extend %top;
+  @extend %left;
+
+  &:hover {
+    letter-spacing: 2px;
+  }
+}
+
+.new_feature {
+  float: right;
+
+  .link-to-features-new {
+    @include transition(color $fast);
+
+    &:hover {
+      color: $gray-dark-hover;
+    }
+  }
+}

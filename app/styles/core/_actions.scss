@@ -1,6 +1,6 @@
 .fade {
-  @include transition(opacity 0.5s);
-  @extend %use_hardware_acceleration;
+  @include transition(opacity $fast);
+  // @extend %use_hardware_acceleration;
 }
 
 @include mod(fade) {
@@ -16,7 +16,7 @@
     @include opaque;
   }
 }
-// TODO - single or double :: ?
+
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;

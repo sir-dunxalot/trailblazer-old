@@ -1,19 +1,24 @@
 html {
-  font-size: $baseFontSize * 0.8;
+  font-size: $baseFontSize * 0.9;
 
-  // @media ($medium) {
-  //   font-size: $baseFontSize;
-  // }
+  @media #{$medium} {
+    font-size: $baseFontSize;
+  }
 }
 
 body {
   @include rem(font-size, $bodyFontSize);
-  // font-family: $lato;
-  // font-weight: $latoReg;
-  // color: $body;
-  // So text looks much better in Crome/Safari
+  font-family: $lato;
+  font-weight: $latoReg;
+  color: $gray-dark;
+
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; // Better fonts display for Firefox on Macs
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }

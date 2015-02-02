@@ -9,12 +9,10 @@
 }
 
 .header {
-  background: yellow;
   display: table-header-group;
 }
 
 .main {
   @extend %cell;
   // @extend %full_height;
-  background: red;
 }

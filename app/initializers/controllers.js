@@ -1,11 +1,11 @@
-import Em from 'ember';
+import Ember from 'ember';
 
 export function initialize(container, app) {
 
-  Em.ControllerMixin.reopen(
-    Em.Evented, {
+  Ember.ControllerMixin.reopen(
+    Ember.Evented, {
 
-    userId: Em.computed.readOnly('session.content.uid'),
+    userId: Ember.computed.readOnly('session.content.uid'),
     dateFormat: app.dateFormat
 
   });

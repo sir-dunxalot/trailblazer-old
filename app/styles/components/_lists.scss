@@ -1,0 +1,9 @@
+.list-inline {
+  list-style: none;
+  @extend %terrace;
+  padding: 0;
+
+  li {
+    @extend %inline_block;
+  }
+}

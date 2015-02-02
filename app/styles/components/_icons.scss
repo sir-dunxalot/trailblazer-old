@@ -1,0 +1,7 @@
+.icon {
+  @include rem(font-size, $iconFontSize);
+}
+
+@include mod(icon) {
+  @extend .icon;
+}
