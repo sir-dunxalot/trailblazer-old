@@ -1,4 +1,5 @@
 .sign-in .main {
+  @extend %align-middle;
   background-color: $orange;
   color: $white;
 
@@ -15,5 +16,16 @@
   .button-primary {
     background-color: $white;
     color: $gray-dark;
+  }
+
+  .icon-fire {
+    @include rem(font-size, 5);
+    @extend .sub;
+    @include transform(rotateY(0deg));
+    @include transition(transform $slow);
+
+    &:hover {
+      @include transform(rotateY(180deg));
+    }
   }
 }

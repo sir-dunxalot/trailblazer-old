@@ -1,1 +1,32 @@
-<button {{action 'invalidateSession'}}>Sign out</button>
+<h1 class="hidden">Settings</h1>
+
+<div class="headline">
+  <img class="avatar" {{bind-attr src='avatarUrl' alt='fullName'}}>
+  <h2 class="heading">{{fullName}}</h2>
+
+  {{#link-to 'user.edit' content}}
+    <span class="icon-pencil"></span>
+    <span class="hidden">Edit user</span>
+  {{/link-to}}
+
+  <button {{action 'invalidateSession'}} class="signout_button">
+    <span class="text">Sign out</span>
+    <span class="icon-exit-to-app"></span>
+  </button>
+
+</div>
+
+<div class="content">
+
+  <h2>Team</h2>
+
+  <dl class="list-def">
+    <dt>Name</dt>
+    <dd>{{team.name}}</dd>
+    <dt>Members</dt>
+    {{#each member in team.members}}
+      <dd>{{fullName}}</dd>
+    {{/each}}
+  </dl>
+
+</div>

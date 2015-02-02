@@ -7,3 +7,26 @@
     @extend %inline_block;
   }
 }
+
+.list-def {
+  @extend %inline_flexbox;
+  justify-content: flex-end;
+  @include rem(min-width, 20);
+  @include rem(font-size, 1.8);
+  margin-top: 0;
+
+  dt, dd {
+    @include rem(margin-bottom, 1);
+  }
+
+  dt {
+    flex: 0 1 30%;
+    @extend .alt_text;
+    @extend .sub;
+  }
+
+  dd {
+    margin-left: 10%;
+    flex: 0 1 60%;
+  }
+}

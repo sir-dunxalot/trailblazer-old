@@ -14,5 +14,14 @@
 
 .main {
   @extend %cell;
+  @extend %align-top;
   // @extend %full_height;
+}
+
+.headline {
+  background-color: $offwhite;
+}
+
+.content {
+  @include rem(margin, $spacing * 1.2);
 }

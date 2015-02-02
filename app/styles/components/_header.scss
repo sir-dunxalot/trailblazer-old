@@ -44,10 +44,12 @@
 
 .letterhead {
   @extend %absolute;
-  @extend %full_width-viewport;
+  @extend %full_width;
+  width: calc(100% - 200px);
   @extend %align-center;
   @extend %top;
   @extend %left;
+  margin: 0 100px;
 
   .link-to-index {
     color: $orange;
@@ -57,10 +59,10 @@
     @extend %inline_block;
     @include rem(font-size, 1.4);
     @include rem(padding, 1.4, 2);
-    @include transition(letter-spacing $slow);
+    @include transition(letter-spacing $fast);
 
     &:hover {
-      letter-spacing: 2px;
+      letter-spacing: 6px;
     }
   }
 }

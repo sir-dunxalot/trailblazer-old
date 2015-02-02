@@ -1,0 +1,28 @@
+.settings {
+
+  .avatar {
+    @include rem(height, 9);
+    @include rem(margin-left, 4.5);
+    @extend %inline_block;
+  }
+
+  .heading {
+    @include rem(margin, 0, $spacing / 2, 0, $spacing);
+    @extend %inline_block;
+  }
+
+  .link-to-user-edit {
+    @extend %relative;
+    @include opacity(0.3);
+    @include rem(padding, 1);
+    @include rem(top, 0.2);
+  }
+
+  .signout_button {
+    @extend .button;
+    @extend .button-transparent;
+    @include rem(padding, $spacing);
+    float: right;
+  }
+
+}

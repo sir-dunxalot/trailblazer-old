@@ -60,6 +60,12 @@
   @extend %align-middle;
 }
 
+%inline_flexbox {
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
 %inline_block {
   @include inline-block;
 }

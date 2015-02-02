@@ -22,8 +22,13 @@ button {
   cursor: pointer;
   @extend .alt_text;
 
+  &:hover {
+    color: $gray-dark-hover;
+    @include transform(scale(1.01));
+  }
+
   &:active {
-    @include transform(translateY(2px));
+    @include transform(scale(1.01) translateY(1px));
     @include box-shadow(none);
   }
 
@@ -48,5 +53,15 @@ button {
   &:hover {
     color: $gray-dark-hover;
     border-color: $gray-dark-hover;
+  }
+}
+
+.button-transparent {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:active {
+    @include transform(none);
   }
 }
