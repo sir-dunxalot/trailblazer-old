@@ -4,10 +4,6 @@
   @include rem(font-size, $iconFontSize);
   @extend %inline_block;
 
-  @include mod(icon) {
-    @extend .fade;
-  }
-
   .icon-logo {
     @extend %relative;
   }
@@ -47,27 +43,32 @@
 }
 
 .letterhead {
-  color: $orange;
-  @extend %uppercase;
-  font-style: italic;
-  @include transform(scaleX(0.8));
-  @extend %inline_block;
-  @include rem(font-size, 1.4);
-  @include rem(padding, 1.4, 1);
-  @include transition(letter-spacing $slow);
   @extend %absolute;
   @extend %full_width-viewport;
   @extend %align-center;
   @extend %top;
   @extend %left;
 
-  &:hover {
-    letter-spacing: 2px;
+  .link-to-index {
+    color: $orange;
+    @extend %uppercase;
+    font-style: italic;
+    @include transform(scaleX(0.8));
+    @extend %inline_block;
+    @include rem(font-size, 1.4);
+    @include rem(padding, 1.4, 2);
+    @include transition(letter-spacing $slow);
+
+    &:hover {
+      letter-spacing: 2px;
+    }
   }
 }
 
 .new_feature {
   float: right;
+  position: relative;
+  z-index: 2;
 
   .link-to-features-new {
     @include transition(color $fast);
