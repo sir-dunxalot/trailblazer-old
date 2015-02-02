@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   cancel: true,
   cancelText: 'Cancel',
-  classNames: ['buttons', 'form_submission'],
+  classNames: ['buttons', 'submission'],
   formSubmitted: Em.computed.oneWay('parentView.controller.formSubmitted'),
   submit: true,
   submitText: 'Save',

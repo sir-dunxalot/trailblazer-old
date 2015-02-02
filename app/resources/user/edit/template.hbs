@@ -1,11 +1,19 @@
-<form>
-  {{input firstName}}
-  {{input lastName}}
-  {{input teamId hint='Don\'t know your team ID? Ask a colleague.'}}
-  {{team.name}}
+{{#page-header}}
+  <h1 class="heading">Edit Your Profile</h1>
+{{/page-header}}
 
-  {{input avatarUrl}}
-  {{input email}}
+{{#page-content}}
 
-  {{form-submission}}
-</form>
+  {{#form-wrapper}}
+    {{#form-controls legend='Edit your profile and team'}}
+      {{input firstName}}
+      {{input lastName}}
+      {{input teamId hint=teamHint}}
+      {{input avatarUrl}}
+      {{input email}}
+    {{/form-controls}}
+
+    {{form-submission}}
+  {{/form-wrapper}}
+
+{{/page-content}}

@@ -104,7 +104,7 @@ export default {
                 if (!this.get('isDestroying')) {
                   this.set('showValidity', false);
                 }
-              }, 1500);
+              }, 2000);
             }
           }, 50);
         }

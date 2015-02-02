@@ -1,3 +1,4 @@
+import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
 import Saving from 'trailblazer/mixins/controllers/saving';
 
@@ -26,8 +27,15 @@ export default Ember.ObjectController.extend(
 
   },
 
+  teamHint: function () {
+    return defaultFor(
+      'You are currently a member of ' + this.get('team.name'),
+      'Don\'t know your team ID? Ask a colleague'
+    );
+  }.property('team.name'),
+
   cancel: function() {
-    this.transitionToRoute('user', this.get('content'));
+    this.transitionToRoute('settings');
   },
 
   save: function() {
@@ -35,7 +43,7 @@ export default Ember.ObjectController.extend(
     var teamId = _this.get('teamId');
     var save = function() {
       _this.get('content').save().then(function(user) {
-        _this.transitionToRoute('user', user);
+        _this.transitionToRoute('settings');
       });
     };
 

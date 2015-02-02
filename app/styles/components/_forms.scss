@@ -1,0 +1,120 @@
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-weight: inherit;
+  text-rendering: inherit;
+  -webkit-font-smoothing: inherit;
+  font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+}
+
+legend {
+  @extend .hidden;
+}
+
+.form {
+  @extend %inline_block;
+  @extend %relative;
+  margin: 0 auto;
+}
+
+.controls {
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  @extend %table;
+}
+
+/* Control set */
+
+.control {
+  @extend %row;
+  border: 0 solid transparent;
+  @include rem(border-bottom-width, $spacing / 1.5);
+
+  &:before {
+    @extend %no_content;
+    @extend .fade;
+    @extend .fade-out;
+    @extend %icon-check;
+    @extend %absolute;
+    @include rem(margin-top, 0.1);
+    @include rem(right, 0.1);
+    color: $green;
+
+    @include rem(padding, 0.8);
+    @include rem(font-size, 1.8);
+    background-color: $inputBackgroundColor;
+    @include rem(border-radius, 0.3);
+    pointer-events: none;
+  }
+}
+
+.input_with_validity {
+
+  &:before {
+    @extend .fade-in;
+  }
+}
+
+/* Elements of the control */
+
+.label,
+.input_wrapper {
+  @extend %cell;
+}
+
+.label {
+  @include rem(font-size, 1.8);
+  @include rem(padding, 0.6, $spacing, 0, 0);
+  text-align: right;
+  cursor: pointer;
+  @extend %align-top;
+}
+
+.input {
+  background-color: $inputBackgroundColor;
+  border: 1px solid $gray-light;
+  @include rem(border-radius, 0.3);
+  @include rem(padding, 0.8, 1.2);
+  @include rem(width, 24);
+  @include transition(border-color $fast);
+
+  &:focus {
+    outline: none;
+    border-color: $blue;
+  }
+
+  .input_with_errors &:not(:focus) {
+    border-color: $red;
+  }
+
+  .input_with_validity & {
+    &, &:focus {
+      border-color: $green;
+    }
+  }
+
+  @include placeholder {
+    font-weight: inherit;
+    font-family: inherit;
+    @include opacity(0.6);
+  }
+}
+
+.hint, .error {
+  @extend %block;
+  @include rem(margin-top, $spacing / 3);
+}
+
+.hint {
+  @include rem(font-size, 1.4);
+  font-style: italic;
+  @extend .sub;
+}
+
+.error {
+  color: $red;
+}

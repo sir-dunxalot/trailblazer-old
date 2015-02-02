@@ -33,6 +33,7 @@ a {
 
 h1, h2 {
   font-weight: $latoLight;
+  @include rem(font-size, 3);
   @include rem(margin-bottom, $spacing);
 }
 

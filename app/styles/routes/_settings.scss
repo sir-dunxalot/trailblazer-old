@@ -1,5 +1,9 @@
 .settings {
 
+  .headline {
+    padding: 0;
+  }
+
   .avatar {
     @include rem(height, 9);
     @include rem(margin-left, 4.5);

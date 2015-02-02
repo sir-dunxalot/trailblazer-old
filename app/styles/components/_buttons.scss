@@ -10,7 +10,7 @@ button {
 
 .button {
   @extend %inline_block;
-  @include rem(padding, 2, 2.5);
+  @include rem(padding, 1.5, 2);
 
   @include rem(border-radius, 0.3);
   border: 1px solid transparent;
@@ -32,6 +32,10 @@ button {
     @include box-shadow(none);
   }
 
+  &.large {
+    @include rem(padding, 2, 2.5);
+  }
+
   .text {
     @extend %inline_block;
   }
@@ -43,12 +47,15 @@ button {
 
 .button-primary {
   background-color: $orange;
-  color: $white;
+
+  &, &:hover {
+    color: $white;
+  }
 }
 
 .button-secondary {
   border: 1px solid $gray-dark;
-  @include transition(all $fast);
+  @include transition(color $fast, border-color $fast);
 
   &:hover {
     color: $gray-dark-hover;

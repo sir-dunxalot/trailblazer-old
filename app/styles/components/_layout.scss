@@ -20,6 +20,12 @@
 
 .headline {
   background-color: $offwhite;
+  @include rem(padding, $spacing);
+
+  h1, h2 {
+    margin: 0;
+    @extend %align-center;
+  }
 }
 
 .content {
