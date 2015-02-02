@@ -22,3 +22,30 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+@include mod(link-to) {
+  @extend .fade;
+
+  &:hover {
+    @extend .fade-in;
+  }
+}
+
+h1, h2 {
+  font-weight: $latoLight;
+  @include rem(margin-bottom, $spacing);
+}
+
+p {
+  @include rem(margin-bottom, $spacing);
+}
+
+.title {
+  @include rem(font-size, 3.6);
+}
+
+.alt_text {
+  @extend %uppercase;
+  @include rem(font-size, 1.4);
+  @include rem(letter-spacing, 0.1);
+}

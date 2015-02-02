@@ -6,9 +6,10 @@
 $baseFontSize: 62.5%;
 $bodyFontSize: 1.6; // In rem
 $iconFontSize: 2.4;
+$iconFontOffset: -0.5 * ($iconFontSize / $bodyFontSize);
 
 $lato: "Lato", Arial, sans-serif;
-$latoThin: 300;
+$latoLight: 300;
 $latoReg: 400;
 
 /* Colors */
@@ -17,7 +18,7 @@ $black: #000;
 $blue: #8dabcd;
 $gray: #868686;
 $gray-dark: #707070;
-$gray-dark-hover: mix(#707070, $black);
+$gray-dark-hover: mix(#707070, $black, 70%);
 $green: #bcdb9d;
 $orange: #e7a169;
 $offwhite: #f0f0f0;
@@ -30,6 +31,8 @@ $small: "(min-width: 37.5em)"; // 600px
 $medium: "(min-width: 50em)"; // 800px
 $big: "(min-width: 63.75em)"; // 1020px
 $xBig: "(min-width: 81.25em)"; // 1200px
+
+$spacing: 3.6;
 
 /* Animations */
 

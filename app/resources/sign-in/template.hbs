@@ -1,1 +1,15 @@
-<button {{action 'authenticate'}}>Get started!</button>
+<div class="modal-transparent">
+  <h1 class="title">Because task tracking shouldn't be a chore.</h1>
+
+  <p>
+    {{#link-to 'about'}}
+      <span class="icon-info-circle"></span>
+      <span class="text">Learn More</span>
+    {{/link-to}}
+  </p>
+
+  <button {{action 'authenticate'}} class="button-primary">
+    <span class="text">Login or register</span>
+    <span class="icon-github"></span>
+  </button>
+</div>

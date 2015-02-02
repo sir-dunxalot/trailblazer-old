@@ -7,6 +7,8 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 
+  this.route('about');
+
   this.resource('users', function() {
     this.route('new');
 
@@ -31,6 +33,9 @@ Router.map(function() {
     });
   });
 
+  this.route('settings');
+  this.route('sign-in');
+
   this.resource('stage-types', function() {
     this.route('new');
   });
@@ -43,8 +48,6 @@ Router.map(function() {
     });
   });
 
-  this.route('settings');
-  this.route('sign-in');
 });
 
 export default Router;

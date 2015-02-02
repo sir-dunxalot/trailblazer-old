@@ -1,0 +1,19 @@
+.sign-in .main {
+  background-color: $orange;
+  color: $white;
+
+  .title {
+    @include rem(font-size, 4);
+    @include rem(margin-bottom, $spacing / 2);
+  }
+
+  .link-to-about {
+    @include rem(font-size, 1.8);
+    @extend .sub;
+  }
+
+  .button-primary {
+    background-color: $white;
+    color: $gray-dark;
+  }
+}

@@ -118,7 +118,7 @@
   @include backface-visibility;
 }
 
-%sub {
+.sub {
   @include opacity(0.5);
 }
 

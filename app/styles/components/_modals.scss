@@ -1,0 +1,51 @@
+.overlay {
+  background: rgba($black, 0.85);
+}
+
+.modal_wrapper {
+  @include rem(padding, $spacing / 2);
+}
+
+.modal {
+  @extend %relative;
+  background-color: $white;
+  @include rem(max-width, 60);
+  @include rem(padding, $spacing * 1.5);
+  border-bottom: 2px solid #bbb;
+  box-shadow: 0 3px 20px 2px rgba(0,0,0,0.5);
+  margin: 0 auto;
+  text-align: center;
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-top: 0;
+  }
+}
+
+@include mod(modal) {
+  @extend .modal;
+}
+
+.modal-flat {
+  @include background-clip(padding-box);
+  border: 1px solid rgba($black, 0.2);
+  box-shadow: none;
+}
+
+.modal-transparent {
+  @include rem(max-width, 80);
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+.modal .close {
+  cursor: pointer;
+  @extend %absolute;
+  @extend %top;
+  @extend %right;
+  @include rem(padding, $spacing / 2);
+}

@@ -1,5 +1,11 @@
 .icon {
+  @include rem(margin, $iconFontOffset, 0);
   @include rem(font-size, $iconFontSize);
+  @extend %inline_block;
+
+  & ~ .text, .text ~ & {
+    @include rem(margin-left, 1.5);
+  }
 }
 
 @include mod(icon) {

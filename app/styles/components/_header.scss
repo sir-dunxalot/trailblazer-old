@@ -20,7 +20,7 @@
     @include rem(font-size, 2);
 
     &:before {
-      @extend %sub;
+      @extend .sub;
     }
   }
 
@@ -38,16 +38,11 @@
 .nav {
   @include mod(icon) {
     @extend %inline_block;
-    @include rem(padding, 1, 1.2, 1, 1.4);
+    @include rem(padding, 1.8, 1.2, 1.6, 1.4);
   }
 
   .link-to-settings {
-    @extend %sub;
-    @extend .fade;
-
-    &:hover {
-      @extend .fade-in;
-    }
+    @extend .sub;
   }
 }
 
