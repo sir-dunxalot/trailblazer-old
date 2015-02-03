@@ -48,7 +48,6 @@ export default Ember.Component.extend({
     element.noUiSlider({
       animate: true,
       connect: true,
-      margin: 1,
       start: [this.get('lower'), this.get('upper')],
       range: {
         min: this.get('min'),

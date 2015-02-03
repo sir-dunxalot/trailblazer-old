@@ -72,3 +72,31 @@
 .noUi-origin {
   @include rem(border-radius, 0.6);
 }
+
+.pika-single {
+  font-family: inherit;
+}
+
+.pika-label {
+  font-weight: $latoReg;
+}
+
+.pika-button {
+  .is-selected & {
+    background-color: $orange;
+    @include box-shadow(none);
+  }
+
+  .is-today & {
+    color: mix($gray-dark, $black, 70%);
+    // background-color: mix($gray-light, $white, 40%);
+  }
+
+  .is-selected.is-today & {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: $orange !important;
+  }
+}
