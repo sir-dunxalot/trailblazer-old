@@ -5,7 +5,7 @@
 .slider {
   $size: 1;
 
-  @include rem(margin-bottom, $spacing);
+  @include rem(margin-bottom, $spacing * 1.5);
   @include rem(height, $size);
   @include rem(border-radius, $size / 2);
 
@@ -29,18 +29,18 @@
   }
 
   .noUi-handle {
-    $size: 2.4;
+    $handleSize: 2.4;
 
     @include rem(top, -0.8);
-    @include rem(height, $size);
-    @include rem(width, $size);
+    @include rem(height, $handleSize);
+    @include rem(width, $handleSize);
     @include border-radius(50%);
     border: 1px solid $gray-light;
 
     &:before {
       @extend %full_size_pseudo;
-      @include rem(height, $size - 0.8);
-      @include rem(width, $size - 0.8);
+      @include rem(height, $handleSize - 0.8);
+      @include rem(width, $handleSize - 0.8);
       @include rem(top, 0.2);
       @include rem(left, 0.2);
       border: 1px solid rgba($gray-light, 0.5);
@@ -50,6 +50,10 @@
 
     &:after {
       @extend .hidden;
+    }
+
+    .slider_date {
+      @include rem(top, $size + $handleSize);
     }
   }
 }
@@ -73,30 +77,10 @@
   @include rem(border-radius, 0.6);
 }
 
-.pika-single {
-  font-family: inherit;
-}
-
-.pika-label {
-  font-weight: $latoReg;
-}
-
-.pika-button {
-  .is-selected & {
-    background-color: $orange;
-    @include box-shadow(none);
-  }
-
-  .is-today & {
-    color: mix($gray-dark, $black, 70%);
-    // background-color: mix($gray-light, $white, 40%);
-  }
-
-  .is-selected.is-today & {
-    color: $white;
-  }
-
-  &:hover {
-    background-color: $orange !important;
-  }
+.slider_date {
+  @extend %absolute;
+  @include rem(width, 10);
+  @extend .alt_text;
+  @extend .sub;
+  margin-left: -50%;
 }

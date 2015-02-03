@@ -135,3 +135,32 @@ legend {
 .submission {
   @extend %align-right;
 }
+
+/* Datepicker */
+
+.pika-single {
+  font-family: inherit;
+}
+
+.pika-label {
+  font-weight: $latoReg;
+}
+
+.pika-button {
+  .is-selected & {
+    background-color: $orange;
+    @include box-shadow(none);
+  }
+
+  .is-today & {
+    color: mix($gray-dark, $black, 70%);
+  }
+
+  .is-selected.is-today & {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: $orange !important;
+  }
+}

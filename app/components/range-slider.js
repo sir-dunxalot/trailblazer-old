@@ -10,7 +10,36 @@ export default Ember.Component.extend({
   upper: null,
   _previousMax: null,
   rendered: false,
+  startDate: null,
   step: 1,
+
+  /* Computed properties */
+
+  lowerDate: function() {
+    var startDate = this.get('startDate');
+
+    if (startDate) {
+      startDate = moment(this.get('startDate'));
+
+      return startDate.add(this.get('lower'), 'd');
+    } else {
+      return null;
+    }
+  }.property('lower'),
+
+  upperDate: function() {
+    var startDate = this.get('startDate');
+
+    if (startDate) {
+      startDate = moment(this.get('startDate'));
+
+      return startDate.add(this.get('upper'), 'd');
+    } else {
+      return null;
+    }
+  }.property('upper'),
+
+  /* Methods */
 
   _cacheMax: function() {
     this.set('_previousMax', this.get('max'));
@@ -44,6 +73,8 @@ export default Ember.Component.extend({
   renderSlider: function() {
     var _this = this;
     var element = this.$().find('.slider');
+    var startDate = _this.get('startDate');
+    var toggles;
 
     element.noUiSlider({
       animate: true,
@@ -74,6 +105,22 @@ export default Ember.Component.extend({
         });
       }
     });
+
+    /* Add tooltips */
+
+    if (startDate) {
+      toggles = [element.Link('lower'), element.Link('upper')];
+
+      toggles.forEach(function(element) {
+        element.to('-inline-<div class="slider_date"></div>', function (value) {
+          var date = moment(startDate);
+
+          date = date.add(value, 'd').format('D MMM');
+
+          $(this).html(date);
+        });
+      });
+    }
   },
 
   setInitialValues: function(context, key) {
@@ -86,6 +133,6 @@ export default Ember.Component.extend({
         this.renderSlider();
       });
     }
-  }.observes('lower', 'upper').on('didInsertElement')
+  }.observes('lower', 'upper').on('didInsertElement'),
 
 });

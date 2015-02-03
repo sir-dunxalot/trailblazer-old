@@ -35,6 +35,10 @@ app.import(bowerDir + 'emberfire/dist/emberfire.js', {
   type: 'vendor'
 });
 
+app.import('vendor/lib-link.js', {
+  type: 'vendor'
+});
+
 app.import(bowerDir +
   'nouislider/distribute/jquery.nouislider.js', {
   type: 'vendor'
