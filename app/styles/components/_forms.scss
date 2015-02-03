@@ -109,6 +109,12 @@ legend {
   @extend .input;
 }
 
+.input-textarea {
+  @include rem(min-height, 10);
+  @include rem(padding-top, 1);
+  @include rem(padding-bottom, 1);
+}
+
 .hint, .error {
   @extend %block;
   @include rem(margin-top, $spacing / 3);

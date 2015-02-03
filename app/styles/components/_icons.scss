@@ -30,3 +30,11 @@
   @extend %icon;
   content: "\ea10";
 }
+
+.icon-dots {
+  margin: 0;
+  @include rem(font-size, 1.4);
+  border: 1px solid $gray;
+  @include rem(padding, 0.2, 0.4, 0.1, 0.6);
+  @include rem(border-radius, 0.3);
+}

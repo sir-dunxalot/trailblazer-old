@@ -11,23 +11,29 @@
         {{input startDate as='date' maxDate=endDate}}
         {{input endDate as='date' minDate=startDate}}
 
-{{!--         {{lowerDuration}}-
-        {{upperDuration}} --}}
-
-        {{!-- <div class="control"> --}}
-          {{range-slider
-            lower=lowerDuration
-            upper=upperDuration
-            max=totalDuration
-          }}
-        {{!-- </div> --}}
+        {{range-slider
+          lower=lowerDuration
+          upper=upperDuration
+          max=totalDuration
+        }}
 
         {{input name}}
-        {{input notes as='text'}}
-{{!--
-        {{#each stage in stages}}
-          Duration: {{stage.duration}}
-        {{/each}} --}}
+
+        {{#if view.showNotes}}
+          {{input notes as='text' class=view.notesClassName}}
+        {{else}}
+          <div class="control">
+            <div class="label">
+              <span class="hidden">Add notes?</span>
+            </div>
+
+            <button class="button-unstyled sub" {{action 'addNotes' target='view'}}>
+              <span class="icon-dots"></span>
+              <span class="text alt_text">Add notes</span>
+            </button>
+          </div>
+        {{/if}}
+
       {{/form-controls}}
 
       {{form-submission}}
