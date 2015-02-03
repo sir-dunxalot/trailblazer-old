@@ -3,11 +3,6 @@
   @extend %full_height-viewport;
 }
 
-.nav, .main {
-  // @extend %align-top;
-  // @extend %full_width;
-}
-
 .header {
   display: table-header-group;
 }
@@ -15,7 +10,6 @@
 .main {
   @extend %cell;
   @extend %align-top;
-  // @extend %full_height;
 }
 
 .headline {
@@ -30,4 +24,8 @@
 
 .content {
   @include rem(margin, $spacing * 1.2);
+
+  &.center {
+    @extend %align-center;
+  }
 }

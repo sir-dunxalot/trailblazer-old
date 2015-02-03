@@ -1,0 +1,18 @@
+.spinner {
+  @extend %inline_block;
+  @include rem(padding, 1.6);
+
+  .icon-spinner {
+    @include animation(spin 1s linear infinite);
+    color: $orange;
+  }
+}
+
+@include keyframes(spin) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}

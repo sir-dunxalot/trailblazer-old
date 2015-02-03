@@ -27,12 +27,14 @@
       {{/if}}
 
       {{#if session.isAuthenticated}}
-        <li class="new_feature">
-          {{#link-to 'features.new'}}
-            <span class="icon-pencil2"></span>
-            <span class="hidden">Add a new feature</span>
-          {{/link-to}}
-        </li>
+        {{#unless view.onForm}}
+          <li class="new_feature">
+            {{#link-to 'features.new'}}
+              <span class="icon-pencil2"></span>
+              <span class="hidden">Add a new feature</span>
+            {{/link-to}}
+          </li>
+        {{/unless}}
       {{/if}}
 
     </ul>

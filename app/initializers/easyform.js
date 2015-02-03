@@ -29,7 +29,7 @@ export default {
       '{{label-field propertyBinding="view.property" textBinding="view.label"}}' +
       '<div class="input_wrapper">' +
       '{{#if view.isDatepicker}}' +
-        '{{input id=view.datepickerInputId class="datepicker"}}' +
+        '{{input id=view.datepickerInputId class="datepicker input"}}' +
       '{{/if}}' +
         '{{partial "easyForm/inputControls"}}' +
       '</div>'

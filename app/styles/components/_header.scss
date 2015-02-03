@@ -34,7 +34,7 @@
 .nav {
   @include mod(icon) {
     @extend %inline_block;
-    @include rem(padding, 1.8, 1.2, 1.6, 1.4);
+    @include rem(padding, 1.8, 1.2, 1.8, 1.4);
   }
 
   .link-to-settings {

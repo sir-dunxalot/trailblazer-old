@@ -16,13 +16,14 @@ legend {
 .form {
   @extend %inline_block;
   @extend %relative;
-  margin: 0 auto;
+  @extend %align-left;
 }
 
 .controls {
   border: none;
   padding: 0;
   margin: 0;
+  @include rem(margin, $spacing / 2, 0);
 
   @extend %table;
 }
@@ -35,7 +36,7 @@ legend {
   @include rem(border-bottom-width, $spacing / 1.5);
 
   &:before {
-    @extend %no_content;
+    // No content so it doesn't show in the DOM
     @extend .fade;
     @extend .fade-out;
     @extend %icon-check;
@@ -104,6 +105,10 @@ legend {
   }
 }
 
+@include mod(input) {
+  @extend .input;
+}
+
 .hint, .error {
   @extend %block;
   @include rem(margin-top, $spacing / 3);
@@ -117,4 +122,20 @@ legend {
 
 .error {
   color: $red;
+}
+
+/* Form submission */
+
+.submission {
+  @extend %align-right;
+}
+
+/* Misc */
+
+.slider_wrapper {
+  display: table-caption;
+}
+
+.slider {
+  @include rem(margin-bottom, $spacing);
 }

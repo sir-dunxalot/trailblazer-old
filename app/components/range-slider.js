@@ -3,6 +3,7 @@ import Ember from 'ember';
 import insert from 'trailblazer/utils/computed/insert';
 
 export default Ember.Component.extend({
+  classNames: ['slider_wrapper'],
   lower: null,
   max: 10,
   min: 0,
@@ -42,7 +43,7 @@ export default Ember.Component.extend({
 
   renderSlider: function() {
     var _this = this;
-    var element = this.$();
+    var element = this.$().find('.slider');
 
     element.noUiSlider({
       animate: true,

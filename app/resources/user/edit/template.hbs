@@ -2,15 +2,16 @@
   <h1 class="heading">Edit Your Profile</h1>
 {{/page-header}}
 
-{{#page-content}}
+{{#page-content class='center'}}
 
   {{#form-wrapper}}
     {{#form-controls legend='Edit your profile and team'}}
       {{input firstName}}
       {{input lastName}}
-      {{input teamId hint=teamHint}}
+      {{input teamId hint=teamHint label='Team ID'}}
       {{input avatarUrl}}
-      {{input email}}
+      {{!-- TODO - image preview --}}
+      {{input email placeholder='Optional'}}
     {{/form-controls}}
 
     {{form-submission}}

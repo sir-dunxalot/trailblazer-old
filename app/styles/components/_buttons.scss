@@ -9,11 +9,12 @@ button {
 }
 
 .button {
+  @extend %nowrap;
   @extend %inline_block;
   @include rem(padding, 1.5, 2);
 
   @include rem(border-radius, 0.3);
-  border: 1px solid transparent;
+  border: 1px solid rgba($black, 0.15);
   background: none;
   @extend %border_box;
 
@@ -24,16 +25,20 @@ button {
 
   &:hover {
     color: $gray-dark-hover;
-    @include transform(scale(1.01));
+    @include transform(scale(1.02));
   }
 
   &:active {
-    @include transform(scale(1.01) translateY(1px));
+    @include transform(scale(1.02) translateY(1px));
     @include box-shadow(none);
   }
 
   &.large {
     @include rem(padding, 2, 2.5);
+  }
+
+  & ~ & {
+    @include rem(margin-left, $spacing / 2);
   }
 
   .text {
@@ -71,4 +76,9 @@ button {
   &:active {
     @include transform(none);
   }
+}
+
+.button-unstyled {
+  @extend .button-transparent;
+  padding: 0;
 }
