@@ -129,13 +129,3 @@ legend {
 .submission {
   @extend %align-right;
 }
-
-/* Misc */
-
-.slider_wrapper {
-  display: table-caption;
-}
-
-.slider {
-  @include rem(margin-bottom, $spacing);
-}
