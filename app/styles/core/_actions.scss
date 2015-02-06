@@ -1,13 +1,13 @@
-.fade {
-  @include transition(opacity $fast);
-  // @extend %use_hardware_acceleration;
-}
-
-@include mod(fade) {
-  @extend .fade;
-}
-
 .csstransitions {
+  .fade {
+    @include transition(opacity $fast);
+    // @extend %use_hardware_acceleration;
+  }
+
+  @include mod(fade) {
+    @extend .fade;
+  }
+
   .fade-out {
     @include transparent;
   }

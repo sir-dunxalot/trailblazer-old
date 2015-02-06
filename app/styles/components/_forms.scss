@@ -110,9 +110,19 @@ legend {
 }
 
 .input-textarea {
-  @include rem(min-height, 10);
+  // @include rem(min-height, 10);
   @include rem(padding-top, 1);
   @include rem(padding-bottom, 1);
+}
+
+.notes.control {
+  @include opacity(0);
+}
+
+.notes .input-textarea {
+  display: none;
+  // height: 0;
+  // min-height: 0;
 }
 
 .hint, .error {

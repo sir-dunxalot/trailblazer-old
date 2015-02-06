@@ -6,7 +6,7 @@ export default Ember.ObjectController.extend(
 
   lowerDuration: null,
   upperDuration: null,
-  userCanCreateFeature: false,
+  userCanCreateFeature: false, // Set by route
 
   /* Validations */
 

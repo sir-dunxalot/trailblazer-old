@@ -4,7 +4,7 @@
 
 .slider {
   $size: 1;
-
+  // TODO - Make thinner
   @include rem(margin-bottom, $spacing * 1.5);
   @include rem(height, $size);
   @include rem(border-radius, $size / 2);
@@ -36,6 +36,7 @@
     @include rem(width, $handleSize);
     @include border-radius(50%);
     border: 1px solid $gray-light;
+    cursor: pointer;
 
     &:before {
       @extend %full_size_pseudo;

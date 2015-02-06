@@ -20,20 +20,7 @@
 
         {{input name}}
 
-        {{#if view.showNotes}}
-          {{input notes as='text' class=view.notesClassName}}
-        {{else}}
-          <div class="control">
-            <div class="label">
-              <span class="hidden">Add notes?</span>
-            </div>
-
-            <button class="button-unstyled sub" {{action 'addNotes' target='view'}}>
-              <span class="icon-dots"></span>
-              <span class="text alt_text">Add notes</span>
-            </button>
-          </div>
-        {{/if}}
+        {{partial 'form-components/notes'}}
 
       {{/form-controls}}
 
