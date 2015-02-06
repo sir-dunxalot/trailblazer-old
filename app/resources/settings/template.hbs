@@ -2,8 +2,8 @@
 
 {{#page-header}}
 
-  {{!-- TODO - image component that fades after load --}}
-  <img class="avatar" {{bind-attr src='avatarUrl' alt='fullName'}}>
+  {{image-tag src=avatarUrl alt=fullName class='avatar'}}
+
   <h2 class="heading">{{fullName}}</h2>
 
   {{#link-to 'user.edit' content}}
