@@ -4,8 +4,6 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   DeleteRecord, {
 
-  userCanCreateFeature: null,
-
   // undoStageCreation: function() {
   //   var stages = this.get('controller.content.stages');
 
@@ -48,11 +46,9 @@ export default Ember.Route.extend(
     /* If user has team, don't let them create a feature */
 
     this.store.find('user', userId).then(function(user) {
-      if (!user.get('team.content')) {
+      if (!user.get('team')) {
         transition.abort();
         _this.transitionTo('user.edit', user);
-      } else {
-        _this.set('controller.userCanCreateFeature', true);
       }
     });
   },

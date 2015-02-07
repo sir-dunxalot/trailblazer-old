@@ -1,6 +1,16 @@
-<h1>{{name}}</h1>
+<div class="overview">
+  <h1>
+    <span class="text">{{name}}</dpan>
 
-{{#link-to 'feature.edit' content}}Edit{{/link-to}}
+    {{#link-to 'feature.edit' content class="icon"}}
+      <span class="icon-edit"></span>
+      <span class="hidden">Edit</span>
+    {{/link-to}}
+  </h1>
+
+  {{progress-bar}}
+</div>
+
 {{#link-to 'tasks.new' content}}Add task{{/link-to}}
 
 <p>

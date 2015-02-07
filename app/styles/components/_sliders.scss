@@ -1,13 +1,22 @@
-.slider_wrapper {
-  display: table-caption;
-}
-
-.slider {
+.progress_bar {
   $size: 1;
-  // TODO - Make thinner
+
+  @extend %relative;
   @include rem(margin-bottom, $spacing * 1.5);
   @include rem(height, $size);
   @include rem(border-radius, $size / 2);
+  background-color: $gray;
+
+  .progress {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 0;
+    @extend %left;
+    @include transition(width $slow);
+    background-color: $orange;
+    @include rem(border-radius, $size / 2);
+  }
 
   &:before, &:after {
     @extend %no_content;
@@ -18,6 +27,7 @@
     @include border-radius(50%);
     background-color: $white;
     @include rem(top, 0.3);
+    // z-index: 2;
   }
 
   &:before {
@@ -27,6 +37,14 @@
   &:after {
     @include rem(right, 0.3);
   }
+}
+
+.slider_wrapper {
+  display: table-caption;
+}
+
+.slider {
+  @extend .progress_bar;
 
   .noUi-handle {
     $handleSize: 2.4;
@@ -54,7 +72,7 @@
     }
 
     .slider_date {
-      @include rem(top, $size + $handleSize);
+      @include rem(top, $handleSize * 1.5);
     }
   }
 }

@@ -4,31 +4,26 @@
 
 {{#page-content class='center'}}
 
-  {{#if userCanCreateFeature}}
+  {{#form-wrapper}}
+    {{#form-controls legend='Create a new feature'}}
 
-    {{#form-wrapper}}
-      {{#form-controls legend='Create a new feature'}}
-        {{input startDate as='date' maxDate=endDate}}
-        {{input endDate as='date' minDate=startDate}}
+      {{input startDate as='date' maxDate=endDate}}
+      {{input endDate as='date' minDate=startDate}}
 
-        {{range-slider
-          lower=lowerDuration
-          upper=upperDuration
-          max=totalDuration
-          startDate=startDate
-        }}
+      {{range-slider
+        lower=lowerDuration
+        upper=upperDuration
+        max=totalDuration
+        startDate=startDate
+      }}
 
-        {{input name}}
+      {{input name}}
 
-        {{partial 'form-components/notes'}}
+      {{partial 'form-components/notes'}}
 
-      {{/form-controls}}
+    {{/form-controls}}
 
-      {{form-submission}}
-    {{/form-wrapper}}
-
-  {{else}}
-    {{loading-spinner}}
-  {{/if}}
+    {{form-submission}}
+  {{/form-wrapper}}
 
 {{/page-content}}
