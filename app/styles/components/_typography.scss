@@ -33,7 +33,7 @@ a {
 
 h1, h2 {
   font-weight: $latoLight;
-  @include rem(font-size, 3);
+  @include rem(font-size, $headingSize);
   @include rem(margin-bottom, $spacing);
 }
 
@@ -42,7 +42,7 @@ p {
 }
 
 .title {
-  @include rem(font-size, 3.6);
+  @include rem(font-size, $spacing);
 }
 
 .alt_text {

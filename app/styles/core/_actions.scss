@@ -47,7 +47,7 @@
 .hidden.focusable:focus {
   clip: auto;
   height: auto;
-  margin: 0;
+  @extend %no_margin;
   overflow: visible;
   position: static;
   width: auto;

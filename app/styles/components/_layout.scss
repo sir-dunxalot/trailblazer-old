@@ -17,8 +17,9 @@
   @include rem(padding, $spacing);
 
   h1, h2 {
-    margin: 0;
+    @extend %no_margin;
     @extend %align-center;
+    @include rem(marging-top, -0.4);
   }
 }
 

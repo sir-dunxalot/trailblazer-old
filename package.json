@@ -33,6 +33,7 @@
     "ember-cli-simple-auth": "0.7.2",
     "ember-data": "1.0.0-beta.12",
     "ember-export-application-global": "^1.0.0",
+    "ember-flash-messages": "0.5.1",
     "ember-moment": "1.0.0",
     "ember-validations": "^2.0.0-alpha.2",
     "express": "^4.8.5",

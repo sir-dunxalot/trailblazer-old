@@ -80,5 +80,5 @@ button {
 
 .button-unstyled {
   @extend .button-transparent;
-  padding: 0;
+  @extend %no_padding;
 }

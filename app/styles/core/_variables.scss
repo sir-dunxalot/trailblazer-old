@@ -5,8 +5,11 @@
 
 $baseFontSize: 62.5%;
 $bodyFontSize: 1.6; // In rem
+$headingSize: 3;
 $iconFontSize: 2.4;
+
 $iconFontOffset: -0.5 * ($iconFontSize / $bodyFontSize);
+$iconMargin: 1.5;
 
 $lato: "Lato", Arial, sans-serif;
 $latoLight: 300;

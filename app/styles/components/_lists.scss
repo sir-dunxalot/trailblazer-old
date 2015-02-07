@@ -1,7 +1,7 @@
 .list-inline {
   list-style: none;
   @extend %terrace;
-  padding: 0;
+  @extend %no_padding;
 
   li {
     @extend %inline_block;

@@ -1,7 +1,7 @@
 .settings {
 
   .headline {
-    padding: 0;
+    @extend %no_padding;
   }
 
   .avatar {

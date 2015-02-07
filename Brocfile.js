@@ -5,6 +5,10 @@ var bowerDir = 'bower_components/';
 
 var app = new EmberApp({
 
+  flashMessages: {
+    layout: true,
+  },
+
   sassOptions: {
     includePaths: [
       bowerDir + 'compass-mixins/lib'

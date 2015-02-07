@@ -1,36 +1,52 @@
-<div class="overview">
-  <h1>
-    <span class="text">{{name}}</dpan>
+{{#page-header class='overview'}}
 
-    {{#link-to 'feature.edit' content class="icon"}}
-      <span class="icon-edit"></span>
+  <div class="heading_row">
+    <h1>{{name}}</h1>
+
+    {{#link-to 'feature.edit' content class='sub'}}
+      <span class="icon-pencil"></span>
       <span class="hidden">Edit</span>
     {{/link-to}}
-  </h1>
 
-  {{progress-bar}}
-</div>
+    <dl class="tasks_completed">
+      <dt class="hidden">Task progress</dt>
+      <dd>{{completedTasks.length}} / {{tasks.length}}</dd>
+    </dl>
+  </div>
 
-{{#link-to 'tasks.new' content}}Add task{{/link-to}}
+  {{progress-bar value=completedTasks.length max=tasks.length}}
+{{/page-header}}
 
-<p>
-  {{moment startDate dateFormat}}
-  -
-  {{moment endDate dateFormat}}
-</p>
+{{#page-content}}
 
-<ol>
-  {{#each stage in stages}}
-    <li>{{stage.duration}}</li>
-  {{/each}}
-</ol>
+  {{#link-to 'tasks.new' content}}Add task{{/link-to}}
 
-<ul>
-  {{#each task in tasks}}
-    <li {{bind-attr class='task.stage.type.name'}}>
-      {{#link-to 'task.edit' task}}
-        {{task.name}}
-      {{/link-to}}
-    </li>
-  {{/each}}
-</ul>
+  <p>
+    {{moment startDate dateFormat}}
+    -
+    {{moment endDate dateFormat}}
+  </p>
+
+  <ol>
+    {{#each stage in stages}}
+      <li {{bind-attr class=':stage_block stage.type.name'}}>
+        {{stage.duration}}
+      </li>
+    {{/each}}
+  </ol>
+
+  <ul>
+    {{#each task in tasks}}
+      <li {{bind-attr class='task.stage.type.name'}}>
+        {{#link-to 'task.edit' task}}
+          {{task.name}}
+        {{/link-to}}
+      </li>
+    {{else}}
+      {{#flash-message type='info'}}
+        No tasks!
+      {{/flash-message}}
+    {{/each}}
+  </ul>
+
+{{/page-content}}

@@ -1,15 +1,15 @@
 .progress_bar {
   $size: 1;
 
+  @extend %no_margin;
   @extend %relative;
-  @include rem(margin-bottom, $spacing * 1.5);
   @include rem(height, $size);
   @include rem(border-radius, $size / 2);
   background-color: $gray;
 
   .progress {
-    margin: 0;
-    padding: 0;
+    @extend %no_margin;
+    @extend %no_padding;
     height: 100%;
     width: 0;
     @extend %left;
@@ -27,7 +27,6 @@
     @include border-radius(50%);
     background-color: $white;
     @include rem(top, 0.3);
-    // z-index: 2;
   }
 
   &:before {
@@ -44,6 +43,7 @@
 }
 
 .slider {
+  @include rem(margin-bottom, $spacing * 1.5);
   @extend .progress_bar;
 
   .noUi-handle {

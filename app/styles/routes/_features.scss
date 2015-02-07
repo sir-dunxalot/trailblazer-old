@@ -1,7 +1,29 @@
 .feature-index {
 
-  .overview {
-    background-color: $offwhite;
+  .headline {
+
+    h1 {
+      @extend %align-left;
+    }
+  }
+
+  h1 {
+    @extend %no_margin;
+    @include rem(margin-right, $iconMargin);
+  }
+
+  .heading_row {
+    @include rem(margin-bottom, $spacing / 1.5);
+
+    h1, .link-to-feature-edit, .tasks_completed {
+      @extend %inline_block;
+    }
+  }
+
+  .tasks_completed {
+    float: right;
+    @extend %no_margin;
+    @include rem(font-size, 3);
   }
 
 }

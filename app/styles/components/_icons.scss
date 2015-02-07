@@ -4,7 +4,7 @@
   @extend %inline_block;
 
   & ~ .text, .text ~ & {
-    @include rem(margin-left, 1.5);
+    @include rem(margin-left, $iconMargin);
   }
 }
 
@@ -32,7 +32,7 @@
 }
 
 .icon-dots {
-  margin: 0;
+  @extend %no_margin;
   @include rem(font-size, 1.4);
   border: 1px solid $gray;
   @include rem(padding, 0.2, 0.4, 0.1, 0.6);
