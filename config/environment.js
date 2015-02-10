@@ -15,7 +15,8 @@ module.exports = function(environment) {
     },
 
     APP: {
-      dateFormat: 'MMM D, YYYY'
+      dateFormat: 'MMM D, YYYY',
+      shortDateFormat: 'D MMM'
     },
 
     contentSecurityPolicy: {

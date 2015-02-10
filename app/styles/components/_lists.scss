@@ -30,3 +30,11 @@
     flex: 0 1 60%;
   }
 }
+
+.list-unstyled {
+  @extend %no_margin;
+
+  dd {
+    margin-left: 0;
+  }
+}

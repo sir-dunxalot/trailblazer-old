@@ -24,6 +24,26 @@
     float: right;
     @extend %no_margin;
     @include rem(font-size, 3);
+    font-weight: $latoLight;
+  }
+
+  .dates_list {
+    @include rem(margin-top, $spacing / 2);
+    @extend .list-unstyled;
+    @extend .alt_text;
+    @extend .sub;
+
+    dd {
+      @extend %inline_block;
+
+      &:last-of-type {
+        float: right;
+      }
+    }
+
+    .lower_date, .upper_date {
+      @extend %relative;
+    }
   }
 
 }

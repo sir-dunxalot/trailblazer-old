@@ -16,15 +16,19 @@
 
   {{progress-bar value=completedTasks.length max=tasks.length}}
 
-  <dl>
+  <dl class="dates_list">
     <dt class="hidden">Feature start date</dt>
     <dd>{{moment startDate shortDateFormat}}</dd>
 
     <dt class="hidden">Development start date</dt>
-    <dd>{{moment lowerDate shortDateFormat}}</dd>
+    <dd class="lower_date" {{bind-attr style=lowerDatePosition}}>
+      {{moment lowerDate shortDateFormat}}
+    </dd>
 
     <dt class="hidden">Testing start date</dt>
-    <dd>{{moment upperDate shortDateFormat}}</dd>
+    <dd class="upper_date" {{bind-attr style=upperDatePosition}}>
+      {{moment upperDate shortDateFormat}}
+    </dd>
 
     <dt class="hidden">Feature end date</dt>
     <dd>{{moment endDate shortDateFormat}}</dd>

@@ -115,6 +115,13 @@ legend {
   @include rem(padding-bottom, 1);
 }
 
+.notes_button {
+  @include mod(button) {
+    @extend %no_padding;
+    @include rem(padding-bottom, 0.1);
+  }
+}
+
 .notes.control {
   @include opacity(0);
 }
