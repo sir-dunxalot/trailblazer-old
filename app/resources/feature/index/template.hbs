@@ -16,7 +16,7 @@
 
   {{progress-bar value=completedTasks.length max=tasks.length}}
 
-  <dl class="dates_list">
+  <dl {{bind-attr class=':dates_list datePositionsSet:fade-in'}}>
     <dt class="hidden">Feature start date</dt>
     <dd>{{moment startDate shortDateFormat}}</dd>
 
@@ -36,6 +36,25 @@
 
 {{/page-header}}
 
+<h2 class="hidden">Stages</h2>
+
+<ul class="stages_list">
+  {{#each stage in stages}}
+    <li {{bind-attr class=':stage_block stage.type.name'}}>
+      <h3 class="hidden">{{stage.type.name}}</h3>
+      <dl>
+        <dt>
+          {{capitalize-string stage.type.name}}
+          <span class="hidden">tasks completed</span>
+        </dt>
+        <dt>
+          {{stage.completedTasks.length}} / {{stage.tasks.length}}
+        </dt>
+      </dl>
+    </li>
+  {{/each}}
+</ul>
+
 {{#page-content}}
 
   {{#link-to 'tasks.new' content}}Add task{{/link-to}}
@@ -45,14 +64,6 @@
     -
     {{moment endDate dateFormat}}
   </p>
-
-  <ol>
-    {{#each stage in stages}}
-      <li {{bind-attr class=':stage_block stage.type.name'}}>
-        {{stage.duration}}
-      </li>
-    {{/each}}
-  </ol>
 
   <ul>
     {{#each task in tasks}}

@@ -27,23 +27,60 @@
     font-weight: $latoLight;
   }
 
-  .dates_list {
-    @include rem(margin-top, $spacing / 2);
-    @extend .list-unstyled;
+}
+
+.dates_list {
+  @include rem(margin-top, $spacing / 2);
+  @extend .list-unstyled;
+  @extend .fade;
+  @extend .fade-out;
+
+  dd {
+    @extend %inline_block;
     @extend .alt_text;
     @extend .sub;
 
-    dd {
-      @extend %inline_block;
-
-      &:last-of-type {
-        float: right;
-      }
+    &:last-of-type {
+      float: right;
     }
+  }
 
-    .lower_date, .upper_date {
-      @extend %relative;
-    }
+  .lower_date, .upper_date {
+    @extend %relative;
+    @include transition(left $slow);
+  }
+}
+
+.stages_list {
+  @extend .list-inline;
+  @extend %full_width;
+}
+
+.stage_block {
+  @include box-sizing(border-box);
+  @include rem(font-size, 1.2);
+  @include rem(padding, 0, $spacing / 2);
+  // @extend %inline_block;
+  @extend %no_margin;
+  @extend .alt_text;
+  color: $white;
+  width: 33.3333%;
+  @include transition(width $slow);
+
+  &.research {
+    background-color: $purple;
+  }
+
+  &.development {
+    background-color: $blue;
+  }
+
+  &.testing {
+    background-color: $green;
+  }
+
+  dd, dt {
+    @extend %inline_block;
   }
 
 }

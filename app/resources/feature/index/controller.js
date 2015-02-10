@@ -3,6 +3,7 @@ import MathHelpers from 'trailblazer/utils/math-helpers';
 
 export default Ember.ObjectController.extend({
   completedTasks: Ember.computed.filter('tasks', 'completed', true),
+  datePositionsSet: Ember.computed.and('lowerDate', 'upperDate'),
 
   lowerDate: null,
   lowerDuration: null,

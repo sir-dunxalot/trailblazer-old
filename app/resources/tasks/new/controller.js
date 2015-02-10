@@ -44,6 +44,8 @@ export default Ember.ObjectController.extend(
     this.transitionToRoute('feature', this.get('feature'));
   },
 
+  // TODO - save task to stage
+
   save: function() {
     var _this = this;
 
