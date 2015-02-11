@@ -1,6 +1,7 @@
 .feature-index {
 
   .headline {
+    @include rem(padding-bottom, $spacing / 2);
 
     h1 {
       @extend %align-left;
@@ -34,6 +35,7 @@
   @extend .list-unstyled;
   @extend .fade;
   @extend .fade-out;
+  @extend %relative;
 
   dd {
     @extend %inline_block;
@@ -46,8 +48,10 @@
   }
 
   .lower_date, .upper_date {
-    @extend %relative;
+    @extend %absolute;
     @include transition(left $slow);
+    // @include rem(margin-left, -50%);
+    @include transform(translateX(-50%));
   }
 }
 
@@ -60,7 +64,7 @@
   @include box-sizing(border-box);
   @include rem(font-size, 1.2);
   @include rem(padding, 0, $spacing / 2);
-  // @extend %inline_block;
+  @extend %relative;
   @extend %no_margin;
   @extend .alt_text;
   color: $white;
@@ -79,8 +83,31 @@
     background-color: $green;
   }
 
+  &:first-of-type {
+    @include rem(padding-left, $spacing);
+  }
+
+  &:last-of-type {
+    @include rem(padding-right, $spacing);
+  }
+
+  dl {
+    @extend %no_wrap;
+  }
+
   dd, dt {
     @extend %inline_block;
+  }
+
+  dd {
+    float: right;
+    @extend %no_margin;
+  }
+
+  .progress {
+    background-color: rgba($white, 0.2);
+    @extend %absolute;
+    border-radius: 0;
   }
 
 }

@@ -26,7 +26,7 @@ export default Ember.ObjectController.extend({
     var upperDuration = this.get('upperDuration');
     var totalDuration = this.get('totalDuration');
     var percentage = MathHelpers.percentage(
-      lowerDuration + upperDuration,
+      totalDuration - upperDuration,
       totalDuration
     );
 

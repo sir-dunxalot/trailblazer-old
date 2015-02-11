@@ -22,10 +22,11 @@ export default {
     return a * b;
   },
 
-  percentage: function(a, b) {
-    var result = a === 0 ? 1 : this.divide(a, b) * 100;
+  percentage: function(a, b, returnNumber) {
+    var result = a === 0 ? 0 : this.divide(a, b) * 100;
+    var affix = returnNumber === false ? 0 : '%';
 
-    return result + '%';
+    return result + affix;
   },
 
   round: function(a) {

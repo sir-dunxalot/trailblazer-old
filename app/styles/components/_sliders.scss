@@ -1,29 +1,18 @@
-.progress_bar {
-  $size: 1;
+$progressBarSize: 1;
 
+.progress_bar {
   @extend %no_margin;
   @extend %relative;
-  @include rem(height, $size);
-  @include rem(border-radius, $size / 2);
+  @include rem(height, $progressBarSize);
+  @include rem(border-radius, $progressBarSize / 2);
   background-color: $gray;
-
-  .progress {
-    @extend %no_margin;
-    @extend %no_padding;
-    height: 100%;
-    width: 0;
-    @extend %left;
-    @include transition(width $slow);
-    background-color: $orange;
-    @include rem(border-radius, $size / 2);
-  }
 
   &:before, &:after {
     @extend %no_content;
     @extend %absolute;
     @extend %inline_block;
-    @include rem(height, $size - 0.6);
-    @include rem(width, $size - 0.6);
+    @include rem(height, $progressBarSize - 0.6);
+    @include rem(width, $progressBarSize - 0.6);
     @include border-radius(50%);
     background-color: $white;
     @include rem(top, 0.3);
@@ -36,6 +25,18 @@
   &:after {
     @include rem(right, 0.3);
   }
+}
+
+.progress {
+  @extend %no_margin;
+  @extend %no_padding;
+  height: 100%;
+  width: 0;
+  @extend %top;
+  @extend %left;
+  @include transition(width $slow);
+  background-color: $orange;
+  @include rem(border-radius, $progressBarSize / 2);
 }
 
 .slider_wrapper {
@@ -72,7 +73,7 @@
     }
 
     .slider_date {
-      @include rem(top, $handleSize * 1.5);
+      @include rem(top, $handleSize + $progressBarSize);
     }
   }
 }

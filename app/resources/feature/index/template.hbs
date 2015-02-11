@@ -39,19 +39,18 @@
 <h2 class="hidden">Stages</h2>
 
 <ul class="stages_list">
-  {{#each stage in stages}}
-    <li {{bind-attr class=':stage_block stage.type.name'}}>
-      <h3 class="hidden">{{stage.type.name}}</h3>
-      <dl>
-        <dt>
-          {{capitalize-string stage.type.name}}
-          <span class="hidden">tasks completed</span>
-        </dt>
-        <dt>
-          {{stage.completedTasks.length}} / {{stage.tasks.length}}
-        </dt>
-      </dl>
-    </li>
+  {{#each stage in stages itemViewClass='stage-block'}}
+    <h3 class="hidden">{{stage.type.name}}</h3>
+    <div class="progress" {{bind-attr style='view.progressStyle'}}>
+    </div>
+    <dl>
+      <dt>
+        <span class="hidden">Number of</span> {{stage.type.name}} <span class="hidden">tasks completed</span>
+      </dt>
+      <dd>
+        {{stage.completedTasks.length}} / {{stage.tasks.length}}
+      </dd>
+    </dl>
   {{/each}}
 </ul>
 
