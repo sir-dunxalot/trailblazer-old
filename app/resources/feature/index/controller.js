@@ -2,8 +2,12 @@ import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
 
 export default Ember.ObjectController.extend({
+  tasks: Em.A(),
   completedTasks: Ember.computed.filter('tasks', 'completed', true),
+  developmentTasks: Ember.computed.filter('tasks', 'stageName', 'development'),
   datePositionsSet: Ember.computed.and('lowerDate', 'upperDate'),
+  researchTasks: Ember.computed.filter('tasks', 'stageName', 'research'),
+  testingTasks: Ember.computed.filter('tasks', 'stageName', 'testing'),
 
   lowerDate: null,
   lowerDuration: null,

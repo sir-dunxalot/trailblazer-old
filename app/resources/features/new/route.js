@@ -54,7 +54,9 @@ export default Ember.Route.extend(
   },
 
   model: function() {
+    console.log(this.get('currentUser'));
     return this.store.createRecord('feature');
+    // TODO - add team id to feature
   },
 
 });

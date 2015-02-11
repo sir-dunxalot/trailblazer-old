@@ -50,14 +50,24 @@
   .lower_date, .upper_date {
     @extend %absolute;
     @include transition(left $slow);
-    // @include rem(margin-left, -50%);
     @include transform(translateX(-50%));
   }
 }
 
 .stages_list {
+  @extend .fade;
+  @extend .fade-out;
   @extend .list-inline;
   @extend %full_width;
+  @include box-sizing(border-box);
+  @extend %no_wrap;
+
+  &.fade-in {
+    border-left: #{$spacing / 10}px solid $purple;
+    border-left: #{$spacing}rem solid $purple;
+    border-right: #{$spacing / 10}px solid $green;
+    border-right: #{$spacing}rem solid $green;
+  }
 }
 
 .stage_block {
@@ -84,11 +94,11 @@
   }
 
   &:first-of-type {
-    @include rem(padding-left, $spacing);
+    @include rem(padding-left, 0);
   }
 
   &:last-of-type {
-    @include rem(padding-right, $spacing);
+    @include rem(padding-right, 0);
   }
 
   dl {

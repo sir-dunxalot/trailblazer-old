@@ -5,7 +5,6 @@ export default Ember.View.extend({
   attributeBindings: ['role'],
   classNameBindings: ['currentRoute'],
   classNames: ['app'],
-  // currentRoute: Em.computed.readOnly('controller.currentRouteName'),
   role: 'application',
 
   currentRoute: function() {
@@ -16,6 +15,10 @@ export default Ember.View.extend({
 
     return routeName.replace('.', '-');
   }.property('controller.currentRouteName'),
+
+  onFeature: function() {
+    return this.get('currentRoute') === 'feature-index';
+  }.property('currentRoute'),
 
   onForm: function() {
     var currentRoute = this.get('currentRoute');

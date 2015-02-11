@@ -38,7 +38,7 @@
 
 <h2 class="hidden">Stages</h2>
 
-<ul class="stages_list">
+<ul {{bind-attr class=':stages_list datePositionsSet:fade-in'}}>
   {{#each stage in stages itemViewClass='stage-block'}}
     <h3 class="hidden">{{stage.type.name}}</h3>
     <div class="progress" {{bind-attr style='view.progressStyle'}}>
@@ -58,11 +58,7 @@
 
   {{#link-to 'tasks.new' content}}Add task{{/link-to}}
 
-  <p>
-    {{moment startDate dateFormat}}
-    -
-    {{moment endDate dateFormat}}
-  </p>
+  <h1 class="heading">Tasks</h1>
 
   <ul>
     {{#each task in tasks}}

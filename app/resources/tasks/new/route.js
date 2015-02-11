@@ -5,10 +5,12 @@ export default Ember.Route.extend(
   DeleteRecord, {
 
   model: function() {
+    var store = this.store;
     var feature = this.modelFor('feature');
+    var userId = this.get('session.uid');
 
-    return this.store.createRecord('task', {
-      // TODO - set assignee here
+    return store.createRecord('task', {
+      assignee: store.find('user', userId),
       feature: feature
     });
   },
@@ -16,21 +18,20 @@ export default Ember.Route.extend(
   setupController: function(controller, model) {
     // TODO - Just the team of the user
     var _this = this;
+    var store = _this.store;
     var feature = model.get('feature');
-    var users = this.store.find('user');
+    var userId = this.get('session.uid');
+    var users = store.find('user');
 
     this._super(controller, model);
 
     feature.get('stages').then(function(stages) {
 
-      var testTask = _this.store.createRecord('task', {
-        // TODO - set assignee here
+      var testTask = store.createRecord('task', {
+        assignee: store.find('user', userId),
         feature: feature,
         stage: stages.findBy('type.name', 'testing')
       });
-
-      // HERE - stage is undefined
-      console.log(stages);
 
       controller.setProperties({
         users: users,

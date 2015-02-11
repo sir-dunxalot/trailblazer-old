@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 var attr = DS.attr;
 var belongsTo = DS.belongsTo;
@@ -20,5 +21,6 @@ export default DS.Model.extend({
   feature: belongsTo('feature', {
     async: true
   }),
-  stage: belongsTo('stage')
+  stage: belongsTo('stage'),
+  stageName: Ember.computed.readOnly('stage.type.name')
 });
