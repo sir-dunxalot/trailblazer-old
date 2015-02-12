@@ -4,8 +4,7 @@ import Saving from 'trailblazer/mixins/controllers/saving';
 export default Ember.ObjectController.extend(
   Saving, {
 
-  testingStage: Ember.computed.filterBy('stages', 'type.name', 'testing'),
-  testTask: null,
+  testingStages: Ember.computed.filterBy('feature.stages', 'type.name', 'testing'),
   testTaskSelection: { // Hacky
     name: 'Unit test',
     value: 'unit'
@@ -44,6 +43,10 @@ export default Ember.ObjectController.extend(
     }
   },
 
+  testingStage: function() {
+    return this.get('testingStages.firstObject');
+  }.property('testingStages.[]'),
+
   transition: function() {
     this.transitionToRoute('feature', this.get('feature'));
   },
@@ -67,7 +70,7 @@ export default Ember.ObjectController.extend(
         _this.get('feature.content').save().then(function(feature) {
           var isTestingTask = task.get('stageName') === 'testing';
 
-          if (_this.get('testTask') && !isTestingTask) {
+          if (_this.get('testTaskSelection') && !isTestingTask) {
             _this.get('testingStage').save().then(function() {
               _this.transition();
             });
@@ -87,7 +90,7 @@ export default Ember.ObjectController.extend(
     var numberOfTasksSaved = 0;
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var testTask = _this.get('testTask');
+      var testTask = _this.get('testTaskSelection').value;
 
       if (!testTask) {
         resolve();
@@ -106,7 +109,7 @@ export default Ember.ObjectController.extend(
           }, reject);
         });
       } else {
-        _this.createTestTask(testTask).save().then(function() {
+        _this.createTestTask(testTask).save().then(function(task) {
           feature.get('tasks').pushObject(task);
 
           resolve();
@@ -119,16 +122,18 @@ export default Ember.ObjectController.extend(
     var _this = this;
     var taskName = type.capitalize() + ' test for ' + _this.get('name');
 
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      _this.store.createRecord('task', {
+    // return new Ember.RSVP.Promise(function(resolve, reject) {
+      return _this.store.createRecord('task', {
         name: taskName,
         assignee: _this.get('assignee'),
         stage: _this.get('testingStage')
       });
 
-      resolve();
-    });
+      // resolve(testTask);
+    // });
   },
+
+  // TODO - remember stage, assignee, and test task
 
   setDefaultStage: function() {
     var _this = this;
