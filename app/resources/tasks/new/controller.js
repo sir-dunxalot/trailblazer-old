@@ -5,7 +5,10 @@ export default Ember.ObjectController.extend(
   Saving, {
 
   testTask: null,
-  testTaskSelection: null,
+  testTaskSelection: { // Hacky
+    name: 'Unit test',
+    value: 'unit'
+  },
   testTaskOptions: Em.A([
     {
       name: 'None',

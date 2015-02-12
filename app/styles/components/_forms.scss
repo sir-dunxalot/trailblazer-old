@@ -79,9 +79,10 @@ legend {
   background-color: $inputBackgroundColor;
   border: 1px solid $gray-light;
   @include rem(border-radius, 0.3);
-  @include rem(padding, 0.8, 1.2);
-  @include rem(width, 24);
+  @include rem(padding, $inputVertPadding, $inputHorizPadding);
+  @include rem(width, $inputWidth);
   @include transition(border-color $fast);
+  @include box-sizing(border-box);
 
   &:focus {
     outline: none;
@@ -178,4 +179,27 @@ legend {
   &:hover {
     background-color: $orange !important;
   }
+}
+
+.selectize-input {
+  @include box-sizing(border-box);
+  @include rem(width, $inputWidth);
+}
+
+.selectize-control.single .selectize-input:after {
+  border: none;
+  @extend %icon;
+  content: "\e097";
+  background-image: none;
+  color: $gray;
+  top: 40%;
+  @include rem(right, 2);
+}
+
+.selectize-control.single .selectize-input.dropdown-active:after {
+  content: "\e096";
+}
+
+.selectize-input, .selectize-dropdown [data-selectable] {
+  @include rem(padding, $inputVertPadding, $inputHorizPadding);
 }
