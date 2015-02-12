@@ -1,38 +1,47 @@
-{{session.currentUser.fullName}}
+{{#page-header}}
+  <h1 class="title">New Task</h1>
+  <p class="subtitle">{{feature.name}}</p>
+{{/page-header}}
 
-<form>
+{{#page-content class='center'}}
+  {{#form-wrapper}}
 
-  {{input name}}
-  {{input notes as='text'}}
+    {{#form-controls legend='Add a new task to the feature'}}
 
-  {{!-- TODO - set to last used stage --}}
-  {{input stage
-    as='selectize'
-    content=feature.stages
-    optionValuePath='content.id'
-    optionLabelPath='content.type.capitalizedName'
-    placeholder='Select a stage'
-  }}
+      {{input name}}
 
-  {{input assignee
-    as='selectize'
-    content=users
-    optionValuePath='content.id'
-    optionLabelPath='content.fullName'
-    placeholder='Select an assignee'
-  }}
+      {{!-- TODO - set to last used stage --}}
+      {{input stage
+        as='selectize'
+        content=feature.stages
+        optionValuePath='content.id'
+        optionLabelPath='content.type.capitalizedName'
+        placeholder='Select a stage'
+      }}
 
-  {{#if new}}
-    {{input testTaskSelection
-      as='selectize'
-      content=testTaskOptions
-      optionValuePath='content.value'
-      optionLabelPath='content.name'
-      placeholder='Add a test task?'
-    }}
-  {{/if}}
+      {{input assignee
+        as='selectize'
+        content=users
+        optionValuePath='content.id'
+        optionLabelPath='content.fullName'
+        placeholder='Select an assignee'
+      }}
 
-  {{!-- TODO - Add test tasks for new only --}}
+      {{#if new}}
+        {{input testTaskSelection
+          as='selectize'
+          content=testTaskOptions
+          optionValuePath='content.value'
+          optionLabelPath='content.name'
+          placeholder='Add a test task?'
+        }}
+      {{/if}}
 
-  {{form-submission}}
-</form>
+      {{partial 'form-components/notes'}}
+
+    {{/form-controls}}
+
+    {{form-submission}}
+
+  {{/form-wrapper}}
+{{/page-content}}

@@ -92,6 +92,8 @@ export function initialize(container, app) {
   container.register('authenticator:firebase', Authenticator);
 
   Session.reopen({
+    currentTeam: null,
+    currentUser: null,
 
     setCurrentUser: function() {
       var store = container.lookup('store:main');
@@ -100,7 +102,10 @@ export function initialize(container, app) {
 
       if (userId) {
         return store.find('user', userId).then(function(user) {
-          _this.set('currentUser', user);
+          _this.setProperties({
+            currentTeam: user.get('team'),
+            currentUser: user
+          });
         });
       }
     }.observes('uid')

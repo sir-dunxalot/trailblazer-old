@@ -4,31 +4,33 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   DeleteRecord, {
 
-  model: function() {
-    var store = this.store;
-    var feature = this.modelFor('feature');
-    var userId = this.get('session.uid');
+  // TODO - delete test record on cancel
 
-    return store.createRecord('task', {
-      assignee: store.find('user', userId),
+  model: function() {
+    var feature = this.modelFor('feature');
+
+    return this.store.createRecord('task', {
+      assignee: this.get('session.currentUser'),
       feature: feature
     });
   },
 
   setupController: function(controller, model) {
-    // TODO - Just the team of the user
     var _this = this;
+    var session = this.get('session');
     var store = _this.store;
     var feature = model.get('feature');
-    var userId = this.get('session.uid');
-    var users = store.find('user');
+    var currentUser = session.get('currentUser');
+    var users = store.find('user', {
+      team: session.get('currentTeam')
+    });
 
     this._super(controller, model);
 
     feature.get('stages').then(function(stages) {
 
       var testTask = store.createRecord('task', {
-        assignee: store.find('user', userId),
+        assignee: currentUser, // TODO - whatever is chosen
         feature: feature,
         stage: stages.findBy('type.name', 'testing')
       });
