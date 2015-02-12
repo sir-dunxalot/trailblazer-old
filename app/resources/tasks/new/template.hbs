@@ -1,5 +1,7 @@
 {{#page-header}}
-  <h1 class="title">New Task</h1>
+  <h1 class="title">
+    {{#if new}}New{{else}}Edit{{/if}} Task
+  </h1>
   <p class="subtitle">{{feature.name}}</p>
 {{/page-header}}
 
@@ -17,6 +19,7 @@
         optionValuePath='content.id'
         optionLabelPath='content.type.capitalizedName'
         placeholder='Select a stage'
+        disabled=editing
       }}
 
       {{input assignee

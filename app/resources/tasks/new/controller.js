@@ -55,7 +55,7 @@ export default Ember.ObjectController.extend(
   }.property('testingStages.[]'),
 
   transition: function() {
-    this.transitionToRoute('feature', this.get('feature'));
+    this.transitionToRoute('feature');
   },
 
   cancel: function() {
