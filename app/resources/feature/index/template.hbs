@@ -60,17 +60,38 @@
 
   <h1 class="heading">Tasks</h1>
 
-  <ul>
-    {{#each task in tasks}}
-      <li {{bind-attr class='task.stageName'}}>
+  <ul class="tasks_list-research">
+    {{#each task in researchTasks}}
+      <li>
+        {{task.name}}
         {{#link-to 'task.edit' task}}
-          {{task.name}}
+          Edit
         {{/link-to}}
       </li>
-    {{else}}
-      {{#flash-message type='info'}}
-        No tasks!
-      {{/flash-message}}
+    {{/each}}
+  </ul>
+
+
+  <ul class="tasks_list-development">
+    {{#each task in developmentTasks}}
+      <li>
+        {{task.name}}
+        {{#link-to 'task.edit' task}}
+          Edit
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+
+
+  <ul class="tasks_list-testing">
+    {{#each task in testingTasks}}
+      <li>
+        {{task.name}}
+        {{#link-to 'task.edit' task}}
+          Edit
+        {{/link-to}}
+      </li>
     {{/each}}
   </ul>
 

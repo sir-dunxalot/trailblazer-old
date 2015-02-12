@@ -194,8 +194,9 @@ export default {
 
     Ember.EasyForm.Selectize = EmberSelectizeComponent.extend({
       content: Em.computed.oneWay('parentView.content'),
-      value: Em.computed.alias('selection'),
+      disabled: Em.computed.oneWay('parentView.disabled'),
       loading: Em.computed.not('content.isLoaded'),
+      value: Em.computed.alias('selection'),
     });
 
     Ember.EasyForm.Config.registerInputType('selectize',

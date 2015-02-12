@@ -1,29 +1,36 @@
 import Ember from 'ember';
 import Saving from 'trailblazer/mixins/controllers/saving';
 
+var computed = Ember.computed;
+
 export default Ember.ObjectController.extend(
   Saving, {
 
-  testingStages: Ember.computed.filterBy('feature.stages', 'type.name', 'testing'),
-  testTaskSelection: { // Hacky
-    name: 'Unit test',
-    value: 'unit'
+  taskIsInTestingStage: computed.equal('stageName', 'testing'),
+  testingStages: computed.filterBy('feature.stages', 'type.name', 'testing'),
+  testTaskSelection: Ember.computed.oneWay('testTaskOptionDefault'),
+  testTaskOptionNone: {
+    name: 'None',
+    value: ''
   },
-  testTaskOptions: Em.A([
-    {
-      name: 'None',
-      value: ''
-    }, {
+  testTaskOptionDefault: {
       name: 'Unit test',
       value: 'unit'
-    }, {
-      name: 'Integration test',
-      value: 'integration'
-    }, {
-      name: 'Both',
-      value: 'both'
-    }
-  ]),
+  },
+
+  testTaskOptions: function() {
+    return Em.A([
+      this.get('testTaskOptionNone'),
+      this.get('testTaskOptionDefault'),
+      {
+        name: 'Integration test',
+        value: 'integration'
+      }, {
+        name: 'Both',
+        value: 'both'
+      }
+    ]);
+  }.property('testTaskOptionNone', 'testTaskOptionDefault'),
 
   validations: {
     stage: {
@@ -122,16 +129,18 @@ export default Ember.ObjectController.extend(
     var _this = this;
     var taskName = type.capitalize() + ' test for ' + _this.get('name');
 
-    // return new Ember.RSVP.Promise(function(resolve, reject) {
-      return _this.store.createRecord('task', {
-        name: taskName,
-        assignee: _this.get('assignee'),
-        stage: _this.get('testingStage')
-      });
-
-      // resolve(testTask);
-    // });
+    return _this.store.createRecord('task', {
+      name: taskName,
+      assignee: _this.get('assignee'),
+      stage: _this.get('testingStage')
+    });
   },
+
+  resetTestingTaskSelection: function() {
+    if (this.get('taskIsInTestingStage')) {
+      this.set('testTaskSelection', this.get('testTaskOptionNone'));
+    }
+  }.observes('taskIsInTestingStage'),
 
   // TODO - remember stage, assignee, and test task
 

@@ -9,7 +9,7 @@ export default TaskController.extend({
     // TODO - save task on assignee here
 
     _this.get('content').save().then(function(task) {
-      _this.transitionToRoute('feature', task.get('feature'));
+      _this.transition();
     });
   },
 
