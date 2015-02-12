@@ -9,8 +9,12 @@ var hasMany = DS.hasMany;
 export default DS.Model.extend({
   completedTasks: Ember.computed.filterBy('tasks', 'completed', true),
   duration: attr('number'),
-  feature: belongsTo('feature'),
-  tasks: hasMany('task'),
+  feature: belongsTo('feature', {
+    async: true
+  }),
+  tasks: hasMany('task', {
+    async: true
+  }),
   type: belongsTo('stageType', {
     async: true
   }),

@@ -62,7 +62,7 @@
 
   <ul>
     {{#each task in tasks}}
-      <li {{bind-attr class='task.stage.type.name'}}>
+      <li {{bind-attr class='task.stageName'}}>
         {{#link-to 'task.edit' task}}
           {{task.name}}
         {{/link-to}}

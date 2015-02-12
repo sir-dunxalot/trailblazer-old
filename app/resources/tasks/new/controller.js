@@ -4,6 +4,7 @@ import Saving from 'trailblazer/mixins/controllers/saving';
 export default Ember.ObjectController.extend(
   Saving, {
 
+  testingStage: Ember.computed.filterBy('stages', 'type.name', 'testing'),
   testTask: null,
   testTaskSelection: { // Hacky
     name: 'Unit test',
@@ -12,7 +13,7 @@ export default Ember.ObjectController.extend(
   testTaskOptions: Em.A([
     {
       name: 'None',
-      value: null
+      value: ''
     }, {
       name: 'Unit test',
       value: 'unit'
@@ -43,34 +44,91 @@ export default Ember.ObjectController.extend(
     }
   },
 
-  cancel: function() {
+  transition: function() {
     this.transitionToRoute('feature', this.get('feature'));
   },
 
-  // TODO - save task to stage
+  cancel: function() {
+    this.transition();
+  },
 
   save: function() {
     var _this = this;
 
-    this.get('content').save().then(function(task) {
-      var feature = task.get('feature');
+    /* Save Task */
 
-      feature.get('tasks').pushObject(task);
-      feature.get('content').save().then(function() {
-        _this.transitionToRoute('feature', feature);
+    this.get('content').save().then(function(task) {
+      _this.get('feature.tasks').pushObject(task);
+
+      _this.saveTestTasks().then(function() {
+
+        /* Save feature */
+
+        _this.get('feature.content').save().then(function(feature) {
+          var isTestingTask = task.get('stageName') === 'testing';
+
+          if (_this.get('testTask') && !isTestingTask) {
+            _this.get('testingStage').save().then(function() {
+              _this.transition();
+            });
+          } else {
+            task.get('stage').save().then(function() {
+              _this.transition();
+            });
+          }
+        });
       });
     });
   },
 
-  // saveTestTask: function() {
-  //   var _this = this;
+  saveTestTasks: function() {
+    var _this = this;
+    var feature = _this.get('feature');
+    var numberOfTasksSaved = 0;
 
-  //   return new Ember.RSVP.Promise(function(resolve, reject) {
-  //     var testTask = _this.get('testTask');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var testTask = _this.get('testTask');
 
+      if (!testTask) {
+        resolve();
+      }
 
-  //   });
-  // },
+      if (testTask === 'both') {
+        ['unit', 'integration'].forEach(function(type) {
+          _this.createTestTask(type).save().then(function(task) {
+            numberOfTasksSaved++;
+
+            feature.get('tasks').pushObject(task);
+
+            if (numberOfTasksSaved === 2) {
+              resolve();
+            }
+          }, reject);
+        });
+      } else {
+        _this.createTestTask(testTask).save().then(function() {
+          feature.get('tasks').pushObject(task);
+
+          resolve();
+        }, reject);
+      }
+    });
+  },
+
+  createTestTask: function(type) {
+    var _this = this;
+    var taskName = type.capitalize() + ' test for ' + _this.get('name');
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      _this.store.createRecord('task', {
+        name: taskName,
+        assignee: _this.get('assignee'),
+        stage: _this.get('testingStage')
+      });
+
+      resolve();
+    });
+  },
 
   setDefaultStage: function() {
     var _this = this;
