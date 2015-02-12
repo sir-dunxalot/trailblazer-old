@@ -1,8 +1,9 @@
 import AuthenticatorBase from 'simple-auth/authenticators/base';
 import Ember from 'ember';
+import Session from 'simple-auth/session';
 
 var firebase = new Firebase('https://trailblazer.firebaseio.com');
-var CustomAuthenticator = AuthenticatorBase.extend({
+var Authenticator = AuthenticatorBase.extend({
 
   authenticate: function(/* options */) {
     var _this = this;
@@ -88,7 +89,23 @@ var CustomAuthenticator = AuthenticatorBase.extend({
 });
 
 export function initialize(container, app) {
-  container.register('authenticator:firebase', CustomAuthenticator);
+  container.register('authenticator:firebase', Authenticator);
+
+  Session.reopen({
+
+    setCurrentUser: function() {
+      var store = container.lookup('store:main');
+      var _this = this;
+      var userId = this.get('uid');
+
+      if (userId) {
+        return store.find('user', userId).then(function(user) {
+          _this.set('currentUser', user);
+        });
+      }
+    }.observes('uid')
+
+  });
 }
 
 export default {
