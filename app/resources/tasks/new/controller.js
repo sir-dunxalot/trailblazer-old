@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Saving from 'trailblazer/mixins/controllers/saving';
+import uncapitalize from 'trailblazer/utils/uncapitalize';
 
 var computed = Ember.computed;
 
@@ -127,10 +128,11 @@ export default Ember.ObjectController.extend(
 
   createTestTask: function(type) {
     var _this = this;
-    var taskName = type.capitalize() + ' test for ' + _this.get('name');
+    var taskName = uncapitalize(_this.get('name'));
+    var testTaskName = type.capitalize() + ' test for ' + taskName;
 
     return _this.store.createRecord('task', {
-      name: taskName,
+      name: testTaskName,
       assignee: _this.get('assignee'),
       stage: _this.get('testingStage')
     });
