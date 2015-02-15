@@ -5,12 +5,9 @@
 
     h1 {
       @extend %align-left;
+      @extend %no_margin;
+      @include rem(margin-right, $iconMargin);
     }
-  }
-
-  h1 {
-    @extend %no_margin;
-    @include rem(margin-right, $iconMargin);
   }
 
   .heading_row {
@@ -31,7 +28,9 @@
 }
 
 .dates_list {
-  @include rem(margin-top, $spacing / 2);
+  // Align dates with stage blocks below
+  @include rem(margin, $spacing / 2, -$spacing, 0);
+  @include rem(padding, 0, $spacing);
   @extend .list-unstyled;
   @extend .fade;
   @extend .fade-out;
@@ -61,13 +60,6 @@
   @extend %full_width;
   @include box-sizing(border-box);
   @extend %no_wrap;
-
-  &.fade-in {
-    border-left: #{$spacing / 10}px solid $purple;
-    border-left: #{$spacing}rem solid $purple;
-    border-right: #{$spacing / 10}px solid $green;
-    border-right: #{$spacing}rem solid $green;
-  }
 }
 
 .stage_block {
@@ -94,11 +86,11 @@
   }
 
   &:first-of-type {
-    @include rem(padding-left, 0);
+    @include rem(padding-left, $spacing);
   }
 
   &:last-of-type {
-    @include rem(padding-right, 0);
+    @include rem(padding-right, $spacing);
   }
 
   dl {
@@ -115,9 +107,67 @@
   }
 
   .progress {
-    background-color: rgba($white, 0.2);
+    // TODO - Change to scale color when PR #24 on compass-mixins it merged
+    background-color: rgba($white, 0.1);
     @extend %absolute;
     border-radius: 0;
   }
 
+}
+
+.tasks_list {
+  border-left: 0 solid transparent;
+  @include rem(border-left-width, 0.8);
+  @extend .list-unstyled;
+  @include rem(margin-bottom, $spacing / 2);
+  @extend %table;
+
+  li {
+    @extend %row;
+    @include rem(padding, $inputHorizPadding);
+    border-bottom: 1px solid mix($gray-light, $white, 40%);
+    // border-left: 0 solid transparent;
+    // @include rem(border-left-width, $spacing / 2);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  @include mod(button) {
+    color: $orange;
+  }
+
+  .task_name, .task_buttons {
+    @extend %cell;
+  }
+
+  .task_name {
+    @extend %full_width;
+  }
+
+  .task_buttons {
+    @include rem(min-width, 17);
+  }
+
+  .link-to-task-edit {
+    // @extend %inline_block;
+    // @include rem(padding, 1);
+  }
+}
+
+@include mod(tasks_list) {
+  @extend .tasks_list;
+}
+
+.tasks_list-research {
+  border-color: $purple;
+}
+
+.tasks_list-development {
+  border-color: $blue;
+}
+
+.tasks_list-testing {
+  border-color: $green;
 }

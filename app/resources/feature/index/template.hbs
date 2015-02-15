@@ -62,36 +62,21 @@
 
   <ul class="tasks_list-research">
     {{#each task in researchTasks}}
-      <li>
-        {{task.name}}
-        {{#link-to 'task.edit' task}}
-          Edit
-        {{/link-to}}
-      </li>
+      {{partial 'task/list-item'}}
     {{/each}}
   </ul>
 
 
   <ul class="tasks_list-development">
     {{#each task in developmentTasks}}
-      <li>
-        {{task.name}}
-        {{#link-to 'task.edit' task}}
-          Edit
-        {{/link-to}}
-      </li>
+      {{partial 'task/list-item'}}
     {{/each}}
   </ul>
 
 
   <ul class="tasks_list-testing">
     {{#each task in testingTasks}}
-      <li>
-        {{task.name}}
-        {{#link-to 'task.edit' task}}
-          Edit
-        {{/link-to}}
-      </li>
+      {{partial 'task/list-item'}}
     {{/each}}
   </ul>
 

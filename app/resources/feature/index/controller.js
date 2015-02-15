@@ -38,6 +38,15 @@ export default Ember.ObjectController.extend({
     return 'left:' + percentage + ';';
   }.property('upperDuration', 'totalDuration'),
 
+  actions: {
+    completeTask: function(task) {
+      task.set('completed', true);
+      task.save().then(function() {
+        // TODO - Success message here
+      });
+    },
+  },
+
   setDates: function() {
     var _this = this;
 

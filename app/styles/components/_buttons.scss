@@ -11,7 +11,7 @@ button {
 .button {
   @extend %nowrap;
   @extend %inline_block;
-  @include rem(padding, 1.5, 2);
+  @include rem(padding, $buttonVertPadding, $buttonHorizPadding);
 
   @include rem(border-radius, 0.3);
   border: 1px solid rgba($black, 0.15);
@@ -80,5 +80,6 @@ button {
 
 .button-unstyled {
   @extend .button-transparent;
-  @extend %no_padding;
+  padding: 0; // Don't use extend
+  @extend %pull-right;
 }

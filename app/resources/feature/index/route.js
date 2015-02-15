@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model: function(params) {
-    return this.store.find('feature', params.id);
+    return this.modelFor('feature');
   },
 
 });

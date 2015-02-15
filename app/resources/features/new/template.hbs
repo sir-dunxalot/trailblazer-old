@@ -6,7 +6,7 @@
 
   {{currentUser.fullName}}
 
-  {{#form-wrapper}}
+  {{#form}}
     {{#form-controls legend='Create a new feature'}}
 
       {{input startDate as='date' maxDate=endDate}}
@@ -26,6 +26,6 @@
     {{/form-controls}}
 
     {{form-submission}}
-  {{/form-wrapper}}
+  {{/form}}
 
 {{/page-content}}

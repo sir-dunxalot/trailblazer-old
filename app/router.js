@@ -12,7 +12,7 @@ Router.map(function() {
   this.resource('users', function() {
     this.route('new');
 
-    this.resource('user', { path: '/:id' }, function() {
+    this.resource('user', { path: '/:user_id' }, function() {
       this.route('edit');
     });
   });
@@ -20,13 +20,13 @@ Router.map(function() {
   this.resource('features', function() {
     this.route('new');
 
-    this.resource('feature', { path: '/:id' }, function() {
+    this.resource('feature', { path: '/:feature_id' }, function() {
       this.route('edit');
 
       this.resource('tasks', function() {
         this.route('new');
 
-        this.resource('task', { path: '/:id' }, function() {
+        this.resource('task', { path: '/:task_id' }, function() {
           this.route('edit');
         });
       });
@@ -43,7 +43,7 @@ Router.map(function() {
   this.resource('teams', function() {
     this.route('new');
 
-    this.resource('team', { path: '/:id' }, function() {
+    this.resource('team', { path: '/:team_id' }, function() {
 
     });
   });
