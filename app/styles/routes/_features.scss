@@ -74,15 +74,33 @@
   @include transition(width $slow);
 
   &.research {
-    background-color: $purple;
+    $backgroundColor: $purple;
+
+    background-color: $backgroundColor;
+
+    .progress {
+      background-color: rgba(darken($backgroundColor, 6), 0.5);
+    }
   }
 
   &.development {
-    background-color: $blue;
+    $backgroundColor: $blue;
+
+    background-color: $backgroundColor;
+
+    .progress {
+      background-color: rgba(darken($backgroundColor, 6), 0.5);
+    }
   }
 
   &.testing {
-    background-color: $green;
+    $backgroundColor: $green;
+
+    background-color: $backgroundColor;
+
+    .progress {
+      background-color: rgba(darken($backgroundColor, 10), 0.5);
+    }
   }
 
   &:first-of-type {
@@ -95,6 +113,7 @@
 
   dl {
     @extend %no_wrap;
+    @extend %relative; // So text sits ontop of progress bar
   }
 
   dd, dt {
@@ -107,8 +126,6 @@
   }
 
   .progress {
-    // TODO - Change to scale color when PR #24 on compass-mixins it merged
-    background-color: rgba($white, 0.1);
     @extend %absolute;
     border-radius: 0;
   }
@@ -116,22 +133,31 @@
 }
 
 .tasks_list {
-  border-left: 0 solid transparent;
-  @include rem(border-left-width, 0.8);
+  $borderGap: $spacing  / 1.5;
   @extend .list-unstyled;
-  @include rem(margin-bottom, $spacing / 2);
+  @extend %relative;
   @extend %table;
+  // Hacky width
+  width: calc(100% - #{$borderGap * 10}px);
+  width: calc(100% - #{$borderGap}rem);
+  @include rem(margin-left, $borderGap);
+  @include rem(margin-bottom, $spacing / 2);
+  padding: 0;
 
   li {
     @extend %row;
-    @include rem(padding, $inputHorizPadding);
-    border-bottom: 1px solid mix($gray-light, $white, 40%);
-    // border-left: 0 solid transparent;
-    // @include rem(border-left-width, $spacing / 2);
+    @include rem(margin-left, $inputHorizPadding);
+    border-bottom: 1px solid mix($gray-light, $white, 30%);
 
     &:last-of-type {
       border-bottom: none;
     }
+  }
+
+  &:before {
+    @extend %full_size_pseudo;
+    @include rem(width, 0.8);
+    @include rem(left, -$borderGap);
   }
 
   @include mod(button) {
@@ -150,9 +176,12 @@
     @include rem(min-width, 17);
   }
 
+  .link-to-task-edit, .button-unstyled {
+    @include rem(padding, 1);
+  }
+
   .link-to-task-edit {
-    // @extend %inline_block;
-    // @include rem(padding, 1);
+    @extend %inline_block;
   }
 }
 
@@ -160,14 +189,14 @@
   @extend .tasks_list;
 }
 
-.tasks_list-research {
-  border-color: $purple;
+.tasks_list-research:before {
+  background-color: $purple;
 }
 
-.tasks_list-development {
-  border-color: $blue;
+.tasks_list-development:before {
+  background-color: $blue;
 }
 
-.tasks_list-testing {
-  border-color: $green;
+.tasks_list-testing:before {
+  background-color: $green;
 }
