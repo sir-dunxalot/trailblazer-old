@@ -1,17 +1,34 @@
-<li>
+<li {{bind-attr class='task.completed:complete:not_complete'}}>
   <div class="task_name">
     {{capitalize-string task.name}}
   </div>
 
   <div class="task_buttons">
-    {{#link-to 'task.edit' task class='sub'}}
-      <span class="icon-pencil small sub"></span>
-      <span class="hidden">Edit</span>
-    {{/link-to}}
 
-    <button {{action 'completeTask' task}} class="button-unstyled">
-      <span class="icon-fire"></span>
-      <span class="text">Blaze it</span>
-    </button>
+    {{!-- TODO - undo completion button --}}
+
+      {{#link-to 'task.edit' task class='sub'}}
+        <span class="icon-pencil small sub"></span>
+        <span class="hidden">Edit</span>
+      {{/link-to}}
+
+    {{#if task.completed}}
+      <button class="button-unstyled sub" {{action 'toggleTaskCompletion' task}}>
+        <span class="icon-restart"></span>
+        <span class="text">Restart</span>
+      </button>
+    {{else}}
+
+
+      <button
+        class="button-unstyled"
+        title="Complete this task"
+        {{action 'toggleTaskCompletion' task}}
+      >
+        <span class="icon-fire"></span>
+        <span class="text">Blaze it</span>
+      </button>
+    {{/if}}
+
   </div>
 </li>

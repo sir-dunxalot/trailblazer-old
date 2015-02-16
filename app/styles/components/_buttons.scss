@@ -28,6 +28,10 @@ button {
     @include transform(scale(1.02));
   }
 
+  &.disabled:hover {
+    @include transform(none);
+  }
+
   &:active {
     @include transform(scale(1.02) translateY(1px));
     @include box-shadow(none);

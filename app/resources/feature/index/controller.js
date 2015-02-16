@@ -39,8 +39,8 @@ export default Ember.ObjectController.extend({
   }.property('upperDuration', 'totalDuration'),
 
   actions: {
-    completeTask: function(task) {
-      task.set('completed', true);
+    toggleTaskCompletion: function(task) {
+      task.toggleProperty('completed');
       task.save().then(function() {
         // TODO - Success message here
       });

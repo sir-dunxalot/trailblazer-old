@@ -60,3 +60,8 @@
 [aria-hidden="false"] {
   pointer-events: auto;
 }
+
+.disabled {
+  @extend .sub;
+  @extend %not_allowed;
+}
