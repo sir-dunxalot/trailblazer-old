@@ -56,14 +56,15 @@
 
 {{#page-content}}
 
+
+
   <div class="filters">
     <h2>Filters</h2>
 
-    {{list-filter checked=showResearch label='research'}}
-    {{list-filter checked=showDevelopment label='development'}}
-    {{list-filter checked=showTesting label='testing'}}
-    {{list-filter checked=showCompleted label='completed'}}
-
+    {{styled-checkbox checked=showResearch label='research'}}
+    {{styled-checkbox checked=showDevelopment label='development'}}
+    {{styled-checkbox checked=showTesting label='testing'}}
+    {{styled-checkbox checked=showCompleted label='completed'}}
   </div>
 
   <h1 class="heading">Tasks</h1>

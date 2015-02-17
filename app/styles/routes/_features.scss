@@ -1,4 +1,5 @@
 .feature-index {
+  // TODO - Scrolling in tasks list. Page stay the same.
 
   .headline {
     @include rem(padding-bottom, $spacing / 2);
@@ -184,6 +185,12 @@
   .not_complete {
     @include mod(button) {
       color: $orange;
+      border-radius: 0;
+
+      &:hover {
+        background-color: $orange;
+        color: $white;
+      }
     }
   }
 
@@ -233,33 +240,34 @@
 
 .filters {
 
-  label {
+  .checkbox_wrapper {
     @include rem(padding, 0.4, $spacing / 2, 0.4, 0);
   }
 
-  label ~ label {
+  .checkbox_wrapper ~ .checkbox_wrapper {
     border-left: 1px solid rgba($gray-light, 0.5);
     @include rem(padding-left, $spacing / 2);
   }
 
-  .alt_text {
+  .checkbox_label {
+    @extend .alt_text;
     cursor: pointer;
     @include rem(padding-left, $inputHorizPadding);
   }
 
-  .research {
+  .research .alt_text {
     color: $research;
   }
 
-  .development {
+  .development .alt_text {
     color: $development;
   }
 
-  .testing {
+  .testing .alt_text {
     color: $testing;
   }
 
-  .completed {
+  .completed .alt_text {
     color: $orange;
   }
 }

@@ -122,6 +122,34 @@ legend {
   @include rem(padding-bottom, 1);
 }
 
+/* Checkboxes */
+
+.input-checkbox {
+  @include rem(line-height, 2);
+  @include rem(height, 2.2);
+  @include rem(width, 2.2);
+  @include rem(top, -0.1);
+  @extend %align-center;
+  @extend %inline_block;
+  @extend %relative;
+  cursor: pointer;
+  padding: 0;
+
+  &:before {
+    @include rem(font-size, 1.4);
+    @extend %icon;
+    content: "\ea10";
+    @include transition(opacity 0.2s);
+    @extend .fade-out;
+
+    input:checked ~ & {
+      @extend .fade-in;
+    }
+  }
+}
+
+/* Notes input */
+
 .notes_button {
   @include mod(button) {
     @extend %no_padding;
