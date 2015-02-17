@@ -134,6 +134,9 @@
 
 .tasks_list {
   $borderGap: $spacing  / 1.5;
+  $borderColor: mix($gray-light, $white, 30%);
+
+
   @extend .list-unstyled;
   @extend %relative;
   @extend %table;
@@ -144,18 +147,25 @@
   @include rem(margin-bottom, $spacing / 2);
   padding: 0;
 
+  &.show-completed {
+    .task_item ~ .task_item {
+      border-top: 1px solid $borderColor;
+    }
+  }
+
   .task_item {
     @include rem(margin-left, $inputHorizPadding);
-    border-bottom: 1px solid mix($gray-light, $white, 30%);
 
-    &:last-of-type {
-      border-bottom: none;
+
+    &.not_complete ~ .task_item.not_complete {
+      border-top: 1px solid $borderColor;
     }
 
     &.complete {
       @extend %temporarily_hidden;
     }
   }
+
 
   .task_item, &.show-completed .task_item.complete {
     @extend %row;
@@ -180,7 +190,7 @@
   }
 
   .link-to-task-edit, .button-unstyled, .task_name {
-    @include rem(padding, 1);
+    @include rem(padding, 1, 1.5);
   }
 
   .task_name, .task_buttons {
@@ -195,11 +205,12 @@
   }
 
   .task_buttons {
-    @include rem(min-width, 17);
+    @include rem(min-width, 19); // Hacky
   }
 
   .link-to-task-edit {
     @extend %inline_block;
+    border-right: 1px solid $borderColor;
   }
 }
 
