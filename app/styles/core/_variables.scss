@@ -22,6 +22,7 @@ $white: #fff;
 $blue: #8dabcd;
 $gray: #868686;
 $gray-light: mix(#868686, $white);
+$gray-lighter: mix($gray-light, $white, 30%);
 $gray-dark: #707070;
 $gray-dark-hover: mix(#707070, $black, 70%);
 $green: #bcdb9d;
@@ -29,6 +30,10 @@ $orange: #e7a169;
 $offwhite: #f0f0f0;
 $purple: #b287d7;
 $red: #d47d7d;
+
+$research: $purple;
+$development: $blue;
+$testing: $green;
 
 $inputBackgroundColor: mix($white, $offwhite, 80%);
 

@@ -26,14 +26,26 @@ legend {
   @include rem(margin, $spacing / 2, 0);
 
   @extend %table;
+
+  .control {
+    @extend %row;
+    border: 0 solid transparent;
+    @include rem(border-bottom-width, $spacing / 1.5);
+  }
+
+  .label,
+  .input_wrapper {
+    @extend %cell;
+  }
+
+  .input {
+    @include rem(width, $inputWidth);
+  }
 }
 
 /* Control set */
 
 .control {
-  @extend %row;
-  border: 0 solid transparent;
-  @include rem(border-bottom-width, $spacing / 1.5);
 
   &:before {
     // No content so it doesn't show in the DOM
@@ -62,11 +74,6 @@ legend {
 
 /* Elements of the control */
 
-.label,
-.input_wrapper {
-  @extend %cell;
-}
-
 .label {
   @include rem(font-size, 1.8);
   @include rem(padding, 0.6, $spacing, 0, 0);
@@ -80,7 +87,6 @@ legend {
   border: 1px solid $gray-light;
   @include rem(border-radius, 0.3);
   @include rem(padding, $inputVertPadding, $inputHorizPadding);
-  @include rem(width, $inputWidth);
   @include transition(border-color $fast);
   @include box-sizing(border-box);
 
