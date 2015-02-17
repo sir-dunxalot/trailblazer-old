@@ -56,26 +56,37 @@
 
 {{#page-content}}
 
+  <h2>Filters</h2>
+
+  {{input showCompleted as='checkbox' label='Completed'}}
+  {{input showDevelopment as='checkbox' label='Development'}}
+  {{input showResearch as='checkbox' label='Research'}}
+  {{input showTesting as='checkbox' label='Testing'}}
+
   <h1 class="heading">Tasks</h1>
 
-  <ul class="tasks_list-research">
-    {{#each task in researchTasks}}
-      {{partial 'task/list-item'}}
-    {{/each}}
-  </ul>
+  {{#if showResearch}}
+    <ul {{bind-attr class=':tasks_list-research showCompleted'}}>
+      {{#each task in researchTasks}}
+        {{partial 'task/list-item'}}
+      {{/each}}
+    </ul>
+  {{/if}}
 
+  {{#if showDevelopment}}
+    <ul {{bind-attr class=':tasks_list-development showCompleted'}}>
+      {{#each task in developmentTasks}}
+        {{partial 'task/list-item'}}
+      {{/each}}
+    </ul>
+  {{/if}}
 
-  <ul class="tasks_list-development">
-    {{#each task in developmentTasks}}
-      {{partial 'task/list-item'}}
-    {{/each}}
-  </ul>
-
-
-  <ul class="tasks_list-testing">
-    {{#each task in testingTasks}}
-      {{partial 'task/list-item'}}
-    {{/each}}
-  </ul>
+  {{#if showTesting}}
+    <ul {{bind-attr class=':tasks_list-testing showCompleted'}}>
+      {{#each task in testingTasks}}
+        {{partial 'task/list-item'}}
+      {{/each}}
+    </ul>
+  {{/if}}
 
 {{/page-content}}

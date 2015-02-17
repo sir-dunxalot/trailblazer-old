@@ -4,11 +4,23 @@ import MathHelpers from 'trailblazer/utils/math-helpers';
 var filterBy = Ember.computed.filterBy;
 
 export default Ember.ObjectController.extend({
+
+  /* Filters */
+
+  showCompleted: false,
+  showDevelopment: true,
+  showResearch: true,
+  showTesting: true,
+
+  /* Tasks */
+
   completedTasks: filterBy('tasks', 'completed', true),
   developmentTasks: filterBy('tasks', 'stageName', 'development'),
   datePositionsSet: Ember.computed.and('lowerDate', 'upperDate'),
   researchTasks: filterBy('tasks', 'stageName', 'research'),
   testingTasks: filterBy('tasks', 'stageName', 'testing'),
+
+  /* Dates */
 
   lowerDate: null,
   lowerDuration: null,
