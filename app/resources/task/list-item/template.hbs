@@ -2,9 +2,12 @@
 
   <div class="task_name">
     {{capitalize-string task.name}}
-    <span {{bind-attr class=':assignee_name showPersonal:fade-out:fade-in'}}>
-      {{task.assignee.firstName}}
-    </span>
+
+    {{#if showPersonalToggle}}
+      <span {{bind-attr class=':assignee_name showPersonal:fade-out:fade-in'}}>
+        {{task.assignee.firstName}}
+      </span>
+    {{/if}}
   </div>
 
   <div class="task_buttons">
