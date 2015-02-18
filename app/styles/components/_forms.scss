@@ -242,6 +242,8 @@ legend {
 
 .x-toggle-container {
   @extend %inline_block;
+  @extend %relative;
+  @include rem(top, 0.4);
 
   &.x-toggle-container-checked {
     .toggle-prefix {
@@ -275,7 +277,6 @@ legend {
 }
 
 .x-toggle {
-
   &:checked + .x-toggle-ios.x-toggle-btn {
     background-color: $gray;
   }
@@ -284,7 +285,7 @@ legend {
 .x-toggle-ios {
   &.x-toggle-btn {
     @extend %relative;
-    @include rem(top, 0.3);
+    @include rem(top, 0.2);
     @include rem(padding, 0.3);
     background-color: $inputBackgroundColor;
     border: 1px solid $gray-light;

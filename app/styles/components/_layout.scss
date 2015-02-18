@@ -36,13 +36,26 @@
   flex-wrap: wrap;
   align-items: center;
 
-  .heading, .title, .heading_aside {
+  .heading, .title, .heading_aside, .flex_item {
     @extend %no_margin;
-    flex: 1;
     // align-self: flex-end;
   }
 
+  .heading, .title, .flex_item {
+    flex: 1;
+  }
+
   .heading_aside {
+    flex: 3;
     @extend %align-right;
+  }
+}
+
+.flex_item {
+
+  // Because we're probably putting something next to the heading
+  .heading {
+    @extend %inline_block;
+    @include rem(margin-right, $spacing);
   }
 }

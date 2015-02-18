@@ -234,6 +234,7 @@
 /* Checkbox filter */
 
 .filters {
+  @extend .heading_aside;
 
   .checkbox_wrapper {
     @include rem(padding, 0.4, $spacing / 2, 0.4, 0);

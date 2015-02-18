@@ -56,28 +56,30 @@
 
 {{#page-content}}
 
-
-
-  <div class="filters">
-    <h2>Filters</h2>
-
-    {{styled-checkbox checked=showResearch label='research'}}
-    {{styled-checkbox checked=showDevelopment label='development'}}
-    {{styled-checkbox checked=showTesting label='testing'}}
-    {{styled-checkbox checked=showCompleted label='completed'}}
-  </div>
-
   <div class="heading_wrapper">
-    <h1 class="heading">Tasks</h1>
-    {{!-- TODO - add icons to on and off --}}
-    {{x-toggle
-      class='heading_aside'
-      on='Personal:true'
-      off='Team:false'
-      size='small'
-      showLabels='true'
-      value=showPersonalString
-    }}
+    <div class="flex_item">
+      <h1 class="heading">Tasks</h1>
+
+      {{x-toggle
+        on='Personal:true'
+        off='Team:false'
+        size='small'
+        showLabels='true'
+        value=showPersonalString
+      }}
+    </div>
+
+    <div class="filters">
+      <h2 class="hidden">Filters</h2>
+
+      {{styled-checkbox checked=showResearch label='research'}}
+      {{styled-checkbox checked=showDevelopment label='development'}}
+      {{styled-checkbox checked=showTesting label='testing'}}
+      {{styled-checkbox checked=showCompleted label='completed'}}
+
+      {{!-- TODO - add icons to on and off --}}
+
+    </div>
   </div>
 
   {{#if showResearch}}
