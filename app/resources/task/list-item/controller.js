@@ -15,6 +15,10 @@ export default Ember.ObjectController.extend({
     var showCompleted = this.get('featureController.showCompleted');
     var shouldShowIfCompleted = completed && showCompleted;
 
+    if (currentUserID !== assigneeID) {
+      this.set('featureController.showPersonalToggle', true);
+    }
+
     this.set('shouldShow',
       (shouldShowIfPersonal || !showPersonal) &&
       (shouldShowIfCompleted || !completed)

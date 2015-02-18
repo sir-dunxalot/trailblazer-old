@@ -11,6 +11,7 @@ export default Ember.ObjectController.extend({
   showDevelopment: true,
   showPersonal: Ember.computed.equal('showPersonalString', 'true'),
   showPersonalString: 'false',
+  showPersonalToggle: false,
   showResearch: true,
   showTesting: true,
 

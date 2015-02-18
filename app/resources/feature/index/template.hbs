@@ -57,28 +57,27 @@
 {{#page-content}}
 
   <div class="heading_wrapper">
-    <div class="flex_item">
-      <h1 class="heading">Tasks</h1>
-
-      {{x-toggle
-        on='Personal:true'
-        off='Team:false'
-        size='small'
-        showLabels='true'
-        value=showPersonalString
-      }}
-    </div>
+    <h1 class="heading">Tasks</h1>
 
     <div class="filters">
+
       <h2 class="hidden">Filters</h2>
+
+      {{!-- TODO - add icons to on and off --}}
+      {{#if showPersonalToggle}}
+        {{x-toggle
+          on='Personal:true'
+          off='Team:false'
+          size='small'
+          showLabels='true'
+          value=showPersonalString
+        }}
+      {{/if}}
 
       {{styled-checkbox checked=showResearch label='research'}}
       {{styled-checkbox checked=showDevelopment label='development'}}
       {{styled-checkbox checked=showTesting label='testing'}}
       {{styled-checkbox checked=showCompleted label='completed'}}
-
-      {{!-- TODO - add icons to on and off --}}
-
     </div>
   </div>
 

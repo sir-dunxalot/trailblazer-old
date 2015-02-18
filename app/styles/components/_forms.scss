@@ -243,7 +243,7 @@ legend {
 .x-toggle-container {
   @extend %inline_block;
   @extend %relative;
-  @include rem(top, 0.4);
+  @include rem(top, 0.2);
 
   &.x-toggle-container-checked {
     .toggle-prefix {
