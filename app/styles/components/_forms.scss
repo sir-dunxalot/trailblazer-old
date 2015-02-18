@@ -237,3 +237,62 @@ legend {
 .selectize-input, .selectize-dropdown [data-selectable] {
   @include rem(padding, $inputVertPadding, $inputHorizPadding);
 }
+
+/* Toggles */
+
+.x-toggle-container {
+  @extend %inline_block;
+
+  &.x-toggle-container-checked {
+    .toggle-prefix {
+      @extend .sub;
+    }
+
+    .toggle-postfix {
+      @extend .fade-in;
+    }
+  }
+
+  .toggle-text {
+    @extend .fade;
+    @extend .alt_text;
+    // @extend %relative;
+    // @include rem(top, -0.2);
+  }
+
+  .toggle-text.small {
+    @include rem(font-size, 1.4);
+  }
+
+  .toggle-prefix {
+    @include rem(margin-right, 0.4);
+  }
+
+  .toggle-postfix {
+    @extend .sub;
+    @include rem(margin-left, 0.4);
+  }
+}
+
+.x-toggle {
+
+  &:checked + .x-toggle-ios.x-toggle-btn {
+    background-color: $gray;
+  }
+}
+
+.x-toggle-ios {
+  &.x-toggle-btn {
+    @extend %relative;
+    @include rem(top, 0.3);
+    @include rem(padding, 0.3);
+    background-color: $inputBackgroundColor;
+    border: 1px solid $gray-light;
+
+    &:after {
+      background-color: $white;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2),
+                  0 4px 0 rgba(0, 0, 0, 0.08)
+    }
+  }
+}

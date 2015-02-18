@@ -28,6 +28,12 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline' https://s3.amazonaws.com http://fonts.googleapis.com",
     },
 
+    'ember-cli-toggle': {
+      defaultTheme: 'ios',
+      includedThemes: ['ios'],
+      excludedThemes: ['default', 'flat', 'flip', 'light', 'skewed'],
+    },
+
     'simple-auth': {
       authenticationRoute: 'sign-in',
     }
