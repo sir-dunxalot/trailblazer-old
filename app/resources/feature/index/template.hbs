@@ -58,24 +58,26 @@
 
 
 
-  <div class="filters">
+{{!--   <div class="filters">
     <h2>Filters</h2>
-
-    {{x-toggle
-      on='Personal:true'
-      off='Team:false'
-      value=personalView
-      showLabels='true'
-      size='small'
-    }}
 
     {{styled-checkbox checked=showResearch label='research'}}
     {{styled-checkbox checked=showDevelopment label='development'}}
     {{styled-checkbox checked=showTesting label='testing'}}
     {{styled-checkbox checked=showCompleted label='completed'}}
-  </div>
+  </div> --}}
 
-  <h1 class="heading">Tasks</h1>
+  <div class="heading_wrapper">
+    <h1 class="heading">Tasks</h1>
+    {{x-toggle
+      class='heading_aside'
+      on='Personal:true'
+      off='Team:false'
+      size='small'
+      showLabels='true'
+      value=showPersonalString
+    }}
+  </div>
 
   {{#if showResearch}}
     <ul {{bind-attr class=':tasks_list-research showCompleted'}}>

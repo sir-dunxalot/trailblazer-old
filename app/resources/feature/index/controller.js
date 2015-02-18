@@ -5,15 +5,12 @@ var filterBy = Ember.computed.filterBy;
 
 export default Ember.ObjectController.extend({
 
-  uofbouf: function() {
-    console.log(typeof this.get('personalView'));
-  }.observes('personalView'),
-
   /* Filters */
 
-  personalView: false,
+  showPersonalString: 'false',
   showCompleted: false,
   showDevelopment: true,
+  showPersonal: Ember.computed.equal('showPersonalString', 'true'),
   showResearch: true,
   showTesting: true,
 

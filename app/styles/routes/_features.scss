@@ -209,6 +209,16 @@
     padding-left: 0;
   }
 
+  .assignee_name {
+    @extend .alt_text;
+    @include rem(font-size, 1.2);
+    @include rem(margin-left, 1.5);
+
+    &.fade-in {
+      @include opacity(0.3);
+    }
+  }
+
   .task_buttons {
     @include rem(min-width, 19); // Hacky
   }

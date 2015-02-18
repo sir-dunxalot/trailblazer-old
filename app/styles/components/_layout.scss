@@ -30,3 +30,19 @@
     @extend %align-center;
   }
 }
+
+.heading_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .heading, .title, .heading_aside {
+    @extend %no_margin;
+    flex: 1;
+    // align-self: flex-end;
+  }
+
+  .heading_aside {
+    @extend %align-right;
+  }
+}

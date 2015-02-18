@@ -31,10 +31,15 @@ a {
   }
 }
 
+// TODO - class instead of element selector
+
 h1, h2 {
   font-weight: $latoLight;
   @include rem(font-size, $headingSize);
-  @include rem(margin-bottom, $spacing);
+}
+
+h1, h2, .heading_wrapper {
+  @include rem(margin, $spacing / 2, 0, $spacing);
 }
 
 p {
