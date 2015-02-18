@@ -1,8 +1,7 @@
-<li {{bind-attr class=':task_item task.completed:complete:not_complete'}}>
+<li {{bind-attr class=':task_item task.completed controller.shouldShow::hidden'}}>
 
   <div class="task_name">
     {{capitalize-string task.name}}
-    {{!-- {{showPersonal}} --}}
     <span {{bind-attr class=':assignee_name showPersonal:fade-out:fade-in'}}>
       {{task.assignee.firstName}}
     </span>

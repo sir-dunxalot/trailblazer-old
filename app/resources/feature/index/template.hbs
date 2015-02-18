@@ -58,17 +58,18 @@
 
 
 
-{{!--   <div class="filters">
+  <div class="filters">
     <h2>Filters</h2>
 
     {{styled-checkbox checked=showResearch label='research'}}
     {{styled-checkbox checked=showDevelopment label='development'}}
     {{styled-checkbox checked=showTesting label='testing'}}
     {{styled-checkbox checked=showCompleted label='completed'}}
-  </div> --}}
+  </div>
 
   <div class="heading_wrapper">
     <h1 class="heading">Tasks</h1>
+    {{!-- TODO - add icons to on and off --}}
     {{x-toggle
       class='heading_aside'
       on='Personal:true'
@@ -81,7 +82,7 @@
 
   {{#if showResearch}}
     <ul {{bind-attr class=':tasks_list-research showCompleted'}}>
-      {{#each task in researchTasks}}
+      {{#each task in researchTasks itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
     </ul>
@@ -89,7 +90,7 @@
 
   {{#if showDevelopment}}
     <ul {{bind-attr class=':tasks_list-development showCompleted'}}>
-      {{#each task in developmentTasks}}
+      {{#each task in developmentTasks itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
     </ul>
@@ -97,7 +98,7 @@
 
   {{#if showTesting}}
     <ul {{bind-attr class=':tasks_list-testing showCompleted'}}>
-      {{#each task in testingTasks}}
+      {{#each task in testingTasks itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
     </ul>

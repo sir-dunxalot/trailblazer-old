@@ -7,10 +7,10 @@ export default Ember.ObjectController.extend({
 
   /* Filters */
 
-  showPersonalString: 'false',
   showCompleted: false,
   showDevelopment: true,
   showPersonal: Ember.computed.equal('showPersonalString', 'true'),
+  showPersonalString: 'false',
   showResearch: true,
   showTesting: true,
 
