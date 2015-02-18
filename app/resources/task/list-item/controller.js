@@ -5,28 +5,25 @@ export default Ember.ObjectController.extend({
   needs: ['feature/index'],
   shouldShow: true,
 
-  observeCompleted: function() {
+  observeShowPersonal: function() {
+    var currentUserID = this.get('session.currentUser.id');
+    var task = this.get('content');
+    var assigneeID = task.get('assignee.id');
+    var showPersonal = this.get('featureController.showPersonal');
+    var shouldShowIfPersonal = showPersonal && currentUserID === assigneeID;
     var completed = this.get('content.completed');
     var showCompleted = this.get('featureController.showCompleted');
     var shouldShowIfCompleted = completed && showCompleted;
 
-    this.set('shouldShow', shouldShowIfCompleted || !completed);
+    this.set('shouldShow',
+      (shouldShowIfPersonal || !showPersonal) &&
+      (shouldShowIfCompleted || !completed)
+    );
   }.observes(
+    'content.assignee',
     'content.completed',
-    'featureController.showCompleted'
+    'featureController.showCompleted',
+    'featureController.showPersonal'
   ).on('init'),
-
-  // observeShowPersonal: function() {
-  //   var currentUserID = this.get('session.currentUser.id');
-  //   var task = this.get('content');
-  //   var assigneeID = task.get('assignee');
-  //   var showPersonal = this.get('featureController.showPersonal');
-  //   var shouldShowIfPersonal = showPersonal && currentUserID === assigneeID;
-
-  //   this.set('shouldShow', shouldShowIfPersonal || !showPersonal);
-  // }.observes(
-  //   'content.assignee',
-  //   'featureController.showPersonal'
-  // ).on('init'),
 
 });
