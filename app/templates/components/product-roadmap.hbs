@@ -1,0 +1,29 @@
+<h1 class="hidden">Product Roadmap</h1>
+
+<h2 class="hidden">Dates</h2>
+
+<ol class="roadmap_months">
+  {{#each month in months}}
+    <li class="month" {{bind-attr style=monthStyle}}>
+      {{month}}
+    </li>
+  {{/each}}
+</ol>
+
+<h2 class="hidden">Features</h2>
+
+<ul class="roadmap_features">
+  {{#each feature in features}}
+    <li class="roadmap_feature">
+      {{#link-to 'feature' feature}}
+        {{feature.name}}
+      {{/link-to}}
+
+      <ol>
+        {{#each stage in feature.stages}}
+          <li>{{stage.duration}}</li>
+        {{/each}}
+      </ol>
+    </li>
+  {{/each}}
+</ul>

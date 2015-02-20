@@ -1,0 +1,28 @@
+.roadmap {
+  @extend %relative;
+  @extend %full_height;
+  background-color: $offwhite;
+  @include rem(padding-left, $logoSize);
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.roadmap_months {
+  @extend .list-inline;
+  @extend %full_height;
+  @extend %full_width;
+  @extend %absolute;
+  @extend .sub;
+
+  .month {
+    border-left: 1px solid $gray-light;
+    @include box-sizing(border-box);
+    @include rem(padding, 1);
+    @extend %full_height;
+    @extend .alt_text;
+  }
+}
+
+.roadmap_features {
+  @extend .list-unstyled;
+}
