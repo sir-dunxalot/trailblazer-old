@@ -5,20 +5,30 @@ export default Ember.Component.extend({
   classNames: ['roadmap'],
   features: Ember.A(),
   numberOfLanes: 5,
+  numberOfDaysDisplayed: 0,
   numberOfMonthsInViewport: 5,
   tagName: 'section',
+  startDate: moment().date(1),
 
   months: function() {
     var months = Ember.A();
     var i = 0;
-    var month = moment().date(1); // First day of month
+    var startDate = this.get('startDate');
+    var month = startDate.clone(); // First day of month
     var max = this.get('numberOfMonths');
+    var totalDays, lastDate;
 
     while (i < max) {
       months.pushObject(month.format('MMM'));
-      month = month.add(1, 'month');
+      month.add(1, 'month');
       i++;
     }
+
+    month.subtract(1, 'month'); // TODO - hacky
+
+    lastDate = month.endOf('month').startOf('day');
+    totalDays = lastDate.diff(startDate, 'days');
+    this.set('numberOfDaysDisplayed', totalDays);
 
     return months;
   }.property('numberOfMonths'),

@@ -4,7 +4,7 @@
 
 <ol class="roadmap_months">
   {{#each month in months}}
-    <li class="month" {{bind-attr style=monthStyle}}>
+    <li class="roadmap_month" {{bind-attr style=monthStyle}}>
       {{month}}
     </li>
   {{/each}}
@@ -12,18 +12,22 @@
 
 <h2 class="hidden">Features</h2>
 
-<ul class="roadmap_features">
-  {{#each feature in features}}
-    <li class="roadmap_feature">
-      {{#link-to 'feature' feature}}
-        {{feature.name}}
-      {{/link-to}}
+<p>{{view.numberOfDays}}</p>
 
-      <ol>
-        {{#each stage in feature.stages}}
-          <li>{{stage.duration}}</li>
-        {{/each}}
-      </ol>
-    </li>
+<ul class="roadmap_features">
+  {{#each feature in features itemViewClass='feature/list-item'}}
+
+    {{#link-to 'feature' feature}}
+      {{feature.name}}
+    {{/link-to}}
+
+    <p>{{view.daysOffset}}</p>
+
+    <ol>
+      {{#each stage in feature.stages}}
+        <li>{{stage.duration}}</li>
+      {{/each}}
+    </ol>
+
   {{/each}}
 </ul>

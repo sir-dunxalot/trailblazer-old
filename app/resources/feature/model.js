@@ -34,6 +34,7 @@ export default DS.Model.extend({
     async: true
   }),
 
+  // TODO - Change to totalDays
   totalDuration: function() {
     var endDate = moment(this.get('endDate'));
     var startDate = moment(this.get('startDate'));
