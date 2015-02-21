@@ -33,10 +33,20 @@ a {
 
 // TODO - class instead of element selector
 
-h1, h2 {
+h1, h2, .heading {
   font-weight: $latoLight;
   @include rem(font-size, $headingSize);
 }
+
+@include mod(heading) {
+  @extend .heading;
+}
+
+.heading-small {
+  @include rem(font-size, 1.8);
+  font-weight: $latoReg;
+}
+
 
 h1, h2, .heading_wrapper {
   @include rem(margin, $spacing / 2, 0, $spacing);

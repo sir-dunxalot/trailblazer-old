@@ -1,0 +1,18 @@
+{{#with view.content as feature}}
+  <h3 class="heading-small">
+    {{#link-to 'feature' feature}}
+      {{feature.name}}
+    {{/link-to}}
+  </h3>
+
+  {{progress-bar
+    max=feature.tasks.length
+    value=feature.completedTasks.length
+  }}
+
+  <ol class="list-inline">
+    {{#each stage in feature.stages}}
+      <li>{{stage.duration}}</li>
+    {{/each}}
+  </ol>
+{{/with}}

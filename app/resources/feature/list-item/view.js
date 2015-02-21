@@ -5,17 +5,11 @@ import MathHelpers from 'trailblazer/utils/math-helpers';
 export default Ember.View.extend({
   attributeBindings: ['style'],
   classNames: ['roadmap_feature'],
-  left: math('percentage',
-    'daysOffset',
-    'totalDaysDisplayedInRoadmap'
-  ),
-  totalDaysDisplayedInRoadmap: Ember.computed.oneWay('controller.numberOfDaysDisplayed'),
+  left: math('percentage', 'daysOffset', 'totalDaysDisplayedInRoadmap'),
   tagName: 'li',
-
-  width: math('percentage',
-    'content.totalDuration',
-    'totalDaysDisplayedInRoadmap'
-  ),
+  templateName: 'feature/list-item',
+  totalDaysDisplayedInRoadmap: Ember.computed.oneWay('controller.numberOfDaysDisplayed'),
+  width: math('percentage', 'content.totalDuration', 'totalDaysDisplayedInRoadmap'),
 
   daysOffset: function() {
     var featureStartDate = this.get('content.startDate');
@@ -24,12 +18,23 @@ export default Ember.View.extend({
     return moment(featureStartDate).diff(roadmapStartDate, 'days');
   }.property('content.startDate', 'controller.startDate'),
 
-
   style: function() {
-    var left = 'left:' + this.get('left') + ';';
-    var width = 'width:' + this.get('width') + ';';
+    var _this = this;
+    var style = '';
 
-    return left + width;
-  }.property('left', 'width'),
+    ['left', 'top', 'width'].forEach(function(property) {
+      style += property + ':' + _this.get(property) + ';';
+    });
+
+    return style;
+  }.property('left', 'top', 'width'),
+
+  top: function() {
+    var contentIndex = this.get('contentIndex');
+    var numberOfLanes = this.get('controller.numberOfLanes');
+    var lane = ((contentIndex + 1) % numberOfLanes);
+
+    return MathHelpers.percentage(lane, numberOfLanes);
+  }.property('contentIndex'),
 
 });

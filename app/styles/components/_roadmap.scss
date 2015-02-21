@@ -26,6 +26,7 @@
 }
 
 .roadmap_features {
+  @extend %full_height;
   @extend .list-unstyled;
   @include rem(margin-left, $logoSize);
   @extend %relative;
@@ -33,5 +34,8 @@
 
 .roadmap_feature {
   @extend %absolute;
-  @include rem(font-size, 1.8);
+
+  .heading-small {
+    margin-top: 0;
+  }
 }

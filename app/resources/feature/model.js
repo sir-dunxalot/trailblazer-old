@@ -1,6 +1,7 @@
 /* global moment */
 
 import DS from 'ember-data';
+import Ember from 'ember';
 
 var attr = DS.attr;
 var belongsTo = DS.belongsTo;
@@ -12,6 +13,7 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
+  completedTasks: Ember.computed.filterBy('tasks', 'completed', true),
   endDate: attr('date', {
     defaultValue: function() {
       return moment().add(30, 'days').toDate();
