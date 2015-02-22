@@ -33,11 +33,15 @@
 }
 
 .roadmap_feature {
+  $offsetTop: $headingSize-small * 2 + $progressBarSize + 0.2;
+
   @extend %absolute;
   @include rem(padding-bottom, $progressBarSize * 3); // For hover
+  @include rem(margin-top, -1 * $offsetTop);
 
   .heading-small {
     margin-top: 0;
+    @include rem(margin-bottom, $headingSize-small);
   }
 
   .link-to-feature {

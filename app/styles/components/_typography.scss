@@ -43,7 +43,7 @@ h1, h2, .heading {
 }
 
 .heading-small {
-  @include rem(font-size, 1.8);
+  @include rem(font-size, $headingSize-small);
   font-weight: $latoReg;
 }
 

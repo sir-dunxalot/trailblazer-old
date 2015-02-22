@@ -34,7 +34,7 @@ export default Ember.View.extend({
     var numberOfLanes = this.get('controller.numberOfLanes');
     var lane = ((contentIndex + 1) % numberOfLanes);
 
-    return MathHelpers.percentage(lane, numberOfLanes);
+    return MathHelpers.percentage(lane, numberOfLanes + 1);
   }.property('contentIndex'),
 
 });
