@@ -39,6 +39,28 @@
   .heading-small {
     margin-top: 0;
   }
+
+  .link-to-feature {
+    @extend %block;
+    @include rem(padding, 1);
+    @include rem(margin, -1);
+  }
+
+  .text {
+    @extend %inline_block;
+    width: calc(100% - 28px);
+    width: calc(100% - 2.8rem);
+  }
+
+  .icon-go {
+    @extend .fade;
+    @extend .fade-out;
+    margin-left: 0;
+  }
+
+  &:hover .icon-go {
+    @extend .fade-in;
+  }
 }
 
 .roadmap_feature_stages {
