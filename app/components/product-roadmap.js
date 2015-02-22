@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   numberOfDaysDisplayed: 0,
   numberOfMonthsInViewport: 5,
   tagName: 'section',
+  today: moment(),
   startDate: moment().date(1),
 
   months: function() {
@@ -83,5 +84,15 @@ export default Ember.Component.extend({
 
     return lanes;
   }.property('numberOfLanes'),
+
+  todayLineStyle: function() {
+    var today = this.get('today');
+    var startDate = this.get('startDate');
+    var difference = today.diff(startDate, 'days');
+    var numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
+    var left = MathHelpers.percentage(difference, numberOfDaysDisplayed);
+
+    return 'left:' + left + ';';
+  }.property('startDate'),
 
 });

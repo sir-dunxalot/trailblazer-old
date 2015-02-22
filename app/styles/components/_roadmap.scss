@@ -48,6 +48,10 @@
     @extend %block;
     @include rem(padding, 1);
     @include rem(margin, -1);
+
+    &:hover .icon-go {
+      @extend .fade-in;
+    }
   }
 
   .text {
@@ -60,10 +64,6 @@
     @extend .fade;
     @extend .fade-out;
     margin-left: 0;
-  }
-
-  &:hover .icon-go {
-    @extend .fade-in;
   }
 }
 
@@ -133,4 +133,13 @@
   border-bottom: 0 solid $white;
   @include rem(border-bottom-width, 0.4);
   @extend %full_width;
+}
+
+.roadmap_today {
+  @extend %absolute;
+  @extend %full_height;
+  @extend .list-unstyled;
+  width: 1px;
+  @include rem(margin-left, $logoSize);
+  background-color: mix($gray-light, $offwhite, 20%);
 }

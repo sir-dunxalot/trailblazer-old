@@ -10,6 +10,13 @@
   {{/each}}
 </ol>
 
+{{#if todayLineStyle}}
+  <dl class="roadmap_today" {{bind-attr style=todayLineStyle}}>
+    <dd class="hidden">Current Date</dd>
+    <dd class="hidden">{{moment today}}</dd>
+  </dl>
+{{/if}}
+
 <div class="roadmap_lanes">
   {{#each lane in lanes}}
     <span class="roadmap_lane" {{bind-attr style=lane.style}}>
