@@ -16,15 +16,9 @@ export default Ember.View.extend({
     return routeName.replace('.', '-');
   }.property('controller.currentRouteName'),
 
-  onFeature: function() {
-    return this.get('currentRoute') === 'feature-index';
-  }.property('currentRoute'),
-
-  onForm: function() {
+  onRoadmap: function() {
     var currentRoute = this.get('currentRoute');
-    var isNew = currentRoute.indexOf('new') > -1;
-    var isEdit = currentRoute.indexOf('edit') > -1;
 
-    return isNew || isEdit;
+    return currentRoute === 'index';
   }.property('currentRoute')
 });

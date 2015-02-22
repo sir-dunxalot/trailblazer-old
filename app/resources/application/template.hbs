@@ -27,21 +27,14 @@
       {{/if}}
 
       {{#if session.isAuthenticated}}
-        {{#unless view.onForm}}
+        {{#if view.onRoadmap}}
           <li class="new_feature">
-            {{#if view.onFeature}}
-              {{#link-to 'tasks.new' title='Add a new task'}}
-                <span class="icon-pencil2"></span>
-                <span class="hidden">Add a new task</span>
-              {{/link-to}}
-            {{else}}
-              {{#link-to 'features.new' title='Add a new feature'}}
-                <span class="icon-pencil2"></span>
-                <span class="hidden">Add a new feature</span>
-              {{/link-to}}
-            {{/if}}
+            {{#link-to 'features.new' title='Add a new feature'}}
+              <span class="icon-pencil2"></span>
+              <span class="hidden">Add a new feature</span>
+            {{/link-to}}
           </li>
-        {{/unless}}
+        {{/if}}
       {{/if}}
 
     </ul>
