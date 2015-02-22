@@ -1,5 +1,4 @@
 .feature-index {
-  // TODO - Scrolling in tasks list. Page stay the same.
 
   .headline {
     @include rem(padding-bottom, $spacing / 2);
@@ -27,16 +26,16 @@
   }
 
   .link-to-tasks-new {
+    $padding: $buttonVertPadding;
+
     @extend %block;
-    @include rem(padding, $buttonVertPadding + 0.2, $buttonVertPadding + $taskBorderSize);
+    @include rem(padding, $padding + 0.2, $padding + $taskBorderSize);
     @include rem(margin-bottom, $spacing / 1.5);
-    background-color: rgba($offwhite, 0.5);
     @include transition(background-color $fast);
-    // border: 0 solid $gray-lighter;
-    // @include rem(border-width, 0.2);
+    background-color: rgba($offwhite, 0.5);
 
     &:hover {
-      background-color: rgba($offwhite, 0.7);
+      background-color: rgba($offwhite, 0.8);
     }
   }
 

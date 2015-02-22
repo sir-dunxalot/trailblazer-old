@@ -6,4 +6,6 @@ export default Ember.View.extend(
   NotesAnimation,
   Submitting, {
 
+  classNameBindings: ['controller.stage.type.name'],
+
 });

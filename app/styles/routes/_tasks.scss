@@ -1,0 +1,19 @@
+.tasks-new {
+  .headline {
+    border-bottom: 0 solid transparent;
+    @include rem(border-bottom-width, 0.8);
+    @include transition(border-color 2s);
+  }
+
+  .development .headline {
+    border-bottom-color: rgba($development, 0.4);
+  }
+
+  .research .headline {
+    border-bottom-color: rgba($research, 0.4);
+  }
+
+  .testing .headline {
+    border-bottom-color: rgba($testing, 0.4);
+  }
+}

@@ -38,6 +38,10 @@ legend {
     @extend %cell;
   }
 
+  .label {
+    @extend %align-top;
+  }
+
   .input {
     @include rem(width, $inputWidth);
   }
@@ -76,10 +80,9 @@ legend {
 
 .label {
   @include rem(font-size, 1.8);
-  @include rem(padding, 0.6, $spacing, 0, 0);
+  @include rem(padding, $inputVertPadding, $spacing, 0, 0);
   text-align: right;
   cursor: pointer;
-  @extend %align-top;
 }
 
 .input {
