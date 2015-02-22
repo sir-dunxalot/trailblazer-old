@@ -18,7 +18,7 @@
     {{/link-to}}
 
     <button
-      {{bind-attr class=":button-unstyled task.completed:sub"}}
+      {{bind-attr class=":complete_button task.completed:sub"}}
       {{action 'toggleTaskCompletion' task}}
       title="Complete this task"
     >

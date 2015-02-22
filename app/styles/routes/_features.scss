@@ -156,15 +156,13 @@
     @include rem(margin-left, $inputHorizPadding);
     @extend %row;
 
-    &:not(.completed) {
-      @include mod(button) {
-        color: $orange;
-        border-radius: 0;
+    &:not(.completed) .complete_button {
+      color: $orange;
+      border-radius: 0;
 
-        &:hover {
-          background-color: $orange;
-          color: $white;
-        }
+      &:hover {
+        background-color: $orange;
+        color: $white;
       }
     }
   }
@@ -181,7 +179,7 @@
     }
   }
 
-  .link-to-task-edit, .button-unstyled, .task_name {
+  .link-to-task-edit, .complete_button, .task_name {
     @include rem(padding, 1, 1.5);
   }
 
@@ -272,4 +270,10 @@
   .x-toggle-container {
     @include rem(margin-right, $spacing);
   }
+}
+
+.complete_button {
+  @extend .button;
+  @extend .button-unstyled;
+  @extend %pull-right;
 }
