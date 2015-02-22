@@ -65,7 +65,7 @@ legend {
   }
 }
 
-.input_with_validity {
+.control-valid {
 
   &:before {
     @extend .fade-in;
@@ -95,11 +95,11 @@ legend {
     border-color: $blue;
   }
 
-  .input_with_errors &:not(:focus) {
+  .control-error &:not(:focus) {
     border-color: $red;
   }
 
-  .input_with_validity & {
+  .control-valid & {
     &, &:focus {
       border-color: $green;
     }
@@ -202,6 +202,7 @@ legend {
     @include box-shadow(none);
   }
 
+  // TODO - why not styled when selected?
   .is-today & {
     color: mix($gray-dark, $black, 70%);
   }

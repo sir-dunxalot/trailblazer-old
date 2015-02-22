@@ -61,8 +61,8 @@
   }
 
   .icon-go {
-    @extend .fade;
     @extend .fade-out;
+    @include transition(opacity, 0.15s); // Instead of .fade
     margin-left: 0;
   }
 }
@@ -79,9 +79,10 @@
 
 .roadmap_feature_stage {
   @extend %relative;
-  @include transition(transform $slow);
+  @include transition(transform $fast);
 
   .progress {
+    @include rem(height, $progressBarSize);
     @extend %full_width;
   }
 

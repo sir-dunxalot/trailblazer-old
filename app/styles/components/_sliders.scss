@@ -26,12 +26,10 @@
 }
 
 .progress {
+  @extend %full_height;
   @extend %no_margin;
   @extend %no_padding;
-  @include rem(height, $progressBarSize);
   width: 0;
-  // @extend %top;
-  // @extend %left;
   @include transition(width $slow);
   background-color: $orange;
   @include rem(border-radius, $progressBarSize / 2);

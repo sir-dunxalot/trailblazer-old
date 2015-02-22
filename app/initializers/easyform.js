@@ -9,6 +9,11 @@ export default {
 
   initialize: function( container, app ) {
 
+    Ember.EasyForm.Input.reopen({
+      datepickerInputId: insert('elementId', 'input-{{value}}'),
+      isDatepicker: Em.computed.equal('as', 'date'),
+    });
+
     /* Datepicker built with pickaday */
 
     Ember.EasyForm.DatePicker = Em.EasyForm.TextField.extend({
