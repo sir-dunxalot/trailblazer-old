@@ -23,12 +23,16 @@ a {
   text-decoration: none;
 }
 
-@include mod(link-to) {
+.link-to {
   @extend .fade;
 
   &:hover {
     @extend .fade-in;
   }
+}
+
+@include mod(link-to) {
+  @extend .link-to;
 }
 
 // TODO - class instead of element selector

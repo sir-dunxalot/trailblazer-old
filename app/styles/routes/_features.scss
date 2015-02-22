@@ -26,6 +26,20 @@
     font-weight: $latoLight;
   }
 
+  .link-to-tasks-new {
+    @extend %block;
+    @include rem(padding, $buttonVertPadding + 0.2, $buttonVertPadding + $taskBorderSize);
+    @include rem(margin-bottom, $spacing / 1.5);
+    background-color: rgba($offwhite, 0.5);
+    @include transition(background-color $fast);
+    // border: 0 solid $gray-lighter;
+    // @include rem(border-width, 0.2);
+
+    &:hover {
+      background-color: rgba($offwhite, 0.7);
+    }
+  }
+
 }
 
 .dates_list {
@@ -169,7 +183,7 @@
 
   &:before {
     @extend %full_size_pseudo;
-    @include rem(width, 0.8);
+    @include rem(width, $taskBorderSize);
     @include rem(left, -$borderGap);
   }
 
@@ -180,7 +194,7 @@
   }
 
   .link-to-task-edit, .complete_button, .task_name {
-    @include rem(padding, 1, 1.5);
+    @include rem(padding, $buttonVertPadding / 1.5, $buttonVertPadding);
   }
 
   .task_name, .task_buttons {
@@ -197,7 +211,7 @@
   .assignee_name {
     @extend .alt_text;
     @include rem(font-size, 1.2);
-    @include rem(margin-left, 1.5);
+    @include rem(margin-left, $buttonVertPadding);
 
     &.fade-in {
       @include opacity(0.3);

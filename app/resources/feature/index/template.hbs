@@ -81,6 +81,11 @@
     </div>
   </div>
 
+  {{#link-to 'tasks.new'}}
+    <span class="icon-write"></span>
+    <span class="text">Add a task</span>
+  {{/link-to}}
+
   {{#if showResearch}}
     <ul {{bind-attr class=':tasks_list-research showCompleted'}}>
       {{#each task in researchTasks itemController='task/list-item'}}

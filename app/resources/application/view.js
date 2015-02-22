@@ -8,10 +8,7 @@ export default Ember.View.extend({
   role: 'application',
 
   currentRoute: function() {
-    var routeName = defaultFor(
-      this.get('controller.currentRouteName'),
-      ''
-    );
+    var routeName = defaultFor(this.get('controller.currentRouteName'),'');
 
     return routeName.replace('.', '-');
   }.property('controller.currentRouteName'),
