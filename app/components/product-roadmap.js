@@ -63,6 +63,25 @@ export default Ember.Component.extend({
     );
 
     return 'width:' + percentage + ';';
-  }.property('numberOfMonthsInViewport')
+  }.property('numberOfMonthsInViewport'),
+
+  lanes: function() {
+    var i = 0;
+    var lanes = Ember.A();
+    var numberOfLanes = this.get('numberOfLanes');
+    var percentPerLane = 100 / (numberOfLanes + 1);
+    var height = 'height:' + percentPerLane + '%;';
+
+    while (i < numberOfLanes) {
+
+      lanes.pushObject({
+        style: height
+      });
+
+      i++;
+    }
+
+    return lanes;
+  }.property('numberOfLanes'),
 
 });

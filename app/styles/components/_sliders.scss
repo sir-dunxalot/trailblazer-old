@@ -1,5 +1,3 @@
-$progressBarSize: 1;
-
 .progress_bar {
   @extend %no_margin;
   @extend %relative;
@@ -30,10 +28,10 @@ $progressBarSize: 1;
 .progress {
   @extend %no_margin;
   @extend %no_padding;
-  height: 100%;
+  @include rem(height, $progressBarSize);
   width: 0;
-  @extend %top;
-  @extend %left;
+  // @extend %top;
+  // @extend %left;
   @include transition(width $slow);
   background-color: $orange;
   @include rem(border-radius, $progressBarSize / 2);

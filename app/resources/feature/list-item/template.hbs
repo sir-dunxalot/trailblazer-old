@@ -1,4 +1,5 @@
 {{#with view.content as feature}}
+
   <h3 class="heading-small">
     {{#link-to 'feature' feature}}
       {{feature.name}}
@@ -10,9 +11,13 @@
     value=feature.completedTasks.length
   }}
 
-  <ol class="list-inline">
-    {{#each stage in feature.stages}}
-      <li>{{stage.duration}}</li>
+  <h4 class="hidden">Stages</h4>
+
+  <ol class="roadmap_feature_stages">
+    {{#each stage in feature.stages itemViewClass='stage/list-item'}}
+      <span class="hidden">{{stage.type.name}}</span>
+      <div class="progress"></div>
     {{/each}}
   </ol>
+
 {{/with}}

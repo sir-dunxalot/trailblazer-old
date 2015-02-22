@@ -19,7 +19,7 @@
 
 .roadmap_month {
   border-left: 1px solid $gray-light;
-  @include box-sizing(border-box);
+  @extend %border_box;
   @include rem(padding, 1);
   @extend %full_height;
   @extend .alt_text;
@@ -34,8 +34,77 @@
 
 .roadmap_feature {
   @extend %absolute;
+  @include rem(padding-bottom, $progressBarSize * 3); // For hover
 
   .heading-small {
     margin-top: 0;
   }
+}
+
+.roadmap_feature_stages {
+  @extend .list-inline;
+  @extend .fade;
+  @extend .fade-out;
+
+  .roadmap_feature:hover & {
+    @extend .fade-in;
+  }
+}
+
+.roadmap_feature_stage {
+  @extend %relative;
+  @include transition(transform $slow);
+
+  .progress {
+    @extend %full_width;
+  }
+
+  &.research .progress {
+    background-color: $research;
+  }
+
+  &.development {
+    @extend %border_box;
+    border: 0 solid transparent;
+    @include rem(border-left-width, $progressBarSize);
+    @include rem(border-right-width, $progressBarSize);
+    @include background-clip(content-box);
+
+    .progress {
+      background-color: $development;
+    }
+  }
+
+  &.testing .progress {
+    background-color: $testing;
+  }
+
+  .roadmap_feature:hover & {
+
+    &.research {
+      @include transform(translateY(#{$progressBarSize}rem));
+    }
+
+    &.development {
+      @include transform(translateY(#{$progressBarSize * 2}rem));
+    }
+
+    &.testing {
+      @include transform(translateY(#{$progressBarSize * 3}rem));
+    }
+  }
+}
+
+.roadmap_lanes {
+  @extend %absolute;
+  @extend %full_width;
+  @extend %full_height;
+}
+
+.roadmap_lane {
+  @extend %block;
+  @extend %border_box;
+  border-bottom: 0 solid $white;
+  @include rem(border-bottom-width, 0.4);
+  @extend %full_width;
 }

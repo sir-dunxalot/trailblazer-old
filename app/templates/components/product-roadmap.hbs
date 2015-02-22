@@ -10,6 +10,13 @@
   {{/each}}
 </ol>
 
+<div class="roadmap_lanes">
+  {{#each lane in lanes}}
+    <span class="roadmap_lane" {{bind-attr style=lane.style}}>
+    </span>
+  {{/each}}
+</div>
+
 <h2 class="hidden">Features</h2>
 
 {{view 'features/index' content=features}}
