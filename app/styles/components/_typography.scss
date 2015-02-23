@@ -51,6 +51,10 @@ h1, h2, .heading {
   font-weight: $latoReg;
 }
 
+.heading-thick {
+  @extend %uppercase;
+  font-weight: $latoBlack;
+}
 
 h1, h2, .heading_wrapper {
   @include rem(margin, $spacing / 2, 0, $spacing);

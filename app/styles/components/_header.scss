@@ -1,8 +1,14 @@
 .logo {
   color: $white;
-  background: $orange;
+  background-color: $orange;
   @include rem(font-size, $iconFontSize);
+  @include transition(background-color $slow, color $slow);
   @extend %inline_block;
+
+  .index & {
+    color: $orange;
+    background-color: transparent;
+  }
 
   .icon-logo {
     @extend %relative;
@@ -51,7 +57,7 @@
   @extend %left;
   margin: 0 100px;
 
-  .link-to-features-index {
+  @include mod(link-to) {
     color: $orange;
     @extend %uppercase;
     font-style: italic;

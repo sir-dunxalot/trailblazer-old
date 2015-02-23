@@ -35,7 +35,7 @@ module.exports = function(environment) {
     },
 
     'simple-auth': {
-      authenticationRoute: 'sign-in',
+      authenticationRoute: 'index',
       routeAfterAuthentication: 'features',
       routeIfAlreadyAuthenticated: 'features'
     }

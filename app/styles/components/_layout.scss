@@ -59,3 +59,15 @@
     @include rem(margin-right, $spacing);
   }
 }
+
+.top_right {
+  @extend %absolute;
+  @extend %top;
+  @extend %right;
+}
+
+.fullscreen {
+  & > .heading {
+    margin-top: 0;
+  }
+}

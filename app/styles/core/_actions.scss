@@ -1,20 +1,18 @@
-.csstransitions {
-  .fade {
-    @include transition(opacity $fast);
-    // @extend %use_hardware_acceleration;
-  }
+.fade {
+  @include transition(opacity $fast);
+  // @extend %use_hardware_acceleration;
+}
 
-  @include mod(fade) {
-    @extend .fade;
-  }
+@include mod(fade) {
+  @extend .fade;
+}
 
-  .fade-out {
-    @include transparent;
-  }
+.fade-out {
+  @include transparent;
+}
 
-  .fade-in {
-    @include opaque;
-  }
+.fade-in {
+  @include opaque;
 }
 
 ::-moz-selection {

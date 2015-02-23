@@ -4,26 +4,44 @@
     <ul class="list-inline">
 
       <li class="letterhead">
-        {{#link-to 'features.index'}}
-          Trailblazer
-        {{/link-to}}
+        {{!-- TODO - improve with HTMLBars --}}
+        {{#if session.isAuthenticated}}
+          {{#link-to 'features'}}
+            Trailblazer
+          {{/link-to}}
+        {{else}}
+          {{#link-to 'index'}}
+            Trailblazer
+          {{/link-to}}
+        {{/if}}
       </li>
 
       <li>
-        {{#link-to 'features.index' class='logo'}}
-          <span class="icon-logo"></span>
-          <span class="icon-home"></span>
-          <span class="hidden">Roadmap</span>
-        {{/link-to}}
+        {{!-- TODO - improve with HTMLBars --}}
+        {{#if session.isAuthenticated}}
+          {{#link-to 'features' class='logo' title='View the roadmap'}}
+            <span class="icon-logo"></span>
+            <span class="icon-home"></span>
+            <span class="hidden">Roadmap</span>
+          {{/link-to}}
+        {{else}}
+          {{#link-to 'index' class='logo' title='Home'}}
+            <span class="icon-logo"></span>
+            <span class="icon-home"></span>
+            <span class="hidden">Home</span>
+          {{/link-to}}
+        {{/if}}
       </li>
 
       {{#if session.isAuthenticated}}
-        <li>
-          {{#link-to 'settings'}}
-            <span class="icon-settings"></span>
-            <span class="hidden">Settings</span>
-          {{/link-to}}
-        </li>
+        {{#unless view.onLandingPage}}
+          <li>
+            {{#link-to 'settings'}}
+              <span class="icon-settings"></span>
+              <span class="hidden">Settings</span>
+            {{/link-to}}
+          </li>
+        {{/unless}}
       {{/if}}
 
       {{#if session.isAuthenticated}}

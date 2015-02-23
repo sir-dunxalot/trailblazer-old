@@ -5,6 +5,8 @@ export default Ember.View.extend({
   attributeBindings: ['role'],
   classNameBindings: ['currentRoute'],
   classNames: ['app'],
+  onLandingPage: Ember.computed.equal('currentRoute', 'index'),
+  onRoadmap: Ember.computed.equal('currentRoute', 'features-index'),
   role: 'application',
 
   currentRoute: function() {
@@ -12,10 +14,4 @@ export default Ember.View.extend({
 
     return routeName.replace('.', '-');
   }.property('controller.currentRouteName'),
-
-  onRoadmap: function() {
-    var currentRoute = this.get('currentRoute');
-
-    return currentRoute === 'features-index';
-  }.property('currentRoute')
 });

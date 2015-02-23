@@ -1,0 +1,53 @@
+.index {
+
+  .heading-thick {
+    @include rem(font-size, 3.6);
+    @include rem(margin-bottom, $spacing * 1.5);
+  }
+
+  .line {
+    @extend %block;
+
+    &:nth-of-type(2) {
+      color: mix($gray, $white, 80%);
+    }
+
+    &:nth-of-type(2) {
+      color: $purple;
+    }
+
+    &:nth-of-type(3) {
+      color: $blue;
+    }
+
+    &:nth-of-type(4) {
+      // More readable
+      color: scale-color($green, $lightness: -5%, $saturation: -5%);
+    }
+
+    &:nth-of-type(5) {
+      color: $orange;
+    }
+  }
+
+  .top_right .button-unstyled {
+    @include rem(padding, 1.5);
+  }
+
+  .content {
+    @extend %no_margin;
+    height: calc(100vh - #{$logoSize * 10}px);
+    height: calc(100vh - #{$logoSize}rem);
+  }
+
+  .fullscreen {
+    @extend %border_box;
+    @include rem(padding, 10, 14);
+    background-repeat: no-repeat;
+    background-image: url('/images/roadmap-2x.png');
+    background-size: contain;
+    background-origin: content-box;
+    background-position: bottom right;
+    height: 100%;
+  }
+}

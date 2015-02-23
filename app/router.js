@@ -7,6 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 
+  // TODO - remove
   this.route('about');
 
   this.resource('users', function() {
@@ -34,7 +35,7 @@ Router.map(function() {
   });
 
   this.route('settings');
-  this.route('sign-in');
+  this.route('sign-in'); // TODO - Deprecate
 
   this.resource('stage-types', function() {
     this.route('new');
