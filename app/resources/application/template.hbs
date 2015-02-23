@@ -4,13 +4,13 @@
     <ul class="list-inline">
 
       <li class="letterhead">
-        {{#link-to 'index'}}
+        {{#link-to 'features.index'}}
           Trailblazer
         {{/link-to}}
       </li>
 
       <li>
-        {{#link-to 'index' class='logo'}}
+        {{#link-to 'features.index' class='logo'}}
           <span class="icon-logo"></span>
           <span class="icon-home"></span>
           <span class="hidden">Roadmap</span>
@@ -43,7 +43,5 @@
 </header>
 
 <main class="main" role="main">
-  {{!-- <div class="content"> --}}
-    {{outlet}}
-  {{!-- </div> --}}
+  {{outlet}}
 </main>

@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   numberOfMonthsInViewport: 5,
   tagName: 'section',
   today: moment(),
+  sortedFeatures: Ember.computed.sort('features', 'sortProperties'),
+  sortProperties: ['startDate'],
   startDate: moment().date(1),
 
   months: function() {
