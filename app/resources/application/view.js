@@ -16,6 +16,6 @@ export default Ember.View.extend({
   onRoadmap: function() {
     var currentRoute = this.get('currentRoute');
 
-    return currentRoute === 'index';
+    return currentRoute === 'features-index';
   }.property('currentRoute')
 });
