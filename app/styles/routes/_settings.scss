@@ -2,9 +2,9 @@
   background-color: $orange;
 
   .content {
+    @extend %full_height;
     @extend %no_margin;
     @extend %table;
-    height: 100%;
   }
 
   .list-inline {
@@ -25,6 +25,10 @@
       @include rem(margin, -$padding);
       @extend %relative;
       z-index: 2;
+
+      &:hover {
+        @include opacity(0.7);
+      }
     }
 
     .link-to-features {
