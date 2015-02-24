@@ -19,32 +19,42 @@
 
 {{#page-content}}
 
-  <svg height="260" width="320">
-    <polygon points="10 250,310 250,160 10" class="triangle_outer">
-    </polygon>
-    <polygon points="30 240,290 240,160 30" class="triangle_inner">
-    </polygon>
-  </svg>
+  <div class="settings_triangle">
 
-  <ul>
-    <li>
-      {{#link-to 'user.edit' content}}
-        Team
-      {{/link-to}}
-    </li>
-    <li>
-      {{#link-to 'user.edit' content}}
-        Product
-      {{/link-to}}
-    </li>
-    <li>
-      {{#link-to 'user.edit' content}}
-        Developer
-      {{/link-to}}
-    </li>
-  </ul>
+    <ul>
+      <li>
+        {{#link-to 'user.edit' content}}
+          Team
+        {{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'user.edit' content}}
+          Product
+        {{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'user.edit' content}}
+          Developer
+        {{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'features'}}
+          <span class="icon-fire"></span>
+          <span class="hidden">Back to the roadmap</span>
+        {{/link-to}}
+      </li>
+    </ul>
 
-  <h2>Team</h2>
+    <svg height="262" width="326">
+      <polygon points="14 254,314 254,164 14" class="triangle_outer">
+      </polygon>
+      <polygon points="36 242,292 242,164 36" class="triangle_inner">
+      </polygon>
+    </svg>
+
+  </div>
+
+  {{!-- <h2>Team</h2> --}}
 
 {{!--   <dl class="list-def">
     <dt>Name</dt>
