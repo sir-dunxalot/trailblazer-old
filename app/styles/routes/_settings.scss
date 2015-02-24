@@ -1,35 +1,96 @@
 .settings {
   background-color: $orange;
 
+  .content {
+    @extend %no_margin;
+    @extend %table;
+    height: 100%;
+  }
+
+  .list-inline {
+    @extend %inline_block;
+  }
+
+  .settings_triangle {
+    @extend %cell;
+    @extend %align-center;
+    color: $white;
+
+    @include mod(link-to) {
+      $padding: $spacing / 2;
+
+      @extend .heading;
+      @extend .heading-large;
+      @include rem(padding, $padding);
+      @include rem(margin, -$padding);
+      @extend %relative;
+      z-index: 2;
+    }
+
+    .link-to-features {
+      @extend %absolute;
+      top: 50%;
+    }
+  }
+
+  .triangle_bottom_link {
+    @include rem(margin-top, $spacing / 2);
+    @include rem(margin-left, -$spacing / 2);
+    @extend %block;
+  }
+
   .headline {
+    @extend %absolute;
     @extend %no_padding;
-  }
-
-  .avatar {
-    @include rem(height, 9);
-    @include rem(margin-left, 4.5);
-    @extend %inline_block;
-  }
-
-  .heading {
-    @include rem(margin, 0, $spacing / 2, 0, $spacing);
-    @extend %inline_block;
-  }
-
-  .link-to-user-edit {
-    @extend %relative;
-    @include opacity(0.3);
-    @include rem(padding, 1);
-    @include rem(top, 0.2);
+    @extend %align-center;
+    @include rem(margin, $spacing, 0, 0, $logoSize);
+    background-color: transparent;
   }
 
   .signout_button {
     @extend .button;
-    @extend .button-transparent;
-    @include rem(padding, $spacing);
-    float: right;
+    @extend .button-unstyled;
+    @include rem(margin-left, 6);
+    @include rem(padding, $buttonVertPadding / 2);
+
+    &, &:hover {
+      color: $white;
+    }
   }
 
+  .icon-fire {
+    @include rem(font-size, 6);
+    @include rem(margin-left, -$spacing - 1);
+    @include transform(rotateY(0deg));
+    @include transition(transform $slow);
+  }
+
+  li:not(.triangle):hover ~ .icon_link .icon-fire {
+    @include transform(rotateY(180deg));
+  }
+
+}
+
+.profile_block {
+  background-color: rgba($white, 0.4);
+  @extend .list-unstyled;
+  color: $gray-dark;
+
+  .avatar, .full_name {
+    @extend %inline_block;
+  }
+
+  .avatar {
+    @include rem(height, 6);
+
+    .image {
+      height: 100%;
+    }
+  }
+
+  .full_name {
+    @include rem(margin, 0, $spacing / 2);
+  }
 }
 
 .triangle_outer {

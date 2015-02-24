@@ -57,6 +57,10 @@ h1, h2, .heading {
   font-weight: $latoBlack;
 }
 
+.heading-large {
+  @include rem(font-size, $headingSize-large);
+}
+
 h1, h2, .heading_wrapper {
   @include rem(margin, $spacing / 2, 0, $spacing);
 }

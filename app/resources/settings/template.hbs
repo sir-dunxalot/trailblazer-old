@@ -1,30 +1,41 @@
 <h1 class="hidden">Settings</h1>
 
-{{!-- {{#page-header}}
+{{#page-header}}
 
-  {{image-tag src=avatarUrl alt=fullName class='avatar'}}
+  <dl class="profile_block">
+    <dt class="hidden">Profile Image</dt>
+    <dd class="avatar">
+      {{image-tag src=avatarUrl alt=fullName}}
+    </dd>
+    <dt class="hidden">User</dt>
+    <dd class="full_name">{{fullName}}</dt>
+  </dl>
 
-  <h2 class="heading">{{fullName}}</h2>
-
-  {{#link-to 'user.edit' content}}
-    <span class="icon-pencil"></span>
-    <span class="hidden">Edit user</span>
-  {{/link-to}}
-
+  {{!-- TODO - Add 'are you sure' modal to sign out --}}
   <button {{action 'invalidateSession'}} class="signout_button">
-    <span class="text">Sign out</span>
-    <span class="icon-go"></span>
+    Sign out
   </button>
-{{/page-header}} --}}
+{{/page-header}}
 
 {{#page-content}}
 
   <div class="settings_triangle">
 
-    <ul>
+    <ul class="list-inline">
       <li>
         {{#link-to 'user.edit' content}}
           Team
+        {{/link-to}}
+      </li>
+      <li class="triangle">
+        <svg height="262" width="326">
+          <polygon points="14 254,314 254,164 14" class="triangle_outer">
+          </polygon>
+          <polygon points="36 242,292 242,164 36" class="triangle_inner">
+          </polygon>
+        </svg>
+        {{#link-to 'features' class='hidden'}}
+          Back to the roadmap
         {{/link-to}}
       </li>
       <li>
@@ -32,25 +43,18 @@
           Product
         {{/link-to}}
       </li>
-      <li>
+      <li class="triangle_bottom_link">
         {{#link-to 'user.edit' content}}
           Developer
         {{/link-to}}
       </li>
-      <li>
-        {{#link-to 'features'}}
+      <li class="icon_link">
+        {{#link-to 'features' class='sub'}}
           <span class="icon-fire"></span>
           <span class="hidden">Back to the roadmap</span>
         {{/link-to}}
       </li>
     </ul>
-
-    <svg height="262" width="326">
-      <polygon points="14 254,314 254,164 14" class="triangle_outer">
-      </polygon>
-      <polygon points="36 242,292 242,164 36" class="triangle_inner">
-      </polygon>
-    </svg>
 
   </div>
 

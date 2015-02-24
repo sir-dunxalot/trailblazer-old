@@ -72,6 +72,18 @@ button {
   }
 }
 
+.button-secondary-white {
+  color: $white;
+  border: 1px solid $white;
+  @include transition(color $fast, border-color $fast);
+  @include box-shadow(0 4px 0 -2px rgba($black, 0.05));
+
+  &:hover {
+    color: $gray-lighter;
+    border-color: $gray-lighter;
+  }
+}
+
 .button-transparent {
   background: none;
   border-color: transparent;

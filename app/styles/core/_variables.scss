@@ -7,6 +7,7 @@ $baseFontSize: 62.5%;
 $bodyFontSize: 1.6; // In rem
 $headingSize: 3;
 $headingSize-small: 1.8;
+$headingSize-large: $headingSize * 1.2;
 $iconFontSize: 2.4;
 
 $iconFontOffset: -0.5 * ($iconFontSize / $bodyFontSize);
