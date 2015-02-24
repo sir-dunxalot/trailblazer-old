@@ -22,7 +22,7 @@
 
     &:nth-of-type(4) {
       // More readable
-      color: scale-color($green, $lightness: -5%, $saturation: -5%);
+      color: scale-color($green, $lightness: -10%, $saturation: -5%);
     }
 
     &:nth-of-type(5) {
@@ -31,7 +31,7 @@
   }
 
   .top_right .button-unstyled {
-    @include rem(padding, 1.5);
+    @include rem(padding, $spacing / 2);
   }
 
   .content {

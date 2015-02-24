@@ -53,6 +53,7 @@ h1, h2, .heading {
 
 .heading-thick {
   @extend %uppercase;
+  @include rem(letter-spacing, 0.1);
   font-weight: $latoBlack;
 }
 

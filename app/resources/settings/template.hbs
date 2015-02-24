@@ -1,6 +1,6 @@
 <h1 class="hidden">Settings</h1>
 
-{{#page-header}}
+{{!-- {{#page-header}}
 
   {{image-tag src=avatarUrl alt=fullName class='avatar'}}
 
@@ -15,17 +15,43 @@
     <span class="text">Sign out</span>
     <span class="icon-go"></span>
   </button>
-{{/page-header}}
+{{/page-header}} --}}
 
 {{#page-content}}
+
+  <svg height="260" width="320">
+    <polygon points="10 250,310 250,160 10" class="triangle_outer">
+    </polygon>
+    <polygon points="30 240,290 240,160 30" class="triangle_inner">
+    </polygon>
+  </svg>
+
+  <ul>
+    <li>
+      {{#link-to 'user.edit' content}}
+        Team
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to 'user.edit' content}}
+        Product
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to 'user.edit' content}}
+        Developer
+      {{/link-to}}
+    </li>
+  </ul>
+
   <h2>Team</h2>
 
-  <dl class="list-def">
+{{!--   <dl class="list-def">
     <dt>Name</dt>
     <dd>{{team.name}}</dd>
     <dt>Members</dt>
     {{#each member in team.members}}
       <dd>{{fullName}}</dd>
     {{/each}}
-  </dl>
+  </dl> --}}
 {{/page-content}}

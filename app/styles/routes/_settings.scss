@@ -1,4 +1,5 @@
 .settings {
+  background-color: $orange;
 
   .headline {
     @extend %no_padding;
@@ -29,4 +30,16 @@
     float: right;
   }
 
+}
+
+.triangle_outer {
+  fill: transparent;
+  stroke: $white;
+  stroke-width: 10;
+}
+
+.triangle_inner {
+  fill: transparent;
+  stroke: mix($white, $orange);
+  stroke-width: 2;
 }
