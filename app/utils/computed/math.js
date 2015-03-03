@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import MathHelpers from '../math-helpers';
 
 var isNumber = MathHelpers.isNumber;
@@ -39,7 +38,7 @@ export default function(methodName, keyOne, keyTwo) {
       } else {
         return null;
       }
-    }.property(keyOne)
+    }.property(keyOne);
 
   }
 }

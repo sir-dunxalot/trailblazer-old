@@ -42,7 +42,6 @@ export default Ember.ObjectController.extend({
   }.property('lowerDuration', 'totalDuration'),
 
   upperDatePosition: function() {
-    var lowerDuration = this.get('lowerDuration');
     var upperDuration = this.get('upperDuration');
     var totalDuration = this.get('totalDuration');
     var percentage = MathHelpers.percentage(

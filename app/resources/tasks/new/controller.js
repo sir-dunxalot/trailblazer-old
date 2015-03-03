@@ -20,7 +20,7 @@ export default Ember.ObjectController.extend(
   },
 
   testTaskOptions: function() {
-    return Em.A([
+    return Ember.A([
       this.get('testTaskOptionNone'),
       this.get('testTaskOptionDefault'),
       {
@@ -75,7 +75,7 @@ export default Ember.ObjectController.extend(
 
         /* Save feature */
 
-        _this.get('feature.content').save().then(function(feature) {
+        _this.get('feature.content').save().then(function(/* feature */) {
           var isTestingTask = task.get('stageName') === 'testing';
 
           if (_this.get('testTaskSelection') && !isTestingTask) {

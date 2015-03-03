@@ -24,13 +24,13 @@ var Authenticator = AuthenticatorBase.extend({
           } else {
             var store = _this.get('container').lookup('store:main');
 
-            store.find('user', authData.uid).then(function(user) {
+            store.find('user', authData.uid).then(function(/* user */) {
               // If user if already registered
               resolve(authData);
             }, function() {
               // If user is not registered...
               store.unloadAll('user');
-              _this.createUser(authData, store).then(function(account) {
+              _this.createUser(authData, store).then(function(/* account */) {
                 resolve(authData);
               });
             });
@@ -41,8 +41,6 @@ var Authenticator = AuthenticatorBase.extend({
   },
 
   createUser: function(authData, store) {
-    var _this = this;
-
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var githubData = authData.github;
       var githubProfile = authData.github.cachedUserProfile;
@@ -66,9 +64,7 @@ var Authenticator = AuthenticatorBase.extend({
   },
 
   invalidate: function(authData) {
-    var _this = this;
-
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve /*, reject */) {
       firebase.unauth();
       resolve(authData);
     });
@@ -89,7 +85,7 @@ var Authenticator = AuthenticatorBase.extend({
 
 });
 
-export function initialize(container, app) {
+export function initialize(container /*, app */) {
   container.register('authenticator:firebase', Authenticator);
 
   Session.reopen({
@@ -117,4 +113,4 @@ export function initialize(container, app) {
 export default {
   name: 'authentication',
   initialize: initialize
-}
+};

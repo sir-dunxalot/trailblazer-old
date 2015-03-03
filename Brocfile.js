@@ -9,12 +9,6 @@ var app = new EmberApp({
     layout: true,
   },
 
-  sassOptions: {
-    includePaths: [
-      bowerDir + 'compass-mixins/lib'
-    ]
-  },
-
 });
 
 /* Boilerplate stuff */

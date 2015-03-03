@@ -42,13 +42,13 @@ export default Ember.ObjectController.extend(
     var _this = this;
     var teamId = _this.get('teamId');
     var save = function() {
-      _this.get('content').save().then(function(user) {
+      _this.get('content').save().then(function(/* user */) {
         _this.transitionToRoute('settings');
       });
     };
 
     if ('teamId') {
-      this.store.find('team', teamId).then(function(team) {
+      this.store.find('team', teamId).then(function(/* team */) {
         save();
       }, function() {
         _this.set('teamId', null);
@@ -61,4 +61,4 @@ export default Ember.ObjectController.extend(
 
   },
 
-})
+});

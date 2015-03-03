@@ -7,16 +7,17 @@ import { EmberSelectizeComponent } from 'ember-cli-selectize/index';
 export default {
   name: 'easy-form',
 
-  initialize: function( container, app ) {
+  initialize: function(/* container, app */) {
+    var computed = Ember.computed;
 
     Ember.EasyForm.Input.reopen({
       datepickerInputId: insert('elementId', 'input-{{value}}'),
-      isDatepicker: Em.computed.equal('as', 'date'),
+      isDatepicker: computed.equal('as', 'date'),
     });
 
     /* Datepicker built with pickaday */
 
-    Ember.EasyForm.DatePicker = Em.EasyForm.TextField.extend({
+    Ember.EasyForm.DatePicker = Ember.EasyForm.TextField.extend({
       classNames: ['datepicker', 'removed'],
       datepicker: null,
       type: 'hidden',
@@ -77,10 +78,10 @@ export default {
     );
 
     Ember.EasyForm.Selectize = EmberSelectizeComponent.extend({
-      content: Em.computed.oneWay('parentView.content'),
-      disabled: Em.computed.oneWay('parentView.disabled'),
-      loading: Em.computed.not('content.isLoaded'),
-      value: Em.computed.alias('selection'),
+      content: computed.oneWay('parentView.content'),
+      disabled: computed.oneWay('parentView.disabled'),
+      loading: computed.not('content.isLoaded'),
+      value: computed.alias('selection'),
     });
 
     Ember.EasyForm.Config.registerInputType('selectize',

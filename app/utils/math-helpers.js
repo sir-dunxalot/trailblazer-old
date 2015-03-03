@@ -37,4 +37,4 @@ export default {
     return a - b;
   },
 
-}
+};

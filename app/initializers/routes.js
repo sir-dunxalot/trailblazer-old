@@ -13,7 +13,7 @@ export function initialize(/* container, app */) {
     Ember.Evented, {
 
     authenticate: true,
-    userId: Em.computed.readOnly('session.content.uid'),
+    userId: Ember.computed.readOnly('session.content.uid'),
 
     addAuthenticationMixin: function() {
       // So null doesn't add anything

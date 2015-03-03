@@ -14,6 +14,6 @@ export default Ember.Component.extend({
   }.on('init'),
 
   lazyLoad: function() {
-    this.$().on('load', Em.run.bind(this, this.set, 'loaded', true));
+    this.$().on('load', Ember.run.bind(this, this.set, 'loaded', true));
   }.on('didInsertElement')
 });

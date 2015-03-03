@@ -1,5 +1,3 @@
-import defaultFor from 'trailblazer/utils/default-for';
-
 export default function uncapitalize(string) {
   var firstLetter = string.charAt(0);
 

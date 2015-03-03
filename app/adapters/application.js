@@ -2,17 +2,14 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import ENV from 'trailblazer/config/environment';
 
-var fmt = Ember.String.fmt;
-
 export default DS.FirebaseAdapter.extend({
   firebase: new Firebase(ENV.APP.firebaseUrl),
 
   find: function(store, type, id) {
     var adapter = this;
     var ref = this._getRef(type, id);
-    var serializer = store.serializerFor(type);
 
-    return new Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       ref.once('value', function(snapshot) {
         var payload = adapter._assignIdToPayload(snapshot);
 

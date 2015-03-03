@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export function initialize(container, app) {
+export function initialize(/* container, app */) {
 
   Ember.LinkView.reopen({
     classNameBindings: ['className'],

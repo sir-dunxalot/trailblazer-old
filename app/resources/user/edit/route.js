@@ -14,7 +14,7 @@ export default Ember.Route.extend(
     this._super(controller, model);
 
     if (team) {
-      controller.set('teamId', team.get('id'))
+      controller.set('teamId', team.get('id'));
     }
   },
 

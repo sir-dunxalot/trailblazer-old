@@ -1,6 +1,4 @@
-import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
-import insert from 'trailblazer/utils/computed/insert';
 
 export default Ember.Component.extend({
   classNames: ['slider_wrapper'],
@@ -117,7 +115,7 @@ export default Ember.Component.extend({
 
           date = date.add(value, 'd').format('D MMM');
 
-          $(this).html(date);
+          Ember.$(this).html(date);
         });
       });
     }
@@ -129,7 +127,7 @@ export default Ember.Component.extend({
     } else if (!this.get('rendered') && this.get('upper') && this.get('lower')) {
       this.set('rendered', true);
 
-      Em.run.scheduleOnce('afterRender', this, function() {
+      Ember.run.scheduleOnce('afterRender', this, function() {
         console.log('here');
         this.renderSlider();
       });

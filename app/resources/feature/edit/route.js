@@ -13,7 +13,7 @@ export default Ember.Route.extend(
       if (stage.get('isDirty')) {
         stage.rollback();
       }
-    })
+    });
   }.on('willTransition'),
 
   model: function() {
