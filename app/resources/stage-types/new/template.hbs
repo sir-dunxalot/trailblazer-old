@@ -1,5 +1,9 @@
-<form>
-  {{input name}}
+{{#page-content}}
+  {{#form}}
+    {{#form-controls legend='Create a new stage type'}}
+      {{input name}}
+    {{/form-controls}}
 
-  {{form-submission}}
-</form>
+    {{form-submission}}
+  {{/form}}
+{{/page-content}}

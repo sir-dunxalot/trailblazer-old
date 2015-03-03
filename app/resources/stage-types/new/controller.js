@@ -8,7 +8,7 @@ export default Ember.ObjectController.extend(
     var _this = this;
 
     this.get('content').save().then(function(/* stageType */) {
-      _this.transitionToRoute('index');
+      _this.transitionToRoute('features');
     });
   },
 

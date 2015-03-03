@@ -130,6 +130,7 @@ export default Ember.Component.extend({
       this.set('rendered', true);
 
       Em.run.scheduleOnce('afterRender', this, function() {
+        console.log('here');
         this.renderSlider();
       });
     }

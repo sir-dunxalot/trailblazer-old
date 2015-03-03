@@ -54,7 +54,6 @@ export default Ember.Route.extend(
   },
 
   model: function() {
-    console.log(this.get('curentUser'));
     return this.store.createRecord('feature', {
       team: this.get('curentUser.team')
     });

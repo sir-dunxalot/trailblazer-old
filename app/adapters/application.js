@@ -1,11 +1,11 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import ENV from 'trailblazer/config/environment';
 
 var fmt = Ember.String.fmt;
 
 export default DS.FirebaseAdapter.extend({
-  // TODO - move URL to config
-  firebase: new Firebase('https://trailblazer.firebaseio.com'),
+  firebase: new Firebase(ENV.APP.firebaseUrl),
 
   find: function(store, type, id) {
     var adapter = this;

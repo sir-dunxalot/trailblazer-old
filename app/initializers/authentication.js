@@ -1,8 +1,9 @@
 import AuthenticatorBase from 'simple-auth/authenticators/base';
 import Ember from 'ember';
+import ENV from 'trailblazer/config/environment';
 import Session from 'simple-auth/session';
 
-var firebase = new Firebase('https://trailblazer.firebaseio.com');
+var firebase = new Firebase(ENV.APP.firebaseUrl);
 var Authenticator = AuthenticatorBase.extend({
 
   authenticate: function(/* options */) {
