@@ -1,0 +1,89 @@
+.introjs-overlay {
+  // background-color: $white;
+  // @include opacity(0.2)
+}
+
+.introjs-tooltip {
+  @include rem(margin, 2);
+  @extend %align-center;
+
+  .introjs-skipbutton {
+    border: none;
+  }
+
+  &:not(.introjs-tooltiplast) {
+    .introjs-prevbutton {
+      border-right: none;
+    }
+  }
+
+  &.introjs-tooltiplast {
+
+    .introjs-prevbutton {
+      border-right: 1px solid;
+    }
+
+    .introjs-skipbutton {
+      &,
+      &:not(.introjs-disabled):hover,
+      &:not(.introjs-disabled):focus {
+        border: 1px solid $orange;
+        background-color: $orange;
+        color: $white !important;
+      }
+    }
+  }
+}
+
+.introjs-tooltipwide {
+  @include rem(width, 26);
+}
+
+.introjs-tooltiplast {
+
+}
+
+.introjs-tooltiptext,
+.introjs-tooltipbuttons {
+  @include rem(padding-left, 3);
+  @include rem(padding-right, 3);
+  @include rem(margin-left, -1);
+  @include rem(margin-right, -1);
+}
+
+.introjs-disabled {
+  @extend .hidden;
+}
+
+.introjs-button {
+  text-shadow: none;
+  color: $gray !important;
+  @include rem(font-size, 1.4);
+  border: 1px solid;
+  font-family: $lato;
+
+  &:not(.introjs-disabled):hover,
+  &:not(.introjs-disabled):focus {
+    border-color: $gray;
+    background-color: $gray;
+    color: $white !important;
+  }
+}
+
+.introjs-nextbutton {
+  border-color: $orange;
+  background-color: $orange;
+  color: $white !important;
+
+  &:not(.introjs-disabled):hover,
+  &:not(.introjs-disabled):focus {
+    border-color: darken($orange, 10%);
+    background-color: darken($orange, 10%);
+    color: $white !important;
+  }
+}
+
+.introjs-tooltipbuttons {
+  // @extend %align-left;
+  // @include rem(margin-bottom, 1);
+}

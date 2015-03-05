@@ -28,7 +28,7 @@ module.exports = function(environment) {
       'frame-src': "'self' https://*.firebaseio.com",
       'font-src': "'self' http://fonts.gstatic.com https://s3.amazonaws.com",
       'img-src': "'self' https://*.githubusercontent.com",
-      'script-src': "'self' 'unsafe-eval' https://*.firebaseio.com",
+      'script-src': "'self' 'unsafe-eval' 'unsafe-inline' https://*.firebaseio.com",
       'style-src': "'self' 'unsafe-inline' https://s3.amazonaws.com http://fonts.googleapis.com",
     },
 

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Submitting from 'trailblazer/mixins/views/submitting';
+import Submitting from 'ember-easy-form-extensions/mixins/views/submitting';
 
 export default Ember.View.extend(
   Submitting, {

@@ -1,6 +1,6 @@
 import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
-import Saving from 'trailblazer/mixins/controllers/saving';
+import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
 
 export default Ember.ObjectController.extend(
   Saving, {
@@ -52,7 +52,7 @@ export default Ember.ObjectController.extend(
         save();
       }, function() {
         _this.set('teamId', null);
-        // Team not found
+        // TODO - Team not found
         alert('Team not found!');
       });
     } else {

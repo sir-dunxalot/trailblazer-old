@@ -4,9 +4,7 @@
 
 {{#page-content class='center'}}
 
-  {{currentUser.fullName}}
-
-  {{#form}}
+  {{#form-wrapper}}
     {{#form-controls legend='Create a new feature'}}
 
       {{input startDate as='date' maxDate=endDate}}
@@ -26,6 +24,6 @@
     {{/form-controls}}
 
     {{form-submission}}
-  {{/form}}
+  {{/form-wrapper}}
 
 {{/page-content}}

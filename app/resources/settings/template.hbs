@@ -12,6 +12,7 @@
   </dl>
 
   {{!-- TODO - Add 'are you sure' modal to sign out --}}
+
   <button {{action 'invalidateSession'}} class="signout_button">
     Sign out
   </button>
@@ -20,6 +21,8 @@
 {{#page-content}}
 
   <div class="settings_triangle">
+
+    {{!-- TODO - Make the links actually go to revelant places --}}
 
     <ul class="list-inline">
       <li>
@@ -57,15 +60,4 @@
     </ul>
 
   </div>
-
-  {{!-- <h2>Team</h2> --}}
-
-{{!--   <dl class="list-def">
-    <dt>Name</dt>
-    <dd>{{team.name}}</dd>
-    <dt>Members</dt>
-    {{#each member in team.members}}
-      <dd>{{fullName}}</dd>
-    {{/each}}
-  </dl> --}}
 {{/page-content}}

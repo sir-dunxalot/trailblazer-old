@@ -1,4 +1,4 @@
-import DeleteRecord from 'trailblazer/mixins/routes/delete-record';
+import DeleteRecord from 'ember-easy-form-extensions/mixins/routes/delete-record';
 import Ember from 'ember';
 
 export default Ember.Route.extend(
@@ -26,4 +26,4 @@ export default Ember.Route.extend(
 });
 
 // TODO - ability to add branch name with github integration
-// TODO - Ability to delete things (feature just gets hidden)
+// TODO - Ability to delete features/tasks (they should actually just get hidden)

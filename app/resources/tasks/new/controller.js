@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Saving from 'trailblazer/mixins/controllers/saving';
+import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
 import uncapitalize from 'trailblazer/utils/uncapitalize';
 
 var computed = Ember.computed;

@@ -13,7 +13,7 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
-  // Update all places to use this CM
+  // TODO - update all places to use this CM
   completedTasks: Ember.computed.filterBy('tasks', 'completed', true),
   endDate: attr('date', {
     defaultValue: function() {

@@ -1,5 +1,13 @@
-<form>
-  {{input name}}
+{{!-- TODO - Real new team form --}}
 
-  {{form-submission}}
-</form>
+{{#page-content}}
+  {{#form-wrapper}}
+
+    {{#form-controls legend='Create a new team'}}
+      {{input name}}
+    {{/form-controls}}
+
+    {{form-submission}}
+
+  {{/form-wrapper}}
+{{/page-content}}

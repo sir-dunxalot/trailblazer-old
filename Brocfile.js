@@ -19,46 +19,27 @@ app.import({
 });
 
 app.import(bowerDir + 'normalize.css/normalize.css', {
-  type: 'vendor',
   prepend: true
 });
 
 /* Dependencies */
 
-app.import(bowerDir + 'firebase/firebase.js', {
-  type: 'vendor'
-});
+app.import(bowerDir + 'firebase/firebase.js');
+app.import(bowerDir + 'emberfire/dist/emberfire.js');
 
-app.import(bowerDir + 'emberfire/dist/emberfire.js', {
-  type: 'vendor'
-});
-
-app.import('vendor/lib-link.js', {
-  type: 'vendor'
-});
-
-app.import(bowerDir +
-  'nouislider/distribute/jquery.nouislider.js', {
-  type: 'vendor'
-});
-
-app.import(bowerDir +
-  'nouislider/distribute/jquery.nouislider.min.css', {
-  type: 'vendor'
-});
+app.import('vendor/lib-link.js');
+app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.js');
+app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.min.css');
 
 app.import(bowerDir + 'velocity/velocity.js');
 
-app.import(bowerDir + 'moment/moment.js', {
-  type: 'vendor'
-});
+app.import(bowerDir + 'moment/moment.js');
 
-app.import(bowerDir + 'pikaday/pikaday.js', {
-  type: 'vendor'
-});
+app.import(bowerDir + 'pikaday/pikaday.js');
+app.import(bowerDir + 'pikaday/css/pikaday.css');
 
-app.import(bowerDir + 'pikaday/css/pikaday.css', {
-  type: 'vendor'
-});
+app.import(bowerDir + 'intro.js/intro.js');
+app.import(bowerDir + 'intro.js/introjs.css');
+app.import(bowerDir + 'intro.js/themes/introjs-nassim.css');
 
 module.exports = app.toTree();

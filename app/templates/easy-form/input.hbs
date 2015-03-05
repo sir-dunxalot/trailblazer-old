@@ -6,8 +6,8 @@
 <div class="input_wrapper">
 
   {{#if view.isDatepicker}}
-    {{input id=view.datepickerInputId class='datepicker input'}}
+    {{input elementIdBinding='view.datepickerInputId' class='datepicker input'}}
   {{/if}}
 
-  {{partial "easy-form/input-controls"}}
+  {{partial 'easy-form/input-controls'}}
 </div>

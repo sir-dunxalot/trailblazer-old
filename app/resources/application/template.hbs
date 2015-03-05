@@ -35,7 +35,7 @@
 
       {{#if session.isAuthenticated}}
         {{#unless view.onLandingPage}}
-          <li>
+          <li data-tour="settings_button">
             {{#link-to 'settings'}}
               <span class="icon-settings"></span>
               <span class="hidden">Settings</span>
@@ -46,7 +46,7 @@
 
       {{#if session.isAuthenticated}}
         {{#if view.onRoadmap}}
-          <li class="new_feature">
+          <li class="new_feature" data-tour="new_feature_button">
             {{#link-to 'features.new' title='Add a new feature'}}
               <span class="icon-write"></span>
               <span class="hidden">Add a new feature</span>
