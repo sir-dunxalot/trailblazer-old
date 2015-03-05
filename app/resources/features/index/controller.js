@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
+  tourShown: false,
 
   renderTour: function() {
     var tour = introJs();
@@ -13,6 +14,7 @@ export default Ember.ArrayController.extend({
       showStepNumbers: false,
       steps: [
         {
+          // TODO - tour should say "team's features" not "your features", etc
           intro: 'Welcome to Trailblazer! This is your roadmap, which you will add features to',
           tooltipClass: 'introjs-tooltipwide'
         }, {
@@ -35,6 +37,19 @@ export default Ember.ArrayController.extend({
     Ember.run.scheduleOnce('afterRender', this, function() {
       tour.start();
     });
-  }.on('init')
+  },
+
+  // TODO - remvoed the below tour until a userOnboarded flag is added to the user account
+
+  // watchContent: function() {
+  //   var content = this.get('content');
+
+  //   // console.log(content);
+
+  //   if (!content.get('length') && content.get('isLoaded') && !this.get('tourShown')) {
+  //     this.renderTour();
+  //     this.set('tourShown', true);
+  //   }
+  // }.observes('content.isLoaded')
 
 });
