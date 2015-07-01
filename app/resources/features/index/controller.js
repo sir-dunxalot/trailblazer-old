@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const { run } = Ember;
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   tourShown: false,
 
   renderTour() {
@@ -44,7 +44,7 @@ export default Ember.ArrayController.extend({
   // TODO - remvoed the below tour until a userOnboarded flag is added to the user account
 
   // watchContent: function() {
-  //   var content = this.get('content');
+  //   var content = this.get('model');
 
   //   // console.log(content);
 

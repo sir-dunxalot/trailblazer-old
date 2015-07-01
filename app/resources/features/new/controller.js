@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
 
-export default Ember.ObjectController.extend(
+export default Ember.Controller.extend(
   Saving, {
 
   lowerDuration: null,
@@ -11,15 +11,15 @@ export default Ember.ObjectController.extend(
   /* Validations */
 
   validations: {
-    name: {
+    'model.name': {
       presence: true
     },
 
-    endDate: {
+    'model.endDate': {
       presence: true
     },
 
-    startDate: {
+    'model.startDate': {
       presence: true
     }
   },
@@ -31,10 +31,10 @@ export default Ember.ObjectController.extend(
   },
 
   save() {
-    const feature = this.get('content');
+    const feature = this.get('model');
 
-    this.get('stages').forEach(function(stage) {
-      stage.set('feature', feature);
+    this.get('model.stages').forEach(function(stage) {
+      stage.set('model.feature', feature);
       stage.save();
     });
 
@@ -53,10 +53,10 @@ export default Ember.ObjectController.extend(
       const hash = {
         research: lower,
         development: upper - lower,
-        testing: this.get('totalDuration') - upper
+        testing: this.get('model.totalDuration') - upper
       };
 
-      this.get('stages').forEach(function(stage) {
+      this.get('model.stages').forEach(function(stage) {
         stage.get('type').then(function(type) {
           stage.set('duration', hash[type.get('name')]);
         });
@@ -65,8 +65,8 @@ export default Ember.ObjectController.extend(
 
   }),
 
-  setDurations: Ember.observer('stages.[]', function() {
-    this.get('stages').then(function(stages) {
+  setDurations: Ember.observer('model.stages.[]', function() {
+    this.get('model.stages').then(function(stages) {
       var researchStage = stages.objectAt(0);
       var developmentStage = stages.objectAt(1);
 

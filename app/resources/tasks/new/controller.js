@@ -4,11 +4,11 @@ import uncapitalize from 'trailblazer/utils/uncapitalize';
 
 const { computed } = Ember;
 
-export default Ember.ObjectController.extend(
+export default Ember.Controller.extend(
   Saving, {
 
-  taskIsInTestingStage: computed.equal('stageName', 'testing'),
-  testingStages: computed.filterBy('feature.stages', 'type.name', 'testing'),
+  taskIsInTestingStage: computed.equal('model.stageName', 'testing'),
+  testingStages: computed.filterBy('model.feature.stages', 'type.name', 'testing'),
   testTaskSelection: computed.oneWay('testTaskOptionDefault'),
   testTaskOptionNone: {
     name: 'None',
@@ -34,19 +34,19 @@ export default Ember.ObjectController.extend(
   }),
 
   validations: {
-    stage: {
+    'model.stage': {
       presence: true
     },
 
-    name: {
+    'model.name': {
       presence: true
     },
 
-    assignee: {
+    'model.assignee': {
       presence: true
     },
 
-    testTaskSelection: {
+    'model.testTaskSelection': {
       presence: true
     }
   },
@@ -68,14 +68,14 @@ export default Ember.ObjectController.extend(
 
     /* Save Task */
 
-    this.get('content').save().then(function(task) {
-      _this.get('feature.tasks').pushObject(task);
+    this.get('model').save().then(function(task) {
+      _this.get('model.feature.tasks').pushObject(task);
 
       _this.saveTestTasks().then(function() {
 
         /* Save feature */
 
-        _this.get('feature.content').save().then(function(/* feature */) {
+        _this.get('model.feature.content').save().then(function(/* feature */) {
           const isTestingTask = task.get('stageName') === 'testing';
 
           if (_this.get('testTaskSelection') && !isTestingTask) {
@@ -93,7 +93,7 @@ export default Ember.ObjectController.extend(
   },
 
   saveTestTasks() {
-    const feature = this.get('feature');
+    const feature = this.get('model.feature');
 
     let numberOfTasksSaved = 0;
 
@@ -127,12 +127,12 @@ export default Ember.ObjectController.extend(
   },
 
   createTestTask(type) {
-    const taskName = uncapitalize(this.get('name'));
+    const taskName = uncapitalize(this.get('model.name'));
     const testTaskName = type.capitalize() + ' test for ' + taskName;
 
     return this.store.createRecord('task', {
       name: testTaskName,
-      assignee: this.get('assignee'),
+      assignee: this.get('model.assignee'),
       stage: this.get('testingStage')
     });
   },
@@ -145,8 +145,8 @@ export default Ember.ObjectController.extend(
 
   // TODO - remember stage, assignee, and test task
 
-  setDefaultStage: Ember.observer('stages.[]', function() {
-    this.get('feature.stages').then(function(stages) {
+  setDefaultStage: Ember.observer('model.stages.[]', function() {
+    this.get('model.feature.stages').then(function(stages) {
       const stage = stages.objectAt(1);
 
       this.set('stage', stage);

@@ -4,7 +4,7 @@ import MathHelpers from 'trailblazer/utils/math-helpers';
 const { computed } = Ember;
 const filterBy = computed.filterBy;
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
 
   /* Filters */
 
@@ -22,6 +22,7 @@ export default Ember.ObjectController.extend({
   developmentTasks: filterBy('tasks', 'stageName', 'development'),
   datePositionsSet: computed.and('lowerDate', 'upperDate'),
   researchTasks: filterBy('tasks', 'stageName', 'research'),
+  taske: computed.oneWay('model.tasks'),
   testingTasks: filterBy('tasks', 'stageName', 'testing'),
 
   /* Dates */
@@ -64,10 +65,10 @@ export default Ember.ObjectController.extend({
     },
   },
 
-  setDates: Ember.observer('stages.@each.duration', function() {
+  setDates: Ember.observer('model.stages.@each.duration', function() {
     const _this = this;
 
-    _this.get('stages').then(function(stages) {
+    _this.get('model.stages').then(function(stages) {
       stages.forEach(function(stage) {
         stage.get('type').then(function(type) {
           const name = type.get('name');

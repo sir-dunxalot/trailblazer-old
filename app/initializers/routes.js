@@ -36,7 +36,7 @@ export function initialize(/* container, app */) {
       Adds the `routeDidTransition` event to the route's controller. The event will trigger everytime the router has finished transitioning into the route - it triggers on the route that has been transitioned into, not the previous route. Thus, it can be used to reliably reset controller properties on 'page load'. For example:
 
       ```
-      App.SomeController = Em.ObjectController.extend({
+      App.SomeController = Ember.Controller.extend({
         templateChosen: false,
 
         resetTemplateChosen: function() {

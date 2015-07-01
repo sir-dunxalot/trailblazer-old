@@ -2,7 +2,7 @@
   <h1 class="title">
     {{#if new}}New{{else}}Edit{{/if}} Task
   </h1>
-  <p class="subtitle">{{feature.name}}</p>
+  <p class="subtitle">{{model.feature.name}}</p>
 {{/page-header}}
 
 {{#page-content class='center'}}
@@ -10,13 +10,13 @@
 
     {{#form-controls legend='Add a new task to the feature'}}
 
-      {{input-group value=name}}
+      {{input-group value=model.name}}
 
       {{!-- TODO - set to last used stage --}}
       {{input-group
-        value=stage
+        value=model.stage
         type='selectize'
-        content=feature.stages
+        content=model.feature.stages
         optionValuePath='content.id'
         optionLabelPath='content.type.capitalizedName'
         placeholder='Select a stage'
@@ -24,7 +24,7 @@
       }}
 
       {{input-group
-        value=assignee
+        value=model.assignee
         type='selectize'
         content=users
         optionValuePath='content.id'

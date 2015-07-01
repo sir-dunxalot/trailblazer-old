@@ -8,23 +8,23 @@
     {{#form-controls legend='Create a new feature'}}
 
       {{datepicker-group
-        value=startDate
-        maxDate=endDate
+        value=model.startDate
+        maxDate=model.endDate
       }}
 
       {{datepicker-group
-        value=endDate
-        minDate=startDate
+        value=model.endDate
+        minDate=model.startDate
       }}
 
       {{range-slider
         lower=lowerDuration
         upper=upperDuration
-        max=totalDuration
-        startDate=startDate
+        max=model.totalDuration
+        startDate=model.startDate
       }}
 
-      {{input-group value=name}}
+      {{input-group value=model.name}}
 
       {{partial 'form-components/notes'}}
 

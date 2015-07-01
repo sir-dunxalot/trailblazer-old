@@ -9,25 +9,25 @@ export default Ember.ObjectController.extend(
 
   validations: {
 
-    avatarUrl: {
+    'model.avatarUrl': {
       presence: true
     },
 
-    firstName: {
+    'model.firstName': {
       presence: true
     },
 
-    lastName: {
+    'model.lastName': {
       presence: true
     },
 
-    teamId: {
+    'model.teamId': {
       presence: true
     }
 
   },
 
-  teamHint: Ember.computed('team.name', function() {
+  teamHint: Ember.computed('model.team.name', function() {
     return defaultFor(
       'You are currently a member of ' + this.get('team.name'),
       'Don\'t know your team ID? Ask a colleague'
@@ -42,12 +42,12 @@ export default Ember.ObjectController.extend(
     const _this = this;
     const teamId = this.get('teamId');
     const save = function() {
-      _this.get('content').save().then(function(/* user */) {
+      _this.get('model').save().then(function(/* user */) {
         _this.transitionToRoute('settings');
       });
     };
 
-    if ('teamId') {
+    if (teamId) {
       this.store.find('team', teamId).then(function(/* team */) {
         save();
       }, function() {

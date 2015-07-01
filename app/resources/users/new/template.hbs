@@ -1,11 +1,11 @@
 <form>
-  {{input-group value=firstName}}
-  {{input-group value=lastName}}
-  {{input-group value=email}}
-  {{input-group value=password}}
+  {{input-group value=model.firstName}}
+  {{input-group value=model.lastName}}
+  {{input-group value=model.email}}
+  {{input-group value=model.password}}
 
   {{input-group
-    value=team
+    value=model.team
     type='selectize'
     content=teams
     optionValuePath='content.id'

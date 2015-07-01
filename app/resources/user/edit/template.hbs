@@ -6,18 +6,18 @@
 
   {{#form-wrapper}}
     {{#form-controls legend='Edit your profile and team'}}
-      {{input-group value=firstName}}
-      {{input-group value=lastName}}
+      {{input-group value=model.firstName}}
+      {{input-group value=model.lastName}}
       {{input-group
         hint=teamHint
         label='Team ID'
-        value=teamId
+        value=model.teamId
       }}
-      {{input-group value=avatarUrl}}
+      {{input-group value=model.avatarUrl}}
       {{!-- TODO - image preview --}}
       {{input-group
         placeholder='Optional'
-        value=email
+        value=model.email
       }}
     {{/form-controls}}
 

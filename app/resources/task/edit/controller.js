@@ -8,7 +8,7 @@ export default TaskController.extend({
 
     // TODO - save task on assignee here
 
-    this.get('content').save().then(function(/* task */) {
+    this.get('model').save().then(function(/* task */) {
       this.transition();
     }.bind(this));
   },

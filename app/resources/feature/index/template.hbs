@@ -1,9 +1,9 @@
 {{#page-header class='overview'}}
 
   <div class="heading_row">
-    <h1>{{capitalize-string name}}</h1>
+    <h1>{{capitalize-string model.name}}</h1>
 
-    {{#link-to 'feature.edit' content class='sub'}}
+    {{#link-to 'feature.edit' model class='sub'}}
       <span class="icon-pencil sub"></span>
       <span class="hidden">Edit</span>
     {{/link-to}}
@@ -39,7 +39,7 @@
 <h2 class="hidden">Stages</h2>
 
 <ul class="stages_list {{if datePositionsSet 'fade-in'}}">
-  {{#each stages as stage itemViewClass='stage-block'}}
+  {{#each model.stages as stage itemViewClass='stage-block'}}
     <h3 class="hidden">{{stage.type.name}}</h3>
     <div class="progress" style="{{view.progressStyle}}">
     </div>

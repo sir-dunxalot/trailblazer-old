@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend(
   Saving, {
 
   save() {
-    this.get('content').save().then(function(/* stageType */) {
+    this.get('model').save().then(function(/* stageType */) {
       this.transitionToRoute('features');
     }.bind(this));
   },
