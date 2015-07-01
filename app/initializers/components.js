@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export function initialize(/* container, app */) {
 
-  Ember.LinkView.reopen({
+  Ember.LinkComponent.reopen({
     classNameBindings: ['className'],
 
     className: Ember.computed('params.[]', function() {
@@ -16,6 +16,6 @@ export function initialize(/* container, app */) {
 }
 
 export default {
-  name: 'views',
+  name: 'components',
   initialize: initialize
 };

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
+import escapeCss from 'trailblazer/utils/escape-css';
 import math from 'trailblazer/utils/computed/math';
 
 const { computed } = Ember;
@@ -24,12 +25,12 @@ export default Ember.Component.extend({
     let style = '';
 
     ['left', 'top', 'width'].forEach(function(property) {
-      const value = this.get(property);
+      const value = escapeCss(this.get(property));
 
       style += `${property}:${value};`;
     }, this);
 
-    return style;
+    return (style).htmlSafe();
   }),
 
   top: computed('contentIndex', function() {

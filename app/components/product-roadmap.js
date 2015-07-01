@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
+import escapeCss from 'trailblazer/utils/escape-css';
 
 export default Ember.Component.extend({
   classNames: ['roadmap'],
@@ -61,24 +62,24 @@ export default Ember.Component.extend({
   }),
 
   monthStyle: Ember.computed('numberOfMonthsInViewport', function() {
-    const monthsInViewport = this.get('numberOfMonthsInViewport');
+    const monthsInViewport = escapeCss(this.get('numberOfMonthsInViewport'));
     const percentage = MathHelpers.percentage(1, monthsInViewport);
 
-    return `width:${percentage};`;
+    return (`width:${percentage};`).htmlSafe();
   }),
 
   lanes: Ember.computed('numberOfLanes', function() {
     const lanes = Ember.A();
-    const numberOfLanes = this.get('numberOfLanes');
+    const numberOfLanes = escapeCss(this.get('numberOfLanes'));
     const percentPerLane = 100 / (numberOfLanes + 1);
-    const height = `height:${percentPerLane}%;`;
+    const heightStyle = (`height:${percentPerLane}%;`).htmlSafe();
 
     let i = 0;
 
     while (i < numberOfLanes) {
 
       lanes.pushObject({
-        style: height
+        style: heightStyle,
       });
 
       i++;
@@ -88,13 +89,16 @@ export default Ember.Component.extend({
   }),
 
   todayLineStyle: Ember.computed('startDate', function() {
-    const numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
+    const numberOfDaysDisplayed = escapeCss(this.get('numberOfDaysDisplayed'));
     const today = this.get('today');
     const startDate = this.get('startDate');
     const difference = today.diff(startDate, 'days');
-    const left = MathHelpers.percentage(difference, numberOfDaysDisplayed);
 
-    return `left:${left};`;
+    let left = MathHelpers.percentage(difference, numberOfDaysDisplayed);
+
+    left = escapeCss(left);
+
+    return (`left:${left};`).htmlSafe();
   }),
 
 });

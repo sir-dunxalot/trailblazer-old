@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
+import escapeCss from 'trailblazer/utils/escape-css';
 
 export default Ember.Component.extend({
   attributeBindings: ['style'],
@@ -9,20 +10,23 @@ export default Ember.Component.extend({
   tagName: 'li',
 
   style: Ember.computed('stage.tasks.length', 'stage.feature.tasks.length', function() {
-    const stage = this.get('content');
+    const stage = this.get('stage');
     const stageDuration = stage.get('duration');
     const totalDuration = stage.get('feature.totalDuration');
-    const percentage = MathHelpers.percentage(
+
+    let percentage = MathHelpers.percentage(
       stageDuration,
       totalDuration
     );
 
-    return `width:${percentage};`;
+    percentage = escapeCss(percentage);
+
+    return (`width:${percentage};`).htmlSafe();
   }),
 
   progressStyle: Ember.computed('stage.completedPercentage', function() {
-    const completedPercentage = this.get('stage.completedPercentage');
+    const completedPercentage = escapeCss(this.get('stage.completedPercentage'));
 
-    return `width:${completedPercentage};`;
+    return (`width:${completedPercentage};`).htmlSafe();
   }),
 });

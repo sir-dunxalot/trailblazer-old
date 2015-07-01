@@ -1,6 +1,8 @@
 import Ember from 'ember';
-import insert from 'trailblazer/utils/computed/insert';
+import escapeCss from 'trailblazer/utils/escape-css';
 import math from 'trailblazer/utils/computed/math';
+
+const { computed } = Ember;
 
 export default Ember.Component.extend({
   attributeBindings: ['style'],
@@ -10,5 +12,11 @@ export default Ember.Component.extend({
   stage: null,
   tagName: 'li',
   width: math('percentage', 'stage.duration', 'featureDuration'),
-  style: insert('width', 'width:{{value}};'),
+
+  style: computed('width', function() {
+    const width = escapeCss(this.get('width'));
+
+    return (`width:${width};`).htmlSafe();
+  }),
+
 });

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
+import escapeCss from 'trailblazer/utils/escape-css';
 
 const { computed } = Ember;
 const filterBy = computed.filterBy;
@@ -37,11 +38,11 @@ export default Ember.Controller.extend({
       [ 'lowerDuration', 'totalDuration' ]
     );
     const percentage = MathHelpers.percentage(
-      lowerDuration,
-      totalDuration
+      escapeCss(lowerDuration),
+      escapeCss(totalDuration)
     );
 
-    return `left:${percentage};`;
+    return (`left:${percentage};`).htmlSafe();
   }),
 
   upperDatePosition: Ember.computed('upperDuration', 'totalDuration', function() {
@@ -49,11 +50,11 @@ export default Ember.Controller.extend({
       [ 'totalDuration', 'upperDuration' ]
     );
     const percentage = MathHelpers.percentage(
-      totalDuration - upperDuration,
-      totalDuration
+      escapeCss(totalDuration - upperDuration),
+      escapeCss(totalDuration)
     );
 
-    return `left:${percentage};`;
+    return (`left:${percentage};`).htmlSafe();
   }),
 
   actions: {

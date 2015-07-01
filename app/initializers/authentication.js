@@ -3,18 +3,20 @@ import Ember from 'ember';
 import ENV from 'trailblazer/config/environment';
 import Session from 'simple-auth/session';
 
-var firebase = new Firebase(ENV.APP.firebaseUrl);
-var Authenticator = AuthenticatorBase.extend({
+const { RSVP, observer } = Ember;
+
+const firebase = new Firebase(ENV.APP.firebaseUrl);
+const Authenticator = AuthenticatorBase.extend({
 
   authenticate: function(/* options */) {
-    var _this = this;
+    const _this = this;
 
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new RSVP.Promise(function(resolve, reject) {
       firebase.authWithOAuthPopup('github', function(error, authData) {
         Ember.run(function() {
 
           if (error) {
-            var code = error.code;
+            const code = error.code;
 
             if (code === 'USER_CANCELLED' || code === 'USER_DENIED') {
               // Don't show errors for these
@@ -22,10 +24,10 @@ var Authenticator = AuthenticatorBase.extend({
               reject(error);
             }
           } else {
-            var store = _this.get('container').lookup('store:main');
+            const store = _this.get('container').lookup('store:main');
 
             store.find('user', authData.uid).then(function(/* user */) {
-              // If user if already registered
+              // If user is already registered
               resolve(authData);
             }, function() {
               // If user is not registered...
@@ -41,11 +43,11 @@ var Authenticator = AuthenticatorBase.extend({
   },
 
   createUser: function(authData, store) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      var githubData = authData.github;
-      var githubProfile = authData.github.cachedUserProfile;
-      var nameParts = githubData.displayName.split(' ');
-      var newUser = store.createRecord('user', {
+    return new RSVP.Promise(function(resolve, reject) {
+      const githubData = authData.github;
+      const githubProfile = authData.github.cachedUserProfile;
+      const nameParts = githubData.displayName.split(' ');
+      const newUser = store.createRecord('user', {
         avatarUrl: githubProfile.avatar_url,
         email: githubData.email,
         id: authData.uid,
@@ -64,15 +66,15 @@ var Authenticator = AuthenticatorBase.extend({
   },
 
   invalidate: function(authData) {
-    return new Ember.RSVP.Promise(function(resolve /*, reject */) {
+    return new RSVP.Promise(function(resolve /*, reject */) {
       firebase.unauth();
       resolve(authData);
     });
   },
 
   restore: function(authData) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      var timestamp = Math.floor(Date.now() / 1000);
+    return new RSVP.Promise(function(resolve, reject) {
+      const timestamp = Math.floor(Date.now() / 1000);
 
       // TODO - Does simple auth handle this?
       if (authData && authData.expires > timestamp) {
@@ -85,25 +87,24 @@ var Authenticator = AuthenticatorBase.extend({
 
 });
 
-export function initialize(container /*, app */) {
+export function initialize(container) {
   container.register('authenticator:firebase', Authenticator);
 
   Session.reopen({
     currentTeam: null,
     currentUser: null,
 
-    setCurrentUser: Ember.observer('uid', function() {
-      var store = container.lookup('store:main');
-      var _this = this;
-      var userId = this.get('uid');
+    setCurrentUser: observer('uid', function() {
+      const store = container.lookup('store:main');
+      const userId = this.get('uid');
 
       if (userId) {
         return store.find('user', userId).then(function(user) {
-          _this.setProperties({
+          this.setProperties({
             currentTeam: user.get('team'),
             currentUser: user
           });
-        });
+        }.bind(this));
       }
     })
 
