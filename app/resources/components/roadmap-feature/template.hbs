@@ -1,0 +1,22 @@
+<h3 class="heading-small">
+  {{#link-to 'feature' feature}}
+    <span class="text">{{feature.name}}</span>
+    <span class="icon-go"></span>
+  {{/link-to}}
+</h3>
+
+{{progress-bar
+  max=feature.tasks.length
+  value=feature.completedTasks.length
+}}
+
+<h4 class="hidden">Stages</h4>
+
+<ol class="roadmap_feature_stages">
+  {{#each stage in feature.stages}}
+    {{stage/list-item
+      featureDuration=totalDuration
+      stage=stage
+    }}
+  {{/each}}
+</ol>

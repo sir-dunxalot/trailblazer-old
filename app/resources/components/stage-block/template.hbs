@@ -1,0 +1,13 @@
+<h3 class="hidden">{{stage.type.name}}</h3>
+<div class="progress" style="{{view.progressStyle}}">
+</div>
+<dl>
+  <dt>
+    <span class="hidden">Number of</span> {{stage.type.name}} <span class="hidden">tasks completed</span>
+  </dt>
+  <dd>
+    {{stage.completedTasks.length}} / {{stage.tasks.length}}
+  </dd>
+</dl>
+
+{{yield}}
