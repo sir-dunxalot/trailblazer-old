@@ -5,7 +5,7 @@ export default Ember.Route.extend(
   DeleteRecord, {
 
   model() {
-    return this.store.createRecord('stageType');
+    return this.store.createRecord('stage-type');
   }
 
 });

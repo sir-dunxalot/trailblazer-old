@@ -39,7 +39,7 @@
 <h2 class="hidden">Stages</h2>
 
 <ul {{bind-attr class=':stages_list datePositionsSet:fade-in'}}>
-  {{#each stages as |stage| itemViewClass='stage-block'}}
+  {{#each stages as stage itemViewClass='stage-block'}}
     <h3 class="hidden">{{stage.type.name}}</h3>
     <div class="progress" {{bind-attr style='view.progressStyle'}}>
     </div>
@@ -96,7 +96,7 @@
 
   {{#if showDevelopment}}
     <ul {{bind-attr class=':tasks_list-development showCompleted'}}>
-      {{#each developmentTasks as |task| itemController='task/list-item'}}
+      {{#each developmentTasks as task itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
     </ul>
@@ -104,7 +104,7 @@
 
   {{#if showTesting}}
     <ul {{bind-attr class=':tasks_list-testing showCompleted'}}>
-      {{#each testingTasks as |task| itemController='task/list-item'}}
+      {{#each testingTasks as task itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
     </ul>

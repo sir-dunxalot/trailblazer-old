@@ -2,6 +2,7 @@ import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
 
 const { computed } = Ember;
+const filterBy = computed.filterBy;
 
 export default Ember.ObjectController.extend({
 

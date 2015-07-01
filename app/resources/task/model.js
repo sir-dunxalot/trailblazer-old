@@ -21,6 +21,8 @@ export default DS.Model.extend({
   feature: belongsTo('feature', {
     async: true
   }),
-  stage: belongsTo('stage'),
+  stage: belongsTo('stage', {
+    async: false
+  }),
   stageName: computed.readOnly('stage.type.name')
 });

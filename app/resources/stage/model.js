@@ -2,6 +2,7 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
 
+const { computed } = Ember;
 const { attr, belongsTo, hasMany } = DS;
 
 export default DS.Model.extend({
@@ -13,7 +14,7 @@ export default DS.Model.extend({
   tasks: hasMany('task', {
     async: true
   }),
-  type: belongsTo('stageType', {
+  type: belongsTo('stage-type', {
     async: true
   }),
 

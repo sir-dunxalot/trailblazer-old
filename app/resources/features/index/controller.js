@@ -6,7 +6,7 @@ export default Ember.ArrayController.extend({
   tourShown: false,
 
   renderTour() {
-    const tour = introJs();
+    const tour = window.introJs();
     const selector = function(name) {
       return `[data-tour="${name}"]`;
     };

@@ -10,11 +10,12 @@
 
     {{#form-controls legend='Add a new task to the feature'}}
 
-      {{input name}}
+      {{input-group value=name}}
 
       {{!-- TODO - set to last used stage --}}
-      {{input stage
-        as='selectize'
+      {{input-group
+        value=stage
+        type='selectize'
         content=feature.stages
         optionValuePath='content.id'
         optionLabelPath='content.type.capitalizedName'
@@ -22,8 +23,9 @@
         disabled=editing
       }}
 
-      {{input assignee
-        as='selectize'
+      {{input-group
+        value=assignee
+        type='selectize'
         content=users
         optionValuePath='content.id'
         optionLabelPath='content.fullName'
@@ -32,8 +34,9 @@
 
       {{!-- TODO if notTesting --}}
       {{#if new}}
-        {{input testTaskSelection
-          as='selectize'
+        {{input-group
+          value=testTaskSelection
+          type='selectize'
           content=testTaskOptions
           optionValuePath='content.value'
           optionLabelPath='content.name'

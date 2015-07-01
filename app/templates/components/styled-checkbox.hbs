@@ -1,9 +1,16 @@
-{{input id=inputId checked=checked type='checkbox' class='hidden'}}
+{{input
+  id=inputId
+  checked=checked
+  type='checkbox'
+  class='hidden'
+}}
 
 <span {{bind-attr aria-labelledby=inputId}} class="input-checkbox">
   <span class="hidden">{{label}}</span>
 </span>
 
 {{#if label}}
-  <span class="checkbox_label">{{capitalize-string label}}</span>
+  <span class="checkbox_label">
+    {{capitalize-string label}}
+  </span>
 {{/if}}

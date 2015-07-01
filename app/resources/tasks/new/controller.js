@@ -64,7 +64,7 @@ export default Ember.ObjectController.extend(
   },
 
   save() {
-    var _this = this;
+    const _this = this;
 
     /* Save Task */
 
@@ -93,7 +93,7 @@ export default Ember.ObjectController.extend(
   },
 
   saveTestTasks() {
-    const feature = _this.get('feature');
+    const feature = this.get('feature');
 
     let numberOfTasksSaved = 0;
 
@@ -132,7 +132,7 @@ export default Ember.ObjectController.extend(
 
     return this.store.createRecord('task', {
       name: testTaskName,
-      assignee: _this.get('assignee'),
+      assignee: this.get('assignee'),
       stage: this.get('testingStage')
     });
   },

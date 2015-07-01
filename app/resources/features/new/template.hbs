@@ -7,8 +7,15 @@
   {{#form-wrapper}}
     {{#form-controls legend='Create a new feature'}}
 
-      {{input startDate as='date' maxDate=endDate}}
-      {{input endDate as='date' minDate=startDate}}
+      {{datepicker-group
+        value=startDate
+        maxDate=endDate
+      }}
+
+      {{datepicker-group
+        value=endDate
+        minDate=startDate
+      }}
 
       {{range-slider
         lower=lowerDuration
@@ -17,13 +24,14 @@
         startDate=startDate
       }}
 
-      {{input name}}
+      {{input-group value=name}}
 
       {{partial 'form-components/notes'}}
 
     {{/form-controls}}
 
     {{form-submission}}
+
   {{/form-wrapper}}
 
 {{/page-content}}
