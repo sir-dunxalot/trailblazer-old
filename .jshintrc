@@ -2,11 +2,7 @@
   "predef": [
     "document",
     "window",
-    "-Promise",
-    "moment",
-    "Firebase",
-    "Pikaday",
-    "introJs"
+    "-Promise"
   ],
   "browser": true,
   "boss": true,
