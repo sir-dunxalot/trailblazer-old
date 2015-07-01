@@ -1,8 +1,8 @@
-import Rollback from 'ember-easy-form-extensions/mixins/routes/rollback';
+import DirtyRecordHandler from 'ember-easy-form-extensions/mixins/routes/dirty-record-handler';
 import Ember from 'ember';
 
 export default Ember.Route.extend(
-  Rollback, {
+  DirtyRecordHandler, {
 
   model() {
     return this.modelFor('user');

@@ -1,8 +1,8 @@
-import Rollback from 'trailblazer/mixins/routes/rollback';
+import DirtyRecordHandler from 'ember-easy-form-extensions/mixins/routes/dirty-record-handler';
 import Ember from 'ember';
 
 export default Ember.Route.extend(
-  Rollback, {
+  DirtyRecordHandler, {
 
   /* TODO - is there a way to rollback nested resources? */
 
