@@ -62,7 +62,7 @@ export default Ember.Component.extend({
   }),
 
   monthStyle: Ember.computed('numberOfMonthsInViewport', function() {
-    const monthsInViewport = escapeCss(this.get('numberOfMonthsInViewport'));
+    const monthsInViewport = this.get('numberOfMonthsInViewport');
     const percentage = MathHelpers.percentage(1, monthsInViewport);
 
     return (`width:${percentage};`).htmlSafe();
@@ -70,7 +70,7 @@ export default Ember.Component.extend({
 
   lanes: Ember.computed('numberOfLanes', function() {
     const lanes = Ember.A();
-    const numberOfLanes = escapeCss(this.get('numberOfLanes'));
+    const numberOfLanes = this.get('numberOfLanes');
     const percentPerLane = 100 / (numberOfLanes + 1);
     const heightStyle = (`height:${percentPerLane}%;`).htmlSafe();
 
@@ -89,7 +89,7 @@ export default Ember.Component.extend({
   }),
 
   todayLineStyle: Ember.computed('startDate', function() {
-    const numberOfDaysDisplayed = escapeCss(this.get('numberOfDaysDisplayed'));
+    const numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
     const today = this.get('today');
     const startDate = this.get('startDate');
     const difference = today.diff(startDate, 'days');

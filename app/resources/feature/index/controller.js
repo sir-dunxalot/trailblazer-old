@@ -5,6 +5,10 @@ import escapeCss from 'trailblazer/utils/escape-css';
 const { computed } = Ember;
 const filterBy = computed.filterBy;
 
+function escapeNumber(value) {
+  return parseFloat(escapeCss(value));
+}
+
 export default Ember.Controller.extend({
 
   /* Filters */
@@ -38,8 +42,8 @@ export default Ember.Controller.extend({
       [ 'lowerDuration', 'totalDuration' ]
     );
     const percentage = MathHelpers.percentage(
-      escapeCss(lowerDuration),
-      escapeCss(totalDuration)
+      escapeNumber(lowerDuration),
+      escapeNumber(totalDuration)
     );
 
     return (`left:${percentage};`).htmlSafe();
@@ -50,8 +54,8 @@ export default Ember.Controller.extend({
       [ 'totalDuration', 'upperDuration' ]
     );
     const percentage = MathHelpers.percentage(
-      escapeCss(totalDuration - upperDuration),
-      escapeCss(totalDuration)
+      escapeNumber(totalDuration - upperDuration),
+      escapeNumber(totalDuration)
     );
 
     return (`left:${percentage};`).htmlSafe();
