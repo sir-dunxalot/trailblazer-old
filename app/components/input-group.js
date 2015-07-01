@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import InputGroupComponent from 'ember-easy-form-extensions/components/input-group';
 import insert from 'trailblazer/utils/computed/insert';
 

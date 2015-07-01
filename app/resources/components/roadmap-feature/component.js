@@ -1,4 +1,8 @@
 import Ember from 'ember';
+import MathHelpers from 'trailblazer/utils/math-helpers';
+import math from 'trailblazer/utils/computed/math';
+
+const { computed } = Ember;
 
 export default Ember.Component.extend({
   attributeBindings: ['style'],
@@ -9,7 +13,7 @@ export default Ember.Component.extend({
   totalDaysDisplayedInRoadmap: Ember.computed.oneWay('controller.numberOfDaysDisplayed'),
   width: math('percentage', 'feature.totalDuration', 'totalDaysDisplayedInRoadmap'),
 
-  daysOffset: Ember.computed('feature.startDate', 'controller.startDate', function() {
+  daysOffset: computed('feature.startDate', 'controller.startDate', function() {
     const featureStartDate = this.get('feature.startDate');
     const roadmapStartDate = this.get('controller.startDate');
 
@@ -28,7 +32,7 @@ export default Ember.Component.extend({
     return style;
   }),
 
-  top: Ember.computed('contentIndex', function() {
+  top: computed('contentIndex', function() {
     const contentIndex = this.get('contentIndex');
     const numberOfLanes = this.get('controller.numberOfLanes');
     const lane = ((contentIndex + 1) % numberOfLanes);

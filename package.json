@@ -39,7 +39,9 @@
     "ember-easy-form-extensions": "sir-dunxalot/ember-easy-form-extensions#ember-1.11",
     "ember-export-application-global": "^1.0.2",
     "ember-flash-messages": "0.6.1",
+    "ember-modals": "0.4.1",
     "ember-moment": "1.1.1",
-    "ember-watson": "0.5.7"
+    "ember-watson": "0.5.7",
+    "emberfire": "firebase/emberfire#master"
   }
 }

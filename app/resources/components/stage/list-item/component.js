@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import insert from 'trailblazer/utils/computed/insert';
+import math from 'trailblazer/utils/computed/math';
 
 export default Ember.Component.extend({
   attributeBindings: ['style'],

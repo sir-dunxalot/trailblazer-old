@@ -5,6 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'trailblazer',
     podModulePrefix: 'trailblazer/resources',
     environment: environment,
+    firebase: 'https://YOUR-FIREBASE-NAME.firebaseio.com/',
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {

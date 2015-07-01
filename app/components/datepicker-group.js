@@ -1,7 +1,7 @@
+import Ember from 'ember';
 import ENV from 'trailblazer/config/environment';
 import InputGroupComponent from 'traiblazer/components/input-group';
-
-const { computed } = Ember;
+import defaultFor from 'trailblazer/utils/default-for';
 
 export default InputGroupComponent.extend({
   classNames: ['datepicker-group', 'removed'],
@@ -19,12 +19,12 @@ export default InputGroupComponent.extend({
     const format = this.get('format');
     const inputId = this.get('formattedInputId');
     const minDate = defaultFor(
-      parentView.get('minDate'),
+      this.get('minDate'),
       moment().toDate()
     );
 
     this.set('datepicker',
-      new Pikaday({
+      new window.Pikaday({
         defaultDate: defaultDate,
         field: document.getElementById(inputId),
         format: format,

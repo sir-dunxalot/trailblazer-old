@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import MathHelpers from 'trailblazer/utils/math-helpers';
 
 export default Ember.Component.extend({
   attributeBindings: ['style'],
@@ -11,7 +12,7 @@ export default Ember.Component.extend({
     const stage = this.get('content');
     const stageDuration = stage.get('duration');
     const totalDuration = stage.get('feature.totalDuration');
-    const percentage = MathsHelpers.percentage(
+    const percentage = MathHelpers.percentage(
       stageDuration,
       totalDuration
     );

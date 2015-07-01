@@ -14,10 +14,10 @@
     "qunit": "~1.17.1",
     "selectize": "~0.12.1",
     "ember-cli-moment-shim": "~0.2.0",
-    "ember-simple-auth": "0.8.0"
+    "ember-simple-auth": "0.8.0",
+    "firebase": "^2.1.0"
   },
   "devDependencies": {
-    "emberfire": "~1.4.7",
     "modernizr": "~2.8.3",
     "normalize.css": "~3.0.2",
     "nouislider": "~7.0.10",

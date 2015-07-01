@@ -31,7 +31,6 @@ app.import(bowerDir + 'normalize.css/normalize.css', {
 /* Dependencies */
 
 app.import(bowerDir + 'firebase/firebase.js');
-app.import(bowerDir + 'emberfire/dist/emberfire.js');
 
 app.import('vendor/lib-link.js');
 app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.js');
