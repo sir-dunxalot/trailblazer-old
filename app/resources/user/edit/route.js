@@ -4,12 +4,12 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   Rollback, {
 
-  model: function() {
+  model() {
     return this.modelFor('user');
   },
 
-  setupController: function(controller, model) {
-    var team = model.get('team');
+  setupController(controller, model) {
+    const team = model.get('team');
 
     this._super(controller, model);
 

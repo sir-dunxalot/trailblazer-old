@@ -5,10 +5,10 @@ export function initialize(/* container, app */) {
   Ember.LinkView.reopen({
     classNameBindings: ['className'],
 
-    className: function() {
-      var route = this.get('params.firstObject');
+    className() {
+      const route = this.get('params.firstObject');
 
-      return 'link-to-' + route.replace('.', '-');
+      return `link-to-${route.replace('.', '-')}`;
     }.property('params.[]'),
 
   });

@@ -1,5 +1,5 @@
-export default function uncapitalize(string) {
-  var firstLetter = string.charAt(0);
+export default function uncapitalize(string = '') {
+  const firstLetter = string.charAt(0);
 
   if (firstLetter) {
     return firstLetter.toLowerCase() + string.substring(1);

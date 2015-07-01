@@ -22,16 +22,14 @@ export default Ember.ObjectController.extend(
     }
   },
 
-  cancel: function() {
+  cancel() {
     this.transitionToRoute('users');
   },
 
-  save: function() {
-    var _this = this;
-
+  save() {
     this.get('content').save().then(function(user) {
-      _this.transitionToRoute('user', user);
-    });
+      this.transitionToRoute('user', user);
+    }.bind(this));
   },
 
 });

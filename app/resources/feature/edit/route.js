@@ -6,8 +6,8 @@ export default Ember.Route.extend(
 
   /* TODO - is there a way to rollback nested resources? */
 
-  undoDurationChanges: function() {
-    var stages = this.get('controller.content.stages');
+  undoDurationChanges() {
+    const stages = this.get('controller.content.stages');
 
     stages.forEach(function(stage) {
       if (stage.get('isDirty')) {
@@ -16,7 +16,7 @@ export default Ember.Route.extend(
     });
   }.on('willTransition'),
 
-  model: function() {
+  model() {
     return this.modelFor('feature');
   },
 

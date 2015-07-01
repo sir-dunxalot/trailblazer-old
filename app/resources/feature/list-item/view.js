@@ -11,28 +11,29 @@ export default Ember.View.extend({
   totalDaysDisplayedInRoadmap: Ember.computed.oneWay('controller.numberOfDaysDisplayed'),
   width: math('percentage', 'content.totalDuration', 'totalDaysDisplayedInRoadmap'),
 
-  daysOffset: function() {
-    var featureStartDate = this.get('content.startDate');
-    var roadmapStartDate = this.get('controller.startDate');
+  daysOffset() {
+    const featureStartDate = this.get('content.startDate');
+    const roadmapStartDate = this.get('controller.startDate');
 
     return moment(featureStartDate).diff(roadmapStartDate, 'days');
   }.property('content.startDate', 'controller.startDate'),
 
-  style: function() {
-    var _this = this;
-    var style = '';
+  style() {
+    let style = '';
 
     ['left', 'top', 'width'].forEach(function(property) {
-      style += property + ':' + _this.get(property) + ';';
-    });
+      const value = this.get(property);
+
+      style += `${property}:${value};`;
+    }, this);
 
     return style;
   }.property('left', 'top', 'width'),
 
-  top: function() {
-    var contentIndex = this.get('contentIndex');
-    var numberOfLanes = this.get('controller.numberOfLanes');
-    var lane = ((contentIndex + 1) % numberOfLanes);
+  top() {
+    const contentIndex = this.get('contentIndex');
+    const numberOfLanes = this.get('controller.numberOfLanes');
+    const lane = ((contentIndex + 1) % numberOfLanes);
 
     return MathHelpers.percentage(lane, numberOfLanes + 1);
   }.property('contentIndex'),

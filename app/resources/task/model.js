@@ -1,8 +1,8 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-var attr = DS.attr;
-var belongsTo = DS.belongsTo;
+const { computed } = Ember;
+const { attr, belongsTo } = DS;
 
 export default DS.Model.extend({
   assignee: belongsTo('user', {
@@ -22,5 +22,5 @@ export default DS.Model.extend({
     async: true
   }),
   stage: belongsTo('stage'),
-  stageName: Ember.computed.readOnly('stage.type.name')
+  stageName: computed.readOnly('stage.type.name')
 });

@@ -43,12 +43,6 @@ module.exports = function(environment) {
       routeAfterAuthentication: 'features',
       routeIfAlreadyAuthenticated: 'features'
     },
-
-    sassOptions: {
-      includePaths: [
-        'bower_components/compass-mixins/lib'
-      ]
-    },
   };
 
   if (environment === 'development') {

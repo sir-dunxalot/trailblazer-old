@@ -2,6 +2,8 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-mixin';
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export function initialize(/* container, app */) {
 
   /**
@@ -13,9 +15,9 @@ export function initialize(/* container, app */) {
     Ember.Evented, {
 
     authenticate: true,
-    userId: Ember.computed.readOnly('session.content.uid'),
+    userId: computed.readOnly('session.content.uid'),
 
-    addAuthenticationMixin: function() {
+    addAuthenticationMixin() {
       // So null doesn't add anything
       if (this.get('authenticate')) {
         this.reopen(AuthenticatedRouteMixin);
@@ -49,7 +51,7 @@ export function initialize(/* container, app */) {
       @return true so the action bubbles
       */
 
-      didTransition: function() {
+      didTransition() {
         this.get('controller').trigger('routeDidTransition');
         this.trigger('didTransition');
 
@@ -65,7 +67,7 @@ export function initialize(/* container, app */) {
       @return true so the action bubbles
       */
 
-      willTransition: function() {
+      willTransition() {
         this.get('controller').trigger('routeWillTransition');
         this.trigger('willTransition');
 

@@ -13,13 +13,13 @@ export default Ember.Component.extend({
   sortProperties: ['startDate'],
   startDate: moment().date(1),
 
-  months: function() {
-    var months = Ember.A();
-    var i = 0;
-    var startDate = this.get('startDate');
-    var month = startDate.clone(); // First day of month
-    var max = this.get('numberOfMonths');
-    var totalDays, lastDate;
+  months() {
+    const max = this.get('numberOfMonths');
+    const months = Ember.A();
+    const startDate = this.get('startDate');
+    const month = startDate.clone(); // First day of month
+
+    let i = 0;
 
     while (i < max) {
       months.pushObject(month.format('MMM'));
@@ -29,51 +29,51 @@ export default Ember.Component.extend({
 
     month.subtract(1, 'month'); // TODO - hacky
 
-    lastDate = month.endOf('month').startOf('day');
-    totalDays = lastDate.diff(startDate, 'days');
+    const lastDate = month.endOf('month').startOf('day');
+    const totalDays = lastDate.diff(startDate, 'days');
+
     this.set('numberOfDaysDisplayed', totalDays);
 
     return months;
   }.property('numberOfMonths'),
 
-  maxDate: function() {
-    var features = this.get('features');
-    var endDates = features.mapBy('endDate');
-    var maxDate = new Date(Math.max.apply(null, endDates));
+  maxDate() {
+    const features = this.get('features');
+    const endDates = features.mapBy('endDate');
+    const maxDate = new Date(Math.max.apply(null, endDates));
 
     return maxDate;
   }.property('features.@each.endDate'),
 
-  numberOfDays: function() {
-    var maxDate = this.get('maxDate');
-    var numberOfDays = moment(maxDate).diff(moment(), 'days');
+  numberOfDays() {
+    const maxDate = this.get('maxDate');
+    const numberOfDays = moment(maxDate).diff(moment(), 'days');
 
     return numberOfDays;
   }.property('maxDate'),
 
-  numberOfMonths: function() {
-    var maxDate = this.get('maxDate');
-    var numberOfMonths = moment(maxDate).diff(moment(), 'months');
-    var monthsInViewport = this.get('numberOfMonthsInViewport');
+  numberOfMonths() {
+    const maxDate = this.get('maxDate');
+    const numberOfMonths = moment(maxDate).diff(moment(), 'months');
+    const monthsInViewport = this.get('numberOfMonthsInViewport');
 
     return numberOfMonths < monthsInViewport ? monthsInViewport : numberOfMonths;
   }.property('maxDate'),
 
-  monthStyle: function() {
-    var percentage = MathHelpers.percentage(
-      1,
-      this.get('numberOfMonthsInViewport')
-    );
+  monthStyle() {
+    const monthsInViewport = this.get('numberOfMonthsInViewport');
+    const percentage = MathHelpers.percentage(1, monthsInViewport);
 
-    return 'width:' + percentage + ';';
+    return `width:${percentage};`;
   }.property('numberOfMonthsInViewport'),
 
-  lanes: function() {
-    var i = 0;
-    var lanes = Ember.A();
-    var numberOfLanes = this.get('numberOfLanes');
-    var percentPerLane = 100 / (numberOfLanes + 1);
-    var height = 'height:' + percentPerLane + '%;';
+  lanes() {
+    const lanes = Ember.A();
+    const numberOfLanes = this.get('numberOfLanes');
+    const percentPerLane = 100 / (numberOfLanes + 1);
+    const height = `height:${percentPerLane}%;`;
+
+    let i = 0;
 
     while (i < numberOfLanes) {
 
@@ -87,14 +87,14 @@ export default Ember.Component.extend({
     return lanes;
   }.property('numberOfLanes'),
 
-  todayLineStyle: function() {
-    var today = this.get('today');
-    var startDate = this.get('startDate');
-    var difference = today.diff(startDate, 'days');
-    var numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
-    var left = MathHelpers.percentage(difference, numberOfDaysDisplayed);
+  todayLineStyle() {
+    const numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
+    const today = this.get('today');
+    const startDate = this.get('startDate');
+    const difference = today.diff(startDate, 'days');
+    const left = MathHelpers.percentage(difference, numberOfDaysDisplayed);
 
-    return 'left:' + left + ';';
+    return `left:${left};`;
   }.property('startDate'),
 
 });

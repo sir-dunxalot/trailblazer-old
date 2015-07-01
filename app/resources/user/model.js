@@ -1,8 +1,6 @@
 import DS from 'ember-data';
 
-var attr = DS.attr;
-var belongsTo = DS.belongsTo;
-var hasMany = DS.hasMany;
+const { attr, belongsTo, hasMany } = DS;
 
 export default DS.Model.extend({
   avatarUrl: attr('string'),
@@ -17,10 +15,10 @@ export default DS.Model.extend({
     async: true
   }),
 
-  fullName: function() {
-    var firstName = this.get('firstName').capitalize();
-    var lastName = this.get('lastName').capitalize();
+  fullName() {
+    const firstName = this.get('firstName').capitalize();
+    const lastName = this.get('lastName').capitalize();
 
-    return firstName + ' ' + lastName;
+    return `${firstName} ${lastName}`;
   }.property('firstName', 'lastName'),
 });

@@ -6,8 +6,10 @@
 @return {Boolean} One of two strings depending on whether the dependentKey property is present
 */
 
+import Ember from 'ember';
+
 export default function(dependentKey, ifTrue, ifFalse) {
-  return function() {
+  return Ember.computed(dependentKey, function() {
     return this.get(dependentKey) ? ifTrue : ifFalse;
-  }.property(dependentKey);
+  });
 }

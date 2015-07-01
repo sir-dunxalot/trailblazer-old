@@ -4,7 +4,7 @@ export default Ember.Route.extend({
 
   // TODO - deprecate route?
 
-  model: function() {
+  model() {
     return this.store.find('user');
   }
 

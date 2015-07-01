@@ -1,7 +1,7 @@
 <h1>{{name}}</h1>
 
 <ul>
-  {{#each user in members}}
+  {{#each members as |user|}}
     <li>{{user.firstName}} {{user.lastName}}</li>
   {{else}}
     <li>No teammembers!</li>

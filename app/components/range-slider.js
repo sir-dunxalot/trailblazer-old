@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { run } = Ember;
+
 export default Ember.Component.extend({
   classNames: ['slider_wrapper'],
   lower: null,
@@ -13,11 +15,11 @@ export default Ember.Component.extend({
 
   /* Computed properties */
 
-  lowerDate: function() {
-    var startDate = this.get('startDate');
+  lowerDate() {
+    let startDate = this.get('startDate');
 
     if (startDate) {
-      startDate = moment(this.get('startDate'));
+      startDate = moment(startDate);
 
       return startDate.add(this.get('lower'), 'd');
     } else {
@@ -25,11 +27,11 @@ export default Ember.Component.extend({
     }
   }.property('lower'),
 
-  upperDate: function() {
-    var startDate = this.get('startDate');
+  upperDate() {
+    let startDate = this.get('startDate');
 
     if (startDate) {
-      startDate = moment(this.get('startDate'));
+      startDate = moment(startDate);
 
       return startDate.add(this.get('upper'), 'd');
     } else {
@@ -39,22 +41,21 @@ export default Ember.Component.extend({
 
   /* Methods */
 
-  _cacheMax: function() {
+  _cacheMax() {
     this.set('_previousMax', this.get('max'));
   }.observesBefore('max'),
 
   /* Recalculate values is the min-max range changes */
 
-  calculateRangeValues: function() {
-    var previousMax = this.get('_previousMax');
-    var max, newLowerValue, lowerRatio, newUpperValue, upperRatio;
+  calculateRangeValues() {
+    const previousMax = this.get('_previousMax');
 
     if (previousMax && this.get('rendered')) {
-      max = this.get('max');
-      lowerRatio = this.get('lower') / previousMax;
-      upperRatio = this.get('upper') / previousMax;
-      newLowerValue = Math.round(max * lowerRatio);
-      newUpperValue = Math.round(max * upperRatio);
+      const max = this.get('max');
+      const lowerRatio = this.get('lower') / previousMax;
+      const upperRatio = this.get('upper') / previousMax;
+      const newLowerValue = Math.round(max * lowerRatio);
+      const newUpperValue = Math.round(max * upperRatio);
 
       this.$().val([newLowerValue, newUpperValue]);
 
@@ -68,11 +69,10 @@ export default Ember.Component.extend({
     }
   }.observes('max'),
 
-  renderSlider: function() {
-    var _this = this;
-    var element = this.$().find('.slider');
-    var startDate = _this.get('startDate');
-    var toggles;
+  renderSlider() {
+    const _this = this;
+    const element = this.$().find('.slider');
+    const startDate = this.get('startDate');
 
     element.noUiSlider({
       animate: true,
@@ -95,7 +95,7 @@ export default Ember.Component.extend({
 
     element.on({
       slide: function() {
-        var values = element.val();
+        const values = element.val();
 
         _this.setProperties({
           lower: values[0],
@@ -107,11 +107,11 @@ export default Ember.Component.extend({
     /* Add tooltips */
 
     if (startDate) {
-      toggles = [element.Link('lower'), element.Link('upper')];
+      const toggles = [element.Link('lower'), element.Link('upper')];
 
       toggles.forEach(function(element) {
         element.to('-inline-<div class="slider_date"></div>', function (value) {
-          var date = moment(startDate);
+          let date = moment(startDate);
 
           date = date.add(value, 'd').format('D MMM');
 
@@ -121,13 +121,13 @@ export default Ember.Component.extend({
     }
   },
 
-  setInitialValues: function(context, key) {
+  setInitialValues(context, key) {
     if (key && !this.get(key)) {
       this.set(key, this.get(key));
     } else if (!this.get('rendered') && this.get('upper') && this.get('lower')) {
       this.set('rendered', true);
 
-      Ember.run.scheduleOnce('afterRender', this, function() {
+      run.scheduleOnce('afterRender', this, function() {
         this.renderSlider();
       });
     }

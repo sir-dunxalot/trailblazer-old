@@ -2,14 +2,14 @@ import Ember from 'ember';
 import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
 import uncapitalize from 'trailblazer/utils/uncapitalize';
 
-var computed = Ember.computed;
+const { computed } = Ember;
 
 export default Ember.ObjectController.extend(
   Saving, {
 
   taskIsInTestingStage: computed.equal('stageName', 'testing'),
   testingStages: computed.filterBy('feature.stages', 'type.name', 'testing'),
-  testTaskSelection: Ember.computed.oneWay('testTaskOptionDefault'),
+  testTaskSelection: computed.oneWay('testTaskOptionDefault'),
   testTaskOptionNone: {
     name: 'None',
     value: ''
@@ -19,7 +19,7 @@ export default Ember.ObjectController.extend(
       value: 'unit'
   },
 
-  testTaskOptions: function() {
+  testTaskOptions() {
     return Ember.A([
       this.get('testTaskOptionNone'),
       this.get('testTaskOptionDefault'),
@@ -51,19 +51,19 @@ export default Ember.ObjectController.extend(
     }
   },
 
-  testingStage: function() {
+  testingStage() {
     return this.get('testingStages.firstObject');
   }.property('testingStages.[]'),
 
-  transition: function() {
+  transition() {
     this.transitionToRoute('feature');
   },
 
-  cancel: function() {
+  cancel() {
     this.transition();
   },
 
-  save: function() {
+  save() {
     var _this = this;
 
     /* Save Task */
@@ -76,7 +76,7 @@ export default Ember.ObjectController.extend(
         /* Save feature */
 
         _this.get('feature.content').save().then(function(/* feature */) {
-          var isTestingTask = task.get('stageName') === 'testing';
+          const isTestingTask = task.get('stageName') === 'testing';
 
           if (_this.get('testTaskSelection') && !isTestingTask) {
             _this.get('testingStage').save().then(function() {
@@ -92,13 +92,13 @@ export default Ember.ObjectController.extend(
     });
   },
 
-  saveTestTasks: function() {
-    var _this = this;
-    var feature = _this.get('feature');
-    var numberOfTasksSaved = 0;
+  saveTestTasks() {
+    const feature = _this.get('feature');
+
+    let numberOfTasksSaved = 0;
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var testTask = _this.get('testTaskSelection').value;
+      var testTask = this.get('testTaskSelection').value;
 
       if (!testTask) {
         resolve();
@@ -106,7 +106,7 @@ export default Ember.ObjectController.extend(
 
       if (testTask === 'both') {
         ['unit', 'integration'].forEach(function(type) {
-          _this.createTestTask(type).save().then(function(task) {
+          this.createTestTask(type).save().then(function(task) {
             numberOfTasksSaved++;
 
             feature.get('tasks').pushObject(task);
@@ -115,30 +115,29 @@ export default Ember.ObjectController.extend(
               resolve();
             }
           }, reject);
-        });
+        }, this);
       } else {
-        _this.createTestTask(testTask).save().then(function(task) {
+        this.createTestTask(testTask).save().then(function(task) {
           feature.get('tasks').pushObject(task);
 
           resolve();
         }, reject);
       }
-    });
+    }.bind(this));
   },
 
-  createTestTask: function(type) {
-    var _this = this;
-    var taskName = uncapitalize(_this.get('name'));
-    var testTaskName = type.capitalize() + ' test for ' + taskName;
+  createTestTask(type) {
+    const taskName = uncapitalize(this.get('name'));
+    const testTaskName = type.capitalize() + ' test for ' + taskName;
 
-    return _this.store.createRecord('task', {
+    return this.store.createRecord('task', {
       name: testTaskName,
       assignee: _this.get('assignee'),
-      stage: _this.get('testingStage')
+      stage: this.get('testingStage')
     });
   },
 
-  resetTestingTaskSelection: function() {
+  resetTestingTaskSelection() {
     if (this.get('taskIsInTestingStage')) {
       this.set('testTaskSelection', this.get('testTaskOptionNone'));
     }
@@ -146,14 +145,12 @@ export default Ember.ObjectController.extend(
 
   // TODO - remember stage, assignee, and test task
 
-  setDefaultStage: function() {
-    var _this = this;
+  setDefaultStage() {
+    this.get('feature.stages').then(function(stages) {
+      const stage = stages.objectAt(1);
 
-    _this.get('feature.stages').then(function(stages) {
-      var stage = stages.objectAt(1);
-
-      _this.set('stage', stage);
-    });
+      this.set('stage', stage);
+    }.bind(this));
   }.observes('stages.[]'),
 
 });

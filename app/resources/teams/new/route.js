@@ -4,8 +4,8 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   DeleteRecord, {
 
-  afterModel: function(model) {
-    var userId = this.get('userId');
+  afterModel(model) {
+    const userId = this.get('userId');
 
     /* Add the user to the team model */
 
@@ -14,7 +14,7 @@ export default Ember.Route.extend(
     });
   },
 
-  model: function() {
+  model() {
     return this.store.createRecord('team');
   },
 

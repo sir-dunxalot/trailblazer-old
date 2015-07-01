@@ -4,8 +4,8 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   DeleteRecord, {
 
-  model: function() {
-    var feature = this.modelFor('feature');
+  model() {
+    const feature = this.modelFor('feature');
 
     return this.store.createRecord('task', {
       assignee: this.get('session.currentUser'),
@@ -13,8 +13,8 @@ export default Ember.Route.extend(
     });
   },
 
-  setupController: function(controller, model) {
-    var users = this.store.find('user', {
+  setupController(controller, model) {
+    const users = this.store.find('user', {
       team: this.get('session.currentTeam')
     });
 

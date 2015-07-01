@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import config from './config/environment';
 
-var Router = Ember.Router.extend({
+const Router = Ember.Router.extend({
   location: config.locationType
 });
 
@@ -10,24 +10,24 @@ Router.map(function() {
   // TODO - remove
   this.route('about');
 
-  this.resource('users', function() {
+  this.route('users', function() {
     this.route('new');
 
-    this.resource('user', { path: '/:user_id' }, function() {
+    this.route('user', { path: '/:user_id' }, function() {
       this.route('edit');
     });
   });
 
-  this.resource('features', function() {
+  this.route('features', function() {
     this.route('new');
 
-    this.resource('feature', { path: '/:feature_id' }, function() {
+    this.route('feature', { path: '/:feature_id' }, function() {
       this.route('edit');
 
-      this.resource('tasks', function() {
+      this.route('tasks', function() {
         this.route('new');
 
-        this.resource('task', { path: '/:task_id' }, function() {
+        this.route('task', { path: '/:task_id' }, function() {
           this.route('edit');
         });
       });
@@ -37,14 +37,14 @@ Router.map(function() {
   this.route('settings');
   this.route('sign-in'); // TODO - Deprecate
 
-  this.resource('stage-types', function() {
+  this.route('stage-types', function() {
     this.route('new');
   });
 
-  this.resource('teams', function() {
+  this.route('teams', function() {
     this.route('new');
 
-    this.resource('team', { path: '/:team_id' }, function() {
+    this.route('team', { path: '/:team_id' }, function() {
 
     });
   });

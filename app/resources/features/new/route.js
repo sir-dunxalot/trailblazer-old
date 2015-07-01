@@ -14,10 +14,10 @@ export default Ember.Route.extend(
   //   })
   // }.on('willTransition'),
 
-  afterModel: function(newFeature) {
-    var store = this.store;
-    var duration = newFeature.get('totalDuration');
-    var durations = [
+  afterModel(newFeature) {
+    const store = this.store;
+    const duration = newFeature.get('totalDuration');
+    const durations = [
       duration * 0.2,
       duration * 0.6,
       duration * 0.2
@@ -26,7 +26,7 @@ export default Ember.Route.extend(
     store.find('stageType').then(function(types) {
 
       types.forEach(function(type, i) {
-        var stage = store.createRecord('stage', {
+        const stage = store.createRecord('stage', {
           duration: Math.round(durations[i]),
           feature: newFeature,
           type: type
@@ -37,9 +37,8 @@ export default Ember.Route.extend(
     });
   },
 
-  beforeModel: function(transition, queryParams) {
-    var _this = this;
-    var userId = this.get('userId');
+  beforeModel(transition, queryParams) {
+    const userId = this.get('userId');
 
     this._super(transition, queryParams);
 
@@ -48,12 +47,12 @@ export default Ember.Route.extend(
     this.store.find('user', userId).then(function(user) {
       if (!user.get('team')) {
         transition.abort();
-        _this.transitionTo('user.edit', user);
+        this.transitionTo('user.edit', user);
       }
-    });
+    }.bind(this));
   },
 
-  model: function() {
+  model() {
     return this.store.createRecord('feature', {
       team: this.get('curentUser.team')
     });

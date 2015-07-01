@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
+const { run } = Ember;
+
 export default Ember.ArrayController.extend({
   tourShown: false,
 
-  renderTour: function() {
-    var tour = introJs();
-    var selector = function(name) {
-      return '[data-tour="' + name + '"]';
+  renderTour() {
+    const tour = introJs();
+    const selector = function(name) {
+      return `[data-tour="${name}"]`;
     };
 
     tour.setOptions({
@@ -34,7 +36,7 @@ export default Ember.ArrayController.extend({
       skipLabel: 'Close',
     });
 
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    run.scheduleOnce('afterRender', this, function() {
       tour.start();
     });
   },

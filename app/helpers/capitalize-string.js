@@ -1,8 +1,5 @@
-import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
 
-export default Ember.Handlebars.makeBoundHelper(function(string) {
-  string = defaultFor(string, '');
-
+export default Ember.Handlebars.makeBoundHelper(function(string = '') {
   return string.capitalize();
 });

@@ -5,15 +5,15 @@ export default Ember.ObjectController.extend({
   needs: ['feature/index'],
   shouldShow: true,
 
-  observeShowPersonal: function() {
-    var currentUserID = this.get('session.currentUser.id');
-    var task = this.get('content');
-    var assigneeID = task.get('assignee.id');
-    var showPersonal = this.get('featureController.showPersonal');
-    var shouldShowIfPersonal = showPersonal && currentUserID === assigneeID;
-    var completed = this.get('content.completed');
-    var showCompleted = this.get('featureController.showCompleted');
-    var shouldShowIfCompleted = completed && showCompleted;
+  observeShowPersonal() {
+    const currentUserID = this.get('session.currentUser.id');
+    const task = this.get('content');
+    const assigneeID = task.get('assignee.id');
+    const showPersonal = this.get('featureController.showPersonal');
+    const shouldShowIfPersonal = showPersonal && currentUserID === assigneeID;
+    const completed = this.get('content.completed');
+    const showCompleted = this.get('featureController.showCompleted');
+    const shouldShowIfCompleted = completed && showCompleted;
 
     if (currentUserID !== assigneeID) {
       this.set('featureController.showPersonalToggle', true);

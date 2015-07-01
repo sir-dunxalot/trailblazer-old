@@ -10,24 +10,23 @@ export default Ember.ObjectController.extend(
     },
   },
 
-  cancel: function() {
+  cancel() {
     this.transitionToRoute('teams');
   },
 
-  save: function() {
-    var _this = this;
+  save() {
 
     /* Save the new team then add the team to the
     user's model */
 
     this.get('content').save().then(function(team) {
-      var user = team.get('members.firstObject');
+      const user = team.get('members.firstObject');
 
       user.set('team', team);
       user.save().then(function() {
-        _this.transitionToRoute('team', team);
+        this.transitionToRoute('team', team);
       });
-    });
+    }.bind(this));
   },
 
 });

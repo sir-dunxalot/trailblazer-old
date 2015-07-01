@@ -1,7 +1,7 @@
 <h2>Teams</h2>
 
 <ul>
-  {{#each team in content}}
+  {{#each content as |team|}}
     <li>{{#link-to 'team' team}}{{team.name}}{{/link-to}}</li>
   {{else}}
     <li>No teams!</li>

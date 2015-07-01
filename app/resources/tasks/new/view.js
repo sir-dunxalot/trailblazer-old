@@ -7,5 +7,4 @@ export default Ember.View.extend(
   Submitting, {
 
   classNameBindings: ['controller.stage.type.name'],
-
 });

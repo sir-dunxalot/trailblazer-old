@@ -27,21 +27,21 @@ export default Ember.ObjectController.extend(
 
   },
 
-  teamHint: function () {
+  teamHint() {
     return defaultFor(
       'You are currently a member of ' + this.get('team.name'),
       'Don\'t know your team ID? Ask a colleague'
     );
   }.property('team.name'),
 
-  cancel: function() {
+  cancel() {
     this.transitionToRoute('settings');
   },
 
-  save: function() {
-    var _this = this;
-    var teamId = _this.get('teamId');
-    var save = function() {
+  save() {
+    const _this = this;
+    const teamId = this.get('teamId');
+    const save = function() {
       _this.get('content').save().then(function(/* user */) {
         _this.transitionToRoute('settings');
       });

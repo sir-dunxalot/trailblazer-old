@@ -3,20 +3,18 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-var attr = DS.attr;
-var belongsTo = DS.belongsTo;
-var hasMany = DS.hasMany;
+const { attr, belongsTo, hasMany } = DS;
 
 export default DS.Model.extend({
   createdAt: attr('date', {
-    defaultValue: function() {
+    defaultValue() {
       return new Date();
     }
   }),
   // TODO - update all places to use this CM
   completedTasks: Ember.computed.filterBy('tasks', 'completed', true),
   endDate: attr('date', {
-    defaultValue: function() {
+    defaultValue() {
       return moment().add(30, 'days').toDate();
     }
   }),
@@ -26,7 +24,7 @@ export default DS.Model.extend({
     async: true
   }),
   startDate: attr('date', {
-    defaultValue: function() {
+    defaultValue() {
       return new Date();
     }
   }),
@@ -38,9 +36,9 @@ export default DS.Model.extend({
   }),
 
   // TODO - Change to totalDays
-  totalDuration: function() {
-    var endDate = moment(this.get('endDate'));
-    var startDate = moment(this.get('startDate'));
+  totalDuration() {
+    const endDate = moment(this.get('endDate'));
+    const startDate = moment(this.get('startDate'));
 
     return endDate.diff(startDate, 'days');
   }.property('startDate', 'endDate'),

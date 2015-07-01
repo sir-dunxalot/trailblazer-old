@@ -4,14 +4,13 @@ export default TaskController.extend({
 
   // TODO - Delete method
 
-  save: function() {
-    var _this = this;
+  save() {
 
     // TODO - save task on assignee here
 
-    _this.get('content').save().then(function(/* task */) {
-      _this.transition();
-    });
+    this.get('content').save().then(function(/* task */) {
+      this.transition();
+    }.bind(this));
   },
 
   setDefaultStage: null

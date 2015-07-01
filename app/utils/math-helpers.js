@@ -4,36 +4,36 @@ export default {
 
   /* Allows value of zero to return true */
 
-  isNumber: function(maybeNumber) {
+  isNumber(maybeNumber) {
     return Ember.typeOf(maybeNumber) === 'number';
   },
 
   /* Maths methods */
 
-  add: function(a, b) {
+  add(a, b) {
     return a + b;
   },
 
-  divide: function(a, b) {
+  divide(a, b) {
     return a / b;
   },
 
-  multiply: function(a, b) {
+  multiply(a, b) {
     return a * b;
   },
 
-  percentage: function(a, b, returnNumber) {
-    var result = a === 0 ? 0 : this.divide(a, b) * 100;
-    var affix = returnNumber === false ? 0 : '%';
+  percentage(a, b, returnNumber) {
+    const result = a === 0 ? 0 : this.divide(a, b) * 100;
+    const affix = returnNumber === false ? 0 : '%';
 
     return result + affix;
   },
 
-  round: function(a) {
+  round(a) {
     return Math.round(a);
   },
 
-  subtract: function(a, b) {
+  subtract(a, b) {
     return a - b;
   },
 

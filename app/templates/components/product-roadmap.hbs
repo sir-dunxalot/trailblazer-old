@@ -3,7 +3,7 @@
 <h2 class="hidden">Dates</h2>
 
 <ol class="roadmap_months">
-  {{#each month in months}}
+  {{#each months as |month|}}
     <li class="roadmap_month" {{bind-attr style=monthStyle}}>
       {{month}}
     </li>
@@ -18,7 +18,7 @@
 {{/if}}
 
 <div class="roadmap_lanes">
-  {{#each lane in lanes}}
+  {{#each lanes as |lane|}}
     <span class="roadmap_lane" {{bind-attr style=lane.style}}>
     </span>
   {{/each}}

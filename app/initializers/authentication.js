@@ -92,7 +92,7 @@ export function initialize(container /*, app */) {
     currentTeam: null,
     currentUser: null,
 
-    setCurrentUser: function() {
+    setCurrentUser: Ember.observer('uid', function() {
       var store = container.lookup('store:main');
       var _this = this;
       var userId = this.get('uid');
@@ -105,7 +105,7 @@ export function initialize(container /*, app */) {
           });
         });
       }
-    }.observes('uid')
+    })
 
   });
 }

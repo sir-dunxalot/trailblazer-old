@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export function initialize(container, app) {
 
   Ember.ControllerMixin.reopen(
     Ember.Evented, {
 
-    userId: Ember.computed.readOnly('session.content.uid'),
+    userId: computed.readOnly('session.content.uid'),
     dateFormat: app.dateFormat,
     shortDateFormat: app.shortDateFormat
 

@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   tagName: 'label',
   label: null,
 
-  className: function() {
+  className() {
     return this.get('label').dasherize();
   }.property('label'),
 });

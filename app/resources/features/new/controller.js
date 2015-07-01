@@ -26,13 +26,12 @@ export default Ember.ObjectController.extend(
 
   /* Methods */
 
-  cancel: function() {
+  cancel() {
     this.transitionToRoute('index');
   },
 
-  save: function() {
-    var _this = this;
-    var feature = this.get('content');
+  save() {
+    const feature = this.get('content');
 
     this.get('stages').forEach(function(stage) {
       stage.set('feature', feature);
@@ -40,19 +39,18 @@ export default Ember.ObjectController.extend(
     });
 
     feature.save().then(function(feature) {
-      _this.transitionToRoute('feature', feature);
-    });
+      this.transitionToRoute('feature', feature);
+    }.bind(this));
   },
 
   // TODO - redo how the durations are bound
 
-  setStageDurations: function() {
-    var lower = this.get('lowerDuration');
-    var upper = this.get('upperDuration');
-    var hash;
+  setStageDurations() {
+    const lower = this.get('lowerDuration');
+    const upper = this.get('upperDuration');
 
     if (lower && upper) {
-      hash = {
+      const hash = {
         research: lower,
         development: upper - lower,
         testing: this.get('totalDuration') - upper
@@ -67,24 +65,21 @@ export default Ember.ObjectController.extend(
 
   }.observes('lowerDuration', 'upperDuration'),
 
-  setDurations: function() {
-    var _this = this;
-
+  setDurations() {
     this.get('stages').then(function(stages) {
       var researchStage = stages.objectAt(0);
       var developmentStage = stages.objectAt(1);
-      var lower, upper;
 
       if (researchStage) {
-        lower = researchStage.get('duration');
-        upper = lower + developmentStage.get('duration');
+        const lower = researchStage.get('duration');
+        const upper = lower + developmentStage.get('duration');
 
-        _this.setProperties({
+        this.setProperties({
           lowerDuration: lower,
           upperDuration: upper
         });
       }
-    });
+    }.bind(this));
 
   }.observes('stages.[]'),
 

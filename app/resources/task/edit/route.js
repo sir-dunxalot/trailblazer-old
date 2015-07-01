@@ -4,12 +4,12 @@ import Ember from 'ember';
 export default Ember.Route.extend(
   Rollback, {
 
-  model: function() {
+  model() {
     return this.modelFor('task');
   },
 
-  setupController: function(controller, model) {
-    var users = this.store.find('user', {
+  setupController(controller, model) {
+    const users = this.store.find('user', {
       team: this.get('session.currentTeam')
     });
 

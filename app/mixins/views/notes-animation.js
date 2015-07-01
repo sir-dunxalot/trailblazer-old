@@ -1,24 +1,28 @@
 import Ember from 'ember';
 
+const { computed, run } = Ember;
+
 export default Ember.Mixin.create({
-  showNotes: Ember.computed.bool('controller.notes'),
+  showNotes: computed.bool('controller.notes'),
 
   actions: {
-    addNotes: function() {
+    addNotes() {
       this.revealNotes();
     }
   },
 
-  revealNotes: function() {
+  revealNotes() {
     this.set('showNotes', true);
 
-    Ember.run.next(this, function() {
-      this.$().find('.notes .input-textarea').velocity('slideDown', {
+    run.next(this, function() {
+      const jqueryElement = this.$();
+
+      jqueryElement.find('.notes .input-textarea').velocity('slideDown', {
         duration: 300,
         display: 'block'
       });
 
-      this.$().find('.notes.control').velocity({
+      jqueryElement.find('.notes.control').velocity({
         opacity: 1,
       }, {
         duration: 300,
