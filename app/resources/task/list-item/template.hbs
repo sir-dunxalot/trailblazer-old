@@ -1,10 +1,10 @@
-<li {{bind-attr class=':task_item task.completed controller.shouldShow::hidden'}}>
+<li class="task_item {{task.completed}} {{unless controller.shouldShow 'hidden'}}">
 
   <div class="task_name">
     {{capitalize-string task.name}}
 
     {{#if showPersonalToggle}}
-      <span {{bind-attr class=':assignee_name showPersonal:fade-out:fade-in'}}>
+      <span class="assignee_name {{if showPersonal 'fade-out' 'fade-in'}}">
         {{task.assignee.firstName}}
       </span>
     {{/if}}
@@ -18,7 +18,7 @@
     {{/link-to}}
 
     <button
-      {{bind-attr class=":complete_button task.completed:sub"}}
+      class="complete_button {{if task.completed 'sub'}}"
       {{action 'toggleTaskCompletion' task}}
       title="Complete this task"
     >

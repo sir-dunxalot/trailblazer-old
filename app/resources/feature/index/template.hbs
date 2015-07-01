@@ -16,17 +16,17 @@
 
   {{progress-bar value=completedTasks.length max=tasks.length}}
 
-  <dl {{bind-attr class=':dates_list datePositionsSet:fade-in'}}>
+  <dl class="dates_list {{if datePositionsSet 'fade-in'}}">
     <dt class="hidden">Feature start date</dt>
     <dd>{{moment startDate shortDateFormat}}</dd>
 
     <dt class="hidden">Development start date</dt>
-    <dd class="lower_date" {{bind-attr style=lowerDatePosition}}>
+    <dd class="lower_date" style="{{lowerDatePosition}}">
       {{moment lowerDate shortDateFormat}}
     </dd>
 
     <dt class="hidden">Testing start date</dt>
-    <dd class="upper_date" {{bind-attr style=upperDatePosition}}>
+    <dd class="upper_date" style="{{upperDatePosition}}">
       {{moment upperDate shortDateFormat}}
     </dd>
 
@@ -38,10 +38,10 @@
 
 <h2 class="hidden">Stages</h2>
 
-<ul {{bind-attr class=':stages_list datePositionsSet:fade-in'}}>
+<ul class="stages_list {{if datePositionsSet 'fade-in'}}">
   {{#each stages as stage itemViewClass='stage-block'}}
     <h3 class="hidden">{{stage.type.name}}</h3>
-    <div class="progress" {{bind-attr style='view.progressStyle'}}>
+    <div class="progress" style="{{view.progressStyle}}">
     </div>
     <dl>
       <dt>
@@ -87,7 +87,7 @@
   {{/link-to}}
 
   {{#if showResearch}}
-    <ul {{bind-attr class=':tasks_list-research showCompleted'}}>
+    <ul class="tasks_list-research {{showCompleted}}">
       {{#each task in researchTasks itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
@@ -95,7 +95,7 @@
   {{/if}}
 
   {{#if showDevelopment}}
-    <ul {{bind-attr class=':tasks_list-development showCompleted'}}>
+    <ul class="tasks_list-development {{showCompleted}}">
       {{#each developmentTasks as task itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}
@@ -103,7 +103,7 @@
   {{/if}}
 
   {{#if showTesting}}
-    <ul {{bind-attr class=':tasks_list-testing showCompleted'}}>
+    <ul class="tasks_list-testing {{showCompleted}}">
       {{#each testingTasks as task itemController='task/list-item'}}
         {{partial 'task/list-item'}}
       {{/each}}

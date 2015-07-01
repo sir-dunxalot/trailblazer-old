@@ -4,14 +4,14 @@
 
 <ol class="roadmap_months">
   {{#each months as |month|}}
-    <li class="roadmap_month" {{bind-attr style=monthStyle}}>
+    <li class="roadmap_month" style="{{monthStyle}}">
       {{month}}
     </li>
   {{/each}}
 </ol>
 
 {{#if todayLineStyle}}
-  <dl class="roadmap_today" {{bind-attr style=todayLineStyle}}>
+  <dl class="roadmap_today" style="{{todayLineStyle}}">
     <dd class="hidden">Current Date</dd>
     <dd class="hidden">{{moment today}}</dd>
   </dl>
@@ -19,7 +19,7 @@
 
 <div class="roadmap_lanes">
   {{#each lanes as |lane|}}
-    <span class="roadmap_lane" {{bind-attr style=lane.style}}>
+    <span class="roadmap_lane" style="{{lane.style}}">
     </span>
   {{/each}}
 </div>
