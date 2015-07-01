@@ -30,7 +30,7 @@ export default Ember.ObjectController.extend({
   upperDate: null,
   upperDuration: null,
 
-  lowerDatePosition() {
+  lowerDatePosition: Ember.computed('lowerDuration', 'totalDuration', function() {
     const { lowerDuration, totalDuration } = this.getProperties(
       [ 'lowerDuration', 'totalDuration' ]
     );
@@ -40,9 +40,9 @@ export default Ember.ObjectController.extend({
     );
 
     return `left:${percentage};`;
-  }.property('lowerDuration', 'totalDuration'),
+  }),
 
-  upperDatePosition() {
+  upperDatePosition: Ember.computed('upperDuration', 'totalDuration', function() {
     const { totalDuration, upperDuration } = this.getProperties(
       [ 'totalDuration', 'upperDuration' ]
     );
@@ -52,7 +52,7 @@ export default Ember.ObjectController.extend({
     );
 
     return `left:${percentage};`;
-  }.property('upperDuration', 'totalDuration'),
+  }),
 
   actions: {
     toggleTaskCompletion(task) {
@@ -63,7 +63,7 @@ export default Ember.ObjectController.extend({
     },
   },
 
-  setDates() {
+  setDates: Ember.observer('stages.@each.duration', function() {
     const _this = this;
 
     _this.get('stages').then(function(stages) {
@@ -93,6 +93,6 @@ export default Ember.ObjectController.extend({
         });
       });
     });
-  }.observes('stages.@each.duration'),
+  }),
 
 });

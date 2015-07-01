@@ -36,10 +36,10 @@ export default DS.Model.extend({
   }),
 
   // TODO - Change to totalDays
-  totalDuration() {
+  totalDuration: Ember.computed('startDate', 'endDate', function() {
     const endDate = moment(this.get('endDate'));
     const startDate = moment(this.get('startDate'));
 
     return endDate.diff(startDate, 'days');
-  }.property('startDate', 'endDate'),
+  }),
 });

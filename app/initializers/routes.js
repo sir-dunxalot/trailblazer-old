@@ -17,14 +17,14 @@ export function initialize(/* container, app */) {
     authenticate: true,
     userId: computed.readOnly('session.content.uid'),
 
-    addAuthenticationMixin() {
+    addAuthenticationMixin: Ember.on('init', function() {
       // So null doesn't add anything
       if (this.get('authenticate')) {
         this.reopen(AuthenticatedRouteMixin);
       } else if (this.get('authenticate') === false) {
         this.reopen(UnauthenticatedRouteMixin);
       }
-    }.on('init'),
+    }),
 
     /**
     @ISSUE https://github.com/emberjs/ember.js/issues/5394
@@ -51,7 +51,7 @@ export function initialize(/* container, app */) {
       @return true so the action bubbles
       */
 
-      didTransition() {
+      didTransition: function() {
         this.get('controller').trigger('routeDidTransition');
         this.trigger('didTransition');
 
@@ -67,7 +67,7 @@ export function initialize(/* container, app */) {
       @return true so the action bubbles
       */
 
-      willTransition() {
+      willTransition: function() {
         this.get('controller').trigger('routeWillTransition');
         this.trigger('willTransition');
 

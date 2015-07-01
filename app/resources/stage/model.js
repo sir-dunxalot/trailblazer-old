@@ -17,7 +17,7 @@ export default DS.Model.extend({
     async: true
   }),
 
-  completedPercentage() {
+  completedPercentage: Ember.computed('tasks.length', 'completedTasks.length', function() {
     const tasksLength = this.get('tasks.length');
     const completedTasksLength = this.get('completedTasks.length');
 
@@ -25,5 +25,5 @@ export default DS.Model.extend({
       completedTasksLength,
       tasksLength
     );
-  }.property('tasks.length', 'completedTasks.length')
+  })
 });

@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 const { attr, belongsTo, hasMany } = DS;
@@ -15,10 +16,10 @@ export default DS.Model.extend({
     async: true
   }),
 
-  fullName() {
+  fullName: Ember.computed('firstName', 'lastName', function() {
     const firstName = this.get('firstName').capitalize();
     const lastName = this.get('lastName').capitalize();
 
     return `${firstName} ${lastName}`;
-  }.property('firstName', 'lastName'),
+  }),
 });

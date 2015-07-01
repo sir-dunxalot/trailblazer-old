@@ -15,7 +15,7 @@ export default Ember.Component.extend({
 
   /* Computed properties */
 
-  lowerDate() {
+  lowerDate: Ember.computed('lower', function() {
     let startDate = this.get('startDate');
 
     if (startDate) {
@@ -25,9 +25,9 @@ export default Ember.Component.extend({
     } else {
       return null;
     }
-  }.property('lower'),
+  }),
 
-  upperDate() {
+  upperDate: Ember.computed('upper', function() {
     let startDate = this.get('startDate');
 
     if (startDate) {
@@ -37,17 +37,17 @@ export default Ember.Component.extend({
     } else {
       return null;
     }
-  }.property('upper'),
+  }),
 
   /* Methods */
 
-  _cacheMax() {
+  _cacheMax: function() {
     this.set('_previousMax', this.get('max'));
   }.observesBefore('max'),
 
   /* Recalculate values is the min-max range changes */
 
-  calculateRangeValues() {
+  calculateRangeValues: Ember.observer('max', function() {
     const previousMax = this.get('_previousMax');
 
     if (previousMax && this.get('rendered')) {
@@ -67,9 +67,9 @@ export default Ember.Component.extend({
         upper: newUpperValue
       });
     }
-  }.observes('max'),
+  }),
 
-  renderSlider() {
+  renderSlider: function() {
     const _this = this;
     const element = this.$().find('.slider');
     const startDate = this.get('startDate');
@@ -121,16 +121,19 @@ export default Ember.Component.extend({
     }
   },
 
-  setInitialValues(context, key) {
-    if (key && !this.get(key)) {
-      this.set(key, this.get(key));
-    } else if (!this.get('rendered') && this.get('upper') && this.get('lower')) {
-      this.set('rendered', true);
+  setInitialValues: Ember.on(
+    'didInsertElement',
+    Ember.observer('lower', 'upper', function(context, key) {
+      if (key && !this.get(key)) {
+        this.set(key, this.get(key));
+      } else if (!this.get('rendered') && this.get('upper') && this.get('lower')) {
+        this.set('rendered', true);
 
-      run.scheduleOnce('afterRender', this, function() {
-        this.renderSlider();
-      });
-    }
-  }.observes('lower', 'upper').on('didInsertElement'),
+        run.scheduleOnce('afterRender', this, function() {
+          this.renderSlider();
+        });
+      }
+    })
+  ),
 
 });

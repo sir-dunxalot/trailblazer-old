@@ -45,7 +45,7 @@ export default Ember.ObjectController.extend(
 
   // TODO - redo how the durations are bound
 
-  setStageDurations() {
+  setStageDurations: Ember.observer('lowerDuration', 'upperDuration', function() {
     const lower = this.get('lowerDuration');
     const upper = this.get('upperDuration');
 
@@ -63,9 +63,9 @@ export default Ember.ObjectController.extend(
       });
     }
 
-  }.observes('lowerDuration', 'upperDuration'),
+  }),
 
-  setDurations() {
+  setDurations: Ember.observer('stages.[]', function() {
     this.get('stages').then(function(stages) {
       var researchStage = stages.objectAt(0);
       var developmentStage = stages.objectAt(1);
@@ -81,6 +81,6 @@ export default Ember.ObjectController.extend(
       }
     }.bind(this));
 
-  }.observes('stages.[]'),
+  }),
 
 });

@@ -27,12 +27,12 @@ export default Ember.ObjectController.extend(
 
   },
 
-  teamHint() {
+  teamHint: Ember.computed('team.name', function() {
     return defaultFor(
       'You are currently a member of ' + this.get('team.name'),
       'Don\'t know your team ID? Ask a colleague'
     );
-  }.property('team.name'),
+  }),
 
   cancel() {
     this.transitionToRoute('settings');

@@ -19,7 +19,7 @@ export default Ember.ObjectController.extend(
       value: 'unit'
   },
 
-  testTaskOptions() {
+  testTaskOptions: Ember.computed('testTaskOptionNone', 'testTaskOptionDefault', function() {
     return Ember.A([
       this.get('testTaskOptionNone'),
       this.get('testTaskOptionDefault'),
@@ -31,7 +31,7 @@ export default Ember.ObjectController.extend(
         value: 'both'
       }
     ]);
-  }.property('testTaskOptionNone', 'testTaskOptionDefault'),
+  }),
 
   validations: {
     stage: {
@@ -51,9 +51,9 @@ export default Ember.ObjectController.extend(
     }
   },
 
-  testingStage() {
+  testingStage: Ember.computed('testingStages.[]', function() {
     return this.get('testingStages.firstObject');
-  }.property('testingStages.[]'),
+  }),
 
   transition() {
     this.transitionToRoute('feature');
@@ -137,20 +137,20 @@ export default Ember.ObjectController.extend(
     });
   },
 
-  resetTestingTaskSelection() {
+  resetTestingTaskSelection: Ember.observer('taskIsInTestingStage', function() {
     if (this.get('taskIsInTestingStage')) {
       this.set('testTaskSelection', this.get('testTaskOptionNone'));
     }
-  }.observes('taskIsInTestingStage'),
+  }),
 
   // TODO - remember stage, assignee, and test task
 
-  setDefaultStage() {
+  setDefaultStage: Ember.observer('stages.[]', function() {
     this.get('feature.stages').then(function(stages) {
       const stage = stages.objectAt(1);
 
       this.set('stage', stage);
     }.bind(this));
-  }.observes('stages.[]'),
+  }),
 
 });

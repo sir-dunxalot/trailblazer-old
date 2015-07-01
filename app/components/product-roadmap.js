@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   sortProperties: ['startDate'],
   startDate: moment().date(1),
 
-  months() {
+  months: Ember.computed('numberOfMonths', function() {
     const max = this.get('numberOfMonths');
     const months = Ember.A();
     const startDate = this.get('startDate');
@@ -35,39 +35,39 @@ export default Ember.Component.extend({
     this.set('numberOfDaysDisplayed', totalDays);
 
     return months;
-  }.property('numberOfMonths'),
+  }),
 
-  maxDate() {
+  maxDate: Ember.computed('features.@each.endDate', function() {
     const features = this.get('features');
     const endDates = features.mapBy('endDate');
     const maxDate = new Date(Math.max.apply(null, endDates));
 
     return maxDate;
-  }.property('features.@each.endDate'),
+  }),
 
-  numberOfDays() {
+  numberOfDays: Ember.computed('maxDate', function() {
     const maxDate = this.get('maxDate');
     const numberOfDays = moment(maxDate).diff(moment(), 'days');
 
     return numberOfDays;
-  }.property('maxDate'),
+  }),
 
-  numberOfMonths() {
+  numberOfMonths: Ember.computed('maxDate', function() {
     const maxDate = this.get('maxDate');
     const numberOfMonths = moment(maxDate).diff(moment(), 'months');
     const monthsInViewport = this.get('numberOfMonthsInViewport');
 
     return numberOfMonths < monthsInViewport ? monthsInViewport : numberOfMonths;
-  }.property('maxDate'),
+  }),
 
-  monthStyle() {
+  monthStyle: Ember.computed('numberOfMonthsInViewport', function() {
     const monthsInViewport = this.get('numberOfMonthsInViewport');
     const percentage = MathHelpers.percentage(1, monthsInViewport);
 
     return `width:${percentage};`;
-  }.property('numberOfMonthsInViewport'),
+  }),
 
-  lanes() {
+  lanes: Ember.computed('numberOfLanes', function() {
     const lanes = Ember.A();
     const numberOfLanes = this.get('numberOfLanes');
     const percentPerLane = 100 / (numberOfLanes + 1);
@@ -85,9 +85,9 @@ export default Ember.Component.extend({
     }
 
     return lanes;
-  }.property('numberOfLanes'),
+  }),
 
-  todayLineStyle() {
+  todayLineStyle: Ember.computed('startDate', function() {
     const numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
     const today = this.get('today');
     const startDate = this.get('startDate');
@@ -95,6 +95,6 @@ export default Ember.Component.extend({
     const left = MathHelpers.percentage(difference, numberOfDaysDisplayed);
 
     return `left:${left};`;
-  }.property('startDate'),
+  }),
 
 });

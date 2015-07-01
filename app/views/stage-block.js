@@ -7,7 +7,7 @@ export default Ember.View.extend({
   classNames: ['stage_block'],
   tagName: 'li',
 
-  style() {
+  style: Ember.computed('content.tasks.length', 'content.feature.tasks.length', function() {
     const content = this.get('content');
     const stageDuration = content.get('duration');
     const totalDuration = content.get('feature.totalDuration');
@@ -17,12 +17,12 @@ export default Ember.View.extend({
     );
 
     return `width:${percentage};`;
-  }.property('content.tasks.length', 'content.feature.tasks.length'),
+  }),
 
-  progressStyle() {
+  progressStyle: Ember.computed('content.completedPercentage', function() {
     const completedPercentage = this.get('content.completedPercentage');
 
     return `width:${completedPercentage};`;
-  }.property('content.completedPercentage')
+  })
 
 });
