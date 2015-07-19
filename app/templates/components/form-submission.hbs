@@ -1,23 +1,33 @@
-{{#if formSubmitted}}
-  {{loading-spinner}}
-{{else}}
-
-  {{#if cancel}}
-    {{!-- TODO - Remvoe temporary hack for lack of scopeless helpers --}}
-    <button
-      {{action 'cancel' target='view.parentView.parentView.parentView'}}
-      class="button-secondary"
-      type="reset"
-    >
-      {{cancelText}}
-    </button>
-  {{/if}}
-
-  {{#if submit}}
-    <button class="button-primary" type="submit">
-      <span class="icon-check"></span>
-      <span class="text">{{submitText}}</span>
-    </button>
-  {{/if}}
-
+{{#if cancel}}
+  {{form-submission-button
+    action=cancelAction
+    className='button-secondary'
+    disabled=formIsSubmitted
+    text=cancelText
+    type='reset'
+  }}
 {{/if}}
+
+{{#if delete}}
+  {{form-submission-button
+    action=deleteAction
+    className='button-primary'
+    disabled=formIsSubmitted
+    text=deleteText
+  }}
+{{/if}}
+
+{{#if save}}
+  {{form-submission-button
+    action=saveAction
+    className='button-primary'
+    disabled=formIsSubmitted
+    text=saveText
+    type='submit'
+  }}
+{{/if}}
+
+{{!-- {{#if formIsSubmitted}}
+  {{partial 'form-is-submitted'}}
+{{/if}}
+ --}}

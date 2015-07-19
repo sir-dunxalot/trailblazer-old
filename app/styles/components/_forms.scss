@@ -58,7 +58,7 @@ legend {
     @extend %icon-check;
     @extend %absolute;
     @include rem(margin-top, 0.1);
-    @include rem(right, 0.1);
+    @include rem(right, 0.2);
     color: $green;
 
     @include rem(padding, 0.8);
@@ -185,7 +185,7 @@ legend {
 
 /* Form submission */
 
-.submission {
+.form-submission {
   @extend %align-right;
 }
 
