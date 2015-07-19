@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 
+const { observer } = Ember;
+
 export default Ember.Controller.extend(
   FormMixin, {
 
@@ -31,21 +33,24 @@ export default Ember.Controller.extend(
   },
 
   save() {
+    const _this = this;
     const feature = this.get('model');
 
-    this.get('model.stages').forEach(function(stage) {
-      stage.set('model.feature', feature);
-      stage.save();
-    });
+    this.get('model.stages').then(function(stages) {
+      stages.forEach(function(stage) {
+        stage.set('feature', feature);
+        stage.save();
+      });
 
-    feature.save().then(function(feature) {
-      this.transitionToRoute('feature', feature);
-    }.bind(this));
+      feature.save().then(function(feature) {
+        _this.transitionToRoute('feature', feature);
+      });
+    });
   },
 
   // TODO - redo how the durations are bound
 
-  setStageDurations: Ember.observer('lowerDuration', 'upperDuration', function() {
+  setStageDurations: observer('lowerDuration', 'upperDuration', function() {
     const lower = this.get('lowerDuration');
     const upper = this.get('upperDuration');
 
@@ -56,19 +61,21 @@ export default Ember.Controller.extend(
         testing: this.get('model.totalDuration') - upper
       };
 
-      this.get('model.stages').forEach(function(stage) {
-        stage.get('type').then(function(type) {
-          stage.set('duration', hash[type.get('name')]);
+      this.get('model.stages').then(function(stages) {
+        stages.forEach(function(stage) {
+          stage.get('type').then(function(type) {
+            stage.set('duration', hash[type.get('name')]);
+          });
         });
       });
     }
 
   }),
 
-  setDurations: Ember.observer('model.stages.[]', function() {
+  setDurations: observer('model.stages.[]', function() {
     this.get('model.stages').then(function(stages) {
-      var researchStage = stages.objectAt(0);
-      var developmentStage = stages.objectAt(1);
+      const researchStage = stages.objectAt(0);
+      const developmentStage = stages.objectAt(1);
 
       if (researchStage) {
         const lower = researchStage.get('duration');

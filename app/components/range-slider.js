@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { run } = Ember;
+const { computed, observer, on, run } = Ember;
 
 export default Ember.Component.extend({
   classNames: ['slider_wrapper'],
@@ -15,7 +15,7 @@ export default Ember.Component.extend({
 
   /* Computed properties */
 
-  lowerDate: Ember.computed('lower', function() {
+  lowerDate: computed('lower', function() {
     let startDate = this.get('startDate');
 
     if (startDate) {
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  upperDate: Ember.computed('upper', function() {
+  upperDate: computed('upper', function() {
     let startDate = this.get('startDate');
 
     if (startDate) {
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
 
   /* Recalculate values is the min-max range changes */
 
-  calculateRangeValues: Ember.observer('max', function() {
+  calculateRangeValues: observer('max', function() {
     const previousMax = this.get('_previousMax');
 
     if (previousMax && this.get('rendered')) {
@@ -121,9 +121,8 @@ export default Ember.Component.extend({
     }
   },
 
-  setInitialValues: Ember.on(
-    'didInsertElement',
-    Ember.observer('lower', 'upper', function(context, key) {
+  setInitialValues: on('didInsertElement',
+    observer('lower', 'upper', function(context, key) {
       if (key && !this.get(key)) {
         this.set(key, this.get(key));
       } else if (!this.get('rendered') && this.get('upper') && this.get('lower')) {

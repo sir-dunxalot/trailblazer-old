@@ -14,27 +14,27 @@ export default Ember.Route.extend(
   //   })
   // }.on('willTransition'),
 
-  afterModel(newFeature) {
+  afterModel(model) {
     const store = this.store;
-    const duration = newFeature.get('totalDuration');
+    const duration = model.get('totalDuration');
     const durations = [
       duration * 0.2,
       duration * 0.6,
       duration * 0.2
     ];
 
-    store.findAll('stage-type').then(function(types) {
+    store.findAll('stage-type', { reload: true }).then(function(types) {
 
       types.forEach(function(type, i) {
         const stage = store.createRecord('stage', {
           duration: Math.round(durations[i]),
-          feature: newFeature,
+          feature: model,
           type: type
         });
 
-        newFeature.get('stages').pushObject(stage);
+        model.get('stages').pushObject(stage);
       });
-    });
+    }.bind(this));
   },
 
   beforeModel(transition, queryParams) {
