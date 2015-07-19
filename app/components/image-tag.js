@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   tagName: 'img',
 
   checkForAlt: Ember.on('init', function() {
-    Ember.warn('You must pass an alt option to the {{lazy-image}} component', this.get('alt'));
+    Ember.assert('You must pass an alt option to the {{lazy-image}} component', this.get('alt'));
   }),
 
   lazyLoad: Ember.on('didInsertElement', function() {

@@ -5,10 +5,10 @@
   <dl class="profile_block">
     <dt class="hidden">Profile Image</dt>
     <dd class="avatar">
-      {{image-tag src=avatarUrl alt=fullName}}
+      {{image-tag src=model.avatarUrl alt=model.fullName}}
     </dd>
     <dt class="hidden">User</dt>
-    <dd class="full_name">{{fullName}}</dd>
+    <dd class="full_name">{{model.fullName}}</dd>
   </dl>
 
   {{!-- TODO - Add 'are you sure' modal to sign out --}}
@@ -26,7 +26,7 @@
 
     <ul class="list-inline">
       <li>
-        {{#link-to 'user.edit' content}}
+        {{#link-to 'user.edit' model}}
           Team
         {{/link-to}}
       </li>
@@ -42,12 +42,12 @@
         {{/link-to}}
       </li>
       <li>
-        {{#link-to 'user.edit' content}}
+        {{#link-to 'user.edit' model}}
           Product
         {{/link-to}}
       </li>
       <li class="triangle_bottom_link">
-        {{#link-to 'user.edit' content}}
+        {{#link-to 'user.edit' model}}
           Developer
         {{/link-to}}
       </li>
