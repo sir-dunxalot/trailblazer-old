@@ -1,9 +1,9 @@
-import defaultFor from 'trailblazer/utils/default-for';
 import Ember from 'ember';
-import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
+import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
+import defaultFor from 'trailblazer/utils/default-for';
 
 export default Ember.ObjectController.extend(
-  Saving, {
+  FormMixin, {
 
   teamId: null,
 
@@ -48,7 +48,7 @@ export default Ember.ObjectController.extend(
     };
 
     if (teamId) {
-      this.store.find('team', teamId).then(function(/* team */) {
+      this.store.findRecord('team', teamId).then(function(/* team */) {
         save();
       }, function() {
         _this.set('teamId', null);

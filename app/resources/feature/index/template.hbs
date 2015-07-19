@@ -39,7 +39,7 @@
 <h2 class="hidden">Stages</h2>
 
 <ul class="stages_list {{if datePositionsSet 'fade-in'}}">
-  {{#each model.stages as stage}}
+  {{#each model.stages as |stage|}}
     {{stage-block stage=stage}}
   {{/each}}
 </ul>

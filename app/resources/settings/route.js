@@ -3,7 +3,9 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model() {
-    return this.store.find('user', this.get('session.uid'));
+    const userId = this.get('session.content.secure.uid');
+
+    return this.store.findRecord('user', userId);
   },
 
 });

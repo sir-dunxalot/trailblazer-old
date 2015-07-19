@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model() {
-    return this.store.find('stage-type');
+    return this.store.findAll('stage-type');
   }
 
 });

@@ -9,7 +9,7 @@ export default Ember.Route.extend(
 
     /* Add the user to the team model */
 
-    this.store.find('user', userId).then(function(user) {
+    this.store.findRecord('user', userId).then(function(user) {
       model.get('members').pushObject(user);
     });
   },

@@ -9,7 +9,7 @@ export default Ember.Route.extend(
   },
 
   setupController(controller, model) {
-    const users = this.store.find('user', {
+    const users = this.store.findRecord('user', {
       team: this.get('session.currentTeam')
     });
 

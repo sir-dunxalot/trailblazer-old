@@ -23,7 +23,7 @@ export default Ember.Route.extend(
       duration * 0.2
     ];
 
-    store.find('stageType').then(function(types) {
+    store.findAll('stage-type').then(function(types) {
 
       types.forEach(function(type, i) {
         const stage = store.createRecord('stage', {
@@ -44,7 +44,7 @@ export default Ember.Route.extend(
 
     /* If user has team, don't let them create a feature */
 
-    this.store.find('user', userId).then(function(user) {
+    this.store.findRecord('user', userId).then(function(user) {
       if (!user.get('team')) {
         transition.abort();
         this.transitionTo('user.edit', user);

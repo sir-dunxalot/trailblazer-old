@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import Submitting from 'trailblazer/mixins/views/submitting';
 
-export default Ember.View.extend(
-  Submitting, {
-
+export default Ember.View.extend({
   templateName: 'features/new',
 });

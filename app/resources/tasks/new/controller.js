@@ -1,11 +1,11 @@
 import Ember from 'ember';
-import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
+import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 import uncapitalize from 'trailblazer/utils/uncapitalize';
 
 const { computed } = Ember;
 
 export default Ember.Controller.extend(
-  Saving, {
+  FormMixin, {
 
   taskIsInTestingStage: computed.equal('model.stageName', 'testing'),
   testingStages: computed.filterBy('model.feature.stages', 'type.name', 'testing'),

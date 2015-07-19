@@ -26,7 +26,7 @@ const Authenticator = AuthenticatorBase.extend({
           } else {
             const store = _this.get('container').lookup('store:main');
 
-            store.find('user', authData.uid).then(function(/* user */) {
+            store.findRecord('user', authData.uid).then(function(/* user */) {
               // If user is already registered
               resolve(authData);
             }, function() {
@@ -99,7 +99,7 @@ export function initialize(container) {
       const userId = this.get('uid');
 
       if (userId) {
-        return store.find('user', userId).then(function(user) {
+        return store.findRecord('user', userId).then(function(user) {
           this.setProperties({
             currentTeam: user.get('team'),
             currentUser: user

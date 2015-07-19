@@ -11,7 +11,7 @@ export default Ember.Route.extend(
   },
 
   setupController(controller, model) {
-    const teams = this.store.find('team');
+    const teams = this.store.findAll('team');
 
     this._super(controller, model);
     controller.set('teams', teams);

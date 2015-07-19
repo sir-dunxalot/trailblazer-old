@@ -4,13 +4,10 @@ const { computed } = Ember;
 
 export function initialize(container, app) {
 
-  Ember.ControllerMixin.reopen(
-    Ember.Evented, {
-
-    userId: computed.readOnly('session.content.uid'),
+  Ember.Controller.reopen({
+    userId: computed.oneWay('session.content.secure.uid'),
     dateFormat: app.dateFormat,
-    shortDateFormat: app.shortDateFormat
-
+    shortDateFormat: app.shortDateFormat,
   });
 
 }

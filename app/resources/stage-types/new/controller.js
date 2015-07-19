@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
+import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 
 export default Ember.ObjectController.extend(
-  Saving, {
+  FormMixin, {
 
   save() {
     this.get('model').save().then(function(/* stageType */) {
