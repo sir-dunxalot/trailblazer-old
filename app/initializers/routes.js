@@ -11,7 +11,8 @@ export function initialize(/* container, app */) {
   @submodule routes
   */
 
-  Ember.Route.reopen({
+  Ember.Route.reopen(
+    Ember.Evented, {
 
     authenticate: true,
     userId: computed.readOnly('session.content.uid'),

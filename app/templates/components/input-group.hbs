@@ -1,13 +1,12 @@
 {{#if label}}
   {{label-field
     for=inputId
-    label=label
+    text=label
   }}
 {{/if}}
 
 <div class="input_wrapper">
-
-  {{#if template}}
+  {{#if hasBlock}}
     {{!-- If block form... --}}
     {{yield}}
   {{else}}
@@ -16,13 +15,12 @@
   {{/if}}
 
   {{error-field
-    shouldShowError=shouldShowError
     label=label
-    property=property
+    property=propertyWithModel
+    showError=showError
   }}
 
   {{#if hint}}
-    {{hint-field hint=hint}}
+    {{hint-field text=hint}}
   {{/if}}
-
 </div>

@@ -69,7 +69,7 @@ legend {
   }
 }
 
-.control-valid {
+.control-newly-valid {
 
   &:before {
     @extend .fade-in;
@@ -102,7 +102,7 @@ legend {
     border-color: $red;
   }
 
-  .control-valid & {
+  .control-newly-valid & {
     &, &:focus {
       border-color: $green;
     }
@@ -300,4 +300,8 @@ legend {
                   0 4px 0 rgba(0, 0, 0, 0.08)
     }
   }
+}
+
+.ember-text-field {
+  @extend .input;
 }

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 import defaultFor from 'trailblazer/utils/default-for';
 
-export default Ember.ObjectController.extend(
+export default Ember.Controller.extend(
   FormMixin, {
 
   teamId: null,
@@ -28,10 +28,13 @@ export default Ember.ObjectController.extend(
   },
 
   teamHint: Ember.computed('model.team.name', function() {
-    return defaultFor(
-      'You are currently a member of ' + this.get('team.name'),
-      'Don\'t know your team ID? Ask a colleague'
-    );
+    const teamName = this.get('team.name');
+
+    if (teamName) {
+      return `You are currently a member of ${teamName}`;
+    } else {
+      return 'Don\'t know your team ID? Ask a colleague';
+    }
   }),
 
   cancel() {
@@ -51,10 +54,9 @@ export default Ember.ObjectController.extend(
       this.store.findRecord('team', teamId).then(function(/* team */) {
         save();
       }, function() {
-        _this.set('teamId', null);
-        // TODO - Team not found
-        alert('Team not found!');
-      });
+        this.set('teamId', null);
+        this.flashMessage('error', 'Team not found');
+      }.bind(this));
     } else {
       save();
     }
