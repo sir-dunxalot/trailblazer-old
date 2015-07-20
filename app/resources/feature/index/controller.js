@@ -2,7 +2,7 @@ import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
 import escapeCss from 'trailblazer/utils/escape-css';
 
-const { computed } = Ember;
+const { computed, observer, on } = Ember;
 const filterBy = computed.filterBy;
 
 function escapeNumber(value) {
@@ -37,10 +37,11 @@ export default Ember.Controller.extend({
   upperDate: null,
   upperDuration: null,
 
-  lowerDatePosition: Ember.computed('lowerDuration', 'totalDuration', function() {
+  lowerDatePosition: computed('lowerDuration', 'totalDuration', function() {
     const { lowerDuration, totalDuration } = this.getProperties(
       [ 'lowerDuration', 'totalDuration' ]
     );
+
     const percentage = MathHelpers.percentage(
       escapeNumber(lowerDuration),
       escapeNumber(totalDuration)
@@ -49,7 +50,7 @@ export default Ember.Controller.extend({
     return (`left:${percentage};`).htmlSafe();
   }),
 
-  upperDatePosition: Ember.computed('upperDuration', 'totalDuration', function() {
+  upperDatePosition: computed('upperDuration', 'totalDuration', function() {
     const { totalDuration, upperDuration } = this.getProperties(
       [ 'totalDuration', 'upperDuration' ]
     );
@@ -70,8 +71,10 @@ export default Ember.Controller.extend({
     },
   },
 
-  setDates: Ember.observer('model.stages.@each.duration', function() {
+  setDates: observer('model.stages', function() {
     const _this = this;
+
+    // console.log('running');
 
     _this.get('model.stages').then(function(stages) {
       stages.forEach(function(stage) {

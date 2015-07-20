@@ -34,17 +34,15 @@ export default Ember.Controller.extend(
 
   save() {
     const _this = this;
-    const feature = this.get('model');
+    const model = this.get('model');
 
-    this.get('model.stages').then(function(stages) {
-      stages.forEach(function(stage) {
-        stage.set('feature', feature);
+    model.save().then(function(feature) {
+
+      feature.get('stages').forEach(function(stage) {
         stage.save();
       });
 
-      feature.save().then(function(feature) {
-        _this.transitionToRoute('feature', feature);
-      });
+      _this.transitionToRoute('feature', feature);
     });
   },
 

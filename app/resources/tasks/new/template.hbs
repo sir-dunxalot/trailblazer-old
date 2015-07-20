@@ -10,11 +10,11 @@
 
     {{#form-controls legend='Add a new task to the feature'}}
 
-      {{input-group value=model.name}}
+      {{input-group property='name'}}
 
       {{!-- TODO - set to last used stage --}}
       {{input-group
-        value=model.stage
+        property='stage'
         type='selectize'
         content=model.feature.stages
         optionValuePath='content.id'
@@ -24,7 +24,7 @@
       }}
 
       {{input-group
-        value=model.assignee
+        property='assignee'
         type='selectize'
         content=users
         optionValuePath='content.id'
@@ -35,12 +35,13 @@
       {{!-- TODO if notTesting --}}
       {{#if new}}
         {{input-group
-          value=testTaskSelection
+          property='testTaskSelection'
           type='selectize'
           content=testTaskOptions
           optionValuePath='content.value'
           optionLabelPath='content.name'
           placeholder='Add a test task?'
+          modelPath=null
           disabled=taskIsInTestingStage
         }}
       {{/if}}

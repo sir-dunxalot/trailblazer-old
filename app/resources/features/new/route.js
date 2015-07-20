@@ -32,7 +32,7 @@ export default Ember.Route.extend(
           type: type
         });
 
-        model.get('stages').pushObject(stage);
+        model.get('stages').addObject(stage);
       });
     }.bind(this));
   },
