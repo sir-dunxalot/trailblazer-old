@@ -16,9 +16,14 @@
       </button>
     </div>
 
-    <button {{action 'authenticate'}} class="button-primary">
+    <button {{action 'authenticateFor' 'github'}} class="button-primary">
       <span class="text">Get started</span>
       <span class="icon-github"></span>
+    </button>
+
+    <button {{action 'authenticateFor' 'google'}} class="button-primary">
+      <span class="text">Google</span>
+      <span class="icon-google"></span>
     </button>
 
   </div>

@@ -4,5 +4,13 @@ import AuthenticationControllerMixin from 'simple-auth/mixins/authentication-con
 export default Ember.Controller.extend(
   AuthenticationControllerMixin, {
 
-  authenticator: 'authenticator:firebase',
+  authenticator: null,
+
+  actions: {
+    authenticateFor(provider) {
+      this.set('authenticator', `authenticator:${provider}`);
+
+      this.send('authenticate');
+    }
+  }
 });
