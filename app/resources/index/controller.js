@@ -11,6 +11,10 @@ export default Ember.Controller.extend(
       this.set('authenticator', `authenticator:${provider}`);
 
       this.send('authenticate');
-    }
+    },
+
+    showLoginModal() {
+      this.showModal('modals/login');
+    },
   }
 });

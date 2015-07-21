@@ -1,8 +1,10 @@
-import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
+import ApplicationRouteAuthMixin from 'simple-auth/mixins/application-route-mixin';
+import ApplicationRouteModalMixin from 'ember-modals/mixins/routes/application';
 import Ember from 'ember';
 
 export default Ember.Route.extend(
-  ApplicationRouteMixin, {
+  ApplicationRouteAuthMixin,
+  ApplicationRouteModalMixin, {
 
   authenticate: null,
 

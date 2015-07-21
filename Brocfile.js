@@ -9,6 +9,12 @@ var app = new EmberApp({
     layout: true,
   },
 
+  modals: {
+    layout: true,
+    style: true,
+    animation: 'slide-up'
+  },
+
   sassOptions: {
     includePaths: [
       'bower_components/compass-mixins/lib'

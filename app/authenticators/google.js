@@ -8,7 +8,7 @@ export default AuthenticatorBase.extend({
   createUser: function(authData, store) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       const googleData = authData.google;
-      const googleProfile = authData.google.cachedUserProfile;
+      // const googleProfile = authData.google.cachedUserProfile;
       const nameParts = googleData.displayName.split(' ');
       const newUser = store.createRecord('user', {
         avatarUrl: googleData.profileImageURL,

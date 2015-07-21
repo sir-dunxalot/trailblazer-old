@@ -3,4 +3,4 @@ import layout from 'trailblazer/templates/components/form-submission';
 
 export default FormSubmissionComponent.extend({
   layout,
-})
+});

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import MathHelpers from 'trailblazer/utils/math-helpers';
 import escapeCss from 'trailblazer/utils/escape-css';
 
-const { computed, observer, on } = Ember;
+const { computed, observer } = Ember;
 const filterBy = computed.filterBy;
 
 function escapeNumber(value) {

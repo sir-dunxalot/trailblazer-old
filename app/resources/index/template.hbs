@@ -10,20 +10,15 @@
     </h1>
 
     <div class="top_right">
-      <button {{action 'authenticate'}} class="button-unstyled">
+      <button {{action 'showLoginModal'}} class="button-unstyled">
         <span class="text">Login</span>
-        <span class="icon-github"></span>
+        <span class="icon-arrow-right"></span>
       </button>
     </div>
 
-    <button {{action 'authenticateFor' 'github'}} class="button-primary">
+    <button {{action 'showLoginModal'}} class="button-primary">
       <span class="text">Get started</span>
-      <span class="icon-github"></span>
-    </button>
-
-    <button {{action 'authenticateFor' 'google'}} class="button-primary">
-      <span class="text">Google</span>
-      <span class="icon-google"></span>
+      <span class="icon-arrow-right"></span>
     </button>
 
   </div>

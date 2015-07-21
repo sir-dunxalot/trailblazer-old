@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
-import defaultFor from 'trailblazer/utils/default-for';
 
 export default Ember.Controller.extend(
   FormMixin, {
