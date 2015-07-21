@@ -3,15 +3,23 @@ import ENV from 'trailblazer/config/environment';
 import InputGroupComponent from 'trailblazer/components/input-group';
 import defaultFor from 'trailblazer/utils/default-for';
 
-const { observer, on } = Ember;
+const { computed, observer, on } = Ember;
 
 export default InputGroupComponent.extend({
-  classNames: ['datepicker-group', 'removed'],
+  classNames: ['datepicker-group'],
   datepicker: null,
   format: ENV.APP.dateFormat, // Default
+  formattedValue: null,
+  inputPartial: 'form-inputs/datepicker',
   maxDate: null,
   minDate: null,
-  type: 'hidden',
+  type: null,
+
+  formattedInputId: computed('inputId', function() {
+    const inputId = this.get('inputId');
+
+    return `${inputId}-formatted`;
+  }),
 
   // TODO - set container so calendar doesn't render into the DOM multiple times
 
@@ -19,7 +27,7 @@ export default InputGroupComponent.extend({
     const _this = this;
     const defaultDate = new Date(this.get('value'));
     const format = this.get('format');
-    const inputId = this.get('formattedInputId');
+    const formattedInputId = this.get('formattedInputId');
     const minDate = defaultFor(
       this.get('minDate'),
       moment().toDate()
@@ -28,7 +36,7 @@ export default InputGroupComponent.extend({
     this.set('datepicker',
       new window.Pikaday({
         defaultDate: defaultDate,
-        field: document.getElementById(inputId),
+        field: document.getElementById(formattedInputId),
         format: format,
         margin: this.get('margin'),
         maxDate: this.get('maxDate'),
@@ -44,11 +52,12 @@ export default InputGroupComponent.extend({
   }),
 
   update: observer('minDate', 'maxDate', function(view, key) {
+    const capitalizedKey = key.capitalize();
     const datepicker = this.get('datepicker');
-    const method = 'set' + key.split('.')[1].capitalize();
+    const methodName = `set${capitalizedKey}`;
 
     if (datepicker) {
-      datepicker[method](moment(this.get(key)));
+      datepicker[methodName](new Date(this.get(key)));
     }
   }),
 

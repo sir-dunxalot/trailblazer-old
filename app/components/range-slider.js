@@ -91,7 +91,7 @@ export default Ember.Component.extend({
           return parseInt(value).toFixed(0);
         }
       }
-    });
+    }, true);
 
     element.on({
       slide: function() {
