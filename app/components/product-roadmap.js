@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   features: Ember.A(),
   numberOfLanes: 5,
   numberOfDaysDisplayed: 0,
-  numberOfMonthsInViewport: 5,
+  numberOfMonthsInViewport: 4,
   tagName: 'section',
   today: moment(),
   sortedFeatures: Ember.computed.sort('features', 'sortProperties'),

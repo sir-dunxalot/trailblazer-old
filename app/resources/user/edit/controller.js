@@ -50,7 +50,7 @@ export default Ember.Controller.extend(
     };
 
     if (teamId) {
-      this.store.findRecord('team', teamId).then(function(/* team */) {
+      this.store.find('team', teamId).then(function(/* team */) {
         save();
       }, function() {
         this.set('teamId', null);

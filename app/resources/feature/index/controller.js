@@ -37,11 +37,9 @@ export default Ember.Controller.extend({
   upperDate: null,
   upperDuration: null,
 
-  lowerDatePosition: computed('lowerDuration', 'totalDuration', function() {
-    const { lowerDuration, totalDuration } = this.getProperties(
-      [ 'lowerDuration', 'totalDuration' ]
-    );
-
+  lowerDatePosition: computed('lowerDuration', 'model.totalDuration', function() {
+    const lowerDuration = this.get('lowerDuration');
+    const totalDuration = this.get('model.totalDuration');
     const percentage = MathHelpers.percentage(
       escapeNumber(lowerDuration),
       escapeNumber(totalDuration)
@@ -50,10 +48,9 @@ export default Ember.Controller.extend({
     return (`left:${percentage};`).htmlSafe();
   }),
 
-  upperDatePosition: computed('upperDuration', 'totalDuration', function() {
-    const { totalDuration, upperDuration } = this.getProperties(
-      [ 'totalDuration', 'upperDuration' ]
-    );
+  upperDatePosition: computed('upperDuration', 'model.totalDuration', function() {
+    const totalDuration = this.get('model.totalDuration');
+    const upperDuration = this.get('upperDuration');
     const percentage = MathHelpers.percentage(
       escapeNumber(totalDuration - upperDuration),
       escapeNumber(totalDuration)

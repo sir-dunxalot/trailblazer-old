@@ -44,7 +44,7 @@ export default Ember.Route.extend(
 
     /* If user has team, don't let them create a feature */
 
-    this.store.findRecord('user', userId).then(function(user) {
+    this.store.find('user', userId).then(function(user) {
       if (!user.get('team')) {
         transition.abort();
         this.transitionTo('user.edit', user);
