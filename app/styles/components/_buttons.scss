@@ -41,7 +41,8 @@ button {
     @include rem(padding, 2, 2.5);
   }
 
-  & ~ & {
+  & ~ &,
+  & ~ .or {
     @include rem(margin-left, $spacing / 2);
   }
 

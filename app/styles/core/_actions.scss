@@ -63,3 +63,7 @@
   @extend .sub;
   @extend %not_allowed;
 }
+
+.center {
+  @extend %align-center;
+}

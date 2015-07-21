@@ -1,0 +1,11 @@
+.overlay {
+  background-color: rgba($orange, 0.9);
+
+  // & ~ .main {
+  //   @include transform(translate(-1px, 0));
+  // }
+}
+
+.modal {
+  box-shadow: 0 3px  20px 2px rgba(darken($orange, 30%), 0.5);
+}

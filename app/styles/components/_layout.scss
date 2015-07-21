@@ -25,10 +25,6 @@
 
 .content {
   @include rem(margin, $spacing * 1.2);
-
-  &.center {
-    @extend %align-center;
-  }
 }
 
 .heading_wrapper {

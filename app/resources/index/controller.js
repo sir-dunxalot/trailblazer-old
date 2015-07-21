@@ -11,6 +11,7 @@ export default Ember.Controller.extend(
       this.set('authenticator', `authenticator:${provider}`);
 
       this.send('authenticate');
+      this.get('modal').hide();
     },
 
     showLoginModal() {
