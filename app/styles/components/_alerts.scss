@@ -1,0 +1,139 @@
+.flash-message-queue {
+  z-index: 6;
+  @extend %fixed;
+  @include rem(top, $spacing);
+  @extend %right;
+  @extend %border_box;
+  @include rem(right, $spacing);
+  @include rem(width, 35); // Use width for IE9
+
+  ul {
+    @extend .list-unstyled;
+  }
+}
+
+.flash-message {
+  z-index: 6;
+  @extend %relative;
+  @include rem(margin, 0, 0, $spacing / 2);
+  @include opacity(0);
+  transition: opacity $fast, -webkit-transform $slow; // Safari hack
+  @include transition(opacity $fast, transform $slow);
+  @include rem(border-radius, 0.4);
+  background-color: $white;
+  @include background-image(linear-gradient(to bottom, #fff, #ededed));
+  @include box-shadow(
+    // 0 4px 0 -2px rgba($black, 0.1), // Bottom undershadow
+    0 0 3px rgba($black, 0.3), // All around shadow
+    1px 1px 1px rgba($black, 0.1) // Bottom right shadow
+  );
+  @extend %pointer;
+  @include transform(translateX(100%));
+
+  &.visible {
+    @include opacity(1);
+    @include transform(translateX(0%));
+  }
+
+  &, .flash-message-content {
+    @extend %full_width;
+  }
+
+  .flash-message-content {
+    @include rem(margin-bottom, $spacing / 2);
+  }
+
+  .flash-message-icon-wrapper,
+  .flash-message-content,
+  .button {
+    @include rem(padding, $spacing / 2);
+  }
+
+  .flash-message-icon-wrapper,
+  .flash-message-content,
+  .flash-message-button-wrapper {
+    @extend %cell;
+    border-bottom: 1px solid rgba($black, 0.2);
+  }
+
+  .flash-message-icon-wrapper {
+    border-top: 1px solid rgba($white, 0.2);
+    border-left: 1px solid rgba($white, 0.2);
+    @include rem(border-top-left-radius, 0.4);
+    @include rem(border-bottom-left-radius, 0.4);
+    border-right: 1px solid rgba($black, 0.1);
+
+    @include mod(icon) {
+      @include rem(font-size, 2.4);
+    }
+  }
+
+  .flash-message-content,
+  .flash-message-button-wrapper {
+    text-shadow: 1px 1px 0 $white;
+  }
+
+  .button {
+    @extend .button-transparent;
+    @include transition(opacity $fast);
+    @include opacity(0.3);
+    color: $black;
+
+    &:hover {
+      @include transform(none);
+      @include opacity(0.5);
+    }
+
+    .icon-close {
+      @include rem(font-size, $bodyFontSize);
+    }
+  }
+}
+
+.flash-message-success {
+  color: darken($success, 20%);
+
+  .flash-message-icon-wrapper {
+    color: $white;
+    background-color: $success;
+    @include background-image(
+      linear-gradient(to bottom right, $success, darken($success, 5%))
+    );
+  }
+}
+
+.flash-message-error {
+  color: darken($error, 10%);
+
+  .flash-message-icon-wrapper {
+    color: $white;
+    background-color: $error;
+    @include background-image(
+      linear-gradient(to bottom right, $error, darken($error, 5%))
+    );
+  }
+}
+
+.flash_message-warning {
+  color: darken($warning, 25%);
+
+  .flash-message-icon-wrapper {
+    color: $white;
+    background-color: $warning;
+    @include background-image(
+      linear-gradient(to bottom right, $warning, darken($warning, 5%))
+    );
+  }
+}
+
+.flash_message-info {
+  color: darken($info, 20%);
+
+  .flash-message-icon-wrapper {
+    color: $white;
+    background-color: $info;
+    @include background-image(
+      linear-gradient(to bottom right, $info, darken($info, 5%))
+    );
+  }
+}

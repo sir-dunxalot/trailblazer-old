@@ -14,8 +14,6 @@ export default Ember.Component.extend({
     const stageDuration = stage.get('duration');
     const totalDuration = stage.get('feature.totalDuration');
 
-    console.log(stageDuration, totalDuration);
-
     let percentage = MathHelpers.percentage(
       stageDuration,
       totalDuration

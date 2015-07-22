@@ -38,6 +38,7 @@ export default Ember.Route.extend(
   },
 
   beforeModel(transition, queryParams) {
+    const _this = this;
     const userId = this.get('userId');
 
     this._super(transition, queryParams);
@@ -45,11 +46,19 @@ export default Ember.Route.extend(
     /* If user has team, don't let them create a feature */
 
     this.store.find('user', userId).then(function(user) {
-      if (!user.get('team')) {
-        transition.abort();
-        this.transitionTo('user.edit', user);
-      }
-    }.bind(this));
+      user.get('team').then(function(team) {
+        if (!team) {
+          transition.abort();
+          _this.flashMessage('error', 'You cannot create a feature without joining a team');
+          _this.transitionTo('user.edit', user, {
+            queryParams: {
+              highlightInputFor: 'teamId',
+              highlightMessage: 'Add your team ID',
+            }
+          });
+        }
+      });
+    });
   },
 
   model() {

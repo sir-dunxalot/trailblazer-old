@@ -8,6 +8,15 @@ export default Ember.Route.extend(
     return this.modelFor('user');
   },
 
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.setProperties({
+        highlightInputFor: null,
+        highlightMessage: null,
+      });
+    }
+  },
+
   setupController(controller, model) {
     const team = model.get('team');
 
