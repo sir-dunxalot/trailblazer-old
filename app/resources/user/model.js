@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+const { computed } = Ember;
 const { attr, belongsTo, hasMany } = DS;
 
 export default DS.Model.extend({
@@ -9,6 +10,11 @@ export default DS.Model.extend({
   firstName: attr('string'),
   githubUserName: attr('string'),
   lastName: attr('string'),
+  permissionLevel: attr('number', {
+    defaultValue() {
+      return 0;
+    },
+  }),
   tasks: hasMany('task', {
     async: true
   }),
@@ -16,10 +22,14 @@ export default DS.Model.extend({
     async: true
   }),
 
-  fullName: Ember.computed('firstName', 'lastName', function() {
+  fullName: computed('firstName', 'lastName', function() {
     const firstName = this.get('firstName').capitalize();
     const lastName = this.get('lastName').capitalize();
 
     return `${firstName} ${lastName}`;
+  }),
+
+  isAdmin: computed('permissionLevel', function() {
+    return this.get('permissionLevel') > 10;
   }),
 });

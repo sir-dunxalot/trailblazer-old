@@ -13,9 +13,9 @@ export function initialize(container) {
     currentTeam: null,
     currentUser: null,
 
-    setCurrentUser: observer('uid', function() {
+    setCurrentUser: observer('content.secure.uid', function() {
       const store = container.lookup('store:main');
-      const userId = this.get('uid');
+      const userId = this.get('content.secure.uid');
 
       if (userId) {
         return store.find('user', userId).then(function(user) {

@@ -15,17 +15,25 @@ export default Ember.Controller.extend(
   },
 
   save() {
+    const _this = this;
+    const currentUser = this.get('session.currentUser');
 
     /* Save the new team then add the team to the
     user's model */
 
     this.get('model').save().then(function(team) {
-      const user = team.get('model.members.firstObject');
+      function transition() {
+        _this.transitionToRoute('team', team);
+      }
 
-      user.set('team', team);
-      user.save().then(function() {
-        this.transitionToRoute('team', team);
-      });
+      if (currentUser.get('isAdmin')) {
+        transition();
+      } else {
+        currentUser.set('team', team);
+        currentUser.save().then(function() {
+          transition();
+        });
+      }
     }.bind(this));
   },
 

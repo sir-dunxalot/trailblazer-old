@@ -1,4 +1,10 @@
-<h1>{{name}}</h1>
+{{#page-header}}
+  <h1>{{model.name}}</h1>
+  <p class="subtitle">Team ID: {{model.id}}</p>
+{{/page-header}}
+
+{{!-- TODO --}}
+{{!-- {{input-group property='model.id' disabled=true}} --}}
 
 <ul>
   {{#each members as |user|}}

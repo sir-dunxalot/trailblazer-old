@@ -1,7 +1,9 @@
+import AdminOnlyMixin from 'trailblazer/mixins/routes/admin-only';
 import DirtyRecordHandler from 'ember-easy-form-extensions/mixins/routes/dirty-record-handler';
 import Ember from 'ember';
 
 export default Ember.Route.extend(
+  AdminOnlyMixin,
   DirtyRecordHandler, {
 
   afterModel(model) {

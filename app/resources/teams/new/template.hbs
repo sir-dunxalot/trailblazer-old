@@ -1,10 +1,17 @@
 {{!-- TODO - Real new team form --}}
 
-{{#page-content}}
+{{#page-header}}
+  <h1 class="heading">Add a new team</h1>
+{{/page-header}}
+
+{{#page-content class='center'}}
   {{#form-wrapper}}
 
     {{#form-controls legend='Create a new team'}}
-      {{input-group value=model.name}}
+      {{input-group
+        label='Team Name'
+        property='name'
+      }}
     {{/form-controls}}
 
     {{form-submission}}
