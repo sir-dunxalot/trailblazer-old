@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   numberOfLanes: 5, // Default
   roadmapStartDate: null,
   tagName: 'li',
-  totalDaysDisplayedInRoadmap: Ember.computed.oneWay('controller.numberOfDaysDisplayed'),
+  totalDaysDisplayedInRoadmap: Ember.computed.oneWay('targetObject.numberOfDaysDisplayed'),
   width: math('percentage', 'feature.totalDuration', 'totalDaysDisplayedInRoadmap'),
 
   daysOffset: computed('feature.startDate', 'roadmapStartDate', function() {

@@ -42,6 +42,7 @@
   .heading-small {
     margin-top: 0;
     @include rem(margin-bottom, $headingSize-small);
+    white-space: nowrap; // Text in line. TODO - logo
   }
 
   .link-to-feature {
@@ -63,7 +64,7 @@
   .icon-go {
     @extend .fade-out;
     @include transition(opacity, 0.15s); // Instead of .fade
-    margin-left: 0;
+    @include rem(margin-left, 1);
   }
 }
 

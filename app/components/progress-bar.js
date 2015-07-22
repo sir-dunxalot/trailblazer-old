@@ -7,6 +7,7 @@ export default Ember.Component.extend({
     'max:aria-valuemax',
     'min:aria-valuemin',
     'role',
+    'style',
     'value:aria-valuenow'
   ],
   classNames: ['progress_bar'],
@@ -15,6 +16,7 @@ export default Ember.Component.extend({
   percentage: math('percentage', 'value', 'max'),
   progressStyle: insert('percentage', 'width:{{value}};'),
   role: 'progressbar',
+  style: null,
   tagName: 'dl',
   value: 0,
 });
