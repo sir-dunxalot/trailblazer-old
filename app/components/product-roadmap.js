@@ -88,10 +88,10 @@ export default Ember.Component.extend({
     return lanes;
   }),
 
-  todayLineStyle: Ember.computed('startDate', function() {
-    const numberOfDaysDisplayed = this.get('numberOfDaysDisplayed');
-    const today = this.get('today');
-    const startDate = this.get('startDate');
+  todayLineStyle: Ember.computed('numberOfDaysDisplayed', 'startDate', 'today', function() {
+    const { numberOfDaysDisplayed, today, startDate } = this.getProperties(
+      [ 'numberOfDaysDisplayed', 'today', 'startDate' ]
+    );
     const difference = today.diff(startDate, 'days');
 
     let left = MathHelpers.percentage(difference, numberOfDaysDisplayed);

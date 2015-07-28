@@ -141,7 +141,7 @@
   @extend %absolute;
   @extend %full_height;
   @extend .list-unstyled;
-  width: 2px;
+  width: 5px;
   @include rem(margin-left, $logoSize);
   background-color: $white;
 }
