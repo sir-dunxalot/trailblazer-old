@@ -7,6 +7,7 @@ const { computed } = Ember;
 export default Ember.Controller.extend(
   FormMixin, {
 
+  lastUsedStageName: null,
   taskIsInTestingStage: computed.equal('model.stageName', 'testing'),
   testingStages: computed.filterBy('model.feature.stages', 'type.name', 'testing'),
   testTaskSelection: computed.oneWay('testTaskOptionDefault'),
@@ -34,7 +35,7 @@ export default Ember.Controller.extend(
   }),
 
   validations: {
-    'model.stage': {
+    'model.assignee': {
       presence: true
     },
 
@@ -42,11 +43,11 @@ export default Ember.Controller.extend(
       presence: true
     },
 
-    'model.assignee': {
+    'model.stage': {
       presence: true
     },
 
-    'model.testTaskSelection': {
+    'testTaskSelection': {
       presence: true
     }
   },
@@ -70,6 +71,8 @@ export default Ember.Controller.extend(
 
     this.get('model').save().then(function(task) {
       _this.get('model.feature.tasks').pushObject(task);
+
+      _this.set('lastUsedStageName', task.get('stage.type.name'));
 
       _this.saveTestTasks().then(function() {
 
@@ -133,6 +136,7 @@ export default Ember.Controller.extend(
     return this.store.createRecord('task', {
       name: testTaskName,
       assignee: this.get('model.assignee'),
+      feature: this.get('model.feature'),
       stage: this.get('testingStage')
     });
   },

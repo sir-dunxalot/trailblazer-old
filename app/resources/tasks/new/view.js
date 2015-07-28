@@ -4,5 +4,5 @@ import NotesAnimation from 'trailblazer/mixins/views/notes-animation';
 export default Ember.View.extend(
   NotesAnimation, {
 
-  classNameBindings: ['controller.stage.type.name'],
+  classNameBindings: ['controller.model.stage.type.name'],
 });

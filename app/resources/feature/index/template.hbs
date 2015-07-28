@@ -14,7 +14,7 @@
     </dl>
   </div>
 
-  {{progress-bar value=completedTasks.length max=tasks.length}}
+  {{progress-bar value=completedTasks.length max=model.tasks.length}}
 
   <dl class="dates_list {{if datePositionsSet 'fade-in'}}">
     <dt class="hidden">Feature start date</dt>
@@ -49,7 +49,7 @@
   <div class="heading_wrapper">
     <h1 class="heading">Tasks</h1>
 
-    {{#if model.length}}
+    {{#if model.tasks.length}}
       <div class="filters">
 
         <h2 class="hidden">Filters</h2>
@@ -80,24 +80,36 @@
 
   {{#if showResearch}}
     <ul class="tasks_list-research {{showCompleted}}">
-      {{#each task in researchTasks itemController='task/list-item'}}
-        {{partial 'task/list-item'}}
+      {{#each researchTasks as |task|}}
+        {{#unless (and showPersonal (eq session.currentUser.id task.assignee.id))}}
+          {{#unless (and showCompleted task.completed)}}
+            {{task-list-item task=task}}
+          {{/unless}}
+        {{/unless}}
       {{/each}}
     </ul>
   {{/if}}
 
   {{#if showDevelopment}}
     <ul class="tasks_list-development {{showCompleted}}">
-      {{#each developmentTasks as task itemController='task/list-item'}}
-        {{partial 'task/list-item'}}
+      {{#each developmentTasks as |task|}}
+        {{#unless (and showPersonal (eq session.currentUser.id task.assignee.id))}}
+          {{#unless (and showCompleted task.completed)}}
+            {{task-list-item task=task}}
+          {{/unless}}
+        {{/unless}}
       {{/each}}
     </ul>
   {{/if}}
 
   {{#if showTesting}}
     <ul class="tasks_list-testing {{showCompleted}}">
-      {{#each testingTasks as task itemController='task/list-item'}}
-        {{partial 'task/list-item'}}
+      {{#each testingTasks as |task|}}
+        {{#unless (and showPersonal (eq session.currentUser.id task.assignee.id))}}
+          {{#unless (and showCompleted task.completed)}}
+            {{task-list-item task=task}}
+          {{/unless}}
+        {{/unless}}
       {{/each}}
     </ul>
   {{/if}}

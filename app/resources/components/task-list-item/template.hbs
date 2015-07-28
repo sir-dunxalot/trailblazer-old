@@ -1,0 +1,31 @@
+<div class="task_name">
+  {{capitalize-string task.name}}
+
+  {{#if showPersonalToggle}}
+    <span class="assignee_name {{if targetObject.showPersonal 'fade-out' 'fade-in'}}">
+      {{task.assignee.firstName}}
+    </span>
+  {{/if}}
+</div>
+
+<div class="task_buttons">
+
+  {{#link-to 'task.edit' task class='sub'}}
+    <span class="icon-pencil small sub"></span>
+    <span class="hidden">Edit</span>
+  {{/link-to}}
+
+  <button class="complete_button {{if task.completed 'sub'}}"
+    {{action 'toggleTaskCompletion' task}}
+    title="Complete this task"
+  >
+    {{#if task.completed}}
+      <span class="icon-restart"></span>
+      <span class="text">Restart</span>
+    {{else}}
+      <span class="icon-fire"></span>
+      <span class="text">Blaze it</span>
+    {{/if}}
+  </button>
+
+</div>

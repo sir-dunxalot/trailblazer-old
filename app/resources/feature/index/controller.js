@@ -23,12 +23,11 @@ export default Ember.Controller.extend({
 
   /* Tasks */
 
-  completedTasks: filterBy('tasks', 'completed', true),
-  developmentTasks: filterBy('tasks', 'stageName', 'development'),
+  completedTasks: filterBy('model.tasks', 'completed', true),
+  developmentTasks: filterBy('model.tasks', 'stageName', 'development'),
   datePositionsSet: computed.and('lowerDate', 'upperDate'),
-  researchTasks: filterBy('tasks', 'stageName', 'research'),
-  taske: computed.oneWay('model.tasks'),
-  testingTasks: filterBy('tasks', 'stageName', 'testing'),
+  researchTasks: filterBy('model.tasks', 'stageName', 'research'),
+  testingTasks: filterBy('model.tasks', 'stageName', 'testing'),
 
   /* Dates */
 
