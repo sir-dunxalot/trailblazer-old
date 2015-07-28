@@ -44,17 +44,6 @@
         {{/unless}}
       {{/if}}
 
-      {{#if session.isAuthenticated}}
-        {{#if view.onRoadmap}}
-          <li class="new_feature" data-tour="new_feature_button">
-            {{#link-to 'features.new' title='Add a new feature'}}
-              <span class="icon-write"></span>
-              <span class="hidden">Add a new feature</span>
-            {{/link-to}}
-          </li>
-        {{/if}}
-      {{/if}}
-
     </ul>
   </nav>
 

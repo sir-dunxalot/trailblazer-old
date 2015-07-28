@@ -76,17 +76,3 @@
     }
   }
 }
-
-.new_feature {
-  float: right;
-  position: relative;
-  z-index: 2;
-  color: $white;
-
-  background-color: $green;
-  @include transition(background-color $fast);
-
-  &:hover {
-    background-color: darken($green, 10%);
-  }
-}
