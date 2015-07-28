@@ -49,26 +49,28 @@
   <div class="heading_wrapper">
     <h1 class="heading">Tasks</h1>
 
-    <div class="filters">
+    {{#if model.length}}
+      <div class="filters">
 
-      <h2 class="hidden">Filters</h2>
+        <h2 class="hidden">Filters</h2>
 
-      {{!-- TODO - add icons to on and off --}}
-      {{#if showPersonalToggle}}
-        {{x-toggle
-          on='Personal:true'
-          off='Team:false'
-          size='small'
-          showLabels='true'
-          value=showPersonalString
-        }}
-      {{/if}}
+        {{!-- TODO - add icons to on and off --}}
+        {{#if showPersonalToggle}}
+          {{x-toggle
+            on='Personal:true'
+            off='Team:false'
+            size='small'
+            showLabels='true'
+            value=showPersonalString
+          }}
+        {{/if}}
 
-      {{styled-checkbox checked=showResearch label='research'}}
-      {{styled-checkbox checked=showDevelopment label='development'}}
-      {{styled-checkbox checked=showTesting label='testing'}}
-      {{styled-checkbox checked=showCompleted label='completed'}}
-    </div>
+        {{styled-checkbox checked=showResearch label='research'}}
+        {{styled-checkbox checked=showDevelopment label='development'}}
+        {{styled-checkbox checked=showTesting label='testing'}}
+        {{styled-checkbox checked=showCompleted label='completed'}}
+      </div>
+    {{/if}}
   </div>
 
   {{#link-to 'tasks.new'}}

@@ -19,7 +19,7 @@ export default Ember.Controller.extend(
       value: 'unit'
   },
 
-  testTaskOptions: Ember.computed('testTaskOptionNone', 'testTaskOptionDefault', function() {
+  testTaskOptions: computed('testTaskOptionNone', 'testTaskOptionDefault', function() {
     return Ember.A([
       this.get('testTaskOptionNone'),
       this.get('testTaskOptionDefault'),

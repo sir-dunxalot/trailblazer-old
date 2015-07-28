@@ -2,7 +2,7 @@ import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 import renderTooltip from 'ember-tooltips/utils/render-tooltip';
 
-const { computed, observer, on } = Ember;
+const { observer, on } = Ember;
 
 export default Ember.Controller.extend(
   FormMixin, {
@@ -39,8 +39,6 @@ export default Ember.Controller.extend(
     const _this = this;
     const defaultHint = 'Don\'t know your team ID? Ask a colleague';
     const teamId = this.get('teamId');
-
-    console.log('running');
 
     if (!teamId) {
       this.set('teamHint', defaultHint);

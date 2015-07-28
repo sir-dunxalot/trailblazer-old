@@ -14,11 +14,13 @@ export default Ember.Route.extend(
   },
 
   setupController(controller, model) {
-    const users = this.store.findRecord('user', {
-      team: this.get('session.currentTeam')
-    });
+    const currentTeam = this.get('session.currentTeam');
 
     this._super(controller, model);
+
+    const users = this.store.findAll('user', {
+      team: currentTeam.get('id'),
+    });
 
     controller.set('users', users);
   },
