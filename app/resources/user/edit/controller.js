@@ -2,16 +2,17 @@ import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 import renderTooltip from 'ember-tooltips/utils/render-tooltip';
 
-const { computed, on } = Ember;
+const { computed, observer, on } = Ember;
 
 export default Ember.Controller.extend(
   FormMixin, {
 
-
   highlightInputFor: null,
   highlightMessage: null,
   queryParams: ['highlightInputFor', 'highlightMessage'],
+  team: null,
   teamId: null,
+  teamHint: null,
   tooltip: null,
 
   validations: {
@@ -28,20 +29,40 @@ export default Ember.Controller.extend(
       presence: true
     },
 
-    'model.teamId': {
+    'model.team': {
       presence: true
     }
 
   },
 
-  teamHint: computed('model.team.name', function() {
-    const teamName = this.get('team.name');
+  updateTeam: observer('teamId', function() {
+    const _this = this;
+    const defaultHint = 'Don\'t know your team ID? Ask a colleague';
+    const teamId = this.get('teamId');
 
-    if (teamName) {
-      return `You are currently a member of ${teamName}`;
-    } else {
-      return 'Don\'t know your team ID? Ask a colleague';
+    console.log('running');
+
+    if (!teamId) {
+      this.set('teamHint', defaultHint);
+
+      return;
     }
+
+    this.store.findRecord('team', teamId).then(function(team) {
+      const teamName = team.get('name');
+
+      _this.setProperties({
+        'model.team': team,
+        teamHint: `You are currently a member of ${teamName}`,
+      });
+    }, function() {
+      _this.flashMessage('error', 'Invalid team ID');
+      _this.get('errors.teamId').push('is not a valid team ID');
+      _this.setProperties({
+        teamHint: defaultHint,
+        teamId: null,
+      });
+    });
   }),
 
   /* Methods */
@@ -81,24 +102,14 @@ export default Ember.Controller.extend(
 
   save() {
     const _this = this;
-    const teamId = this.get('teamId');
-    const save = function() {
-      _this.get('model').save().then(function(/* user */) {
-        _this.transitionToRoute('settings');
+    const team = this.get('team');
+
+    this.get('model').save().then(function(user) {
+      team.get('members').addObject(user);
+      team.save().then(function() {
+        _this.transitionToRoute('features');
       });
-    };
-
-    if (teamId) {
-      this.store.find('team', teamId).then(function(/* team */) {
-        save();
-      }, function() {
-        this.set('teamId', null);
-        this.flashMessage('error', 'Team not found');
-      }.bind(this));
-    } else {
-      save();
-    }
-
+    });
   },
 
 });

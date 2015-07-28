@@ -1,7 +1,7 @@
-import FlashMessage from 'ember-flash-messages/models/flash-message';
+import Ember from 'ember';
 import FlashMessageComponent from 'ember-flash-messages/components/flash-message';
 
-const { on, run } = Ember;
+const { run } = Ember;
 
 export default FlashMessageComponent.extend({
 

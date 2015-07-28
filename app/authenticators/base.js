@@ -29,7 +29,7 @@ export default AuthenticatorBase.extend({
           } else {
             const store = _this.get('container').lookup('store:main');
 
-            store.find('user', authData.uid).then(function(/* user */) {
+            store.findRecord('user', authData.uid).then(function(/* user */) {
               // If user is already registered
               resolve(authData);
             }, function() {

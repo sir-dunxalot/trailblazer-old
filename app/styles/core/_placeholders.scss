@@ -127,6 +127,10 @@
   cursor: not-allowed;
 }
 
+%pointer {
+  cursor: pointer;
+}
+
 %use_hardware_acceleration {
   @include transform(translateZ(0)); // Hardware acceleration
   @include backface-visibility;

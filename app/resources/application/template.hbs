@@ -62,8 +62,8 @@
 
 <main class="main" role="main">
   {{outlet}}
+
+  {{outlet 'modal' name='modal'}}
+
+  {{flash-message-queue}}
 </main>
-
-{{outlet 'modal' name='modal'}}
-
-{{flash-message-queue}}

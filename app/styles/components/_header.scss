@@ -81,12 +81,12 @@
   float: right;
   position: relative;
   z-index: 2;
+  color: $white;
 
-  .link-to-features-new {
-    @include transition(color $fast);
+  background-color: $green;
+  @include transition(background-color $fast);
 
-    &:hover {
-      color: $gray-dark-hover;
-    }
+  &:hover {
+    background-color: darken($green, 10%);
   }
 }
