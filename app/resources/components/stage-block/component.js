@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   stage: null,
   tagName: 'li',
 
-  style: Ember.computed('stage.tasks.length', 'stage.feature.tasks.length', function() {
+  style: Ember.computed('stage.duration', 'stage.totalDuration', function() {
     const stage = this.get('stage');
     const stageDuration = stage.get('duration');
     const totalDuration = stage.get('feature.totalDuration');
