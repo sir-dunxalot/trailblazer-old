@@ -21,7 +21,7 @@
 
   dt {
     flex: 0 1 30%;
-    @extend .alt_text;
+    @extend %alt_text;
     @extend .sub;
   }
 

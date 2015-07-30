@@ -80,9 +80,3 @@ p {
   @include rem(font-size, 2);
   @include rem(margin-top, 1);
 }
-
-.alt_text {
-  @extend %uppercase;
-  @include rem(font-size, 1.4);
-  @include rem(letter-spacing, 0.1);
-}

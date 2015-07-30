@@ -261,7 +261,7 @@ legend {
 
   .toggle-text {
     @extend .fade;
-    @extend .alt_text;
+    @extend %alt_text;
     // @extend %relative;
     // @include rem(top, -0.2);
   }

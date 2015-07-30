@@ -5,10 +5,8 @@ const { computed, run } = Ember;
 export default Ember.Controller.extend({
   tourShown: false,
 
-  tooltipContent: computed('model.length', 'model.isUpdating', function() {
-    const showTooltip = !this.get('model.length') && !this.get('model.isUpdating');
-
-    return showTooltip ? 'Add your first feature' : false;
+  showNewTooltip: computed('model.length', 'model.isUpdating', function() {
+    return !this.get('model.length') && !this.get('model.isUpdating');
   }),
 
   renderTour() {

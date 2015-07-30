@@ -6,6 +6,7 @@ const { observer } = Ember;
 export default Ember.Controller.extend(
   FormMixin, {
 
+  walkthroughComplete: false,
   lowerDuration: null,
   upperDuration: null,
   userCanCreateFeature: false, // Set by route
@@ -18,11 +19,21 @@ export default Ember.Controller.extend(
     },
 
     'model.endDate': {
-      presence: true
+      presence: true // TODO - add conditional on 'unless model.inBacklog'
     },
 
     'model.startDate': {
       presence: true
+    }
+  },
+
+  actions: {
+    setInBacklog(value) { // TODO - Query param change on set
+      console.log(value);
+      this.setProperties({
+        'model.inBacklog': value,
+        walkthroughComplete: true, // TODO - reset on load
+      });
     }
   },
 

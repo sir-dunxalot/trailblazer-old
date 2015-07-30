@@ -10,6 +10,7 @@ export default InputGroupComponent.extend({
   datepicker: null,
   format: ENV.APP.dateFormat, // Default
   formattedValue: null,
+  // formController: null,
   inputPartial: 'form-inputs/datepicker',
   maxDate: null,
   minDate: null,

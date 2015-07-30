@@ -35,10 +35,12 @@
   content: "\e116";
 }
 
-.icon-dots {
-  @extend %no_margin;
-  @include rem(font-size, 1.4);
-  border: 1px solid $gray;
-  @include rem(padding, 0.2, 0.4, 0.1, 0.6);
-  @include rem(border-radius, 0.3);
-}
+// TODO
+
+// .icon-dots {
+//   @extend %no_margin;
+//   @include rem(font-size, 1.4);
+//   border: 1px solid $gray;
+//   @include rem(padding, 0.2, 0.4, 0.1, 0.6);
+//   @include rem(border-radius, 0.3);
+// }

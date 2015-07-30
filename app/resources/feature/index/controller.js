@@ -70,8 +70,6 @@ export default Ember.Controller.extend({
   setDates: observer('model.stages', function() {
     const _this = this;
 
-    // console.log('running');
-
     _this.get('model.stages').then(function(stages) {
       stages.forEach(function(stage) {
         stage.get('type').then(function(type) {
@@ -88,8 +86,7 @@ export default Ember.Controller.extend({
             });
           } else if (name === 'testing') {
             const endDate = moment(_this.get('endDate'));
-            const upperDate = endDate.subtract(duration + 1, 'd');
-            // Hack
+            const upperDate = endDate.subtract(duration + 1, 'd');// Hack
 
             _this.setProperties({
               upperDuration: duration,

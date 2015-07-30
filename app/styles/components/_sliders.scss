@@ -35,9 +35,9 @@
   @include rem(border-radius, $progressBarSize / 2);
 }
 
-.slider_wrapper {
-  display: table-caption;
-}
+// .slider_wrapper {
+//   display: table-caption;
+// }
 
 .slider {
   @include rem(margin-bottom, $spacing * 1.5);
@@ -96,7 +96,7 @@
 .slider_date {
   @extend %absolute;
   @include rem(width, 10);
-  @extend .alt_text;
+  @extend %alt_text;
   @extend .sub;
   margin-left: -50%;
 }

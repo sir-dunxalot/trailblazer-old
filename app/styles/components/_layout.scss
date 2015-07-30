@@ -1,6 +1,11 @@
+html {
+  background-color: $orange;
+}
+
 .app {
   @extend %table;
   @extend %full_height-viewport;
+  background-color: $white;
 }
 
 .header {

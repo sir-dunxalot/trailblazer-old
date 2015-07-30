@@ -17,18 +17,24 @@ button {
   border: 1px solid rgba($black, 0.15);
   background: none;
   @extend %border_box;
+  @include transition(opacity $fast);
 
   @include box-shadow(0 4px 0 -2px rgba($black, 0.1));
 
   cursor: pointer;
-  @extend .alt_text;
+  @extend %alt_text;
 
   &:hover {
     color: $gray-dark-hover;
     @include transform(scale(1.02));
   }
 
-  &.disabled:hover {
+  &[disabled] {
+    @extend .disabled;
+  }
+
+  &.disabled:hover
+  &[disabled]:hover {
     @include transform(none);
   }
 
@@ -57,6 +63,14 @@ button {
 
 .button-primary {
   background-color: $orange;
+
+  &, &:hover {
+    color: $white;
+  }
+}
+
+.button-primary-alt {
+  background-color: $red;
 
   &, &:hover {
     color: $white;
@@ -98,4 +112,35 @@ button {
 .button-unstyled {
   @extend .button-transparent;
   padding: 0; // Don't use extend
+}
+
+.button-box {
+  background-color: $purple;
+  @include rem(padding, $spacing);
+  @include rem(font-size, 2);
+  @include rem(width, 20);
+  text-transform: none;
+  font-style: italic;
+  letter-spacing: 0;
+  color: $white;
+
+  .icon {
+    @include rem(margin-bottom, $spacing / 2);
+    @include rem(font-size, 4);
+    @include opacity(0.5);
+    @extend %block;
+  }
+
+  .icon ~ .text {
+    margin-left: 0;
+  }
+
+  &:hover {
+    color: $white;
+  }
+
+  & ~ & {
+    background-color: $blue;
+  }
+
 }

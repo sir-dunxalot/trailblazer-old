@@ -38,7 +38,7 @@
   }
 
   .triangle_bottom_link {
-    @include rem(margin-top, $spacing / 2);
+    @include rem(margin-top, $spacing / 1.5);
     @include rem(margin-left, -$spacing / 2);
     @extend %block;
   }

@@ -18,14 +18,18 @@
 {{/if}}
 
 {{#if save}}
-  {{form-submission-button
+  {{#form-submission-button
     action=saveAction
     className='button-primary'
     disabled=formIsSubmitted
-    text=saveText
     type='submit'
   }}
+    <span class="icon-success"></span>
+    <span class="text">{{saveText}}</span>
+  {{/form-submission-button}}
 {{/if}}
+
+{{yield}}
 
 {{!-- {{#if formIsSubmitted}}
   {{partial 'form-is-submitted'}}

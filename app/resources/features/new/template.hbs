@@ -1,37 +1,68 @@
 {{#page-header}}
-  <h1>New Feature</h1>
+  {{#if walkthroughComplete}}
+    <h1>New Feature</h1>
+  {{else}}
+    <h1>Are you ready to add this feature to the roadmap?</h1>
+  {{/if}}
 {{/page-header}}
 
 {{#page-content class='center'}}
 
-  {{#form-wrapper}}
-    {{#form-controls legend='Create a new feature'}}
+  {{#if walkthroughComplete}}
+    {{#form-wrapper}}
+      {{#form-controls legend='Create a new feature'}}
 
-      {{datepicker-group
-        property='startDate'
-        maxDate=model.endDate
-      }}
+        {{input-group property='name'}}
 
-      {{datepicker-group
-        property='endDate'
-        minDate=model.startDate
-      }}
+        {{toggle-group
+          label='Ready to set goals?'
+          property='inBacklog'
+          onLabel='No. Add to Backlog'
+          offLabel='Yes! Add to roadmap'
+        }}
 
-      {{range-slider
-        lower=lowerDuration
-        upper=upperDuration
-        max=model.totalDuration
-        startDate=model.startDate
-      }}
+        {{#unless model.inBacklog}}
+          {{datepicker-group
+            property='startDate'
+            maxDate=model.endDate
+            classNameBindings='model.inBacklog:hidden'
+          }}
 
-      {{input-group property='name'}}
+          {{datepicker-group
+            property='endDate'
+            minDate=model.startDate
+            classNameBindings='model.inBacklog:hidden'
+          }}
 
-      {{!-- {{partial 'form-components/notes'}} --}}
+          {{range-slider
+            lower=lowerDuration
+            upper=upperDuration
+            max=model.totalDuration
+            startDate=model.startDate
+            classNameBindings='model.inBacklog:hidden'
+          }}
+        {{/unless}}
 
-    {{/form-controls}}
+        {{!-- TODO --}}
+        {{!-- {{partial 'form-components/notes'}} --}}
 
-    {{form-submission}}
+      {{/form-controls}}
 
-  {{/form-wrapper}}
+      {{form-submission}}
+
+    {{/form-wrapper}}
+  {{else}}
+
+    <button {{action 'setInBacklog' true}} class="button-box">
+      <span class="icon-calendar"></span>
+      <span class="text"><strong>Yes!</strong> Let's set some goals</span>
+    </button>
+
+    <button {{action 'setInBacklog' false}} class="button-box">
+      <span class="icon-dots"></span>
+      <span class="text"><strong>No</strong>, let's add it to the backlog</span>
+    </button>
+
+  {{/if}}
 
 {{/page-content}}

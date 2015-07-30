@@ -1,4 +1,5 @@
 .roadmap {
+  background-color: $offwhite;
   @extend %relative;
   @extend %full_height;
   overflow-x: scroll;
@@ -6,7 +7,6 @@
 }
 
 .roadmap_months {
-  background-color: $offwhite;
   @include box-sizing(border-box);
   @include rem(padding-left, $logoSize);
   @extend .list-inline;
@@ -14,7 +14,6 @@
   @extend %full_width;
   @extend %absolute;
   @extend .sub;
-  z-index: -1;
 }
 
 .roadmap_month {
@@ -22,7 +21,7 @@
   @extend %border_box;
   @include rem(padding, 1);
   @extend %full_height;
-  @extend .alt_text;
+  @extend %alt_text;
 }
 
 .roadmap_features {

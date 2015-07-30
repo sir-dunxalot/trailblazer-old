@@ -52,7 +52,7 @@
 
   dd {
     @extend %inline_block;
-    @extend .alt_text;
+    @extend %alt_text;
     @extend .sub;
 
     &:last-of-type {
@@ -82,7 +82,7 @@
   @include rem(padding, 0, $spacing / 2);
   @extend %relative;
   @extend %no_margin;
-  @extend .alt_text;
+  @extend %alt_text;
   color: $white;
   width: 33.3333%;
   @include transition(width $slow);
@@ -208,7 +208,7 @@
   }
 
   .assignee_name {
-    @extend .alt_text;
+    @extend %alt_text;
     @include rem(font-size, 1.2);
     @include rem(margin-left, $buttonVertPadding);
 
@@ -259,24 +259,24 @@
   }
 
   .checkbox_label {
-    @extend .alt_text;
+    @extend %alt_text;
     cursor: pointer;
     @include rem(padding-left, $inputHorizPadding);
   }
 
-  .research .alt_text {
+  .research %alt_text {
     color: $research;
   }
 
-  .development .alt_text {
+  .development %alt_text {
     color: $development;
   }
 
-  .testing .alt_text {
+  .testing %alt_text {
     color: $testing;
   }
 
-  .completed .alt_text {
+  .completed %alt_text {
     color: $orange;
   }
 
