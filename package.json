@@ -39,6 +39,7 @@
     "ember-easy-form-extensions": "^1.0.2",
     "ember-export-application-global": "^1.0.2",
     "ember-flash-messages": "0.6.1",
+    "ember-inflector": "1.9.0",
     "ember-modals": "0.4.1",
     "ember-moment": "1.1.1",
     "ember-tooltips": "0.3.0",

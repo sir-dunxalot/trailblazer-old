@@ -61,10 +61,19 @@ export default Ember.Route.extend(
     });
   },
 
-  model() {
-    return this.store.createRecord('feature', {
+  model(params) {
+    const feature = {
       team: this.get('curentUser.team'),
-    });
+    };
+    const inBacklog = params.inBacklog;
+
+    if (inBacklog === 'true') {
+      feature.inBacklog = true;
+    } else if (inBacklog === 'false') {
+      feature.inBacklog = false;
+    }
+
+    return this.store.createRecord('feature', feature);
   },
 
 });

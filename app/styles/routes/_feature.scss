@@ -264,6 +264,8 @@
     @include rem(padding-left, $inputHorizPadding);
   }
 
+  // TODO - below selctors
+
   .research %alt_text {
     color: $research;
   }
@@ -289,4 +291,24 @@
   @extend .button;
   @extend .button-unstyled;
   @extend %pull-right;
+}
+
+.range_slider_caption {
+  @extend .list-unstyled;
+  @include rem(font-size, 1.4);
+  display: flex;
+  justify-content: space-between;
+  @include rem(margin-bottom, $spacing);
+
+  .research {
+    color: $research;
+  }
+
+  .development {
+    color: $development;
+  }
+
+  .testing {
+    color: $testingText;
+  }
 }

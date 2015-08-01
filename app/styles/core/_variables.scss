@@ -42,6 +42,7 @@ $warning: $orange;
 $research: $purple;
 $development: $blue;
 $testing: $green;
+$testingText: darken($green, 10%);
 
 $inputBackgroundColor: mix($white, $offwhite, 80%);
 

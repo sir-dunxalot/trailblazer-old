@@ -22,16 +22,19 @@
           }}
 
           {{datepicker-group
+            label='Release date'
             property='endDate'
             minDate=model.startDate
             classNameBindings='model.inBacklog:hidden'
           }}
 
-          <div>
-            <span class="text">Research</span>
-            <span class="text">Development</span>
-            <span class="text">Testing</span>
-          </div>
+          <ol class="range_slider_caption">
+            {{#each model.stages as |stage|}}
+              <li class="{{stage.type.name}}">
+                {{item-inflection stage.duration 'day' 'days'}} of {{capitalize-string stage.type.name}}
+              </li>
+            {{/each}}
+          </ol>
 
           {{range-slider
             lower=lowerDuration
