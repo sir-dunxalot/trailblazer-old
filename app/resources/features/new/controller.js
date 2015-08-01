@@ -15,16 +15,14 @@ export default Ember.Controller.extend(
   inBacklog: null,
   queryParams: ['inBacklog'],
 
-  walkthroughComplete: computed('inBacklog', function() {
-    const inBacklog = this.get('inBacklog');
+  walkthroughComplete: computed('model.inBacklog', function() {
+    const inBacklog = this.get('model.inBacklog');
 
-    /* Because query param is a string not boolean */
-
-    return inBacklog === 'true' || inBacklog === 'false';
+    return typeof inBacklog === 'boolean';
   }),
 
-  saveButtonText: computed('inBacklog', function() {
-    const inBacklog = this.get('inBacklog');
+  saveButtonText: computed('model.inBacklog', function() {
+    const inBacklog = this.get('model.inBacklog');
 
     return inBacklog ? 'Add the backlog' : 'Add to roadmap';
   }),
@@ -37,12 +35,20 @@ export default Ember.Controller.extend(
     },
 
     'model.endDate': {
-      presence: true // TODO - add conditional on 'unless model.inBacklog'
+      presence: {
+        unless: 'model.inBacklog'
+      }
+    },
+
+    'model.inBacklog': {
+      presence: true // Will pass for false
     },
 
     'model.startDate': {
-      presence: true
-    }
+      presence: {
+        unless: 'model.inBacklog'
+      }
+    },
   },
 
   actions: {
@@ -55,6 +61,22 @@ export default Ember.Controller.extend(
 
   /* Methods */
 
+  queryParamsToBoolean: observer('inBacklog', function() {
+    const inBacklog = this.get('inBacklog');
+
+    let value = null;
+
+    if (inBacklog === 'true') {
+      value = true;
+    } else if (inBacklog === 'false') {
+      value = false;
+    }
+
+    if (this.get('model')) {
+      this.set('model.inBacklog', value);
+    }
+  }),
+
   cancel() {
     this.transitionToRoute('index');
   },
@@ -64,8 +86,6 @@ export default Ember.Controller.extend(
     const model = this.get('model');
 
     /* Set walkthrough properties on the model*/
-
-    model.set('inBacklog', this.get('inBacklog'));
 
     model.save().then(function(feature) {
 
