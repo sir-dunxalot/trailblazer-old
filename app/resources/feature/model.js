@@ -12,6 +12,7 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
+  backlogPosition: attr('number'),
   // TODO - update all places to use this CM
   completedTasks: computed.filterBy('tasks', 'completed', true),
   endDate: attr('date', {
@@ -19,11 +20,7 @@ export default DS.Model.extend({
       return moment().add(30, 'days').toDate();
     }
   }),
-  inBacklog: attr('boolean', {
-    defaultValue() {
-      return true;
-    }
-  }),
+  inBacklog: attr('boolean'),
   name: attr('string'),
   notes: attr('string'),
   stages: hasMany('stage', {

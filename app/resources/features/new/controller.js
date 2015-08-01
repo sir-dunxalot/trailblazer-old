@@ -1,15 +1,33 @@
 import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 
-const { observer } = Ember;
+const { computed, observer, on } = Ember;
 
 export default Ember.Controller.extend(
   FormMixin, {
 
-  walkthroughComplete: false,
   lowerDuration: null,
   upperDuration: null,
   userCanCreateFeature: false, // Set by route
+
+  /* Properties for the walkthrough */
+
+  inBacklog: null,
+  queryParams: ['inBacklog'],
+
+  walkthroughComplete: computed('inBacklog', function() {
+    const inBacklog = this.get('inBacklog');
+
+    /* Because query param is a string not boolean */
+
+    return inBacklog === 'true' || inBacklog === 'false';
+  }),
+
+  saveButtonText: computed('inBacklog', function() {
+    const inBacklog = this.get('inBacklog');
+
+    return inBacklog ? 'Add the backlog' : 'Add to roadmap';
+  }),
 
   /* Validations */
 
@@ -28,11 +46,9 @@ export default Ember.Controller.extend(
   },
 
   actions: {
-    setInBacklog(value) { // TODO - Query param change on set
-      console.log(value);
+    setInBacklog(value) {
       this.setProperties({
-        'model.inBacklog': value,
-        walkthroughComplete: true, // TODO - reset on load
+        inBacklog: value,
       });
     }
   },
@@ -46,6 +62,10 @@ export default Ember.Controller.extend(
   save() {
     const _this = this;
     const model = this.get('model');
+
+    /* Set walkthrough properties on the model*/
+
+    model.set('inBacklog', this.get('inBacklog'));
 
     model.save().then(function(feature) {
 

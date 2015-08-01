@@ -2,7 +2,7 @@
   {{#if walkthroughComplete}}
     <h1>New Feature</h1>
   {{else}}
-    <h1>Are you ready to add this feature to the roadmap?</h1>
+    <h1>Have dates for the feature been identified?</h1>
   {{/if}}
 {{/page-header}}
 
@@ -13,13 +13,6 @@
       {{#form-controls legend='Create a new feature'}}
 
         {{input-group property='name'}}
-
-        {{toggle-group
-          label='Ready to set goals?'
-          property='inBacklog'
-          onLabel='No. Add to Backlog'
-          offLabel='Yes! Add to roadmap'
-        }}
 
         {{#unless model.inBacklog}}
           {{datepicker-group
@@ -34,12 +27,17 @@
             classNameBindings='model.inBacklog:hidden'
           }}
 
+          <div>
+            <span class="text">Research</span>
+            <span class="text">Development</span>
+            <span class="text">Testing</span>
+          </div>
+
           {{range-slider
             lower=lowerDuration
             upper=upperDuration
             max=model.totalDuration
             startDate=model.startDate
-            classNameBindings='model.inBacklog:hidden'
           }}
         {{/unless}}
 
@@ -48,17 +46,21 @@
 
       {{/form-controls}}
 
-      {{form-submission}}
+      {{form-submission saveText=saveButtonText}}
 
     {{/form-wrapper}}
   {{else}}
+{{!--
+    {{#link-to 'features.new' (query-params inBacklog=true)}}
+    test
+    {{/link-to}} --}}
 
-    <button {{action 'setInBacklog' true}} class="button-box">
+    <button {{action 'setInBacklog' false}} class="button-box">
       <span class="icon-calendar"></span>
       <span class="text"><strong>Yes!</strong> Let's set some goals</span>
     </button>
 
-    <button {{action 'setInBacklog' false}} class="button-box">
+    <button {{action 'setInBacklog' true}} class="button-box">
       <span class="icon-dots"></span>
       <span class="text"><strong>No</strong>, let's add it to the backlog</span>
     </button>

@@ -37,11 +37,11 @@ export default Ember.Route.extend(
     }.bind(this));
   },
 
-  beforeModel(transition, queryParams) {
+  beforeModel(transition, params) {
     const _this = this;
     const userId = this.get('userId');
 
-    this._super(transition, queryParams);
+    this._super(transition, params);
 
     /* If user has team, don't let them create a feature */
 
@@ -63,7 +63,7 @@ export default Ember.Route.extend(
 
   model() {
     return this.store.createRecord('feature', {
-      team: this.get('curentUser.team')
+      team: this.get('curentUser.team'),
     });
   },
 
