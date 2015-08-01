@@ -32,6 +32,7 @@
             {{#each model.stages as |stage|}}
               <li class="{{stage.type.name}}">
                 {{item-inflection stage.duration 'day' 'days'}} of {{capitalize-string stage.type.name}}
+                .{{stage.numberOfWorkingDays}}.
               </li>
             {{/each}}
           </ol>
