@@ -38,7 +38,6 @@ app.import(bowerDir + 'normalize.css/normalize.css', {
 
 app.import(bowerDir + 'firebase/firebase.js');
 
-app.import('vendor/lib-link.js');
 app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.js');
 app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.min.css');
 

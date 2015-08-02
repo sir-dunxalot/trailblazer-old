@@ -93,6 +93,8 @@ export default Ember.Component.extend({
       }
     }, true);
 
+    /* Update values and render tooltip text */
+
     element.on({
       slide(event, values) {
         _this.setProperties({
@@ -107,8 +109,6 @@ export default Ember.Component.extend({
         _this.updateSliderToggles(element, values);
       }
     });
-
-    /* Add tooltips */
 
     _this.updateSliderToggles(element, element.val());
   },
