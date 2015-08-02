@@ -3,6 +3,8 @@
   @extend %terrace;
   @extend %no_padding;
 
+  dd,
+  dt,
   li {
     @extend %inline_block;
   }

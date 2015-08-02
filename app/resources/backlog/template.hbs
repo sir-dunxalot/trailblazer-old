@@ -15,16 +15,52 @@
 {{/page-header}}
 
 {{#page-content}}
+
   {{#sortable-group
+    class='backlog_feature_list'
+    onChange='reorderBacklog'
     tagName='ol'
-    onChange='reorderBacklog' as |group|
+    as |group|
   }}
+
     {{#each rankedBacklogFeatures as |feature|}}
-      <li class="backlog_feature">
-      {{#sortable-item model=feature group=group}}
-        {{feature.name}}
+
+      {{#sortable-item
+        class='backlog_feature'
+        group=group
+        model=feature
+        tagName='li'
+      }}
+        <dl class="backlog_feature_content">
+          <dt class="hidden">Name</dt>
+          <dd class="backlog_feature_name">
+            {{feature.name}}
+          </dd>
+          <dt class="hidden">Size</dt>
+          <dd></dd>
+          <dt class="hidden">Options</dt>
+          <dd class="backlog_feature_button">
+            {{#link-to 'feature' feature
+              tooltipContent='View feature'
+              tooltipTypeClass='light'
+            }}
+              <span class="icon-go"></span>
+              <span class="hidden">View</span>
+            {{/link-to}}
+          </dd>
+          <dd class="backlog_feature_button">
+            {{#link-to 'feature.edit' feature
+              tooltipContent='Set goals'
+            }}
+              <span class="icon-calendar"></span>
+              <span class="hidden">Add to roadmap</span>
+            {{/link-to}}
+          </dd>
+        </dl>
       {{/sortable-item}}
-      </li>
+
     {{/each}}
+
   {{/sortable-group}}
+
 {{/page-content}}

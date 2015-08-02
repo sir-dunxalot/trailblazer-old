@@ -1,3 +1,71 @@
 .backlog {
   background-color: $gray-darker;
 }
+
+.backlog_feature_list {
+  @include rem(padding-left, $spacing);
+  @include rem(width, 50);
+  @extend %relative;
+  margin: 0 auto;
+
+  &:before {
+    @extend %full_size_pseudo;
+    @include rem(width, 0.8);
+    @include rem(border-radius, 0.4);
+    @include background-image(linear-gradient(top, $orange, transparent));
+  }
+}
+
+.backlog_feature {
+  $_spacing: $spacing / 3;
+
+  @include rem(margin-bottom, $_spacing);
+  background-color: $white;
+  @include rem(border-radius, 0.3);
+
+  @include box-shadow(0 1px 2px rgba($black, 0.2));
+  border-left: 8px solid $orange;
+  color: $gray-darker;
+}
+
+.backlog_feature_content {
+  @extend .list-unstyled;
+  @extend .list-inline;
+
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+
+  .is-dragging & {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+  }
+
+  .backlog_feature_name,
+  .link-to {
+    @include rem(padding, $spacing / 2);
+  }
+}
+
+.backlog_feature_button {
+  float: right;
+
+  &:not(:last-of-type) {
+    border-left: 1px solid rgba($gray-light, 0.5);
+  }
+
+  .link-to {
+    @extend %block;
+    cursor: pointer;
+
+    &:hover .icon {
+      color: $orange;
+      // background-color: rgba($gray-lighter, 0.5);
+    }
+  }
+
+  .icon {
+    color: $gray-dark;
+  }
+}
