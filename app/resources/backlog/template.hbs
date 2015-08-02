@@ -50,21 +50,22 @@
           </dd> --}}
           <dt class="hidden">Options</dt>
           <dd class="backlog_feature_button">
+            {{#link-to 'feature.edit' feature
+              (query-params inBacklog=false)
+              tooltipContent='Set goals'
+              tooltipTypeClass='light'
+            }}
+              <span class="icon-calendar"></span>
+              <span class="hidden">Set goals</span>
+            {{/link-to}}
+          </dd>
+          <dd class="backlog_feature_button">
             {{#link-to 'feature' feature
               tooltipContent='View feature'
               tooltipTypeClass='light'
             }}
               <span class="icon-go"></span>
               <span class="hidden">View</span>
-            {{/link-to}}
-          </dd>
-          <dd class="backlog_feature_button">
-            {{#link-to 'feature.edit' feature
-              tooltipContent='Set goals'
-              tooltipTypeClass='light'
-            }}
-              <span class="icon-calendar"></span>
-              <span class="hidden">Add to roadmap</span>
             {{/link-to}}
           </dd>
         </dl>
