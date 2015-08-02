@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   rendered: false,
   startDate: null,
   step: 1,
+  visible: true,
 
   /* Computed properties */
 

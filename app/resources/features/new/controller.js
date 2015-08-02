@@ -6,9 +6,11 @@ const { computed, observer, on } = Ember;
 export default Ember.Controller.extend(
   FormMixin, {
 
+  ignoreWeekendWarning: false,
   lowerDuration: null,
   upperDuration: null,
   userCanCreateFeature: false, // Set by route
+  weekendWarning: null,
 
   /* Properties for the walkthrough */
 
@@ -52,11 +54,18 @@ export default Ember.Controller.extend(
   },
 
   actions: {
+    ignoreWeekendWarning() {
+      this.get('modal').hide();
+      this.set('ignoreWeekendWarning', true);
+      this.save();
+    },
+
     setInBacklog(value) {
       this.setProperties({
         inBacklog: value,
       });
-    }
+    },
+
   },
 
   /* Methods */
@@ -79,6 +88,35 @@ export default Ember.Controller.extend(
 
   cancel() {
     this.transitionToRoute('index');
+  },
+
+  runCustomValidations() {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      const endDate = this.get('model.endDate');
+      const endDay = endDate.getDay();
+      const endDayIsWeekend = endDay === 0 || endDay === 6;
+      const startDate = this.get('model.startDate');
+      const startDay = startDate.getDay();
+      const startDayIsWeekend = startDay === 0 || startDay === 6;
+
+      let warning;
+
+      if ((!endDayIsWeekend && !startDayIsWeekend) || this.get('ignoreWeekendWarning'))  {
+        return resolve();
+      } if (endDayIsWeekend && startDayIsWeekend) {
+        warning = 'Your feature starts and ends on a weekend';
+      } else if (endDayIsWeekend) {
+        warning = 'Your feature will be released on a weekend';
+      } else if (startDayIsWeekend) {
+        warning = 'Your feature starts on a weekend';
+      }
+
+      this.set('weekendWarning', warning);
+
+      this.showModal('modals/confirm-weekend');
+
+      reject();
+    }.bind(this));
   },
 
   save() {

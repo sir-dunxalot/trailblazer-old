@@ -28,11 +28,10 @@
             classNameBindings='model.inBacklog:hidden'
           }}
 
-          <ol class="range_slider_caption">
+          <ol class="range_slider_caption {{if model.stages.length 'fade-in' 'fade-out'}}">
             {{#each model.stages as |stage|}}
               <li class="{{stage.type.name}}">
-                {{item-inflection stage.duration 'day' 'days'}} of {{capitalize-string stage.type.name}}
-                .{{stage.numberOfWorkingDays}}.
+                {{item-inflection stage.numberOfWorkingDays 'day'}} of {{capitalize-string stage.type.name}}
               </li>
             {{/each}}
           </ol>
@@ -42,6 +41,7 @@
             upper=upperDuration
             max=model.totalDuration
             startDate=model.startDate
+            visible=model.stages.length
           }}
         {{/unless}}
 

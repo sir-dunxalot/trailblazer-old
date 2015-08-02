@@ -1,0 +1,14 @@
+<h1 class="heading">
+  <span class="icon-warning"></span>
+  <span class="text">Fun time being overwritten</span>
+</h1>
+
+<p class="heading-small">{{weekendWarning}}. Are you sure you want to continue?</p>
+
+<button class="button-primary" {{action 'closeModal'}}>
+  <strong>No</strong>, change the dates
+</button>
+
+<button class="button-primary-alt" {{action 'ignoreWeekendWarning'}}>
+  <strong>Yes</strong>, keep the dates
+</button>
