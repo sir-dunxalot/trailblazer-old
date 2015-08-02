@@ -73,7 +73,6 @@ export default Ember.Component.extend({
   renderSlider: function() {
     const _this = this;
     const element = this.$().find('.slider');
-    const startDate = this.get('startDate');
 
     element.noUiSlider({
       animate: true,
@@ -95,31 +94,23 @@ export default Ember.Component.extend({
     }, true);
 
     element.on({
-      slide: function() {
-        const values = element.val();
-
+      slide(event, values) {
         _this.setProperties({
           lower: values[0],
           upper: values[1],
         });
+
+        _this.updateSliderToggles(element, values);
+      },
+
+      set(event, values) {
+        _this.updateSliderToggles(element, values);
       }
     });
 
     /* Add tooltips */
 
-    if (startDate) {
-      const toggles = [element.Link('lower'), element.Link('upper')];
-
-      toggles.forEach(function(element) {
-        element.to('-inline-<div class="slider_date"></div>', function (value) {
-          let date = moment(startDate);
-
-          date = date.add(value, 'd').format('D MMM');
-
-          Ember.$(this).html(date);
-        });
-      });
-    }
+    _this.updateSliderToggles(element, element.val());
   },
 
   setInitialValues: on('didInsertElement',
@@ -135,5 +126,16 @@ export default Ember.Component.extend({
       }
     })
   ),
+
+  updateSliderToggles(sliderElement, values) {
+    const startDate = this.get('startDate');
+
+    ['lower', 'upper'].forEach(function(name, i) {
+      const date = moment(startDate).add(values[i], 'd').format('D MMM');
+      const handle = sliderElement.find(`.noUi-handle-${name}`);
+
+      handle.html(`<div class="slider_date">${date}</div>`);
+    });
+  }
 
 });
