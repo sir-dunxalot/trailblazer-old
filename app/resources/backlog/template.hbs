@@ -16,6 +16,13 @@
 
 {{#page-content}}
 
+  {{#if actionResponse}}
+    <span class="action_response {{actionResponseClass}}">
+      <span class="icon-success"></span>
+      <span class="text">{{actionResponse}}</span>
+    </span>
+  {{/if}}
+
   {{#sortable-group
     class='backlog_feature_list'
     onChange='reorderBacklog'
@@ -34,10 +41,13 @@
         <dl class="backlog_feature_content">
           <dt class="hidden">Name</dt>
           <dd class="backlog_feature_name">
-            {{feature.name}}
+            {{feature.name}} with some more text to make this a reallt long name
           </dd>
-          <dt class="hidden">Size</dt>
-          <dd></dd>
+          {{!-- TODO - size --}}
+          {{!-- <dt class="hidden">Size</dt>
+          <dd>
+            {{size-icon 1}}
+          </dd> --}}
           <dt class="hidden">Options</dt>
           <dd class="backlog_feature_button">
             {{#link-to 'feature' feature
@@ -51,6 +61,7 @@
           <dd class="backlog_feature_button">
             {{#link-to 'feature.edit' feature
               tooltipContent='Set goals'
+              tooltipTypeClass='light'
             }}
               <span class="icon-calendar"></span>
               <span class="hidden">Add to roadmap</span>
