@@ -6,7 +6,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   // TODO - remove
   this.route('about');
 
@@ -50,7 +49,8 @@ Router.map(function() {
   });
 
   this.route('settings');
-  this.route('sign-in'); // TODO - Deprecate
+  // TODO - Deprecate
+  this.route('sign-in');
 
   this.route('stage-types', {
     resetNamespace: true
@@ -71,6 +71,7 @@ Router.map(function() {
     });
   });
 
+  this.route('backlog');
 });
 
 export default Router;

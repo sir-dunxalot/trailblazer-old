@@ -92,6 +92,14 @@ export default Ember.Controller.extend(
 
   runCustomValidations() {
     return new Ember.RSVP.Promise(function(resolve, reject) {
+      const { inBacklog, ignoreWeekendWarning } = this.getProperties(
+        [ 'inBacklog', 'ignoreWeekendWarning' ]
+      );
+
+      if (inBacklog || ignoreWeekendWarning) {
+        return resolve();
+      }
+
       const endDate = this.get('model.endDate');
       const endDay = endDate.getDay();
       const endDayIsWeekend = endDay === 0 || endDay === 6;
@@ -101,7 +109,7 @@ export default Ember.Controller.extend(
 
       let warning;
 
-      if ((!endDayIsWeekend && !startDayIsWeekend) || this.get('ignoreWeekendWarning'))  {
+      if ((!endDayIsWeekend && !startDayIsWeekend))  {
         return resolve();
       } if (endDayIsWeekend && startDayIsWeekend) {
         warning = 'Your feature starts and ends on a weekend';

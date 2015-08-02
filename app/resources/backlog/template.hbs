@@ -1,0 +1,9 @@
+{{#page-header}}
+  <h1>Feature Backlog</h1>
+{{/page-header}}
+
+<ol>
+  {{#each backlogFeatures as |feature|}}
+    <li>{{feature.name}}...{{feature.inBacklog}}</li>
+  {{/each}}
+</ol>

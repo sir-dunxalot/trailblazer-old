@@ -4,6 +4,7 @@ const { computed, run } = Ember;
 
 export default Ember.Controller.extend({
   tourShown: false,
+  roadmapFeatures: computed.filterBy('model', 'inBacklog', false),
 
   showNewTooltip: computed('model.length', 'model.isUpdating', function() {
     return !this.get('model.length') && !this.get('model.isUpdating');
