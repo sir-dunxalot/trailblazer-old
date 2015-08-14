@@ -18,7 +18,7 @@
 
   <dl class="dates_list {{if datePositionsSet 'fade-in'}}">
     <dt class="hidden">Feature start date</dt>
-    <dd>{{moment startDate shortDateFormat}}</dd>
+    <dd>{{moment model.startDate shortDateFormat}}</dd>
 
     <dt class="hidden">Development start date</dt>
     <dd class="lower_date" style={{lowerDatePosition}}>
@@ -31,7 +31,7 @@
     </dd>
 
     <dt class="hidden">Feature end date</dt>
-    <dd>{{moment endDate shortDateFormat}}</dd>
+    <dd>{{moment model.endDate shortDateFormat}}</dd>
   </dl>
 
 {{/page-header}}

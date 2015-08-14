@@ -69,31 +69,31 @@ export default Ember.Controller.extend({
 
   setDates: observer('model.stages', function() {
     const _this = this;
+    const model = this.get('model');
 
-    _this.get('model.stages').then(function(stages) {
+    model.get('stages').then(function(stages) {
       stages.forEach(function(stage) {
-        stage.get('type').then(function(type) {
-          const name = type.get('name');
-          const duration = stage.get('duration');
+        const { duration, rank } = stage.getProperties(
+          [ 'duration', 'rank' ]
+        );
 
-          if (name === 'research') {
-            const startDate = moment(_this.get('startDate'));
-            const lowerDate = startDate.add(duration, 'd');
+        if (rank === 1) {
+          const startDate = moment(model.get('startDate'));
+          const lowerDate = startDate.add(duration, 'd');
 
-            _this.setProperties({
-              lowerDuration: duration,
-              lowerDate,
-            });
-          } else if (name === 'testing') {
-            const endDate = moment(_this.get('endDate'));
-            const upperDate = endDate.subtract(duration + 1, 'd');// Hack
+          _this.setProperties({
+            lowerDuration: duration,
+            lowerDate,
+          });
+        } else if (rank === 3) {
+          const endDate = moment(model.get('endDate'));
+          const upperDate = endDate.subtract(duration + 1, 'd');// Hack
 
-            _this.setProperties({
-              upperDuration: duration,
-              upperDate,
-            });
-          }
-        });
+          _this.setProperties({
+            upperDuration: duration,
+            upperDate,
+          });
+        }
       });
     });
   }),
