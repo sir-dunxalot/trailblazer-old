@@ -12,7 +12,7 @@ export function sizeIcon(params/*, hash*/) {
   } else if (fraction > 0.65) {
     iconName = 'progress-two';
   } else if (fraction > 0.32) {
-    iconName = 'progress-one'
+    iconName = 'progress-one';
   }
 
   return new Ember.String.htmlSafe(`<span class="icon-${iconName}"></span>`);

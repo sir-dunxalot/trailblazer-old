@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 
-const { computed, observer, on } = Ember;
+const { computed, observer } = Ember;
 
 export default Ember.Controller.extend(
   FormMixin, {
@@ -134,12 +134,18 @@ export default Ember.Controller.extend(
     /* Set walkthrough properties on the model*/
 
     model.save().then(function(feature) {
+      const stages = feature.get('stages');
 
-      feature.get('stages').forEach(function(stage) {
-        stage.save();
+      stages.forEach(function(stage, i) {
+        stage.save().then(function() {
+
+          /* If we've saved three stages... */
+
+          if (i === stages.get('length') - 1) {
+            _this.transitionToRoute('feature', feature);
+          }
+        })
       });
-
-      _this.transitionToRoute('feature', feature);
     });
   },
 

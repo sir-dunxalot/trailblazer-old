@@ -27,7 +27,6 @@ export default Ember.Controller.extend({
       }
 
       this.set('actionResponse', 'Saved');
-      console.log(this.get('actionResponse'));
 
       run.later(this, function() {
         this.set('actionResponseClass', 'fade-in');

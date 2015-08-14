@@ -24,6 +24,7 @@
   {{/if}}
 
   {{#sortable-group
+    classNameBindings='model.isUpdating:fade-out:fade-in'
     class='backlog_feature_list'
     onChange='reorderBacklog'
     tagName='ol'
@@ -41,7 +42,7 @@
         <dl class="backlog_feature_content">
           <dt class="hidden">Name</dt>
           <dd class="backlog_feature_name">
-            {{feature.name}} with some more text to make this a reallt long name
+            {{feature.name}}
           </dd>
           {{!-- TODO - size --}}
           {{!-- <dt class="hidden">Size</dt>

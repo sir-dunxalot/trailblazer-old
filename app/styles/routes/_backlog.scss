@@ -75,7 +75,7 @@
 }
 
 .backlog_feature_name {
-  @include rem(max-width, 33); // Hack
+  @include rem(width, 33); // Hack
 }
 
 .action_response {

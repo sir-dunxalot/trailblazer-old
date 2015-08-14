@@ -1,7 +1,4 @@
-import Ember from 'ember';
 import InputGroupComponent from 'trailblazer/components/input-group';
-
-const { computed } = Ember;
 
 export default InputGroupComponent.extend({
   classNames: ['toggle-group'],

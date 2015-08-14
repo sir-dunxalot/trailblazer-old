@@ -36,6 +36,9 @@ app.import(bowerDir + 'normalize.css/normalize.css', {
 
 /* Dependencies */
 
+app.import(bowerDir + 'fullcalendar/dist/fullcalendar.css');
+app.import(bowerDir + 'fullcalendar/dist/fullcalendar.js');
+
 app.import(bowerDir + 'firebase/firebase.js');
 
 app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.js');

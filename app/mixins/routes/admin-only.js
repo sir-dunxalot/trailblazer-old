@@ -5,7 +5,7 @@ export default Ember.Mixin.create({
   beforeModel(transition) {
     const userId = this.get('userId');
 
-    this.store.findRecord('user', userId).then(function(user) {
+    this.store.find('user', userId).then(function(user) {
       if (user.get('permissionLevel') < 10) {
         transition.abort();
         this.transitionTo('features');

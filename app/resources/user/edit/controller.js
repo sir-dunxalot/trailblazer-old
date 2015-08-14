@@ -46,7 +46,7 @@ export default Ember.Controller.extend(
       return;
     }
 
-    this.store.findRecord('team', teamId).then(function(team) {
+    this.store.find('team', teamId).then(function(team) {
       const teamName = team.get('name');
 
       _this.setProperties({

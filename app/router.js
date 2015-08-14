@@ -72,6 +72,7 @@ Router.map(function() {
   });
 
   this.route('backlog');
+  this.route('goals');
 });
 
 export default Router;

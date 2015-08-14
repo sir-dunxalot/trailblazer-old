@@ -18,7 +18,7 @@ export function initialize(container) {
       const userId = this.get('content.secure.uid');
 
       if (userId) {
-        return store.findRecord('user', userId).then(function(user) {
+        return store.find('user', userId).then(function(user) {
           this.setProperties({
             currentTeam: user.get('team'),
             currentUser: user

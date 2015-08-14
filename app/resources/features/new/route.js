@@ -1,6 +1,8 @@
 import DirtyRecordHandler from 'ember-easy-form-extensions/mixins/routes/dirty-record-handler';
 import Ember from 'ember';
 
+const order = ['research', 'development', 'testing'];
+
 export default Ember.Route.extend(
   DirtyRecordHandler, {
 
@@ -29,9 +31,11 @@ export default Ember.Route.extend(
         const stage = store.createRecord('stage', {
           duration: Math.round(durations[i]),
           feature: model,
+          rank: order.indexOf(type.get('name')) + 1,
           type: type
         });
 
+        // type.get('stages').addObject(stage);
         model.get('stages').addObject(stage);
       });
     }.bind(this));
@@ -45,7 +49,7 @@ export default Ember.Route.extend(
 
     /* If user has team, don't let them create a feature */
 
-    this.store.findRecord('user', userId).then(function(user) {
+    this.store.find('user', userId).then(function(user) {
       user.get('team').then(function(team) {
         if (!team) {
           transition.abort();
