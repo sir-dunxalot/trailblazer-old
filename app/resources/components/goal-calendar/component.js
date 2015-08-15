@@ -6,9 +6,7 @@ export default Ember.Component.extend({
   calendar: null,
   features: null,
 
-  didInitAttrs() {
-    this.addEvents();
-  },
+  /* Temporary hack */
 
   addEvents: observer('features.[]', function() {
     const events = [];
@@ -30,11 +28,23 @@ export default Ember.Component.extend({
       return;
     }
 
+    calendar.fullCalendar('removeEvents');
+
     features.forEach(function(feature) {
       const featureName = feature.get('name');
       const { endDate, startDate } = feature.getProperties(
         [ 'endDate', 'startDate' ]
       );
+
+      /* Add the feature start date */
+
+      addEvent({
+        className: 'start',
+        date: startDate,
+        title: `Start ${featureName}`,
+      });
+
+      /* Add each stage end date */
 
       feature.get('stages').then(function(stages) {
         stages.forEach(function(stage) {
@@ -55,13 +65,15 @@ export default Ember.Component.extend({
   }),
 
   _renderCalendar: on('didInsertElement', function() {
+    const _this = this;
     const calendar = $(`#${this.get('elementId')}`).fullCalendar({
       firstDay: 1,
       businessHours: true,
       header: {
+        center: 'title',
         left: 'prev',
         right: 'today basicWeek month next'
-      }
+      },
     });
 
     this.setProperties({ calendar });

@@ -12,6 +12,7 @@ export default DS.Model.extend({
   feature: belongsTo('feature', {
     async: true,
   }),
+  numberOfWorkingDays: null, // Set by observer
   rank: attr('number'),
   tasks: hasMany('task', {
     async: true,
@@ -74,13 +75,21 @@ export default DS.Model.extend({
   },
 
   getNumberOfWorkingDays() {
+    const _this = this;
+
     return new Ember.RSVP.Promise(function(resolve) {
-      this.getDates().then(function({ stageEndDate, stageStartDate }) {
+      _this.getDates().then(function({ stageEndDate, stageStartDate }) {
         const days = numberOfWorkingDays(stageStartDate, stageEndDate);
 
-        rseolve(days);
+        resolve(days);
       });
     });
   },
+
+  setNumberOfWorkingDays: observer('duration', 'feature.startDate', 'feature.endDate', function() {
+    this.getNumberOfWorkingDays().then(function(numberOfWorkingDays) {
+      this.set('numberOfWorkingDays', numberOfWorkingDays);
+    }.bind(this));
+  }),
 
 });
