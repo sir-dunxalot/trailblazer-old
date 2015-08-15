@@ -9,6 +9,7 @@ $headingSize: 3;
 $headingSize-small: 1.8;
 $headingSize-large: $headingSize * 1.2;
 $iconFontSize: 2.4;
+$altTextSize: 1.4;
 
 $iconFontOffset: -0.5 * ($iconFontSize / $bodyFontSize);
 
@@ -44,15 +45,16 @@ $research: $purple;
 $development: $blue;
 $testing: $green;
 $testingText: darken($green, 10%);
+$release: $orange;
 
 $inputBackgroundColor: mix($white, $offwhite, 80%);
 
 /* Layout */
 
-$small: "(min-width: 37.5em)"; // 600px
-$medium: "(min-width: 50em)"; // 800px
-$big: "(min-width: 63.75em)"; // 1020px
-$xBig: "(min-width: 81.25em)"; // 1200px
+$small: 37.5em; // 600px
+$medium: 50em; // 800px
+$large: 63.75em; // 1020px
+$extraLarge: 81.25em; // 1200px
 
 $spacing: 3.6;
 

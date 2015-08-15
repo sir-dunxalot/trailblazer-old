@@ -1,0 +1,109 @@
+.calendar {
+  $_eventSelector: '.fc-event';
+
+  #{$_eventSelector}.start {
+    background-color: mix($research, $red);
+  }
+
+  #{$_eventSelector}.research {
+    background-color: $research;
+  }
+
+  #{$_eventSelector}.development {
+    background-color: $development;
+  }
+
+  #{$_eventSelector}.testing {
+    background-color: $testing;
+    color: rgba($black, 0.6);
+  }
+
+  #{$_eventSelector}.release {
+    background-color: $release;
+  }
+
+  td.fc-day-number {
+    @include rem(padding, 0.5);
+  }
+
+  .fc-today {
+    background-color: rgba($orange, 0.5);
+  }
+
+  .fc-button {
+    @extend .button;
+    @extend .button-primary;
+    background-color: $gray;
+    background-image: none;
+    @include rem(font-size, $altTextSize);
+    @include rem(padding, $buttonVertPadding / 2, $buttonHorizPadding / 2);
+    height: auto;
+  }
+
+  .fc-prev-button,
+  .fc-next-button {
+    @extend .button-transparent;
+    background-color: transparent;
+
+    &, &:hover {
+      color: $gray;
+    }
+  }
+
+  .fc-day-header {
+    @include rem(padding, 0.5);
+    font-weight: normal;
+    border-color: transparent;
+  }
+}
+
+.fc-view-container {
+  @include rem(margin, $spacing);
+
+  @include extra-large {
+    width: 70%;
+    @include rem(margin-top, $spacing * 2);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.fc-toolbar {
+  @include rem(padding, $spacing, $spacing / 2);
+  background-color: $offwhite;
+  margin-bottom: 0;
+
+  /* Limit content width with calendar */
+
+  @include extra-large {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+
+.fc-head {
+  background-color: $gray-light;
+  color: $white;
+}
+
+.fc-event {
+  border-color: rgba($black, 0.2);
+  @include rem(padding, 0.8, 1);
+  line-height: 1.2;
+}
+
+.fc-day-grid-event .fc-content {
+  white-space: normal;
+}
+
+/* Icons */
+
+.fc-icon-arrow-left:before {
+  @extend %icon;
+  content: "\e094";
+}
+
+.fc-icon-arrow-right:before {
+  @extend %icon;
+  content: "\e095";
+}

@@ -26,7 +26,7 @@ export default Ember.Controller.extend(
   saveButtonText: computed('model.inBacklog', function() {
     const inBacklog = this.get('model.inBacklog');
 
-    return inBacklog ? 'Add the backlog' : 'Add to roadmap';
+    return inBacklog ? 'Add to backlog' : 'Add to roadmap';
   }),
 
   /* Validations */

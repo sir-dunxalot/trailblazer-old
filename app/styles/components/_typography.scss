@@ -1,7 +1,7 @@
 html {
   font-size: $baseFontSize * 0.9;
 
-  @media #{$medium} {
+  @include medium {
     font-size: $baseFontSize;
   }
 }

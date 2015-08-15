@@ -153,3 +153,29 @@ Hack until compass-mixins is synced up with new libsass
 @function -o($property) {
   @return -o-#{$property};
 }
+
+/* Media Queries */
+
+@mixin small {
+  @media (min-width: $small) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: $medium) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (min-width: $large) {
+    @content;
+  }
+}
+
+@mixin extra-large {
+  @media (min-width: $extraLarge) {
+    @content;
+  }
+}
