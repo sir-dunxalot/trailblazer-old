@@ -42,7 +42,7 @@
           optionLabelPath='content.name'
           placeholder='Add a test task?'
           modelPath=null
-          disabled=taskIsInTestingStage
+          disabled=(not taskIsInDevelopmentStage)
         }}
       {{/if}}
 

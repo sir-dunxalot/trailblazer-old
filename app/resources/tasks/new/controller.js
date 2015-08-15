@@ -2,35 +2,32 @@ import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 import uncapitalize from 'trailblazer/utils/uncapitalize';
 
-const { computed } = Ember;
+const { computed, observer, on } = Ember;
 
 export default Ember.Controller.extend(
   FormMixin, {
 
   lastUsedStageName: null,
-  taskIsInTestingStage: computed.equal('model.stageName', 'testing'),
+  taskIsInDevelopmentStage: computed.equal('model.stageName', 'development'),
   testingStages: computed.filterBy('model.feature.stages', 'type.name', 'testing'),
-  testTaskSelection: computed.oneWay('testTaskOptionDefault'),
-  testTaskOptionNone: {
-    name: 'None',
-    value: ''
-  },
   testTaskOptionDefault: {
-      name: 'Unit test',
-      value: 'unit'
+    name: 'Unit and integration tests',
+    value: 'both'
   },
 
-  testTaskOptions: computed('testTaskOptionNone', 'testTaskOptionDefault', function() {
+  testTaskOptions: computed(function() {
     return Ember.A([
-      this.get('testTaskOptionNone'),
-      this.get('testTaskOptionDefault'),
       {
+        name: 'None',
+        value: null
+      }, {
+        name: 'Unit test',
+        value: 'unit'
+      }, {
         name: 'Integration test',
         value: 'integration'
-      }, {
-        name: 'Both',
-        value: 'both'
-      }
+      },
+      this.get('testTaskOptionDefault'),
     ]);
   }),
 
@@ -52,8 +49,22 @@ export default Ember.Controller.extend(
     }
   },
 
-  testingStage: Ember.computed('testingStages.[]', function() {
+  testingStage: computed('testingStages.[]', function() {
     return this.get('testingStages.firstObject');
+  }),
+
+  testTaskSelection: computed('taskIsInDevelopmentStage', {
+    get() {
+      if (!this.get('taskIsInDevelopmentStage')) {
+        return null; // Remove any selection
+      } else {
+        return this.get('testTaskOptionDefault');
+      }
+    },
+
+    set() {
+
+    },
   }),
 
   transition() {
@@ -141,20 +152,6 @@ export default Ember.Controller.extend(
     });
   },
 
-  resetTestingTaskSelection: Ember.observer('taskIsInTestingStage', function() {
-    if (this.get('taskIsInTestingStage')) {
-      this.set('testTaskSelection', this.get('testTaskOptionNone'));
-    }
-  }),
-
   // TODO - remember stage, assignee, and test task
-
-  setDefaultStage: Ember.observer('model.stages.[]', function() {
-    this.get('model.feature.stages').then(function(stages) {
-      const stage = stages.objectAt(1);
-
-      this.set('stage', stage);
-    }.bind(this));
-  }),
 
 });
