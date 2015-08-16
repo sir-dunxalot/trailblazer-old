@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import numberOfWorkingDays from 'trailblazer/utils/number-of-working-days';
 import renderTooltip from 'ember-tooltips/utils/render-tooltip';
 
 const { observer, on } = Ember;
@@ -13,6 +14,9 @@ export default Ember.Component.extend({
     const features = this.get('features');
     const featuresLength = features.get('length');
     const store = this.get('container').lookup('store:main');
+    const promises = Ember.A();
+
+    let resolveAsyncronously = false;
 
     return new Ember.RSVP.Promise(function(resolve) {
 
@@ -61,53 +65,20 @@ export default Ember.Component.extend({
           stages.forEach(function(stage, stageIndex) {
             stage.getDates().then(function({ stageStartDate, stageEndDate }) {
               stage.get('type').then(function(type) {
-                stage.get('tasks').then(function(tasks) {
-                  const shouldResolve = featureIndex + 1 === featuresLength && stageIndex + 1 === stagesLength;
-                  const stageName = type.get('name');
-                  const userIds = tasks.mapBy('assignee.id').filter(function(userId, j, arr) {
-                    return arr.indexOf(userId) === j; // Remove duplications
-                  });
-                  const userIdsLength = userIds.get('length');
+                const workingDaysUntilGoal = numberOfWorkingDays(new Date(), stageEndDate);
+                const shouldResolve = featureIndex + 1 === featuresLength && stageIndex + 1 === stagesLength;
+                const stageName = type.get('name');
 
-                  let usersHtml = '';
-
-                  if (!userIdsLength) {
-                    addEvent({
-                      className: stageName,
-                      date: stageEndDate,
-                      title: `Finish ${featureName} ${stageName}`,
-                    });
-
-                    if (shouldResolve) {
-                      resolve(events);
-                    }
-                  }
-
-                  userIds.forEach(function(userId, userIndex) {
-                    store.findRecord('user', userId).then(function(user) {
-                      const { avatarUrl, fullName } = user.getProperties(
-                        [ 'avatarUrl', 'fullName' ]
-                      );
-
-                      usersHtml += `<li><img src="${avatarUrl}" class="calendar_user_avatar"><span class="text">${fullName}</span></li>`
-
-                      if (userIndex + 1 === userIdsLength) {
-                        const description = `<ul class="calendar_user_list">${usersHtml}</ul>`;
-
-                        addEvent({
-                          className: stageName,
-                          date: stageEndDate,
-                          description: description,
-                          title: `Finish ${featureName} ${stageName}`,
-                        });
-
-                        if (shouldResolve) {
-                          resolve(events);
-                        }
-                      }
-                    });
-                  });
+                addEvent({
+                  className: stageName,
+                  description: `${workingDaysUntilGoal} days left`,
+                  date: stageEndDate,
+                  title: `Finish ${featureName} ${stageName}`,
                 });
+
+                if (shouldResolve) {
+                  resolve(events);
+                }
               });
             });
           });
@@ -133,6 +104,7 @@ export default Ember.Component.extend({
 
       events(start, end, timezone, callback) {
         _this.addEvents().then(function(events) {
+          console.log('resolved with', events);
           callback(events);
         });
       },
@@ -149,7 +121,6 @@ export default Ember.Component.extend({
           renderTooltip($element[0], {
             content: description,
             effectClass: 'fade',
-            typeClass: 'calendar',
           });
         }
       },

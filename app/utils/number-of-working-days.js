@@ -23,5 +23,5 @@ export default function numberOfWorkingDays(startDate, endDate) {
     endOffset--;
   }
 
-  return (weeks * 5 + startOffset + endOffset);
+  return (weeks * 5 + startOffset + endOffset).toFixed(0);
 }
