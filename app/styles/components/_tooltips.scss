@@ -1,6 +1,32 @@
+.tooltip {
+  z-index: 2;
+}
+
 .tooltip-light {
   background-color: $offwhite;
   text-shadow: none;
   color: $gray-dark;
   @include box-shadow(0 1px 3px rgba($black, 0.2));
+}
+
+.tooltip-calendar {
+  $_size: $spacing;
+
+  padding: 0;
+  @include rem(line-height, $_size);
+
+  .calendar_user_list {
+    @extend .list-unstyled;
+  }
+
+  .calendar_user_avatar {
+    @include rem(height, $_size);
+    @include rem(width, $_size);
+    @extend %inline_block;
+  }
+
+  .text {
+    @include rem(padding, 1);
+  }
+
 }

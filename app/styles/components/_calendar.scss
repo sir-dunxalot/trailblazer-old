@@ -86,6 +86,10 @@
   color: $white;
 }
 
+.fc-body {
+  background-color: $white;
+}
+
 .fc-event {
   border-color: rgba($black, 0.2);
   @include rem(padding, 0.8, 1);

@@ -68,7 +68,8 @@ export default Ember.Component.extend({
                     return arr.indexOf(userId) === j; // Remove duplications
                   });
                   const userIdsLength = userIds.get('length');
-                  const userNames = [];
+
+                  let usersHtml = '';
 
                   if (!userIdsLength) {
                     addEvent({
@@ -84,10 +85,14 @@ export default Ember.Component.extend({
 
                   userIds.forEach(function(userId, userIndex) {
                     store.findRecord('user', userId).then(function(user) {
-                      userNames.push(user.get('fullName'));
+                      const { avatarUrl, fullName } = user.getProperties(
+                        [ 'avatarUrl', 'fullName' ]
+                      );
+
+                      usersHtml += `<li><img src="${avatarUrl}" class="calendar_user_avatar"><span class="text">${fullName}</span></li>`
 
                       if (userIndex + 1 === userIdsLength) {
-                        const description = '<ul><li>' + userNames.join('</li><li>') + '</li></ul>';
+                        const description = `<ul class="calendar_user_list">${usersHtml}</ul>`;
 
                         addEvent({
                           className: stageName,
@@ -144,6 +149,7 @@ export default Ember.Component.extend({
           renderTooltip($element[0], {
             content: description,
             effectClass: 'fade',
+            typeClass: 'calendar',
           });
         }
       },
