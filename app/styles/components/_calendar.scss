@@ -111,6 +111,14 @@
   border-color: rgba($black, 0.2);
   @include rem(padding, 0.8, 1);
   line-height: 1.2;
+
+  &.user-can-click {
+    cursor: pointer;
+
+    &:hover {
+      @include opacity(0.8);
+    }
+  }
 }
 
 .fc-day-grid-event .fc-content {

@@ -9,6 +9,17 @@ export default Ember.Component.extend({
   classNames: ['calendar'],
   features: null,
 
+  actions: {
+    showOverview(resource) {
+      console.log(resource);
+      this.get('targetObject').showModal({
+        template: 'modals/stage-overview',
+        model: resource,
+        view: 'modals/stage-overview',
+      });
+    },
+  },
+
   addEvents() {
     const events = Ember.A();
     const features = this.get('features');
@@ -25,13 +36,14 @@ export default Ember.Component.extend({
         resolve(events);
       }
 
-      function addEvent({ className, date, description, title }) {
+      function addEvent({ className, date, description, resource, title }) {
         events.addObject({
           allDay: true,
           className: `${className} fade-out`,
-          description: description,
+          description,
+          resource,
           start: date,
-          title: title,
+          title,
         });
       }
 
@@ -70,9 +82,10 @@ export default Ember.Component.extend({
                 const stageName = type.get('name');
 
                 addEvent({
-                  className: stageName,
+                  className: `${stageName} user-can-click`,
                   description: `${workingDaysUntilGoal} days left`,
                   date: stageEndDate,
+                  resource: stage,
                   title: `Finish ${featureName} ${stageName}`,
                 });
 
@@ -89,6 +102,7 @@ export default Ember.Component.extend({
 
   _renderCalendar: on('didInsertElement', function() {
     const _this = this;
+    const eventHoverClass = 'event-hover-state';
     const calendar = $(`#${this.get('elementId')}`).fullCalendar({
       firstDay: 1,
       businessHours: true,
@@ -102,16 +116,22 @@ export default Ember.Component.extend({
         right: 'today basicWeek month next'
       },
 
-      events(start, end, timezone, callback) {
-        _this.addEvents().then(function(events) {
-          console.log('resolved with', events);
-          callback(events);
-        });
-      },
-
       eventAfterRender(event, $element) {
         $element.removeClass('fade-out');
         $element.addClass('fade-in');
+      },
+
+      eventClick({ resource }) {
+        if (resource) {
+
+          /* Temporary functionality until the overview is done */
+
+          resource.get('feature').then(function(feature) {
+            _this.get('targetObject').transitionToRoute('feature', feature);
+          });
+
+          // _this.send('showOverview', resource);
+        }
       },
 
       eventRender(event, $element) {
@@ -124,6 +144,13 @@ export default Ember.Component.extend({
           });
         }
       },
+
+      events(start, end, timezone, callback) {
+        _this.addEvents().then(function(events) {
+          callback(events);
+        });
+      },
+
     });
 
     this.setProperties({ calendar });

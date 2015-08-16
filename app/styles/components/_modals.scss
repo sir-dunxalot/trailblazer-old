@@ -1,9 +1,28 @@
 .overlay {
   background-color: rgba($orange, 0.9);
+  z-index: 5;
 
   // & ~ .main {
   //   @include transform(translate(-1px, 0));
   // }
+}
+
+/* Don't use our mod mixin because ember-modals styling
+is hardcoded in CSS. Just add the modifier class plus the
+base class to overlays */
+
+.overlay-resource_overview {
+  background-color: rgba($white, 0.1);
+
+  .modal-wrapper {
+    padding-left: 0;
+  }
+
+  .modal {
+    @include box-shadow(0 4px 6px rgba($black, 0.2));
+    @include rem(width, 30);
+    margin-left: 0;
+  }
 }
 
 .modal {
