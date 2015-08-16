@@ -12,6 +12,15 @@ export default Ember.Controller.extend({
   actionResponseClass: 'fade-out',
 
   actions: {
+
+    addFirstFeature() {
+      this.transitionToRoute('features.new', {
+        queryParams: {
+          inBacklog: true,
+        }
+      });
+    },
+
     reorderBacklog(backlog) {
       const actionResponseDelay = 3000;
 

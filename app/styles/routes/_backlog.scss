@@ -4,7 +4,8 @@
 
 .backlog_feature_list {
   @include rem(padding-left, $spacing);
-  @include rem(width, 50);
+  @include rem(max-width, 50);
+  @extend %full_width;
   @extend %relative;
   margin: 0 auto;
 

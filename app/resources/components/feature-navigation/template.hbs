@@ -1,18 +1,3 @@
-{{#link-to 'features'}}
-  <span class="icon-roadmap"></span>
-  <span class="text">Roadmap</span>
-{{/link-to}}
-
-{{#link-to 'goals'}}
-  <span class="icon-trophy"></span>
-  <span class="text">Goals</span>
-{{/link-to}}
-
-{{#link-to 'backlog'}}
-  <span class="icon-list-unordered"></span>
-  <span class="text">Backlog</span>
-{{/link-to}}
-
 {{#if showNewTooltip}}
 
   {{#link-to 'features.new'
@@ -26,6 +11,21 @@
   {{/link-to}}
 
 {{else}}
+
+  {{#link-to 'features'}}
+    <span class="icon-roadmap"></span>
+    <span class="text">Roadmap</span>
+  {{/link-to}}
+
+  {{#link-to 'goals'}}
+    <span class="icon-trophy"></span>
+    <span class="text">Goals</span>
+  {{/link-to}}
+
+  {{#link-to 'backlog'}}
+    <span class="icon-list-unordered"></span>
+    <span class="text">Backlog</span>
+  {{/link-to}}
 
   {{#link-to 'features.new'
     title='Add a new feature'
