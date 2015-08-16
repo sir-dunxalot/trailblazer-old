@@ -38,6 +38,18 @@
     @include rem(font-size, $altTextSize);
     @include rem(padding, $buttonVertPadding / 2, $buttonHorizPadding / 2);
     height: auto;
+
+    &.fc-basicWeek-button {
+      @include rem(margin-left, $spacing);
+    }
+
+    &.fc-month-button {
+      @include rem(margin-left, 1);
+    }
+
+    &.fc-state-active {
+      background-color: $gray-darker;
+    }
   }
 
   .fc-prev-button,

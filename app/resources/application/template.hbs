@@ -4,33 +4,23 @@
     <ul class="list-inline">
 
       <li class="letterhead">
-        {{!-- TODO - improve with HTMLBars --}}
-        {{#if session.isAuthenticated}}
-          {{#link-to 'features'}}
-            Trailblazer
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'index'}}
-            Trailblazer
-          {{/link-to}}
-        {{/if}}
+        {{#link-to (if session.isAuthenticated 'features' 'index')}}
+          Trailblazer
+        {{/link-to}}
       </li>
 
       <li>
-        {{!-- TODO - improve with HTMLBars --}}
-        {{#if session.isAuthenticated}}
-          {{#link-to 'features' class='logo' title='View the roadmap'}}
-            <span class="icon-logo"></span>
-            <span class="icon-home"></span>
-            <span class="hidden">Roadmap</span>
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'index' class='logo' title='Home'}}
-            <span class="icon-logo"></span>
-            <span class="icon-home"></span>
-            <span class="hidden">Home</span>
-          {{/link-to}}
-        {{/if}}
+        {{#link-to
+          (if session.isAuthenticated 'features' 'index')
+          class='logo'
+          title='View the roadmap'
+        }}
+          <span class="icon-logo"></span>
+          <span class="icon-home"></span>
+          <span class="hidden">
+            {{if session.isAuthenticated 'Roadmap' 'Home'}}
+          </span>
+        {{/link-to}}
       </li>
 
       {{#if session.isAuthenticated}}

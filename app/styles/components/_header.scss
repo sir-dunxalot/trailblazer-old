@@ -61,6 +61,12 @@
   @extend %left;
   margin: 0 100px;
 
+  display: none !important;
+
+  @include large {
+    display: inline-block !important;
+  }
+
   @include mod(link-to) {
     color: $orange;
     @extend %uppercase;
@@ -73,6 +79,90 @@
 
     &:hover {
       letter-spacing: 6px;
+    }
+  }
+}
+
+.feature-navigation {
+  @extend %terrace;
+  @extend %absolute;
+  @extend %top;
+  @extend %right;
+
+  @include mod(link-to) {
+    @extend %inline_block;
+    @include rem(line-height, $logoSize - 0.5);
+    @include rem(height, $logoSize);
+    @extend %align-center;
+    @extend .button;
+    @extend .button-transparent;
+    @include rem(padding, 0, 1);
+    @include rem(font-size, 1.2);
+    border-radius: 0;
+
+    .text {
+      @extend %relative;
+      display: none;
+
+      @include small {
+        display: inline-block;
+      }
+    }
+
+    &.active .text:after {
+      $_size: 2;
+
+      @extend %full_size_pseudo;
+      height: 0;
+      width: 0;
+      @include rem(border-width, $_size / 2);
+      border-color: transparent;
+      border-top-color: $white;
+      border-style: solid;
+      top: 100%;
+      left: calc(50% - #{$_size * 10}px);
+      left: calc(50% - #{$_size}rem);
+      @extend %block;
+      z-index: 2;
+    }
+  }
+
+  .link-to-features,
+  .link-to-goals,
+  .link-to-backlog {
+    .icon {
+      @include opacity(0.5);
+    }
+  }
+
+  .link-to-features {
+    .icon {
+      @include rem(font-size, 1.4);
+    }
+  }
+
+  .link-to-goals {
+    .icon {
+      @include rem(font-size, 1.8);
+    }
+  }
+
+  .link-to-backlog {
+    .icon {
+      @include rem(font-size, 2);
+    }
+  }
+
+  .link-to-features-new {
+    background-color: $green;
+    @include transition(background-color $fast);
+
+    &, &:hover {
+      color: $white;
+    }
+
+    &:hover {
+      background-color: darken($green, 5%);
     }
   }
 }

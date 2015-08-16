@@ -1,28 +1,3 @@
-{{#if showNewTooltip}}
-
-  {{#link-to 'features.new'
-    title='Add your first new feature'
-    tooltipContent='Add your first feature'
-    tooltipEvent='ready'
-    tooltipPlace='left'
-  }}
-    <span class="icon-write"></span>
-    <span class="hidden">Add a new feature</span>
-  {{/link-to}}
-
-{{else}}
-
-  {{#link-to 'features.new'
-    title='Add a new feature'
-    tooltipContent='Add a new feature'
-    tooltipEvent='hover'
-    tooltipTypeClass='light'
-    tooltipPlace='left'
-  }}
-    <span class="icon-write"></span>
-    <span class="hidden">Add a new feature</span>
-  {{/link-to}}
-
-{{/if}}
+{{feature-navigation showNewTooltip=showNewTooltip}}
 
 {{product-roadmap features=roadmapFeatures}}

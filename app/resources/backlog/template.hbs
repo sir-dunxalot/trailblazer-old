@@ -1,14 +1,4 @@
-{{#link-to 'features.new'
-  title='Add a new feature'
-  tooltipContent='Add a new feature'
-  tooltipEvent='hover'
-  tooltipTypeClass='light'
-  tooltipPlace='left'
-}}
-  <span class="icon-write"></span>
-  <span class="hidden">Add a new feature</span>
-{{/link-to}}
-
+{{feature-navigation}}
 
 {{#page-header}}
   <h1>Feature Backlog</h1>
@@ -22,6 +12,11 @@
       <span class="text">{{actionResponse}}</span>
     </span>
   {{/if}}
+
+  {{!-- TODO --}}
+  {{!-- {{#if (and (not model.isLoading) (not model.length))}}
+    There are no items in your backlog
+  {{/if}} --}}
 
   {{#sortable-group
     classNameBindings='model.isUpdating:fade-out:fade-in'
@@ -71,7 +66,6 @@
           </dd>
         </dl>
       {{/sortable-item}}
-
     {{/each}}
 
   {{/sortable-group}}
