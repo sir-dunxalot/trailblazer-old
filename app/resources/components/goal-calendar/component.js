@@ -31,7 +31,7 @@ export default Ember.Component.extend({
         });
       }
 
-      features.forEach(function(feature, i) {
+      features.forEach(function(feature, featureIndex) {
         const featureName = feature.get('name');
         const { endDate, startDate } = feature.getProperties(
           [ 'endDate', 'startDate' ]
@@ -56,19 +56,19 @@ export default Ember.Component.extend({
         /* Add each stage end date */
 
         feature.get('stages').then(function(stages) {
-          stages.forEach(function(stage) {
+          const stagesLength = stages.get('length');
+
+          stages.forEach(function(stage, stageIndex) {
             stage.getDates().then(function({ stageStartDate, stageEndDate }) {
               stage.get('type').then(function(type) {
                 stage.get('tasks').then(function(tasks) {
+                  const shouldResolve = featureIndex + 1 === featuresLength && stageIndex + 1 === stagesLength;
                   const stageName = type.get('name');
-                  console.log(featureName, stageName, tasks.get('e'));
                   const userIds = tasks.mapBy('assignee.id').filter(function(userId, j, arr) {
-                    return arr.indexOf(userId) === j; // throw away any instances which are not first
+                    return arr.indexOf(userId) === j; // Remove duplications
                   });
-                  const userIdsLength = userIds.length;
+                  const userIdsLength = userIds.get('length');
                   const userNames = [];
-
-                  // console.log(`Finish ${stageName} for ${featureName}`, userIds);
 
                   if (!userIdsLength) {
                     addEvent({
@@ -77,31 +77,31 @@ export default Ember.Component.extend({
                       title: `Finish ${stageName} for ${featureName}`,
                     });
 
-                    if (i + 1 === featuresLength) {
+                    if (shouldResolve) {
                       resolve(events);
                     }
                   }
 
-                  // userIds.forEach(function(userId, k) {
-                  //   store.findRecord('user', userId).then(function(user) {
-                  //     userNames.push(user.get('fullName'));
+                  userIds.forEach(function(userId, userIndex) {
+                    store.findRecord('user', userId).then(function(user) {
+                      userNames.push(user.get('fullName'));
 
-                  //     if (k + 1 === userIdsLength) {
-                  //       const description = '<ul><li>' + userNames.join('</li><li>') + '</li></ul>';
+                      if (userIndex + 1 === userIdsLength) {
+                        const description = '<ul><li>' + userNames.join('</li><li>') + '</li></ul>';
 
-                  //       addEvent({
-                  //         className: stageName,
-                  //         date: stageEndDate,
-                  //         description: description,
-                  //         title: `Finish ${stageName} for ${featureName}`,
-                  //       });
+                        addEvent({
+                          className: stageName,
+                          date: stageEndDate,
+                          description: description,
+                          title: `Finish ${stageName} for ${featureName}`,
+                        });
 
-                  //       if (i + 1 === featuresLength) {
-                  //         resolve(events);
-                  //       }
-                  //     }
-                  //   });
-                  // });
+                        if (shouldResolve) {
+                          resolve(events);
+                        }
+                      }
+                    });
+                  });
                 });
               });
             });
@@ -128,7 +128,6 @@ export default Ember.Component.extend({
 
       events(start, end, timezone, callback) {
         _this.addEvents().then(function(events) {
-          console.log(events);
           callback(events);
         });
       },
