@@ -23,6 +23,11 @@
     @extend %no_margin;
     @include rem(font-size, 3);
     font-weight: $latoLight;
+
+    .button {
+      font-weight: $latoReg;
+      @include rem(margin-top, -$spacing / 2);
+    }
   }
 
   .link-to-tasks-new {

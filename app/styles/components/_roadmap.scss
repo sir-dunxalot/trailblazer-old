@@ -53,7 +53,7 @@
     @include rem(padding, 1);
     @include rem(margin, -1);
 
-    &:hover .icon-go {
+    &:hover .icon-arror-right {
       @extend .fade-in;
     }
   }
@@ -64,7 +64,7 @@
     width: calc(100% - 2.8rem);
   }
 
-  .icon-go {
+  .icon-arrow-right {
     @extend .fade-out;
     @include transition(opacity, 0.15s); // Instead of .fade
     @include rem(margin-left, 1);

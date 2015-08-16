@@ -1,3 +1,5 @@
+{{feature-navigation}}
+
 {{#page-header class='overview'}}
 
   <div class="heading_row">
@@ -10,28 +12,49 @@
 
     <dl class="tasks_completed">
       <dt class="hidden">Task progress</dt>
-      <dd>{{completedTasks.length}} / {{model.tasks.length}}</dd>
+      <dd>
+        {{#if model.inBacklog}}
+          {{#link-to 'feature.edit' model
+            (query-params inBacklog=false)
+            class='button-primary'
+            tooltipContent='This feature is not in the roadmap'
+            tooltipEffectClass='slide'
+            tooltipTypeClass='white'
+            tooltipPlace='left'
+            tooltipEvent='ready'
+          }}
+            <span class="icon-calendar"></span>
+            <span class="text">Set goals</span>
+          {{/link-to}}
+        {{else}}
+          {{completedTasks.length}} / {{model.tasks.length}}
+        {{/if}}
+      </dd>
     </dl>
   </div>
 
   {{progress-bar value=completedTasks.length max=model.tasks.length}}
 
   <dl class="dates_list {{if datePositionsSet 'fade-in'}}">
-    <dt class="hidden">Feature start date</dt>
-    <dd>{{moment model.startDate shortDateFormat}}</dd>
+    {{#unless model.inBacklog}}
 
-    <dt class="hidden">Development start date</dt>
-    <dd class="lower_date" style={{lowerDatePosition}}>
-      {{moment lowerDate shortDateFormat}}
-    </dd>
+      <dt class="hidden">Feature start date</dt>
+      <dd>{{moment model.startDate shortDateFormat}}</dd>
 
-    <dt class="hidden">Testing start date</dt>
-    <dd class="upper_date" style={{upperDatePosition}}>
-      {{moment upperDate shortDateFormat}}
-    </dd>
+      <dt class="hidden">Development start date</dt>
+      <dd class="lower_date" style={{lowerDatePosition}}>
+        {{moment lowerDate shortDateFormat}}
+      </dd>
 
-    <dt class="hidden">Feature end date</dt>
-    <dd>{{moment model.endDate shortDateFormat}}</dd>
+      <dt class="hidden">Testing start date</dt>
+      <dd class="upper_date" style={{upperDatePosition}}>
+        {{moment upperDate shortDateFormat}}
+      </dd>
+
+      <dt class="hidden">Feature end date</dt>
+      <dd>{{moment model.endDate shortDateFormat}}</dd>
+
+    {{/unless}}
   </dl>
 
 {{/page-header}}

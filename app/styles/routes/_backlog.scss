@@ -54,7 +54,6 @@
 }
 
 .backlog_feature_button {
-  // float: right;
 
   & ~ & {
     border-left: 1px solid rgba($gray-light, 0.5);
@@ -65,8 +64,7 @@
     cursor: pointer;
 
     &:hover .icon {
-      color: $orange;
-      // background-color: rgba($gray-lighter, 0.5);
+      color: $gray-darker;
     }
   }
 

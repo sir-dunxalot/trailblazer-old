@@ -2,11 +2,19 @@
   z-index: 2;
 }
 
-.tooltip-light {
-  background-color: $offwhite;
+.tooltip-light,
+.tooltip-white {
   text-shadow: none;
   color: $gray-dark;
   @include box-shadow(0 1px 3px rgba($black, 0.2));
+}
+
+.tooltip-light {
+  background-color: $offwhite;
+}
+
+.tooltip-white {
+  background-color: $white;
 }
 
 .tooltip-calendar {
