@@ -75,7 +75,7 @@ export default Ember.Component.extend({
                     addEvent({
                       className: stageName,
                       date: stageEndDate,
-                      title: `Finish ${stageName} for ${featureName}`,
+                      title: `Finish ${featureName} ${stageName}`,
                     });
 
                     if (shouldResolve) {
@@ -98,7 +98,7 @@ export default Ember.Component.extend({
                           className: stageName,
                           date: stageEndDate,
                           description: description,
-                          title: `Finish ${stageName} for ${featureName}`,
+                          title: `Finish ${featureName} ${stageName}`,
                         });
 
                         if (shouldResolve) {
