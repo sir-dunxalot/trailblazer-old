@@ -1,53 +1,35 @@
 # Trailblazer
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A free product roadmap tool
 
-## Prerequisites
+## License
 
-You will need the following things properly installed on your computer.
+This project is licensed under the `CC-BY-SA-4.0` license, which grants reuse and modification for non-commercial uses only.
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+**You may not use this project for commercial use.**
+
+For more information please see:
+
+- [CC-BY-SA-4.0 Overview](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+- [CC-BY-SA-4.0 Full License](https://spdx.org/licenses/CC-BY-NC-SA-4.0.html)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+- `npm install -g firebase-tools`
+- `git clone git@github.com:sir-dunxalot/trailblazer.git` this repository
+- `cd trailblazer`
+- `npm install`
+- `bower install`
+- `firebase login`
 
 ## Running / Development
+
+### Locally:
 
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Code Generators
+### On Production:
 
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
+- `ember firebase deploy`
+- `firebase open`
