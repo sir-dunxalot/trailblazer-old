@@ -49,3 +49,7 @@
 //   @include rem(padding, 0.2, 0.4, 0.1, 0.6);
 //   @include rem(border-radius, 0.3);
 // }
+
+.large_icon {
+  @include rem(font-size, 5);
+}

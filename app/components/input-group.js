@@ -11,4 +11,26 @@ export default InputGroupComponent.extend({
   formattedInputId: insert('elementId', 'formatted-input-for-{{value}}'),
   formattedValue: null,
   layout,
+
+  actions: {
+
+    showError: function showError() {
+      if (!this.get('isDestroying')) {
+        this.set('showError', true);
+      }
+    },
+
+    setGroupAsInvalid: function setGroupAsInvalid() {
+      if (!this.get('isDestroying')) {
+        this.set('isValid', false);
+      }
+    },
+
+    setGroupAsValid: function setGroupAsValid() {
+      if (!this.get('isDestroying')) {
+        this.set('isValid', true);
+      }
+    }
+
+  },
 });

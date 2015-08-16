@@ -142,7 +142,11 @@ export default Ember.Controller.extend(
           /* If we've saved three stages... */
 
           if (i === stages.get('length') - 1) {
-            _this.transitionToRoute('feature', feature);
+            if (feature.get('inBacklog')) {
+              _this.transitionToRoute('backlog');
+            } else {
+              _this.transitionToRoute('feature', feature);
+            }
           }
         })
       });
@@ -156,17 +160,17 @@ export default Ember.Controller.extend(
     const upper = this.get('upperDuration');
 
     if (lower && upper) {
-      const hash = {
-        research: lower,
-        development: upper - lower,
-        testing: this.get('model.totalDuration') - upper
-      };
+      const values = [
+        lower,
+        upper - lower,
+        this.get('model.totalDuration') - upper
+      ];
+
+      console.log(values);
 
       this.get('model.stages').then(function(stages) {
         stages.forEach(function(stage) {
-          stage.get('type').then(function(type) {
-            stage.set('duration', hash[type.get('name')]);
-          });
+          stage.set('duration', values[stage.get('rank') - 1]);
         });
       });
     }
