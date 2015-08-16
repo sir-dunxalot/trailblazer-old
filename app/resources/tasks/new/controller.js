@@ -7,9 +7,7 @@ const { computed, observer, on } = Ember;
 export default Ember.Controller.extend(
   FormMixin, {
 
-  lastUsedStageName: null,
   taskIsInDevelopmentStage: computed.equal('model.stageName', 'development'),
-  testingStages: computed.filterBy('model.feature.stages', 'type.name', 'testing'),
   testTaskOptionDefault: {
     name: 'Unit and integration tests',
     value: 'both'
@@ -18,9 +16,6 @@ export default Ember.Controller.extend(
   testTaskOptions: computed(function() {
     return Ember.A([
       {
-        name: 'None',
-        value: null
-      }, {
         name: 'Unit test',
         value: 'unit'
       }, {
@@ -43,15 +38,7 @@ export default Ember.Controller.extend(
     'model.stage': {
       presence: true
     },
-
-    'testTaskSelection': {
-      presence: true
-    }
   },
-
-  testingStage: computed('testingStages.[]', function() {
-    return this.get('testingStages.firstObject');
-  }),
 
   testTaskSelection: computed('taskIsInDevelopmentStage', {
     get() {
@@ -77,66 +64,74 @@ export default Ember.Controller.extend(
 
   save() {
     const _this = this;
+    const model = this.get('model');
 
     /* Save Task */
 
-    this.get('model').save().then(function(task) {
-      _this.get('model.feature.tasks').pushObject(task);
+    model.save().then(function(task) {
 
-      _this.set('lastUsedStageName', task.get('stage.type.name'));
+      /* Save the test task(s) if they exist */
 
       _this.saveTestTasks().then(function() {
+        task.get('feature').then(function(feature) {
+          const stage = task.get('stage');
 
-        /* Save feature */
+          [feature, stage].forEach(function(property) {
+            property.get('tasks').addObject(task);
+          });
 
-        _this.get('model.feature.content').save().then(function(/* feature */) {
-          const isTestingTask = task.get('stageName') === 'testing';
-
-          if (_this.get('testTaskSelection') && !isTestingTask) {
-            _this.get('testingStage').save().then(function() {
+          stage.save().then(function() {
+            feature.save().then(function() {
               _this.transition();
             });
-          } else {
-            task.get('stage').save().then(function() {
-              _this.transition();
-            });
-          }
+          });
         });
       });
     });
   },
 
   saveTestTasks() {
+    const model = this.get('model');
     const feature = this.get('model.feature');
 
     let numberOfTasksSaved = 0;
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var testTask = this.get('testTaskSelection').value;
+      const testTask = this.get('testTaskSelection');
 
       if (!testTask) {
-        resolve();
+        return resolve();
       }
 
-      if (testTask === 'both') {
-        ['unit', 'integration'].forEach(function(type) {
-          this.createTestTask(type).save().then(function(task) {
-            numberOfTasksSaved++;
+      model.get('feature').then(function(feature) {
+        const testTaskValue = testTask.value; // POJO
 
-            feature.get('tasks').pushObject(task);
+        feature.get('stages').then(function(stages) {
 
-            if (numberOfTasksSaved === 2) {
-              resolve();
+          stages.findBy('type.name', 'testing').save().then(function() {
+
+            if (testTaskValue === 'both') {
+              ['unit', 'integration'].forEach(function(type) {
+                this.createTestTask(type).save().then(function(task) {
+                  numberOfTasksSaved++;
+
+                  feature.get('tasks').pushObject(task);
+
+                  if (numberOfTasksSaved === 2) {
+                    resolve();
+                  }
+                }, reject);
+              }, this);
+            } else {
+              this.createTestTask(testTaskValue).save().then(function(task) {
+                feature.get('tasks').pushObject(task);
+
+                resolve();
+              }, reject);
             }
-          }, reject);
-        }, this);
-      } else {
-        this.createTestTask(testTask).save().then(function(task) {
-          feature.get('tasks').pushObject(task);
-
-          resolve();
-        }, reject);
-      }
+          });
+        });
+      });
     }.bind(this));
   },
 

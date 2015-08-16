@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import renderTooltip from 'ember-tooltips/utils/render-tooltip';
 
 const { observer, on } = Ember;
 
@@ -20,10 +21,11 @@ export default Ember.Component.extend({
         resolve(events);
       }
 
-      function addEvent({ className, date, title }) {
+      function addEvent({ className, date, description, title }) {
         events.addObject({
           allDay: true,
-          className: className,
+          className: `${className} fade-out`,
+          description: description,
           start: date,
           title: title,
         });
@@ -57,17 +59,50 @@ export default Ember.Component.extend({
           stages.forEach(function(stage) {
             stage.getDates().then(function({ stageStartDate, stageEndDate }) {
               stage.get('type').then(function(type) {
-                const stageName = type.get('name');
+                stage.get('tasks').then(function(tasks) {
+                  const stageName = type.get('name');
+                  console.log(featureName, stageName, tasks.get('e'));
+                  const userIds = tasks.mapBy('assignee.id').filter(function(userId, j, arr) {
+                    return arr.indexOf(userId) === j; // throw away any instances which are not first
+                  });
+                  const userIdsLength = userIds.length;
+                  const userNames = [];
 
-                addEvent({
-                  className: stageName,
-                  date: stageEndDate,
-                  title: `Finish ${stageName} for ${featureName}`,
+                  // console.log(`Finish ${stageName} for ${featureName}`, userIds);
+
+                  if (!userIdsLength) {
+                    addEvent({
+                      className: stageName,
+                      date: stageEndDate,
+                      title: `Finish ${stageName} for ${featureName}`,
+                    });
+
+                    if (i + 1 === featuresLength) {
+                      resolve(events);
+                    }
+                  }
+
+                  // userIds.forEach(function(userId, k) {
+                  //   store.findRecord('user', userId).then(function(user) {
+                  //     userNames.push(user.get('fullName'));
+
+                  //     if (k + 1 === userIdsLength) {
+                  //       const description = '<ul><li>' + userNames.join('</li><li>') + '</li></ul>';
+
+                  //       addEvent({
+                  //         className: stageName,
+                  //         date: stageEndDate,
+                  //         description: description,
+                  //         title: `Finish ${stageName} for ${featureName}`,
+                  //       });
+
+                  //       if (i + 1 === featuresLength) {
+                  //         resolve(events);
+                  //       }
+                  //     }
+                  //   });
+                  // });
                 });
-
-                if (i + 1 === featuresLength) {
-                  resolve(events);
-                }
               });
             });
           });
@@ -91,11 +126,28 @@ export default Ember.Component.extend({
         right: 'today basicWeek month next'
       },
 
-      events: function(start, end, timezone, callback) {
+      events(start, end, timezone, callback) {
         _this.addEvents().then(function(events) {
+          console.log(events);
           callback(events);
         });
-      }
+      },
+
+      eventAfterRender(event, $element) {
+        $element.removeClass('fade-out');
+        $element.addClass('fade-in');
+      },
+
+      eventRender(event, $element) {
+        const description = event.description;
+
+        if (description) {
+          renderTooltip($element[0], {
+            content: description,
+            effectClass: 'fade',
+          });
+        }
+      },
     });
 
     this.setProperties({ calendar });

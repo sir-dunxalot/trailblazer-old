@@ -1,5 +1,7 @@
 /* jshint node: true */
 
+var dateFormat = 'MMM D, YYYY';
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'trailblazer',
@@ -15,7 +17,7 @@ module.exports = function(environment) {
     },
 
     APP: {
-      dateFormat: 'MMM D, YYYY',
+      dateFormat: dateFormat,
       shortDateFormat: 'D MMM',
 
       /* Firebase app details. Also see firebase.json */
@@ -37,6 +39,10 @@ module.exports = function(environment) {
       defaultTheme: 'ios',
       includedThemes: ['ios'],
       excludedThemes: ['default', 'flat', 'flip', 'light', 'skewed'],
+    },
+
+    moment: {
+      outputFormat: dateFormat, // Won't work until v3.5.0
     },
 
     'simple-auth': {

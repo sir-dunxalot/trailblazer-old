@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model() {
-    return this.modelFor('feature');
+    return this.modelFor('feature', { reload: true });
   },
 
 });

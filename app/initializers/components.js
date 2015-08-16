@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export function initialize(/* container, app */) {
+export function initialize(container, app) {
 
   Ember.LinkComponent.reopen({
     classNameBindings: ['className'],
@@ -11,6 +11,11 @@ export function initialize(/* container, app */) {
       return `link-to-${route.replace('.', '-')}`;
     }),
 
+  });
+
+  Ember.Component.reopen({
+    dateFormat: app.dateFormat,
+    shortDateFormat: app.shortDateFormat,
   });
 
 }
