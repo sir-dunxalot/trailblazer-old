@@ -53,7 +53,7 @@
     @include rem(padding, 1);
     @include rem(margin, -1);
 
-    &:hover .icon-arror-right {
+    &:hover .icon-arrow-right {
       @extend .fade-in;
     }
   }

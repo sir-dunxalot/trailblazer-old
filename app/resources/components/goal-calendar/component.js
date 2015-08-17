@@ -11,7 +11,6 @@ export default Ember.Component.extend({
 
   actions: {
     showOverview(resource) {
-      console.log(resource);
       this.get('targetObject').showModal({
         template: 'modals/stage-overview',
         model: resource,
@@ -24,10 +23,6 @@ export default Ember.Component.extend({
     const events = Ember.A();
     const features = this.get('features');
     const featuresLength = features.get('length');
-    const store = this.get('container').lookup('store:main');
-    const promises = Ember.A();
-
-    let resolveAsyncronously = false;
 
     return new Ember.RSVP.Promise(function(resolve) {
 
@@ -102,8 +97,7 @@ export default Ember.Component.extend({
 
   _renderCalendar: on('didInsertElement', function() {
     const _this = this;
-    const eventHoverClass = 'event-hover-state';
-    const calendar = $(`#${this.get('elementId')}`).fullCalendar({
+    const calendar = Ember.$(`#${this.get('elementId')}`).fullCalendar({
       firstDay: 1,
       businessHours: true,
       buttonIcons: {

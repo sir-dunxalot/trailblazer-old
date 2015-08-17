@@ -31,6 +31,7 @@ For more information please see:
 
 ### On Production:
 
+- `ember build --environment=production`
 - `ember firebase deploy`
 - `firebase open`
 

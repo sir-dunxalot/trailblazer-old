@@ -148,7 +148,7 @@ export default Ember.Controller.extend(
               _this.transitionToRoute('feature', feature);
             }
           }
-        })
+        });
       });
     });
   },
@@ -165,8 +165,6 @@ export default Ember.Controller.extend(
         upper - lower,
         this.get('model.totalDuration') - upper
       ];
-
-      console.log(values);
 
       this.get('model.stages').then(function(stages) {
         stages.forEach(function(stage) {

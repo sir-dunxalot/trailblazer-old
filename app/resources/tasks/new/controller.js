@@ -2,7 +2,7 @@ import Ember from 'ember';
 import FormMixin from 'ember-easy-form-extensions/mixins/controllers/form';
 import uncapitalize from 'trailblazer/utils/uncapitalize';
 
-const { computed, observer, on } = Ember;
+const { computed } = Ember;
 
 export default Ember.Controller.extend(
   FormMixin, {
@@ -91,13 +91,13 @@ export default Ember.Controller.extend(
   },
 
   saveTestTasks() {
+    const _this = this;
     const model = this.get('model');
-    const feature = this.get('model.feature');
 
     let numberOfTasksSaved = 0;
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const testTask = this.get('testTaskSelection');
+      const testTask = _this.get('testTaskSelection');
 
       if (!testTask) {
         return resolve();
@@ -108,11 +108,11 @@ export default Ember.Controller.extend(
 
         feature.get('stages').then(function(stages) {
 
-          stages.findBy('type.name', 'testing').save().then(function() {
+          stages.findBy('type.name', 'testing').save().then(function(testingStage) {
 
             if (testTaskValue === 'both') {
               ['unit', 'integration'].forEach(function(type) {
-                this.createTestTask(type).save().then(function(task) {
+                _this.createTestTask(type, testingStage).save().then(function(task) {
                   numberOfTasksSaved++;
 
                   feature.get('tasks').pushObject(task);
@@ -121,9 +121,9 @@ export default Ember.Controller.extend(
                     resolve();
                   }
                 }, reject);
-              }, this);
+              });
             } else {
-              this.createTestTask(testTaskValue).save().then(function(task) {
+              _this.createTestTask(testTaskValue, testingStage).save().then(function(task) {
                 feature.get('tasks').pushObject(task);
 
                 resolve();
@@ -132,10 +132,10 @@ export default Ember.Controller.extend(
           });
         });
       });
-    }.bind(this));
+    });
   },
 
-  createTestTask(type) {
+  createTestTask(type, testingStage) {
     const taskName = uncapitalize(this.get('model.name'));
     const testTaskName = type.capitalize() + ' test for ' + taskName;
 
@@ -143,7 +143,7 @@ export default Ember.Controller.extend(
       name: testTaskName,
       assignee: this.get('model.assignee'),
       feature: this.get('model.feature'),
-      stage: this.get('testingStage')
+      stage: testingStage,
     });
   },
 

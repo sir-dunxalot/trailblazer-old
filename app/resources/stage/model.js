@@ -45,7 +45,7 @@ export default DS.Model.extend({
 
         let stageEndDate, stageStartDate;
 
-        _this.get('type').then(function(type) {
+        _this.get('type').then(function(/* type */) {
 
           if (rank === 1) {
             stageStartDate = startDate;

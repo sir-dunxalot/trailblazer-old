@@ -100,12 +100,13 @@ export default Ember.Controller.extend(
 
   save() {
     const _this = this;
-    const team = this.get('team');
 
     this.get('model').save().then(function(user) {
-      team.get('members').addObject(user);
-      team.save().then(function() {
-        _this.transitionToRoute('features');
+      user.get('team').then(function(team) {
+        team.get('members').addObject(user);
+        team.save().then(function() {
+          _this.transitionToRoute('features');
+        });
       });
     });
   },

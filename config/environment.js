@@ -29,10 +29,10 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       'connect-src': "'self' wss://*.firebaseio.com",
       'frame-src': "'self' https://*.firebaseio.com",
-      'font-src': "'self' http://fonts.gstatic.com https://s3.amazonaws.com",
+      'font-src': "'self' https://fonts.gstatic.com https://s3.amazonaws.com",
       'img-src': "'self' https://*.githubusercontent.com https://*.googleusercontent.com data:",
       'script-src': "'self' 'unsafe-eval' 'unsafe-inline' https://*.firebaseio.com",
-      'style-src': "'self' 'unsafe-inline' https://s3.amazonaws.com http://fonts.googleapis.com",
+      'style-src': "'self' 'unsafe-inline' https://s3.amazonaws.com https://fonts.googleapis.com",
     },
 
     'ember-cli-toggle': {
