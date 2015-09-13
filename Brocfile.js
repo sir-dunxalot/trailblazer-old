@@ -46,6 +46,9 @@ app.import(bowerDir + 'nouislider/distribute/jquery.nouislider.min.css');
 
 app.import(bowerDir + 'velocity/velocity.js');
 
+app.import(bowerDir + 'vis/dist/vis.js');
+app.import(bowerDir + 'vis/dist/vis.css');
+
 app.import(bowerDir + 'moment/moment.js');
 
 app.import(bowerDir + 'pikaday/pikaday.js');

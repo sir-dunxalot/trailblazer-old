@@ -27,7 +27,8 @@
     "pikaday": "~1.3.1",
     "moment": "~2.10.3",
     "compass-mixins": "~1.0.2",
-    "intro.js": "~1.0.0"
+    "intro.js": "~1.0.0",
+    "vis": "~4.8.1"
   },
   "resolutions": {
     "ember-data": "1.13.4"
