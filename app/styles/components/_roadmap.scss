@@ -6,68 +6,56 @@
   // overflow-y: hidden;
 }
 
-.roadmap_months {
-  @include box-sizing(border-box);
-  @include rem(padding-left, $logoSize);
-  @extend .list-inline;
-  @extend %full_height;
-  @extend %full_width;
-  @extend %absolute;
-  @extend .sub;
+.vis-group {
+  cursor: move;
 }
 
-.roadmap_month {
-  border-left: 1px solid $gray-light;
-  @extend %border_box;
-  @include rem(padding, 1);
-  @extend %full_height;
-  @extend %alt_text;
+.vis-time-axis {
+
+  .vis-text {
+    @include rem(padding-left, 0.6);
+    color: $gray;
+  }
 }
 
-.roadmap_features {
-  @extend %full_height;
-  @extend .list-unstyled;
-  @include rem(margin-left, $logoSize);
-  @extend %relative;
+// .vis-content {
+//   top: 0 !important;
+// }
+
+// .vis-itemset {
+//   height: 100% !important;
+// }
+
+.vis-item {
+  @extend %pointer;
+  // @include rem(height, 4.2);
+  // border-bottom: 10px solid $gray-dark;
+  background-color: $gray-dark;
+  border-color: darken($gray-darker, 10%);
+  @include transition(opacity $slow);
+  color: $offwhite;
+
+  &.vis-range {
+    @include rem(border-radius, 0.4);
+  }
+
+  .hovering_over_item & {
+    @include opacity(0.1);
+
+    &.vis-item-hovering {
+      @include opacity(1);
+    }
+  }
+}
+
+.vis-current-time {
+  background-color: $orange;
 }
 
 .roadmap_feature {
-  $offsetTop: $headingSize-small * 2 + $progressBarSize + 0.2;
-
-  @extend %absolute;
-  @include rem(padding-bottom, $progressBarSize * 3); // For hover
-  @include rem(margin-top, -1 * $offsetTop);
-
   .heading-small {
-    margin-top: 0;
-    @include rem(margin-bottom, $headingSize-small);
-    white-space: nowrap; // Text in line. TODO - logo
-
-    .text {
-      background-color: rgba($offwhite, 0.5);
-    }
-  }
-
-  .link-to-feature {
-    @extend %block;
-    @include rem(padding, 1);
-    @include rem(margin, -1);
-
-    &:hover .icon-arrow-right {
-      @extend .fade-in;
-    }
-  }
-
-  .text {
-    @extend %inline_block;
-    width: calc(100% - 28px);
-    width: calc(100% - 2.8rem);
-  }
-
-  .icon-arrow-right {
-    @extend .fade-out;
-    @include transition(opacity, 0.15s); // Instead of .fade
-    @include rem(margin-left, 1);
+    // @include rem(font-size, $bodyFontSize);
+    margin: 0;
   }
 }
 

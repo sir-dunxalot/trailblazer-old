@@ -109,21 +109,25 @@
       }
     }
 
-    &.active .text:after {
-      $_size: 2;
+    &.active .text:after,
+    &.active .text:before {
+      $_size: 1.8;
 
       @extend %full_size_pseudo;
       height: 0;
       width: 0;
       @include rem(border-width, $_size / 2);
       border-color: transparent;
-      border-top-color: $white;
       border-style: solid;
-      top: 100%;
       left: calc(50% - #{$_size * 10}px);
       left: calc(50% - #{$_size}rem);
       @extend %block;
       z-index: 2;
+    }
+
+    &.active .text:after {
+      border-top-color: $white;
+      top: calc(100% + 3px);
     }
   }
 
@@ -163,6 +167,15 @@
 
     &:hover {
       background-color: darken($green, 5%);
+    }
+  }
+}
+
+.features-index {
+  @include mod(link-to) {
+    &.active .text:before {
+      border-top-color: lighten($gray, 15%);
+      top: calc(100% + 4px);
     }
   }
 }

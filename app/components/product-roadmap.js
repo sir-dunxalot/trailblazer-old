@@ -1,8 +1,9 @@
 import Ember from 'ember';
-import MathHelpers from 'trailblazer/utils/math-helpers';
-import escapeCss from 'trailblazer/utils/escape-css';
+// import MathHelpers from 'trailblazer/utils/math-helpers';
+// import escapeCss from 'trailblazer/utils/escape-css';
+// import featureTemplate from 'trailblazer/resources/components/roadmap-feature/template';
 
-const { computed, observer, on } = Ember;
+const { RSVP, observer, on } = Ember;
 const { vis } = window;
 
 export default Ember.Component.extend({
@@ -18,49 +19,125 @@ export default Ember.Component.extend({
   startDate: moment().date(1),
   timeline: null,
 
-  formattedFeatures: computed('features.[]', function() {
-    return this.get('features').map(function(feature) {
-      return {
-        content: feature.get('name'),
-        className: 'feature123',
-        end: feature.get('endDate'),
-        start: feature.get('startDate'),
-      }
-    });
-  }),
+  // formattedFeatures: computed('features.[]', function() {
+  //   const features = this.get('features');
+  //   const height = 100 / features.get('length');
+
+  //   return features.map(function(feature) {
+  //     return {
+  //       content: feature.get('name'),
+  //       className: 'roadmap_feature',
+  //       end: feature.get('endDate'),
+  //       id: feature.get('id'),
+  //       stages: feature.get('stages.content.currentState'),
+  //       start: feature.get('startDate'),
+  //     };
+  //   });
+  // }),
+
+  formatTimelineItem(feature) {
+    return {
+      content: feature.get('name'),
+      className: 'roadmap_feature',
+      end: feature.get('endDate'),
+      id: feature.get('id'),
+      stages: feature.get('stages').map(function(stage) {
+        return {
+          duration: stage.get('duration'),
+          rank: stage.get('rank'),
+        };
+      }),
+      start: feature.get('startDate'),
+    };
+  },
 
   renderTimeline: on('didInsertElement', function() {
-    const formattedFeatures = this.get('formattedFeatures');
+    const element = this.get('element');
+    const timelineHeight = parseInt(window.innerHeight) - 45; // Logo height
 
-    let timelineItems = [];
-
-    if (formattedFeatures.get('length')) {
-      timelineItems = formattedFeatures;
-    }
-
-    const timeline = new vis.Timeline(this.get('element'), timelineItems, {
-      // height: '100%',
-      editable: true,
+    const timeline = new vis.Timeline(element, [], {
+      height: `${timelineHeight}px`,
+      editable: false, // TODO
       // timeAxis: {
       //   scale: 'day',
-      //   step: 1,
+      //   step: 2,
       // },
+      margin: {
+        axis: 20,
+        item: 20,
+      },
+      orientation: 'top',
+      selectable: false,
       type: 'range',
-      zoomKey: 'metaKey',
+      start: moment().subtract(1, 'week'),
+      end: moment().add(4, 'week'),
+      // zoomKey: 'metaKey',
+
+      template(item) {
+        // const featureDuration = moment(item.end).diff(item.start, 'days');
+        // const patchForClasses = ['research', 'development', 'testing'];
+
+        let content = `${item.content}`;
+
+        // content += '<ol class="roadmap_feature_stages">';
+
+        // item.stages.forEach(function(stage) {
+        //   const className = patchForClasses[stage.rank - 1];
+        //   const width = escapeCss(stage.duration / featureDuration * 100);
+
+        //   content +=
+        //     `<li class="roadmap_feature_stage ${className}" style="width:${width}%">
+        //       <div class="progress"></div>
+        //     </li>`;
+        // });
+
+        // content += '</ol>';
+
+        return content;
+      }
     });
 
     this.set('timeline', timeline);
+    this.updateTimeline();
   }),
 
   updateTimeline: observer('formattedFeatures.[]', function() {
+    const _this = this;
     const timeline = this.get('timeline');
+    // const { element, timeline } = this.getProperties(
+    //   [ 'element', 'timeline' ]
+    // );
+    const stagesPromises = [];
 
     if (!timeline) {
       return;
     } else {
-      timeline.setItems(this.get('formattedFeatures'));
+      this.get('features').forEach(function(feature) {
+        stagesPromises.pushObject(feature.get('stages'));
+      });
+
+      RSVP.allSettled(stagesPromises).then(function() {
+        timeline.setItems(_this.get('features').map(function(feature) {
+          return _this.formatTimelineItem(feature);
+        }));
+
+        // TODO
+
+        // $('.vis-item').hover(function() {
+        //   $(element).toggleClass('hovering_over_item');
+        //   $(this).toggleClass('vis-item-hovering');
+        // });
+      });
     }
   }),
+
+  click(event) {
+    const featureId = this.get('timeline').getEventProperties(event).item;
+
+    if (featureId) {
+      this.get('targetObject').transitionToRoute('feature', featureId);
+    }
+  },
 
   // months: Ember.computed('numberOfMonths', function() {
   //   const max = this.get('numberOfMonths');
