@@ -1,13 +1,5 @@
 .roadmap {
-  // $_startColor: $gray-darker;
-  // $_endColor: mix($gray-darker, $black);
-
   background-color: $gray-darker;
-  // @include background-gradient($_startColor, bottom left, $_startColor, $_endColor);
-  // @extend %relative;
-  // @extend %full_height;
-  // overflow-x: scroll;
-  // overflow-y: hidden;
 }
 
 .vis-timeline {
@@ -41,26 +33,20 @@
   }
 }
 
-// .vis-content {
-//   top: 0 !important;
-// }
-
-// .vis-itemset {
-//   height: 100% !important;
-// }
-
 .vis-item {
+  $_borderRadius: 0.4;
+  $_backgroundColor: $offwhite;
+
   @extend %pointer;
-  // @include rem(height, 4.2);
-  // border-bottom: 10px solid $gray-dark;
-  background-color: $offwhite;
-  border-color: darken($gray-darker, 10%);
+  background-color: $_backgroundColor;
+  border-width: 0;
+  border-left: 8px solid $orange;
   @include transition(opacity $slow);
   color: $gray-darker;
   z-index: 3;
 
   &.vis-range {
-    @include rem(border-radius, 0.4);
+    @include rem(border-radius, $_borderRadius);
   }
 
   .hovering_over_item & {
@@ -74,6 +60,20 @@
   .vis-item-content {
     @include rem(padding, 0.8);
   }
+
+
+  .vis-item-overflow {
+    &:after {
+      $_size: 4;
+
+      @extend %full_size_pseudo;
+      @include rem(width, $_size);
+      left: calc(100% - #{$_size * 10}px);
+      left: calc(100% - #{$_size}rem);
+      @include background-gradient(transparent, left, transparent, $_backgroundColor);
+      @include rem(border-radius, $_borderRadius);
+    }
+  }
 }
 
 .vis-current-time {
@@ -82,18 +82,17 @@
 }
 
 .vis-time-axis .vis-grid.vis-minor {
-  // border-color: lighten($gray-darker, 3%);
   border-color: rgba($black, 0.15);
 }
 
 .vis-time-axis .vis-grid.vis-major,
 .vis-panel.vis-center {
-  border-color: rgba($black, 0.5);
+  border-color: rgba($black, 0.4);
 }
 
 .roadmap_feature {
   .heading-small {
-    // @include rem(font-size, $bodyFontSize);
+    @include rem(font-size, $bodyFontSize);
     margin: 0;
   }
 }
