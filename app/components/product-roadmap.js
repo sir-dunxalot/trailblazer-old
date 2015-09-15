@@ -58,20 +58,18 @@ export default Ember.Component.extend({
     const timeline = new vis.Timeline(element, [], {
       height: `${timelineHeight}px`,
       editable: false, // TODO
-      // timeAxis: {
-      //   scale: 'day',
-      //   step: 2,
-      // },
+      end: moment().add(4, 'week'),
       margin: {
         axis: 20,
         item: 20,
       },
       orientation: 'top',
       selectable: false,
-      type: 'range',
       start: moment().subtract(1, 'week'),
-      end: moment().add(4, 'week'),
-      // zoomKey: 'metaKey',
+      type: 'range',
+      zoomMax: 31536000000,
+      zoomMin: 604800000,
+      // zoomKey: 'metaKey', // TODO
 
       template(item) {
         // const featureDuration = moment(item.end).diff(item.start, 'days');

@@ -179,3 +179,42 @@ Hack until compass-mixins is synced up with new libsass
     @content;
   }
 }
+
+/* Background gradient */
+
+@function first($list) {
+  @return nth($list, 1);
+}
+
+@function last($list) {
+  $length: length($list);
+  @return nth($list, $length);
+}
+
+@mixin background-gradient($color, $from, $stops...) {
+  background-color: $color; // Fallback color
+  // CSS3 Gradients
+  background-image: -ms-linear-gradient($from, $stops); // IE11
+  @include background-image(linear-gradient($from, $stops)); // Modern browsers
+  // IE 5.5-8 Fallback
+  $firstStopColor: nth(first($stops), 1);
+  $lastStopColor: nth(last($stops), 1);
+  $fallbackDir: null;
+
+  @if (length($from) > 1) {
+    $fallbackDir: horizontal;
+  } @else if ($from == 'left') {
+    $fallbackDir: horizontal;
+  } @else if ($from == 'right') {
+    $fallbackDir: horizontal;
+  } @else {
+    $fallbackDir: vertical;
+    // Reverse stops for vertical gradient as we specify from bottom
+    $firstStopColor: nth(last($stops), 1);
+    $lastStopColor: nth(first($stops), 1);
+  }
+
+  .no-cssgradients & {
+    @include filter-gradient($firstStopColor, $lastStopColor, $fallbackDir);
+  }
+}
