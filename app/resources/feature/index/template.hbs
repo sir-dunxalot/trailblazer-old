@@ -63,7 +63,9 @@
 
 <ul class="stages_list {{if datePositionsSet 'fade-in'}}">
   {{#each model.stages as |stage|}}
-    {{stage-block stage=stage}}
+    {{#if stage.duration}}
+      {{stage-block stage=stage}}
+    {{/if}}
   {{/each}}
 </ul>
 

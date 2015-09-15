@@ -9,12 +9,14 @@
 {{/if}}
 
 {{#if delete}}
-  {{form-submission-button
+  {{#form-submission-button
     action=deleteAction
-    className='button-primary'
+    className='button-primary-alt'
     disabled=formIsSubmitted
-    text=deleteText
   }}
+    <span class="icon-trash"></span>
+    <span class="text">{{deleteText}}</span>
+    {{/form-submission-button}}
 {{/if}}
 
 {{#if save}}

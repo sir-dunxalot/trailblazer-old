@@ -1,8 +1,14 @@
 {{#page-header}}
   {{#if walkthroughComplete}}
-    <h1>New Feature</h1>
+    {{#if new}}
+      <h1>New Feature</h1>
+    {{else}}
+      <h1>Edit Feature</h1>
+    {{/if}}
   {{else}}
-    <h1>Have dates for the feature been identified?</h1>
+    <h1>
+      Have dates for the feature been identified?
+    </h1>
   {{/if}}
 {{/page-header}}
 
