@@ -136,17 +136,12 @@ export default Ember.Controller.extend(
     model.save().then(function(feature) {
       const stages = feature.get('stages');
 
-      console.log(stages);
-
       stages.forEach(function(stage, i) {
         stage.save().then(function() {
 
           /* If we've saved three stages... */
 
-          console.log(i, 'stage loop');
-
           if (i === stages.get('length') - 1) {
-            console.log('DONE');
             if (feature.get('inBacklog')) {
               _this.transitionToRoute('backlog');
             } else {
@@ -181,7 +176,14 @@ export default Ember.Controller.extend(
   }),
 
   setDurations: observer('model.stages.[]', function() {
-    this.get('model.stages').then(function(stages) {
+    const model = this.get('model');
+
+    model.get('stages').then(function(stages) {
+
+      if (model.get('isDeleted')) {
+        return;
+      }
+
       const researchStage = stages.objectAt(0);
       const developmentStage = stages.objectAt(1);
 

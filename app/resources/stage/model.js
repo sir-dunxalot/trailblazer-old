@@ -36,6 +36,11 @@ export default DS.Model.extend({
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
       _this.get('feature').then(function(feature) {
+
+        if (!feature || feature.get('isDeleted')) {
+          return reject();
+        }
+
         const { duration, rank } = _this.getProperties(
           [ 'duration', 'rank' ]
         );
