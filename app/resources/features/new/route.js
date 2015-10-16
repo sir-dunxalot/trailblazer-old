@@ -25,7 +25,7 @@ export default Ember.Route.extend(
       duration * 0.2
     ];
 
-    store.findAll('stage-type').then(function(types) {
+    store.findAll('stage-type', { reload: true }).then(function(types) {
 
       types.forEach(function(type, i) {
         const stage = store.createRecord('stage', {

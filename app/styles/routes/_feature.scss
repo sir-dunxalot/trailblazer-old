@@ -131,7 +131,9 @@
   }
 
   dl {
-    @extend %no_wrap;
+    display: flex;
+    justify-content: space-between;
+    // @extend %no_wrap;
     @extend %relative; // So text sits ontop of progress bar
   }
 
@@ -140,7 +142,7 @@
   }
 
   dd {
-    float: right;
+    @include rem(margin-left, 1);
     @extend %no_margin;
   }
 

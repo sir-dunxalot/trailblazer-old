@@ -1,0 +1,14 @@
+<h1 class="heading">
+  <span class="icon-new large_icon"></span>
+  <span class="text">Wait!</span>
+</h1>
+
+<p class="heading-small">Are you sure you want to delete {{model.name}}?</p>
+
+<button class="button-primary" {{action 'closeModal'}}>
+  <strong>No</strong>, go back
+</button>
+
+<button class="button-primary-alt" {{action 'delete'}}>
+  <strong>Yes</strong>, delete the feature
+</button>

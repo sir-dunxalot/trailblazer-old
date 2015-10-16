@@ -4,6 +4,15 @@
       <h1>New Feature</h1>
     {{else}}
       <h1>Edit Feature</h1>
+
+      {{#form-submission-button
+        action='confirmDelete'
+        className='button-primary-alt'
+        disabled=formIsSubmitted
+      }}
+        <span class="icon-trash"></span>
+        <span class="text">Delete</span>
+      {{/form-submission-button}}
     {{/if}}
   {{else}}
     <h1>
