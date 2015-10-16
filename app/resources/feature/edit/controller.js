@@ -14,14 +14,12 @@ export default FeatureController.extend({
   },
 
   delete() {
-    const model = this.get('model');
-
     this.get('modal').hide();
 
-
-    model.destroyRecord().then((feature) => {
+    this.get('model').destroyRecord().then((feature) => {
       feature.get('stages').invoke('destroyRecord');
       feature.get('tasks').invoke('destroyRecord');
+
       this.transitionToRoute('features');
     });
   },
