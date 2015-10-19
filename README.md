@@ -40,8 +40,6 @@ For more information please see:
 - Gmail calendar integration w/ notifications and goals
 - Commenting using Disqus
 - 'How far you should be' on feature index route
-- Button components
-- Ability to delete a feature
 - Stage overview component
   - You have x days left
   - You are x% behind
