@@ -92,18 +92,18 @@ export default Ember.Controller.extend(
 
   runCustomValidations() {
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const { inBacklog, ignoreWeekendWarning } = this.getProperties(
-        [ 'inBacklog', 'ignoreWeekendWarning' ]
+      const { ignoreWeekendWarning, model } = this.getProperties(
+        [ 'ignoreWeekendWarning', 'model' ]
       );
 
-      if (inBacklog || ignoreWeekendWarning) {
+      if (model.get('inBacklog') || ignoreWeekendWarning) {
         return resolve();
       }
 
-      const endDate = this.get('model.endDate');
+      const endDate = model.get('endDate');
       const endDay = endDate.getDay();
       const endDayIsWeekend = endDay === 0 || endDay === 6;
-      const startDate = this.get('model.startDate');
+      const startDate = model.get('startDate');
       const startDay = startDate.getDay();
       const startDayIsWeekend = startDay === 0 || startDay === 6;
 
