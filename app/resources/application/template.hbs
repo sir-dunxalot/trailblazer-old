@@ -44,5 +44,9 @@
 
   {{outlet 'modal' name='modal'}}
 
-  {{flash-message-queue}}
+  <div class="c-notification__container">
+    {{#each notifications as |notification|}}
+      {{notification-message notification=notification}}
+    {{/each}}
+  </div>
 </main>

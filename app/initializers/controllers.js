@@ -8,6 +8,15 @@ export function initialize(container, app) {
     userId: computed.oneWay('session.content.secure.uid'),
     dateFormat: app.dateFormat,
     shortDateFormat: app.shortDateFormat,
+
+    flashMessage(type, message) {
+      this.notifications.addNotification({
+        autoClear: true,
+        message,
+        type,
+      });
+    },
+
   });
 
 }

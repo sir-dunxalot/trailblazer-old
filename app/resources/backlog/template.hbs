@@ -6,12 +6,12 @@
 
 {{#page-content}}
 
-  {{#if actionResponse}}
+{{!--   {{#if actionResponse}}
     <span class="action_response {{actionResponseClass}}">
       <span class="icon-success"></span>
       <span class="text">{{actionResponse}}</span>
     </span>
-  {{/if}}
+  {{/if}} --}}
 
   {{#if (and (not backlogFeatures.length) (not model.isUpdating))}}
     <div class="blocker">
