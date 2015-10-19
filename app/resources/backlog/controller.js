@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed, on, run } = Ember;
+const { $, computed, on, run } = Ember;
 
 export default Ember.Controller.extend({
   backlogFeatures: computed.filterBy('model', 'inBacklog'),
@@ -22,10 +22,11 @@ export default Ember.Controller.extend({
   },
 
   scrollIfNecessary() {
-    if (this.get('scrollToBottom') === 'true') {
+    if (this.get('scrollToBottom')) {
       run.scheduleOnce('render', this, function() {
-        console.log('scrolling down');
-        window.scrollTo(0, document.body.scrollHeight);
+        $('html,body').animate({
+          scrollTop: document.body.scrollHeight,
+        }, 1000);
       });
     }
   },

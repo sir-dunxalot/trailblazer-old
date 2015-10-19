@@ -14,7 +14,7 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.scrollIfNecessary();
-    // this._super(controller, model);
+    this._super(controller, model);
   },
 
 });
