@@ -2,7 +2,7 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-mixin';
 import Ember from 'ember';
 
-const { computed } = Ember;
+const { computed, on } = Ember;
 
 export function initialize(/* container, app */) {
 
@@ -17,7 +17,7 @@ export function initialize(/* container, app */) {
     authenticate: true,
     userId: computed.readOnly('session.content.secure.uid'),
 
-    addAuthenticationMixin: Ember.on('init', function() {
+    addAuthenticationMixin: on('init', function() {
       // So null doesn't add anything
       if (this.get('authenticate')) {
         this.reopen(AuthenticatedRouteMixin);
@@ -25,6 +25,14 @@ export function initialize(/* container, app */) {
         this.reopen(UnauthenticatedRouteMixin);
       }
     }),
+
+    flashMessage(type, message) {
+      this.notifications.addNotification({
+        autoClear: true,
+        message,
+        type,
+      });
+    },
 
   });
 
