@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { $, computed, on, run } = Ember;
+const { $, computed, run } = Ember;
 
 export default Ember.Controller.extend({
   backlogFeatures: computed.filterBy('model', 'inBacklog'),
