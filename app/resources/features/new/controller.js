@@ -143,7 +143,11 @@ export default Ember.Controller.extend(
 
           if (i === stages.get('length') - 1) {
             if (feature.get('inBacklog')) {
-              _this.transitionToRoute('backlog');
+              _this.transitionToRoute('backlog', {
+                queryParams: {
+                  scrollToBottom: true,
+                },
+              });
             } else {
               _this.transitionToRoute('feature', feature);
             }

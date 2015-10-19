@@ -6,13 +6,6 @@
 
 {{#page-content}}
 
-{{!--   {{#if actionResponse}}
-    <span class="action_response {{actionResponseClass}}">
-      <span class="icon-success"></span>
-      <span class="text">{{actionResponse}}</span>
-    </span>
-  {{/if}} --}}
-
   {{#if (and (not backlogFeatures.length) (not model.isUpdating))}}
     <div class="blocker">
       <h2 class="heading">
@@ -20,9 +13,11 @@
         <span class="text">Whoa there!</span>
       </h2>
 
-      {{#flash-message type='warning' action='addFirstFeature'}}
-        You have no features in your backlog. Click here to add one.
-      {{/flash-message}}
+      <div class="blocker-content">
+        {{#link-to 'features.new' (query-params inBacklog=true)}}
+          You have no features in your backlog. Click here to add one.
+        {{/link-to}}
+      </div>
     </div>
   {{/if}}
 
